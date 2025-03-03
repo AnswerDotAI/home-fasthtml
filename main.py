@@ -238,8 +238,18 @@ hdrs = [
     Link(href='css/preview-stack.css', rel='stylesheet'),
     Link(href='css/highlighter-theme.css', rel='stylesheet')]
 
+from gallery.main import ar as gallery_ar, application_routes
+from about.main import app as about_app
+routes = [Mount(f"/about", about_app),
+          Mount('/docs', StaticFiles(directory='docs', html=True)),
+          Mount('/gallery/files', StaticFiles(directory='gallery')),
+          *application_routes
+          ]
+
 bodykw = {"class": "relative bg-black font-geist text-black/80 font-details-off"}
-app,rt = fast_app(hdrs=hdrs, default_hdrs=False, bodykw=bodykw, on_startup=[startup])
+app,rt = fast_app(hdrs=hdrs, default_hdrs=False, bodykw=bodykw, on_startup=[startup], routes=routes)
+
+gallery_ar.to_app(app)
 
 scripts = (
     Script(src='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js'),
@@ -271,5 +281,7 @@ async def home():
 
 @rt("/")
 async def get(): return await home()
+
+
 
 serve()
