@@ -16,7 +16,7 @@ ghub_link = A(UkIcon("github"), title="FastHTML Gallery on Github",
                  href="https://github.com/AnswerDotAI/FastHTML-Gallery"),
 
 hdrs = (
-    *Socials(title=site_title, description=descr, site_name='gallery.fastht.ml', twitter_site='@isaac_flath', image=f'/social.png', url=''),
+    *Socials(title=site_title, description=descr, site_name='fastht.ml/gallery', twitter_site='@isaac_flath', image=f'/social.png', url=''),
     toggle_script,
     *Theme.blue.headers(highlightjs=True),
     Link(rel='icon', type='image/x-ico', href="/files/gallery.ico"),

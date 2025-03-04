@@ -1,3 +1,6 @@
+*.db
+*.db-*
+*.db_*
 tags
 index.html
 index_files/
