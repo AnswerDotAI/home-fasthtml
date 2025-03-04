@@ -25,10 +25,7 @@ hdrs = (
 
 def layout(content):
     return Html(
-        Head(
-            Title("FastHTML Gallery"),
-            *hdrs
-        ),
+        Head(Title("FastHTML Gallery"), *hdrs),
         Body(content))
 
 application_routes = []
@@ -65,7 +62,6 @@ def split_view(category: str, project: str):
         GalleryNavBar(dir_path, info=info, active='split'),
         Title(f"{dir_path.name} - Split View"),
             Grid(Div(Pre(Code(code_text, cls='language-python'))),
-                 
                 Div(Iframe(src=f"/app/examples/{category}/{project}/",style="width: 100%; height: 100%; border: none;")),
                 cols_sm=1, cols_md=1, cols_lg=2)))
 
