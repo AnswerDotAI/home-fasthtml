@@ -1,2 +1,2 @@
 # fh-about
-about.fastht.ml source
+fastht.ml/about source

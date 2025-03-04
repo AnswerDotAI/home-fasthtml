@@ -110,7 +110,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta property="og:site_name" content="fasthtml">
 <meta name="twitter:title" content="FastHTML – fasthtml">
 <meta name="twitter:description" content="The fastest, most powerful way to create an HTML app">
-<meta name="twitter:image" content="https://docs.fastht.ml/og-image.png">
+<meta name="twitter:image" content="https://fastht.ml/docs/og-image.png">
 <meta name="twitter:creator" content="@jeremyphoward">
 <meta name="twitter:site" content="@answerdotai">
 <meta name="twitter:card" content="summary_large_image">
@@ -138,7 +138,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="https://about.fastht.ml"> 
+    <a class="nav-link" href="https://fastht.ml/about"> 
 <span class="menu-text">Learn</span></a>
   </li>  
 </ul>
@@ -413,7 +413,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Fast and lightweight, so you can write less code and get more done.</li>
 <li>Easy to learn and use, with a simple, intuitive syntax that makes it easy to build complex apps quickly.</li>
 </ul>
-<p>FastHTML apps are just Python code, so you can use FastHTML with the full power of the Python language and ecosystem. FastHTML’s functionality maps 1:1 directly to HTML and HTTP, but allows them to be encapsulated using good software engineering practices—so you’ll need to understand these foundations to use this library fully. To understand how and why this works, please read this first: <a href="https://about.fastht.ml/">about.fastht.ml</a>.</p>
+<p>FastHTML apps are just Python code, so you can use FastHTML with the full power of the Python language and ecosystem. FastHTML’s functionality maps 1:1 directly to HTML and HTTP, but allows them to be encapsulated using good software engineering practices—so you’ll need to understand these foundations to use this library fully. To understand how and why this works, please read this first: <a href="https://fastht.ml/about">fastht.ml/about</a>.</p>
 <section id="installation" class="level2">
 <h2 class="anchored" data-anchor-id="installation">Installation</h2>
 <p>Since <code>fasthtml</code> is a Python library, you can install it with:</p>
@@ -451,7 +451,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="getting-help-from-ai">Getting help from AI</h3>
 <p>Because FastHTML is newer than most LLMs, AI systems like Cursor, ChatGPT, Claude, and Copilot won’t give useful answers about it. To fix that problem, we’ve provided an LLM-friendly guide that teaches them how to use FastHTML. To use it, add this link for your AI helper to use:</p>
 <ul>
-<li><a href="https://docs.fastht.ml/llms-ctx.txt">/llms-ctx.txt</a></li>
+<li><a href="https://fastht.ml/docs/llms-ctx.txt">/llms-ctx.txt</a></li>
 </ul>
 <p>This example is in a format based on recommendations from Anthropic for use with <a href="https://support.anthropic.com/en/articles/9517075-what-are-projects">Claude Projects</a>. This works so well that we’ve actually found that Claude can provide even better information than our own documentation! For instance, read through <a href="https://gist.github.com/jph00/9559b0a563f6a370029bec1d1cc97b74">this annotated Claude chat</a> for some great getting-started information, entirely generated from a project using the above text file as context.</p>
 <p>If you use Cursor, type <code>@doc</code> then choose “<em>Add new doc</em>”, and use the /llms-ctx.txt link above. The context file is auto-generated from our <a href="https://llmstxt.org/"><code>llms.txt</code></a> (our proposed standard for providing AI-friendly information)—you can generate alternative versions suitable for other models as needed.</p>
@@ -461,8 +461,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="next-steps">Next Steps</h2>
 <p>Start with the official sources to learn more about FastHTML:</p>
 <ul>
-<li><a href="https://about.fastht.ml">About</a>: Learn about the core ideas behind FastHTML</li>
-<li><a href="https://docs.fastht.ml">Documentation</a>: Learn from examples how to write FastHTML code</li>
+<li><a href="https://fastht.ml/about">About</a>: Learn about the core ideas behind FastHTML</li>
+<li><a href="https://fastht.ml/docs">Documentation</a>: Learn from examples how to write FastHTML code</li>
 <li><a href="https://github.com/AnswerDotAI/fasthtml/blob/main/examples/adv_app.py">Idiomatic app</a>: Heavily commented source code walking through a complete application, including custom authentication, JS library connections, and database use.</li>
 </ul>
 <p>We also have a 1-hour intro video:</p>
@@ -474,7 +474,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <p>Then explore the small but growing third-party ecosystem of FastHTML tutorials, notebooks, libraries, and components:</p>
 <ul>
-<li><a href="https://gallery.fastht.ml">FastHTML Gallery</a>: Learn from minimal examples of components (ie chat bubbles, click-to-edit, infinite scroll, etc)</li>
+<li><a href="https://fastht.ml/gallery">FastHTML Gallery</a>: Learn from minimal examples of components (ie chat bubbles, click-to-edit, infinite scroll, etc)</li>
 <li><a href="https://isaac-flath.github.io/website/posts/boots/FasthtmlTutorial.html">Creating Custom FastHTML Tags for Markdown Rendering</a> by Isaac Flath</li>
 <li><a href="https://blog.mariusvach.com/posts/login-fasthtml">How to Build a Simple Login System in FastHTML</a> by Marius Vach</li>
 <li>Your tutorial here!</li>
@@ -605,7 +605,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/docs\.fastht\.ml\/");
+      var filterRegex = new RegExp("https:\/\/fastht\.ml\/docs\/");
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }

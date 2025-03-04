@@ -113,7 +113,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta property="og:site_name" content="fasthtml">
 <meta name="twitter:title" content="Web Devs Quickstart – fasthtml">
 <meta name="twitter:description" content="A fast introduction to FastHTML for experienced web developers.">
-<meta name="twitter:image" content="https://docs.fastht.ml/og-image.png">
+<meta name="twitter:image" content="https://fastht.ml/docs/og-image.png">
 <meta name="twitter:creator" content="@jeremyphoward">
 <meta name="twitter:site" content="@answerdotai">
 <meta name="twitter:card" content="summary_large_image">
@@ -141,7 +141,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="https://about.fastht.ml"> 
+    <a class="nav-link" href="https://fastht.ml/about"> 
 <span class="menu-text">Learn</span></a>
   </li>  
 </ul>
@@ -507,7 +507,7 @@ Note
 </div>
 <div class="callout-body-container callout-body">
 <p>While some linters and developers will complain about the wildcard import, it is by design here and perfectly safe. FastHTML is very deliberate about the objects it exports in <code>fasthtml.common</code>. If it bothers you, you can import the objects you need individually, though it will make the code more verbose and less readable.</p>
-<p>If you want to learn more about how FastHTML handles imports, we cover that <a href="https://docs.fastht.ml/explains/faq.html#why-use-import">here</a>.</p>
+<p>If you want to learn more about how FastHTML handles imports, we cover that <a href="https://fastht.ml/docs/explains/faq.html#why-use-import">here</a>.</p>
 </div>
 </div>
 </section>
@@ -1652,7 +1652,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/docs\.fastht\.ml\/");
+      var filterRegex = new RegExp("https:\/\/fastht\.ml\/docs\/");
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }

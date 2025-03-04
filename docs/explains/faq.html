@@ -110,7 +110,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta property="og:site_name" content="fasthtml">
 <meta name="twitter:title" content="FAQ – fasthtml">
 <meta name="twitter:description" content="Frequently Asked Questions">
-<meta name="twitter:image" content="https://docs.fastht.ml/og-image.png">
+<meta name="twitter:image" content="https://fastht.ml/docs/og-image.png">
 <meta name="twitter:creator" content="@jeremyphoward">
 <meta name="twitter:site" content="@answerdotai">
 <meta name="twitter:card" content="summary_large_image">
@@ -138,7 +138,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="https://about.fastht.ml"> 
+    <a class="nav-link" href="https://fastht.ml/about"> 
 <span class="menu-text">Learn</span></a>
   </li>  
 </ul>
@@ -437,7 +437,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="why-the-distinctive-coding-style" class="level2">
 <h2 class="anchored" data-anchor-id="why-the-distinctive-coding-style">Why the distinctive coding style?</h2>
-<p>FastHTML coding style is the <a href="https://docs.fast.ai/dev/style.html">fastai coding style</a>.</p>
+<p>FastHTML coding style is the <a href="https://fast.ai/docs/dev/style.html">fastai coding style</a>.</p>
 <p>If you are coming from a data science background the <strong>fastai coding style</strong> may already be your preferred style.</p>
 <p>If you are coming from a PEP-8 background where the use of ruff is encouraged, there is a learning curve. However, once you get used to the <strong>fastai coding style</strong> you may discover yourself appreciating the concise nature of this style. It also encourages using more functional programming tooling, which is both productive and fun. Having said that, it’s entirely optional!</p>
 </section>
@@ -455,7 +455,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="can-fasthtml-be-used-for-dashboards" class="level2">
 <h2 class="anchored" data-anchor-id="can-fasthtml-be-used-for-dashboards">Can FastHTML be used for dashboards?</h2>
-<p>Yes it can. In fact, it excels at building dashboards. In addition to being great for building static dashboards, because of its <a href="https://about.fastht.ml/foundation">foundation</a> in ASGI and <a href="https://about.fastht.ml/tech">tech stack</a>, FastHTML natively supports Websockets. That means using FastHTML we can create dashboards that autoupdate.</p>
+<p>Yes it can. In fact, it excels at building dashboards. In addition to being great for building static dashboards, because of its <a href="https://fastht.ml/about/foundation">foundation</a> in ASGI and <a href="https://fastht.ml/about/tech">tech stack</a>, FastHTML natively supports Websockets. That means using FastHTML we can create dashboards that autoupdate.</p>
 </section>
 <section id="why-is-fasthtml-developed-using-notebooks" class="level2">
 <h2 class="anchored" data-anchor-id="why-is-fasthtml-developed-using-notebooks">Why is FastHTML developed using notebooks?</h2>
@@ -564,7 +564,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/docs\.fastht\.ml\/");
+      var filterRegex = new RegExp("https:\/\/fastht\.ml\/docs\/");
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }

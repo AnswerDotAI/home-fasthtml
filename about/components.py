@@ -23,7 +23,7 @@ By using Python as the HTML-generation language, we can avoid these disadvantage
 """
 
 s2 = """
-FastHTML's underlying component data structure is called `FT` ("FastTag"). To learn how this works in detail, see the [Explaining FT Components](https://docs.fastht.ml/explains/explaining_xt_components.html) page. `FT` objects can be created with functions with the Capitalized name of each HTML tag, such as `Div`, `P`, and `Img`. The functions generally take positional and keyword arguments:
+FastHTML's underlying component data structure is called `FT` ("FastTag"). To learn how this works in detail, see the [Explaining FT Components](https://fastht.ml/docs/explains/explaining_xt_components.html) page. `FT` objects can be created with functions with the Capitalized name of each HTML tag, such as `Div`, `P`, and `Img`. The functions generally take positional and keyword arguments:
 
 - Positional arguments represent a list of children, which can be strings (in which case they are text nodes), FT child components, or other Python objects (which are stringified).
 - Keyword arguments represent a dictionary of attributes, which can be used to set the properties of the HTML tag

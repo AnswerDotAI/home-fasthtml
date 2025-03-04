@@ -51,7 +51,7 @@ you can disable it entirely by adding this to your settings:
 ## Why the distinctive coding style?
 
 FastHTML coding style is the [fastai coding
-style](https://docs.fast.ai/dev/style.html).
+style](https://fast.ai/docs/dev/style.html).
 
 If you are coming from a data science background the **fastai coding
 style** may already be your preferred style.
@@ -98,8 +98,8 @@ to recognize that a symbol is from the FastHTML library.
 
 Yes it can. In fact, it excels at building dashboards. In addition to
 being great for building static dashboards, because of its
-[foundation](https://about.fastht.ml/foundation) in ASGI and [tech
-stack](https://about.fastht.ml/tech), FastHTML natively supports
+[foundation](https://fastht.ml/about/foundation) in ASGI and [tech
+stack](https://fastht.ml/about/tech), FastHTML natively supports
 Websockets. That means using FastHTML we can create dashboards that
 autoupdate.
 
