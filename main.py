@@ -26,7 +26,7 @@ def hero_section():
             A(
                 Img(src='/assets/logo.svg', alt='FastHTML', width='105', height='24'),
                 href='#'),
-            A('Read docs', href='https://docs.fastht.ml', **_blank,
+            A('Read docs', href='https://fastht.ml/docs', **_blank,
               cls=f'bg-black text-white py-2 px-4 s-body rounded-[62.5rem] hover:bg-black/80 transition-colors duration-300 px-4 py-1 h-10 {center} justify-center'),
             cls=f'py-2 px-4 {between} items-center rounded-full w-full max-w-[400px] bg-white/50 backdrop-blur-lg border border-white/20'),
         cls=f'fixed top-0 w-full left-0 p-4 {center} justify-center z-50'),
@@ -43,7 +43,7 @@ def hero_section():
                 cls=f'flex-1 {col} items-center justify-center gap-6 text-center w-full text-black'
             ),
             Div(
-                A('Learn more', href='https://about.fastht.ml', **_blank,
+                A('Learn more', href='https://fastht.ml/about', **_blank,
                     cls=f'{bnset} m-body px-4 py-1 rounded-full bg-black hover:bg-black/80 transition-colors duration-300 text-white h-[76px] w-full max-w-[350px] flex items-center justify-center'),
                 video_button('Watch intro', '/assets/thumb.png', '7min 30sec', "QqZUzkPcU7A?si=lTtHuMT5HPC66-49"),
                 cls=f'flex-1 {center} justify-center content-center flex-wrap lg:gap-6 gap-4 m-body'),
@@ -124,7 +124,7 @@ def stacked_cards_section():
                     P("TECH STACK", cls="mono-body text-opacity-60"),
                     H2("FastHTML scales up and scales down.", cls="text-black heading-2"),
                     P("Read more about our ", 
-                        A("design philosophy here", href="https://about.fastht.ml/vision", **_blank,
+                        A("design philosophy here", href="https://fastht.ml/about/vision", **_blank,
                           cls="border-b-2 border-b-black/30 hover:border-b-black/80"),
                         ", or click a button below:",
                         cls=f"l-body {maxrem(32)}"),
@@ -206,7 +206,7 @@ def footer():
                     Ul(
                     footer_link("Github", "https://github.com/AnswerDotAI/fasthtml", **_blank),
                     footer_link("Join Discord", "https://discord.gg/qcXvcxMhdP", **_blank),
-                    footer_link("Docs", "https://docs.fastht.ml", **_blank),
+                    footer_link("Docs", "https://fastht.ml/docs", **_blank),
                     footer_link("Site design", "https://tinloof.com/", **_blank),
                     cls="flex max-lg:flex-col max-lg:items-start gap-4 lg:gap-6 flex-wrap")),
                 cls="relative z-[1] mono-s flex max-lg:flex-col gap-6 text-white/80 px-4 lg:px-16 pb-16"),
@@ -238,8 +238,18 @@ hdrs = [
     Link(href='css/preview-stack.css', rel='stylesheet'),
     Link(href='css/highlighter-theme.css', rel='stylesheet')]
 
+from gallery.main import ar as gallery_ar, application_routes
+from about.main import app as about_app
+routes = [Mount(f"/about", about_app),
+          Mount('/docs', StaticFiles(directory='docs', html=True)),
+          Mount('/gallery/files', StaticFiles(directory='gallery')),
+          *application_routes
+          ]
+
 bodykw = {"class": "relative bg-black font-geist text-black/80 font-details-off"}
-app,rt = fast_app(hdrs=hdrs, default_hdrs=False, bodykw=bodykw, on_startup=[startup])
+app,rt = fast_app(hdrs=hdrs, default_hdrs=False, bodykw=bodykw, on_startup=[startup], routes=routes)
+
+gallery_ar.to_app(app)
 
 scripts = (
     Script(src='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js'),
@@ -271,5 +281,7 @@ async def home():
 
 @rt("/")
 async def get(): return await home()
+
+
 
 serve()

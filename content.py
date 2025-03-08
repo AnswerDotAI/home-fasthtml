@@ -85,16 +85,16 @@ async def components():
 
 stacked = [
     ("Build on solid foundations", "FastHTML stands on the shoulders of giants:", [
-        ("ASGI", "asgi_logo-color.svg", "https://about.fastht.ml/foundation#sec1"),
-        ("HTMX", "htmx.svg", "https://about.fastht.ml/foundation#sec1"),
-        ("HTTP", "http-domain-svgrepo-com.svg", "https://about.fastht.ml/foundation#sec3"),
-        ("HTML", "html-1.svg", "https://about.fastht.ml/components"),
+        ("ASGI", "asgi_logo-color.svg", "https://fastht.ml/about/foundation#sec1"),
+        ("HTMX", "htmx.svg", "https://fastht.ml/about/foundation#sec1"),
+        ("HTTP", "http-domain-svgrepo-com.svg", "https://fastht.ml/about/foundation#sec3"),
+        ("HTML", "html-1.svg", "https://fastht.ml/about/components"),
     ]),
     ("Use tools you already know", "FastHTML embraces the familiar:", [
-        ("Python", "python.svg", "https://about.fastht.ml/tech#sec1"),
-        ("Uvicorn", "uvicorn.png", "https://about.fastht.ml/tech#sec3"),
-        ("Starlette", "starlette.svg", "https://about.fastht.ml/tech#sec4"),
-        ("SQLite", "sqlite370_banner.gif", "https://about.fastht.ml/tech#sec5"),
+        ("Python", "python.svg", "https://fastht.ml/about/tech#sec1"),
+        ("Uvicorn", "uvicorn.png", "https://fastht.ml/about/tech#sec3"),
+        ("Starlette", "starlette.svg", "https://fastht.ml/about/tech#sec4"),
+        ("SQLite", "sqlite370_banner.gif", "https://fastht.ml/about/tech#sec5"),
     ]),
     ("Deploy anywhere", "FastHTML runs anywhere Python does, including 1-click deploy to:", [
         ("Railway", "railway.svg", "https://railway.app/"),

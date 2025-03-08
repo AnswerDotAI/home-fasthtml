@@ -1,5 +1,7 @@
+*.db
+*.db-*
+*.db_*
 tags
-index.html
 index_files/
 data/
 .DS_Store
