@@ -16,3 +16,5 @@ monsterui
 markdown2
 mistletoe
 lxml
+fa6_icons
+

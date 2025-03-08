@@ -4,6 +4,7 @@ from functools import partial
 from monsterui.all import *
 import fasthtml.common as fh
 from monsterui.foundations import *
+from fa6_icons import svgs,dims
 
 _A = partial(A, target='_blank')
 def Markdown(s, **kw): return Div(render_md(s, class_map_mods={'ul':'uk-list uk-list-bullet space-y-2 mb-6 ml-6 text-lg'}), **kw)
@@ -32,9 +33,8 @@ def NavBar(*c, # Component for right side of navbar (Often A tag links)
                     cls=(stringify(mobile_cls),stringify(cls),'hidden md:hidden monster-navbar'), 
                     id=menu_id))
 
-
 def NavLink(*args, cls='', target='_blank', **kw):
-    return fh.A(*args, cls=(cls,TextT.lg), target=target, **kw)
+    return fh.A(*args, cls=(cls, TextT.lg, 'hover:text-yellow-400/60 transition-colors'), target=target, **kw)
 
 def BstPage(selidx, title, h2s, *c):
     navitems = [('About', '/about'), ('Vision', '/about/vision'), ('Foundations', '/about/foundation'),
@@ -51,9 +51,9 @@ def BstPage(selidx, title, h2s, *c):
                 right_items=[
                     NavLink("Theme"),  DropDownNavContainer(Div(ThemePicker(font=False, shadows=False, radii=False), cls='p-6 uk-drop-close')),
                     NavLink('Docs', href=docs),
-                    NavLink(UkIcon('github'), href=ghurl),
+                    NavLink(UkIcon('github', width=24, height=24), href=ghurl),
                 ],
-                cls='bg-green-400/70 rounded-lg rounded-tl-3xl shadow-md p-2 px-4'
+                cls='bg-[#3cdd8c] rounded-lg rounded-tl-3xl shadow-md p-2 px-4'
             ),
 
             # Main Content
@@ -76,6 +76,6 @@ def BstPage(selidx, title, h2s, *c):
 
 def Sections(h2s, texts):
     colors = 'yellow', 'pink', 'teal', 'blue'
-    div_cls = 'py-2 px-3 mt-4 mb-2 bg-{}-400/70 shadow-md rounded-lg rounded-tl-3xl' #bg-{}-100
+    div_cls = 'py-2 px-3 mt-4 mb-2 bg-{}-400/70 rounded-tl-3xl' #bg-{}-100
     return chain([Div(H2(h2, id=f'sec{i+1}', cls=div_cls.format(colors[i%4])), Div(txt, cls='px-2'))
                   for i,(h2,txt) in enumerate(zip(h2s, texts))])
