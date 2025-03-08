@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.57">
+<meta name="generator" content="quarto-1.6.40">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -70,10 +70,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-e463c5e664eae906a5c2eb38a07ecc3d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -495,7 +495,7 @@ Tip
 <p>In a module <a href="https://docs.fastht.ml/api/components.html#__getattr__"><code>__getattr__</code></a> is&nbsp;called to get an attribute. In <code>fasthtml.components</code>, this is defined to create components automatically for you.</p>
 </div>
 </div>
-<p>For example if you want a component that creates <code>&lt;path&gt;&lt;/path&gt;</code> that doesn’t conflict names with <code>pathlib.Path</code> you can do that. FastHTML automatically creates new components with a 1:1 mapping and a consistent name, which is almost always what you want. But in some cases you may want to customize that and you can use the <a href="https://docs.fastht.ml/api/components.html#ft_hx"><code>ft_hx</code></a> function to do that differently than the default.</p>
+<p>For example if you want a component that creates <code>&lt;path&gt;&lt;/path&gt;</code> that doesn’t conflict names with <a href="https://docs.python.org/3/library/pathlib.html#pathlib.Path"><code>pathlib.Path</code></a> you can do that. FastHTML automatically creates new components with a 1:1 mapping and a consistent name, which is almost always what you want. But in some cases you may want to customize that and you can use the <a href="https://docs.fastht.ml/api/components.html#ft_hx"><code>ft_hx</code></a> function to do that differently than the default.</p>
 <div id="cell-14" class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> fasthtml.common <span class="im">import</span> ft_hx</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -631,8 +631,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
   clipboard.on('success', onCopySuccess);
   if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
     const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
       text: getTextToCopy,
       container: window.document.getElementById('quarto-embedded-source-code-modal')
@@ -743,7 +741,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {

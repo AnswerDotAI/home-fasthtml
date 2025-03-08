@@ -21,7 +21,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### set_pico_cls
 
->      set_pico_cls ()
+>  set_pico_cls ()
 
 Run this to make jupyter outputs styled with pico:
 
@@ -39,7 +39,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### Card
 
->      Card (*c, header=None, footer=None, target_id=None, hx_vals=None,
+>  Card (*c, header=None, footer=None, target_id=None, hx_vals=None,
 >            hx_target=None, id=None, cls=None, title=None, style=None,
 >            accesskey=None, contenteditable=None, dir=None, draggable=None,
 >            enterkeyhint=None, hidden=None, inert=None, inputmode=None,
@@ -77,7 +77,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### Group
 
->      Group (*c, target_id=None, hx_vals=None, hx_target=None, id=None,
+>  Group (*c, target_id=None, hx_vals=None, hx_target=None, id=None,
 >             cls=None, title=None, style=None, accesskey=None,
 >             contenteditable=None, dir=None, draggable=None, enterkeyhint=None,
 >             hidden=None, inert=None, inputmode=None, lang=None, popover=None,
@@ -110,7 +110,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### Search
 
->      Search (*c, target_id=None, hx_vals=None, hx_target=None, id=None,
+>  Search (*c, target_id=None, hx_vals=None, hx_target=None, id=None,
 >              cls=None, title=None, style=None, accesskey=None,
 >              contenteditable=None, dir=None, draggable=None,
 >              enterkeyhint=None, hidden=None, inert=None, inputmode=None,
@@ -144,7 +144,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### Grid
 
->      Grid (*c, cls='grid', target_id=None, hx_vals=None, hx_target=None,
+>  Grid (*c, cls='grid', target_id=None, hx_vals=None, hx_target=None,
 >            id=None, title=None, style=None, accesskey=None,
 >            contenteditable=None, dir=None, draggable=None, enterkeyhint=None,
 >            hidden=None, inert=None, inputmode=None, lang=None, popover=None,
@@ -182,7 +182,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### DialogX
 
->      DialogX (*c, open=None, header=None, footer=None, id=None,
+>  DialogX (*c, open=None, header=None, footer=None, id=None,
 >               target_id=None, hx_vals=None, hx_target=None, cls=None,
 >               title=None, style=None, accesskey=None, contenteditable=None,
 >               dir=None, draggable=None, enterkeyhint=None, hidden=None,
@@ -215,7 +215,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### Container
 
->      Container (*args, target_id=None, hx_vals=None, hx_target=None, id=None,
+>  Container (*args, target_id=None, hx_vals=None, hx_target=None, id=None,
 >                 cls=None, title=None, style=None, accesskey=None,
 >                 contenteditable=None, dir=None, draggable=None,
 >                 enterkeyhint=None, hidden=None, inert=None, inputmode=None,
@@ -240,4 +240,4 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### PicoBusy
 
->      PicoBusy ()
+>  PicoBusy ()

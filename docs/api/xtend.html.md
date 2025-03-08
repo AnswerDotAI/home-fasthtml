@@ -15,7 +15,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### A
 
->      A (*c, hx_get=None, target_id=None, hx_swap=None, href='#', hx_vals=None,
+>  A (*c, hx_get=None, target_id=None, hx_swap=None, href='#', hx_vals=None,
 >         hx_target=None, id=None, cls=None, title=None, style=None,
 >         accesskey=None, contenteditable=None, dir=None, draggable=None,
 >         enterkeyhint=None, hidden=None, inert=None, inputmode=None, lang=None,
@@ -47,7 +47,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### AX
 
->      AX (txt, hx_get=None, target_id=None, hx_swap=None, href='#',
+>  AX (txt, hx_get=None, target_id=None, hx_swap=None, href='#',
 >          hx_vals=None, hx_target=None, id=None, cls=None, title=None,
 >          style=None, accesskey=None, contenteditable=None, dir=None,
 >          draggable=None, enterkeyhint=None, hidden=None, inert=None,
@@ -82,7 +82,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### Form
 
->      Form (*c, enctype='multipart/form-data', target_id=None, hx_vals=None,
+>  Form (*c, enctype='multipart/form-data', target_id=None, hx_vals=None,
 >            hx_target=None, id=None, cls=None, title=None, style=None,
 >            accesskey=None, contenteditable=None, dir=None, draggable=None,
 >            enterkeyhint=None, hidden=None, inert=None, inputmode=None,
@@ -109,7 +109,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### Hidden
 
->      Hidden (value:Any='', id:Any=None, target_id=None, hx_vals=None,
+>  Hidden (value:Any='', id:Any=None, target_id=None, hx_vals=None,
 >              hx_target=None, cls=None, title=None, style=None, accesskey=None,
 >              contenteditable=None, dir=None, draggable=None,
 >              enterkeyhint=None, hidden=None, inert=None, inputmode=None,
@@ -134,7 +134,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### CheckboxX
 
->      CheckboxX (checked:bool=False, label=None, value='1', id=None, name=None,
+>  CheckboxX (checked:bool=False, label=None, value='1', id=None, name=None,
 >                 target_id=None, hx_vals=None, hx_target=None, cls=None,
 >                 title=None, style=None, accesskey=None, contenteditable=None,
 >                 dir=None, draggable=None, enterkeyhint=None, hidden=None,
@@ -170,7 +170,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### Script
 
->      Script (code:str='', id=None, cls=None, title=None, style=None,
+>  Script (code:str='', id=None, cls=None, title=None, style=None,
 >              attrmap=None, valmap=None, ft_cls=None, **kwargs)
 
 *A Script tag that doesn’t escape its code*
@@ -183,7 +183,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### Style
 
->      Style (*c, id=None, cls=None, title=None, style=None, attrmap=None,
+>  Style (*c, id=None, cls=None, title=None, style=None, attrmap=None,
 >             valmap=None, ft_cls=None, **kwargs)
 
 *A Style tag that doesn’t escape its code*
@@ -198,7 +198,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### double_braces
 
->      double_braces (s)
+>  double_braces (s)
 
 *Convert single braces to double braces if next to special chars or
 newline*
@@ -211,7 +211,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### undouble_braces
 
->      undouble_braces (s)
+>  undouble_braces (s)
 
 *Convert double braces to single braces if next to special chars or
 newline*
@@ -224,7 +224,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### loose_format
 
->      loose_format (s, **kw)
+>  loose_format (s, **kw)
 
 *String format `s` using `kw`, without being strict about braces outside
 of template params*
@@ -237,7 +237,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### ScriptX
 
->      ScriptX (fname, src=None, nomodule=None, type=None, _async=None,
+>  ScriptX (fname, src=None, nomodule=None, type=None, _async=None,
 >               defer=None, charset=None, crossorigin=None, integrity=None,
 >               **kw)
 
@@ -251,7 +251,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### replace_css_vars
 
->      replace_css_vars (css, pre='tpl', **kwargs)
+>  replace_css_vars (css, pre='tpl', **kwargs)
 
 *Replace `var(--)` CSS variables with `kwargs` if name prefix matches
 `pre`*
@@ -264,7 +264,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### StyleX
 
->      StyleX (fname, **kw)
+>  StyleX (fname, **kw)
 
 *A `style` element with contents read from `fname` and variables
 replaced from `kw`*
@@ -277,7 +277,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### Nbsp
 
->      Nbsp ()
+>  Nbsp ()
 
 *A non-breaking space*
 
@@ -291,7 +291,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### Surreal
 
->      Surreal (code:str)
+>  Surreal (code:str)
 
 *Wrap `code` in `domReadyExecute` and set `m=me()` and `p=me('-')`*
 
@@ -303,7 +303,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### On
 
->      On (code:str, event:str='click', sel:str='', me=True)
+>  On (code:str, event:str='click', sel:str='', me=True)
 
 *An async surreal.js script block event handler for `event` on selector
 `sel,p`, making available parent `p`, event `ev`, and target `e`*
@@ -316,7 +316,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### Prev
 
->      Prev (code:str, event:str='click')
+>  Prev (code:str, event:str='click')
 
 *An async surreal.js script block event handler for `event` on previous
 sibling, with same vars as
@@ -330,7 +330,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### Now
 
->      Now (code:str, sel:str='')
+>  Now (code:str, sel:str='')
 
 *An async surreal.js script block on selector `me(sel)`*
 
@@ -342,7 +342,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### AnyNow
 
->      AnyNow (sel:str, code:str)
+>  AnyNow (sel:str, code:str)
 
 *An async surreal.js script block on selector `any(sel)`*
 
@@ -354,7 +354,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### run_js
 
->      run_js (js, id=None, **kw)
+>  run_js (js, id=None, **kw)
 
 *Run `js` script, auto-generating `id` based on name of caller if
 needed, and js-escaping any `kw` params*
@@ -367,7 +367,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### HtmxOn
 
->      HtmxOn (eventname:str, code:str)
+>  HtmxOn (eventname:str, code:str)
 
 ------------------------------------------------------------------------
 
@@ -377,7 +377,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### jsd
 
->      jsd (org, repo, root, path, prov='gh', typ='script', ver=None, esm=False,
+>  jsd (org, repo, root, path, prov='gh', typ='script', ver=None, esm=False,
 >           **kwargs)
 
 *jsdelivr [`Script`](https://docs.fastht.ml/api/xtend.html#script) or
@@ -393,7 +393,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### Titled
 
->      Titled (title:str='FastHTML app', *args, cls='container', target_id=None,
+>  Titled (title:str='FastHTML app', *args, cls='container', target_id=None,
 >              hx_vals=None, hx_target=None, id=None, style=None,
 >              accesskey=None, contenteditable=None, dir=None, draggable=None,
 >              enterkeyhint=None, hidden=None, inert=None, inputmode=None,
@@ -419,7 +419,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### Socials
 
->      Socials (title, site_name, description, image, url=None, w=1200, h=630,
+>  Socials (title, site_name, description, image, url=None, w=1200, h=630,
 >               twitter_site=None, creator=None, card='summary')
 
 *OG and Twitter social card headers*
@@ -432,7 +432,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### Favicon
 
->      Favicon (light_icon, dark_icon)
+>  Favicon (light_icon, dark_icon)
 
 *Light and dark favicon headers*
 
@@ -444,7 +444,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### clear
 
->      clear (id)
+>  clear (id)
 
 ------------------------------------------------------------------------
 
@@ -454,4 +454,4 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### with_sid
 
->      with_sid (app, dest, path='/')
+>  with_sid (app, dest, path='/')

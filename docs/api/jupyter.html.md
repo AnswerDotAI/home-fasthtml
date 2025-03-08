@@ -17,7 +17,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### nb_serve
 
->      nb_serve (app, log_level='error', port=8000, host='0.0.0.0', **kwargs)
+>  nb_serve (app, log_level='error', port=8000, host='0.0.0.0', **kwargs)
 
 *Start a Jupyter compatible uvicorn server with ASGI `app` on `port`
 with `log_level`*
@@ -30,7 +30,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### nb_serve_async
 
->      nb_serve_async (app, log_level='error', port=8000, host='0.0.0.0',
+>  nb_serve_async (app, log_level='error', port=8000, host='0.0.0.0',
 >                      **kwargs)
 
 *Async version of
@@ -44,7 +44,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### is_port_free
 
->      is_port_free (port, host='localhost')
+>  is_port_free (port, host='localhost')
 
 *Check if `port` is free on `host`*
 
@@ -56,7 +56,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### wait_port_free
 
->      wait_port_free (port, host='localhost', max_wait=3)
+>  wait_port_free (port, host='localhost', max_wait=3)
 
 *Wait for `port` to be free on `host`*
 
@@ -65,12 +65,12 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 ------------------------------------------------------------------------
 
 <a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/jupyter.py#L57"
+href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/components.py#L35"
 target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### show
 
->      show (*s)
+>  show (*s)
 
 *Same as fasthtml.components.show, but also adds `htmx.process()`*
 
@@ -82,7 +82,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### render_ft
 
->      render_ft ()
+>  render_ft ()
 
 ------------------------------------------------------------------------
 
@@ -92,7 +92,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### htmx_config_port
 
->      htmx_config_port (port=8000)
+>  htmx_config_port (port=8000)
 
 ------------------------------------------------------------------------
 
@@ -102,7 +102,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### JupyUvi
 
->      JupyUvi (app, log_level='error', host='0.0.0.0', port=8000, start=True,
+>  JupyUvi (app, log_level='error', host='0.0.0.0', port=8000, start=True,
 >               **kwargs)
 
 *Start and stop a Jupyter compatible uvicorn server with ASGI `app` on
@@ -152,7 +152,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### JupyUviAsync
 
->      JupyUviAsync (app, log_level='error', host='0.0.0.0', port=8000,
+>  JupyUviAsync (app, log_level='error', host='0.0.0.0', port=8000,
 >                    **kwargs)
 
 *Start and stop an async Jupyter compatible uvicorn server with ASGI
@@ -252,8 +252,10 @@ P('not loaded', hx_get=hoho, hx_trigger='load')
 <div id="_l0IdURqdSRu46RNQQPmMvA">
 
 <p hx-get="/hoho" hx-trigger="load" id="_WUPc1vlnQUStT30OWNXAHQ">
+
 not loaded
 </p>
+
 <script id="_o4Z4wNOxQXum9LI9N-YhRw">if (window.htmx) htmx.process(document.body)</script>
 
 </div>
@@ -284,8 +286,10 @@ P('hi', hx_get=foo, hx_trigger='load', hx_target=c)
 <div id="_mmZ8zN0IQRWcwaaJuPD17g">
 
 <p hx-get="/foo" hx-trigger="load" hx-target="#_dazDkLiNRi_5IRjKxnDApQ" id="_21sjPwFeSPKp3vncj4YJrQ">
+
 hi
 </p>
+
 <script id="_iy4Ov4wQRsuuB6ekh8semw">if (window.htmx) htmx.process(document.body)</script>
 
 </div>
@@ -309,7 +313,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### HTMX
 
->      HTMX (path='', app=None, host='localhost', port=8000, height='auto',
+>  HTMX (path='', app=None, host='localhost', port=8000, height='auto',
 >            link=False, iframe=True)
 
 *An iframe which displays the HTMX application in a notebook.*
@@ -355,5 +359,5 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### ws_client
 
->      ws_client (app, nm='', host='localhost', port=8000, ws_connect='/ws',
+>  ws_client (app, nm='', host='localhost', port=8000, ws_connect='/ws',
 >                 frame=True, link=True, **kwargs)

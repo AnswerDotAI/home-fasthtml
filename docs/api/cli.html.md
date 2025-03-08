@@ -11,7 +11,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### railway_link
 
->      railway_link ()
+>  railway_link ()
 
 *Link the current directory to the current project’s Railway service*
 
@@ -23,13 +23,13 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### railway_deploy
 
->      railway_deploy (name:str, mount:<function bool_arg>=True)
+>  railway_deploy (name:str, mount:<function bool_arg>=True)
 
 *Deploy a FastHTML app to Railway*
 
 <table>
 <thead>
-<tr class="header">
+<tr>
 <th></th>
 <th><strong>Type</strong></th>
 <th><strong>Default</strong></th>
@@ -37,13 +37,13 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td>name</td>
 <td>str</td>
 <td></td>
 <td>The project name to deploy</td>
 </tr>
-<tr class="even">
+<tr>
 <td>mount</td>
 <td>bool_arg</td>
 <td>True</td>

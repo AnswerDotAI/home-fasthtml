@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.57">
+<meta name="generator" content="quarto-1.6.40">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -71,10 +71,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-e463c5e664eae906a5c2eb38a07ecc3d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -110,7 +110,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link rel="stylesheet" href="../styles.css">
 <meta property="og:title" content="Web Devs Quickstart – fasthtml">
 <meta property="og:description" content="A fast introduction to FastHTML for experienced web developers.">
+<meta property="og:image" content="https://fastht.ml/docs/tutorials/quickstart-web-dev/quickstart-fasthtml.png">
 <meta property="og:site_name" content="fasthtml">
+<meta property="og:image:height" content="164">
+<meta property="og:image:width" content="334">
 <meta name="twitter:title" content="Web Devs Quickstart – fasthtml">
 <meta name="twitter:description" content="A fast introduction to FastHTML for experienced web developers.">
 <meta name="twitter:image" content="https://fastht.ml/docs/og-image.png">
@@ -1478,7 +1481,7 @@ File uploads in production can be dangerous
 </dd>
 <dt data-target-cell="annotated-cell-42" data-target-annotation="6">6</dt>
 <dd>
-<span data-code-cell="annotated-cell-42" data-code-lines="35" data-code-annotation="6">This step shows how to use Python’s built-in <code>pathlib.Path</code> library to write the file to disk.</span>
+<span data-code-cell="annotated-cell-42" data-code-lines="35" data-code-annotation="6">This step shows how to use Python’s built-in <a href="https://docs.python.org/3/library/pathlib.html#pathlib.Path"><code>pathlib.Path</code></a> library to write the file to disk.</span>
 </dd>
 </dl>
 </section>
@@ -1551,7 +1554,7 @@ File uploads in production can be dangerous
 </dd>
 <dt data-target-cell="annotated-cell-43" data-target-annotation="7">7</dt>
 <dd>
-<span data-code-cell="annotated-cell-43" data-code-lines="37" data-code-annotation="7">This step shows how to use Python’s built-in <code>pathlib.Path</code> library to write the file to disk.</span>
+<span data-code-cell="annotated-cell-43" data-code-lines="37" data-code-annotation="7">This step shows how to use Python’s built-in <a href="https://docs.python.org/3/library/pathlib.html#pathlib.Path"><code>pathlib.Path</code></a> library to write the file to disk.</span>
 </dd>
 </dl>
 
@@ -1642,8 +1645,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
   clipboard.on('success', onCopySuccess);
   if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
     const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
       text: getTextToCopy,
       container: window.document.getElementById('quarto-embedded-source-code-modal')
@@ -1754,7 +1755,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {

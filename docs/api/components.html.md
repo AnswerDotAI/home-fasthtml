@@ -13,12 +13,12 @@ from pprint import pprint
 ------------------------------------------------------------------------
 
 <a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/jupyter.py#L57"
+href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/components.py#L35"
 target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### show
 
->      show (ft, *rest)
+>  show (ft, *rest)
 
 *Renders FT Components into HTML within a Jupyter notebook.*
 
@@ -27,8 +27,8 @@ sentence = P(Strong("FastHTML is ", I("Fast")), id='sentence_id')
 ```
 
 When placed within the
-[`show()`](https://docs.fastht.ml/api/jupyter.html#show) function, this
-will render the HTML in Jupyter notebooks.
+[`show()`](https://docs.fastht.ml/api/components.html#show) function,
+this will render the HTML in Jupyter notebooks.
 
 ``` python
 show(sentence)
@@ -65,7 +65,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### FT.\_\_str\_\_
 
->      FT.__str__ ()
+>  FT.__str__ ()
 
 *Return str(self).*
 
@@ -86,7 +86,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### FT.\_\_radd\_\_
 
->      FT.__radd__ (b)
+>  FT.__radd__ (b)
 
 ``` python
 'hx_target=#' + sentence
@@ -102,7 +102,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### FT.\_\_add\_\_
 
->      FT.__add__ (b)
+>  FT.__add__ (b)
 
 ``` python
 sentence + '...'
@@ -120,7 +120,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### attrmap_x
 
->      attrmap_x (o)
+>  attrmap_x (o)
 
 ------------------------------------------------------------------------
 
@@ -130,7 +130,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### ft_html
 
->      ft_html (tag:str, *c, id=None, cls=None, title=None, style=None,
+>  ft_html (tag:str, *c, id=None, cls=None, title=None, style=None,
 >               attrmap=None, valmap=None, ft_cls=None, **kwargs)
 
 ``` python
@@ -169,7 +169,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### ft_hx
 
->      ft_hx (tag:str, *c, target_id=None, hx_vals=None, hx_target=None,
+>  ft_hx (tag:str, *c, target_id=None, hx_vals=None, hx_target=None,
 >             id=None, cls=None, title=None, style=None, accesskey=None,
 >             contenteditable=None, dir=None, draggable=None, enterkeyhint=None,
 >             hidden=None, inert=None, inputmode=None, lang=None, popover=None,
@@ -219,7 +219,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### File
 
->      File (fname)
+>  File (fname)
 
 *Use the unescaped text in file `fname` directly*
 
@@ -258,7 +258,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### fill_form
 
->      fill_form (form:fastcore.xml.FT, obj)
+>  fill_form (form:fastcore.xml.FT, obj)
 
 *Fills named items in `form` using attributes in `obj`*
 
@@ -334,7 +334,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### fill_dataclass
 
->      fill_dataclass (src, dest)
+>  fill_dataclass (src, dest)
 
 *Modifies dataclass in-place and returns it*
 
@@ -354,7 +354,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### find_inputs
 
->      find_inputs (e, tags='input', **kw)
+>  find_inputs (e, tags='input', **kw)
 
 *Recursively find all elements in `e` with `tags` and attrs matching
 `kw`*
@@ -382,7 +382,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### **getattr**
 
->      __getattr__ (tag)
+>  __getattr__ (tag)
 
 ### html2ft
 
@@ -394,7 +394,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### html2ft
 
->      html2ft (html, attr1st=False)
+>  html2ft (html, attr1st=False)
 
 *Convert HTML to an `ft` expression*
 
@@ -456,7 +456,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### sse_message
 
->      sse_message (elm, event='message')
+>  sse_message (elm, event='message')
 
 *Convert element `elm` into a format suitable for SSE streaming*
 

@@ -17,20 +17,20 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### light_media
 
->      light_media (css:str)
+>  light_media (css:str)
 
 *Render light media for day mode views*
 
 <table>
 <thead>
-<tr class="header">
+<tr>
 <th></th>
 <th><strong>Type</strong></th>
 <th><strong>Details</strong></th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td>css</td>
 <td>str</td>
 <td>CSS to be included in the light media query</td>
@@ -54,20 +54,20 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### dark_media
 
->      dark_media (css:str)
+>  dark_media (css:str)
 
 *Render dark media for night mode views*
 
 <table>
 <thead>
-<tr class="header">
+<tr>
 <th></th>
 <th><strong>Type</strong></th>
 <th><strong>Details</strong></th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td>css</td>
 <td>str</td>
 <td>CSS to be included in the dark media query</td>
@@ -91,13 +91,13 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### MarkdownJS
 
->      MarkdownJS (sel='.marked')
+>  MarkdownJS (sel='.marked')
 
 *Implements browser-based markdown rendering.*
 
 <table>
 <thead>
-<tr class="header">
+<tr>
 <th></th>
 <th><strong>Type</strong></th>
 <th><strong>Default</strong></th>
@@ -105,7 +105,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td>sel</td>
 <td>str</td>
 <td>.marked</td>
@@ -129,7 +129,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### KatexMarkdownJS
 
->      KatexMarkdownJS (sel='.marked', inline_delim='$', display_delim='$$',
+>  KatexMarkdownJS (sel='.marked', inline_delim='$', display_delim='$$',
 >                       math_envs=None)
 
 <table>
@@ -140,7 +140,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 <col style="width: 34%" />
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th></th>
 <th><strong>Type</strong></th>
 <th><strong>Default</strong></th>
@@ -148,25 +148,25 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td>sel</td>
 <td>str</td>
 <td>.marked</td>
 <td>CSS selector for markdown elements</td>
 </tr>
-<tr class="even">
+<tr>
 <td>inline_delim</td>
 <td>str</td>
 <td>$</td>
 <td>Delimiter for inline math</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>display_delim</td>
 <td>str</td>
 <td>$$</td>
 <td>Delimiter for long math</td>
 </tr>
-<tr class="even">
+<tr>
 <td>math_envs</td>
 <td>NoneType</td>
 <td>None</td>
@@ -212,7 +212,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### HighlightJS
 
->      HighlightJS (sel='pre code:not([data-highlighted="yes"])',
+>  HighlightJS (sel='pre code:not([data-highlighted="yes"])',
 >                   langs:str|list|tuple='python', light='atom-one-light',
 >                   dark='atom-one-dark')
 
@@ -227,7 +227,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 <col style="width: 34%" />
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th></th>
 <th><strong>Type</strong></th>
 <th><strong>Default</strong></th>
@@ -235,26 +235,26 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td>sel</td>
 <td>str</td>
 <td>pre code:not([data-highlighted=“yes”])</td>
 <td>CSS selector for code elements. Default is industry standard, be
 careful before adjusting it</td>
 </tr>
-<tr class="even">
+<tr>
 <td>langs</td>
 <td>str | list | tuple</td>
 <td>python</td>
 <td>Language(s) to highlight</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>light</td>
 <td>str</td>
 <td>atom-one-light</td>
 <td>Light theme</td>
 </tr>
-<tr class="even">
+<tr>
 <td>dark</td>
 <td>str</td>
 <td>atom-one-dark</td>
@@ -271,7 +271,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### SortableJS
 
->      SortableJS (sel='.sortable', ghost_class='blue-background-class')
+>  SortableJS (sel='.sortable', ghost_class='blue-background-class')
 
 <table>
 <colgroup>
@@ -281,7 +281,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 <col style="width: 34%" />
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th></th>
 <th><strong>Type</strong></th>
 <th><strong>Default</strong></th>
@@ -289,13 +289,13 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td>sel</td>
 <td>str</td>
 <td>.sortable</td>
 <td>CSS selector for sortable elements</td>
 </tr>
-<tr class="even">
+<tr>
 <td>ghost_class</td>
 <td>str</td>
 <td>blue-background-class</td>
@@ -313,13 +313,13 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### MermaidJS
 
->      MermaidJS (sel='.language-mermaid', theme='base')
+>  MermaidJS (sel='.language-mermaid', theme='base')
 
 *Implements browser-based Mermaid diagram rendering.*
 
 <table>
 <thead>
-<tr class="header">
+<tr>
 <th></th>
 <th><strong>Type</strong></th>
 <th><strong>Default</strong></th>
@@ -327,13 +327,13 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td>sel</td>
 <td>str</td>
 <td>.language-mermaid</td>
 <td>CSS selector for mermaid elements</td>
 </tr>
-<tr class="even">
+<tr>
 <td>theme</td>
 <td>str</td>
 <td>base</td>

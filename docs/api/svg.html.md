@@ -38,7 +38,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### Svg
 
->      Svg (*args, viewBox=None, h=None, w=None, height=None, width=None,
+>  Svg (*args, viewBox=None, h=None, w=None, height=None, width=None,
 >           xmlns='http://www.w3.org/2000/svg', **kwargs)
 
 *An SVG tag; xmlns is added automatically, and viewBox defaults to
@@ -58,7 +58,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### ft_svg
 
->      ft_svg (tag:str, *c, transform=None, opacity=None, clip=None, mask=None,
+>  ft_svg (tag:str, *c, transform=None, opacity=None, clip=None, mask=None,
 >              filter=None, vector_effect=None, pointer_events=None,
 >              target_id=None, hx_vals=None, hx_target=None, id=None, cls=None,
 >              title=None, style=None, accesskey=None, contenteditable=None,
@@ -92,7 +92,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### Rect
 
->      Rect (width, height, x=0, y=0, fill=None, stroke=None, stroke_width=None,
+>  Rect (width, height, x=0, y=0, fill=None, stroke=None, stroke_width=None,
 >            rx=None, ry=None, transform=None, opacity=None, clip=None,
 >            mask=None, filter=None, vector_effect=None, pointer_events=None,
 >            target_id=None, hx_vals=None, hx_target=None, id=None, cls=None,
@@ -131,7 +131,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### Circle
 
->      Circle (r, cx=0, cy=0, fill=None, stroke=None, stroke_width=None,
+>  Circle (r, cx=0, cy=0, fill=None, stroke=None, stroke_width=None,
 >              transform=None, opacity=None, clip=None, mask=None, filter=None,
 >              vector_effect=None, pointer_events=None, target_id=None,
 >              hx_vals=None, hx_target=None, id=None, cls=None, title=None,
@@ -164,7 +164,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### Ellipse
 
->      Ellipse (rx, ry, cx=0, cy=0, fill=None, stroke=None, stroke_width=None,
+>  Ellipse (rx, ry, cx=0, cy=0, fill=None, stroke=None, stroke_width=None,
 >               transform=None, opacity=None, clip=None, mask=None, filter=None,
 >               vector_effect=None, pointer_events=None, target_id=None,
 >               hx_vals=None, hx_target=None, id=None, cls=None, title=None,
@@ -197,7 +197,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### transformd
 
->      transformd (translate=None, scale=None, rotate=None, skewX=None,
+>  transformd (translate=None, scale=None, rotate=None, skewX=None,
 >                  skewY=None, matrix=None)
 
 *Create an SVG `transform` kwarg dict*
@@ -223,7 +223,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### Line
 
->      Line (x1, y1, x2=0, y2=0, stroke='black', w=None, stroke_width=1,
+>  Line (x1, y1, x2=0, y2=0, stroke='black', w=None, stroke_width=1,
 >            transform=None, opacity=None, clip=None, mask=None, filter=None,
 >            vector_effect=None, pointer_events=None, target_id=None,
 >            hx_vals=None, hx_target=None, id=None, cls=None, title=None,
@@ -256,7 +256,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### Polyline
 
->      Polyline (*args, points=None, fill=None, stroke=None, stroke_width=None,
+>  Polyline (*args, points=None, fill=None, stroke=None, stroke_width=None,
 >                transform=None, opacity=None, clip=None, mask=None,
 >                filter=None, vector_effect=None, pointer_events=None,
 >                target_id=None, hx_vals=None, hx_target=None, id=None,
@@ -297,7 +297,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### Polygon
 
->      Polygon (*args, points=None, fill=None, stroke=None, stroke_width=None,
+>  Polygon (*args, points=None, fill=None, stroke=None, stroke_width=None,
 >               transform=None, opacity=None, clip=None, mask=None, filter=None,
 >               vector_effect=None, pointer_events=None, target_id=None,
 >               hx_vals=None, hx_target=None, id=None, cls=None, title=None,
@@ -338,7 +338,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### Text
 
->      Text (*args, x=0, y=0, font_family=None, font_size=None, fill=None,
+>  Text (*args, x=0, y=0, font_family=None, font_size=None, fill=None,
 >            text_anchor=None, dominant_baseline=None, font_weight=None,
 >            font_style=None, text_decoration=None, transform=None,
 >            opacity=None, clip=None, mask=None, filter=None,
@@ -378,7 +378,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### PathFT
 
->      PathFT (tag:str, cs:tuple, attrs:dict=None, void_=False, **kwargs)
+>  PathFT (tag:str, cs:tuple, attrs:dict=None, void_=False, **kwargs)
 
 *A ‘Fast Tag’ structure, containing `tag`,`children`,and `attrs`*
 
@@ -390,7 +390,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### Path
 
->      Path (d='', fill=None, stroke=None, stroke_width=None, transform=None,
+>  Path (d='', fill=None, stroke=None, stroke_width=None, transform=None,
 >            opacity=None, clip=None, mask=None, filter=None,
 >            vector_effect=None, pointer_events=None, target_id=None,
 >            hx_vals=None, hx_target=None, id=None, cls=None, title=None,
@@ -481,7 +481,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### PathFT.M
 
->      PathFT.M (x, y)
+>  PathFT.M (x, y)
 
 *Move to.*
 
@@ -493,7 +493,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### PathFT.L
 
->      PathFT.L (x, y)
+>  PathFT.L (x, y)
 
 *Line to.*
 
@@ -505,7 +505,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### PathFT.H
 
->      PathFT.H (x)
+>  PathFT.H (x)
 
 *Horizontal line to.*
 
@@ -517,7 +517,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### PathFT.V
 
->      PathFT.V (y)
+>  PathFT.V (y)
 
 *Vertical line to.*
 
@@ -529,7 +529,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### PathFT.Z
 
->      PathFT.Z ()
+>  PathFT.Z ()
 
 *Close path.*
 
@@ -541,7 +541,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### PathFT.C
 
->      PathFT.C (x1, y1, x2, y2, x, y)
+>  PathFT.C (x1, y1, x2, y2, x, y)
 
 *Cubic Bézier curve.*
 
@@ -553,7 +553,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### PathFT.S
 
->      PathFT.S (x2, y2, x, y)
+>  PathFT.S (x2, y2, x, y)
 
 *Smooth cubic Bézier curve.*
 
@@ -565,7 +565,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### PathFT.Q
 
->      PathFT.Q (x1, y1, x, y)
+>  PathFT.Q (x1, y1, x, y)
 
 *Quadratic Bézier curve.*
 
@@ -577,7 +577,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### PathFT.T
 
->      PathFT.T (x, y)
+>  PathFT.T (x, y)
 
 *Smooth quadratic Bézier curve.*
 
@@ -589,7 +589,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### PathFT.A
 
->      PathFT.A (rx, ry, x_axis_rotation, large_arc_flag, sweep_flag, x, y)
+>  PathFT.A (rx, ry, x_axis_rotation, large_arc_flag, sweep_flag, x, y)
 
 *Elliptical Arc.*
 
@@ -603,7 +603,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### SvgOob
 
->      SvgOob (*args, **kwargs)
+>  SvgOob (*args, **kwargs)
 
 *Wraps an SVG shape as required for an HTMX OOB swap*
 
@@ -622,7 +622,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### SvgInb
 
->      SvgInb (*args, **kwargs)
+>  SvgInb (*args, **kwargs)
 
 *Wraps an SVG shape as required for an HTMX inband swap*
 

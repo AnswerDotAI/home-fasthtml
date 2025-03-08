@@ -18,7 +18,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### GoogleAppClient
 
->      GoogleAppClient (client_id, client_secret, code=None, scope=None,
+>  GoogleAppClient (client_id, client_secret, code=None, scope=None,
 >                       **kwargs)
 
 *A `WebApplicationClient` for Google oauth2*
@@ -31,7 +31,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### GitHubAppClient
 
->      GitHubAppClient (client_id, client_secret, code=None, scope=None,
+>  GitHubAppClient (client_id, client_secret, code=None, scope=None,
 >                       **kwargs)
 
 *A `WebApplicationClient` for GitHub oauth2*
@@ -44,7 +44,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### HuggingFaceClient
 
->      HuggingFaceClient (client_id, client_secret, code=None, scope=None,
+>  HuggingFaceClient (client_id, client_secret, code=None, scope=None,
 >                         state=None, **kwargs)
 
 *A `WebApplicationClient` for HuggingFace oauth2*
@@ -57,7 +57,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### DiscordAppClient
 
->      DiscordAppClient (client_id, client_secret, is_user=False, perms=0,
+>  DiscordAppClient (client_id, client_secret, is_user=False, perms=0,
 >                        scope=None, **kwargs)
 
 *A `WebApplicationClient` for Discord oauth2*
@@ -70,7 +70,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### Auth0AppClient
 
->      Auth0AppClient (domain, client_id, client_secret, code=None, scope=None,
+>  Auth0AppClient (domain, client_id, client_secret, code=None, scope=None,
 >                      redirect_uri='', **kwargs)
 
 *A `WebApplicationClient` for Auth0 OAuth2*
@@ -87,7 +87,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### WebApplicationClient.login_link
 
->      WebApplicationClient.login_link (redirect_uri, scope=None, state=None,
+>  WebApplicationClient.login_link (redirect_uri, scope=None, state=None,
 >                                       **kwargs)
 
 *Get a login link for this client*
@@ -131,7 +131,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### redir_url
 
->      redir_url (request, redir_path, scheme=None)
+>  redir_url (request, redir_path, scheme=None)
 
 *Get the redir url for the host in `request`*
 
@@ -150,7 +150,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### \_AppClient.parse_response
 
->      _AppClient.parse_response (code, redirect_uri)
+>  _AppClient.parse_response (code, redirect_uri)
 
 *Get the token from the oauth2 server response*
 
@@ -162,7 +162,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### \_AppClient.get_info
 
->      _AppClient.get_info (token=None)
+>  _AppClient.get_info (token=None)
 
 *Get the info for authenticated user*
 
@@ -174,7 +174,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### \_AppClient.retr_info
 
->      _AppClient.retr_info (code, redirect_uri)
+>  _AppClient.retr_info (code, redirect_uri)
 
 *Combines `parse_response` and `get_info`*
 
@@ -202,7 +202,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### \_AppClient.retr_id
 
->      _AppClient.retr_id (code, redirect_uri)
+>  _AppClient.retr_id (code, redirect_uri)
 
 *Call `retr_info` and then return id/subscriber value*
 
@@ -227,7 +227,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### url_match
 
->      url_match (url, patterns=('^(localhost|127\\.0\\.0\\.1)(:\\d+)?$',))
+>  url_match (url, patterns=('^(localhost|127\\.0\\.0\\.1)(:\\d+)?$',))
 
 ------------------------------------------------------------------------
 
@@ -237,7 +237,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### OAuth
 
->      OAuth (app, cli, skip=None, redir_path='/redirect', error_path='/error',
+>  OAuth (app, cli, skip=None, redir_path='/redirect', error_path='/error',
 >             logout_path='/logout', login_path='/login', https=True,
 >             http_patterns=('^(localhost|127\\.0\\.0\\.1)(:\\d+)?$',))
 
@@ -253,7 +253,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### Credentials.update
 
->      Credentials.update ()
+>  Credentials.update ()
 
 *Refresh the credentials if they are expired, and return them*
 
@@ -265,7 +265,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### Credentials.update
 
->      Credentials.update ()
+>  Credentials.update ()
 
 *Refresh the credentials if they are expired, and return them*
 
@@ -277,7 +277,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### Credentials.save
 
->      Credentials.save (fname)
+>  Credentials.save (fname)
 
 *Save credentials to `fname`*
 
@@ -289,7 +289,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### Credentials.save
 
->      Credentials.save (fname)
+>  Credentials.save (fname)
 
 *Save credentials to `fname`*
 
@@ -301,7 +301,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### load_creds
 
->      load_creds (fname)
+>  load_creds (fname)
 
 *Load credentials from `fname`*
 
@@ -313,7 +313,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### GoogleAppClient.creds
 
->      GoogleAppClient.creds ()
+>  GoogleAppClient.creds ()
 
 *Create `Credentials` from the client, refreshing if needed*
 
@@ -325,6 +325,6 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### GoogleAppClient.creds
 
->      GoogleAppClient.creds ()
+>  GoogleAppClient.creds ()
 
 *Create `Credentials` from the client, refreshing if needed*

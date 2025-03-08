@@ -1218,8 +1218,9 @@ In order to access the contents contained within a file we use the
 data, this is a seperate step from accessing metadata
 
 Line 35  
-This step shows how to use Python’s built-in `pathlib.Path` library to
-write the file to disk.
+This step shows how to use Python’s built-in
+[`pathlib.Path`](https://docs.python.org/3/library/pathlib.html#pathlib.Path)
+library to write the file to disk.
 
 ### Multiple File Uploads
 
@@ -1293,5 +1294,6 @@ In order to access the contents contained within a file we use the
 data, this is a seperate step from accessing metadata
 
 Line 37  
-This step shows how to use Python’s built-in `pathlib.Path` library to
-write the file to disk.
+This step shows how to use Python’s built-in
+[`pathlib.Path`](https://docs.python.org/3/library/pathlib.html#pathlib.Path)
+library to write the file to disk.

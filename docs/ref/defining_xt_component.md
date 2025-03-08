@@ -128,10 +128,11 @@ components more deeply.
 </div>
 
 For example if you want a component that creates `<path></path>` that
-doesn’t conflict names with `pathlib.Path` you can do that. FastHTML
-automatically creates new components with a 1:1 mapping and a consistent
-name, which is almost always what you want. But in some cases you may
-want to customize that and you can use the
+doesn’t conflict names with
+[`pathlib.Path`](https://docs.python.org/3/library/pathlib.html#pathlib.Path)
+you can do that. FastHTML automatically creates new components with a
+1:1 mapping and a consistent name, which is almost always what you want.
+But in some cases you may want to customize that and you can use the
 [`ft_hx`](https://docs.fastht.ml/api/components.html#ft_hx) function to
 do that differently than the default.
 

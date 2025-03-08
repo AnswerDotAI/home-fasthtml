@@ -39,7 +39,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### parsed_date
 
->      parsed_date (s:str)
+>  parsed_date (s:str)
 
 *Convert `s` to a datetime*
 
@@ -63,7 +63,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### snake2hyphens
 
->      snake2hyphens (s:str)
+>  snake2hyphens (s:str)
 
 *Convert `s` from snake case to hyphenated and capitalised*
 
@@ -81,7 +81,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### HtmxHeaders
 
->      HtmxHeaders (boosted:str|None=None, current_url:str|None=None,
+>  HtmxHeaders (boosted:str|None=None, current_url:str|None=None,
 >                   history_restore_request:str|None=None, prompt:str|None=None,
 >                   request:str|None=None, target:str|None=None,
 >                   trigger_name:str|None=None, trigger:str|None=None)
@@ -135,7 +135,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### HttpHeader
 
->      HttpHeader (k:str, v:str)
+>  HttpHeader (k:str, v:str)
 
 ``` python
 _to_htmx_header('trigger_after_settle')
@@ -151,7 +151,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### HtmxResponseHeaders
 
->      HtmxResponseHeaders (location=None, push_url=None, redirect=None,
+>  HtmxResponseHeaders (location=None, push_url=None, redirect=None,
 >                           refresh=None, replace_url=None, reswap=None,
 >                           retarget=None, reselect=None, trigger=None,
 >                           trigger_after_settle=None, trigger_after_swap=None)
@@ -172,7 +172,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### form2dict
 
->      form2dict (form:starlette.datastructures.FormData)
+>  form2dict (form:starlette.datastructures.FormData)
 
 *Convert starlette form data to a dict*
 
@@ -192,7 +192,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### parse_form
 
->      parse_form (req:starlette.requests.Request)
+>  parse_form (req:starlette.requests.Request)
 
 *Starlette errors on empty multipart forms, so this checks for that
 situation*
@@ -257,7 +257,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### flat_xt
 
->      flat_xt (lst)
+>  flat_xt (lst)
 
 *Flatten lists*
 
@@ -275,7 +275,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### Beforeware
 
->      Beforeware (f, skip=None)
+>  Beforeware (f, skip=None)
 
 *Initialize self. See help(type(self)) for accurate signature.*
 
@@ -299,7 +299,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### EventStream
 
->      EventStream (s)
+>  EventStream (s)
 
 *Create a text/event-stream response from `s`*
 
@@ -311,7 +311,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### signal_shutdown
 
->      signal_shutdown ()
+>  signal_shutdown ()
 
 ## Routing and application
 
@@ -323,7 +323,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### uri
 
->      uri (_arg, **kwargs)
+>  uri (_arg, **kwargs)
 
 ------------------------------------------------------------------------
 
@@ -333,7 +333,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### decode_uri
 
->      decode_uri (s)
+>  decode_uri (s)
 
 ------------------------------------------------------------------------
 
@@ -343,7 +343,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### StringConvertor.to_string
 
->      StringConvertor.to_string (value:str)
+>  StringConvertor.to_string (value:str)
 
 ------------------------------------------------------------------------
 
@@ -353,7 +353,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### HTTPConnection.url_path_for
 
->      HTTPConnection.url_path_for (name:str, **path_params)
+>  HTTPConnection.url_path_for (name:str, **path_params)
 
 ------------------------------------------------------------------------
 
@@ -363,7 +363,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### flat_tuple
 
->      flat_tuple (o)
+>  flat_tuple (o)
 
 *Flatten lists*
 
@@ -375,7 +375,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### noop_body
 
->      noop_body (c, req)
+>  noop_body (c, req)
 
 *Default Body wrap function which just returns the content*
 
@@ -387,7 +387,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### respond
 
->      respond (req, heads, bdy)
+>  respond (req, heads, bdy)
 
 *Default FT response creation function*
 
@@ -399,7 +399,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### Redirect
 
->      Redirect (loc)
+>  Redirect (loc)
 
 *Use HTMX or Starlette RedirectResponse as required to redirect to
 `loc`*
@@ -412,7 +412,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### get_key
 
->      get_key (key=None, fname='.sesskey')
+>  get_key (key=None, fname='.sesskey')
 
 ``` python
 get_key()
@@ -428,7 +428,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### qp
 
->      qp (p:str, **kw)
+>  qp (p:str, **kw)
 
 *Add parameters kw to path p*
 
@@ -462,7 +462,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### def_hdrs
 
->      def_hdrs (htmx=True, surreal=True)
+>  def_hdrs (htmx=True, surreal=True)
 
 *Default headers for a FastHTML app*
 
@@ -474,7 +474,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### FastHTML
 
->      FastHTML (debug=False, routes=None, middleware=None, title:str='FastHTML
+>  FastHTML (debug=False, routes=None, middleware=None, title:str='FastHTML
 >                page', exception_handlers=None, on_startup=None,
 >                on_shutdown=None, lifespan=None, hdrs=None, ftrs=None,
 >                exts=None, before=None, after=None, surreal=True, htmx=True,
@@ -495,7 +495,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### FastHTML.ws
 
->      FastHTML.ws (path:str, conn=None, disconn=None, name=None,
+>  FastHTML.ws (path:str, conn=None, disconn=None, name=None,
 >                   middleware=None)
 
 *Add a websocket route at `path`*
@@ -508,7 +508,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### nested_name
 
->      nested_name (f)
+>  nested_name (f)
 
 \*Get name of function `f` using ’\_’ to join nested function names\*
 
@@ -533,7 +533,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### FastHTML.route
 
->      FastHTML.route (path:str=None, methods=None, name=None,
+>  FastHTML.route (path:str=None, methods=None, name=None,
 >                      include_in_schema=True, body_wrap=None)
 
 *Add a route at `path`*
@@ -565,7 +565,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### serve
 
->      serve (appname=None, app='app', host='0.0.0.0', port=None, reload=True,
+>  serve (appname=None, app='app', host='0.0.0.0', port=None, reload=True,
 >             reload_includes:list[str]|str|None=None,
 >             reload_excludes:list[str]|str|None=None)
 
@@ -579,7 +579,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 <col style="width: 34%" />
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th></th>
 <th><strong>Type</strong></th>
 <th><strong>Default</strong></th>
@@ -587,44 +587,44 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td>appname</td>
 <td>NoneType</td>
 <td>None</td>
 <td>Name of the module</td>
 </tr>
-<tr class="even">
+<tr>
 <td>app</td>
 <td>str</td>
 <td>app</td>
 <td>App instance to be served</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>host</td>
 <td>str</td>
 <td>0.0.0.0</td>
 <td>If host is 0.0.0.0 will convert to localhost</td>
 </tr>
-<tr class="even">
+<tr>
 <td>port</td>
 <td>NoneType</td>
 <td>None</td>
 <td>If port is None it will default to 5001 or the PORT environment
 variable</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>reload</td>
 <td>bool</td>
 <td>True</td>
 <td>Default is to reload the app upon code changes</td>
 </tr>
-<tr class="even">
+<tr>
 <td>reload_includes</td>
 <td>list[str] | str | None</td>
 <td>None</td>
 <td>Additional files to watch for changes</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>reload_excludes</td>
 <td>list[str] | str | None</td>
 <td>None</td>
@@ -641,7 +641,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### Client
 
->      Client (app, url='http://testserver')
+>  Client (app, url='http://testserver')
 
 *A simple httpx ASGI client that doesn’t require `async`*
 
@@ -1216,7 +1216,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### RouteFuncs
 
->      RouteFuncs ()
+>  RouteFuncs ()
 
 *Initialize self. See help(type(self)) for accurate signature.*
 
@@ -1228,7 +1228,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### APIRouter
 
->      APIRouter (prefix:str|None=None, body_wrap=<function noop_body>)
+>  APIRouter (prefix:str|None=None, body_wrap=<function noop_body>)
 
 *Add routes to an app*
 
@@ -1373,7 +1373,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### cookie
 
->      cookie (key:str, value='', max_age=None, expires=None, path='/',
+>  cookie (key:str, value='', max_age=None, expires=None, path='/',
 >              domain=None, secure=False, httponly=False, samesite='lax')
 
 *Create a ‘set-cookie’
@@ -1401,7 +1401,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### reg_re_param
 
->      reg_re_param (m, s)
+>  reg_re_param (m, s)
 
 ------------------------------------------------------------------------
 
@@ -1411,7 +1411,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### FastHTML.static_route_exts
 
->      FastHTML.static_route_exts (prefix='/', static_path='.', exts='static')
+>  FastHTML.static_route_exts (prefix='/', static_path='.', exts='static')
 
 *Add a static route at URL path `prefix` with files from `static_path`
 and `exts` defined by
@@ -1439,7 +1439,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### FastHTML.static_route
 
->      FastHTML.static_route (ext='', prefix='/', static_path='.')
+>  FastHTML.static_route (ext='', prefix='/', static_path='.')
 
 *Add a static route at URL path `prefix` with files from `static_path`
 and single `ext` (including the ‘.’)*
@@ -1457,7 +1457,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### MiddlewareBase
 
->      MiddlewareBase ()
+>  MiddlewareBase ()
 
 *Initialize self. See help(type(self)) for accurate signature.*
 
@@ -1469,7 +1469,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### FtResponse
 
->      FtResponse (content, status_code:int=200, headers=None, cls=<class
+>  FtResponse (content, status_code:int=200, headers=None, cls=<class
 >                  'starlette.responses.HTMLResponse'>,
 >                  media_type:str|None=None)
 
@@ -1497,7 +1497,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### unqid
 
->      unqid ()
+>  unqid ()
 
 ------------------------------------------------------------------------
 
@@ -1507,4 +1507,4 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### setup_ws
 
->      setup_ws (app, f=<function noop>)
+>  setup_ws (app, f=<function noop>)
