@@ -110,7 +110,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta property="og:site_name" content="fasthtml">
 <meta name="twitter:title" content="Handling handlers – fasthtml">
 <meta name="twitter:description" content="How handlers work in FastHTML">
-<meta name="twitter:image" content="https://fastht.ml/docs/og-image.png">
+<meta name="twitter:image" content="https://answerdotai.github.io/fasthtml/og-image.png">
 <meta name="twitter:creator" content="@jeremyphoward">
 <meta name="twitter:site" content="@answerdotai">
 <meta name="twitter:card" content="summary_large_image">
@@ -481,7 +481,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </code></pre>
 </div>
 </div>
-<p>Handler functions can return <a href="https://fastht.ml/docs/explains/explaining_xt_components.html"><code>FT</code></a> objects, which are automatically converted to HTML strings. The <code>FT</code> class can take other <code>FT</code> components as arguments, such as <code>Div</code>. This allows for easy composition of HTML elements in your responses.</p>
+<p>Handler functions can return <a href="https://answerdotai.github.io/fasthtml/explains/explaining_xt_components.html"><code>FT</code></a> objects, which are automatically converted to HTML strings. The <code>FT</code> class can take other <code>FT</code> components as arguments, such as <code>Div</code>. This allows for easy composition of HTML elements in your responses.</p>
 <div id="43f20c45" class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="at">@app.get</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> autopost(): <span class="cf">return</span> Html(Div(<span class="st">'Text.'</span>, hx_post<span class="op">=</span>yoyo.to()))</span>
