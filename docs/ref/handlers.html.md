@@ -117,7 +117,7 @@ print(cli.get('/ft1').text)
      </html>
 
 Handler functions can return
-[`FT`](https://answerdotai.github.io/fasthtml/explains/explaining_xt_components.html)
+[`FT`](https://docs.fastht.ml/explains/explaining_xt_components.html)
 objects, which are automatically converted to HTML strings. The `FT`
 class can take other `FT` components as arguments, such as `Div`. This
 allows for easy composition of HTML elements in your responses.

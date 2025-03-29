@@ -91,7 +91,7 @@ the image below:
 > it will make the code more verbose and less readable.
 >
 > If you want to learn more about how FastHTML handles imports, we cover
-> that [here](https://answerdotai.github.io/fasthtml/explains/faq.html#why-use-import).
+> that [here](https://docs.fastht.ml/explains/faq.html#why-use-import).
 
 </div>
 

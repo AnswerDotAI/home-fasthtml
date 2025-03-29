@@ -28,7 +28,7 @@ use the `--reload-dir` flag to watch all files in each directory. See
 the uvicorn [docs](https://www.uvicorn.org/settings/#development) for
 more info. - The live reload script is only injected into the page when
 rendering [ft
-components](https://answerdotai.github.io/fasthtml/explains/explaining_xt_components.html).
+components](https://docs.fastht.ml/explains/explaining_xt_components.html).
 
 ## Live reloading with `fast_app`
 

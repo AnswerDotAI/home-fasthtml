@@ -10,7 +10,7 @@ def Markdown(s, **kw): return Div(render_md(s, class_map_mods={'ul':'uk-list uk-
 
 ghurl = 'https://github.com/AnswerDotAI/fasthtml'
 fhurl = 'https://fastht.ml'
-docs = 'https://answerdotai.github.io/fasthtml'
+docs = 'https://docs.fastht.ml'
 
 def NavBar(*c, # Component for right side of navbar (Often A tag links)
            brand=None, # Brand/logo component for left side
@@ -68,7 +68,7 @@ def BstPage(selidx, title, h2s, *c):
                     P("© 2024 onwards AnswerDotAI, Inc", cls=TextPresets.muted_lg),
                     DivCentered(A(Img(src=logo, height=24), href=fhurl)),
                     DivRAligned(A("Home"), 
-                                _A("Docs",href='https://answerdotai.github.io/fasthtml'), 
+                                _A("Docs",href='https://docs.fastht.ml'), 
                                 _A("Company", href='https://www.answer.ai/'), cls=TextPresets.muted_lg+'space-x-4'),
                 ),
                 cls='py-8 mb-4' + ContainerT.xl))

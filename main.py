@@ -26,7 +26,7 @@ def hero_section():
             A(
                 Img(src='/assets/logo.svg', alt='FastHTML', width='105', height='24'),
                 href='#'),
-            A('Read docs', href='https://answerdotai.github.io/fasthtml', **_blank,
+            A('Read docs', href='https://docs.fastht.ml', **_blank,
               cls=f'bg-black text-white py-2 px-4 s-body rounded-[62.5rem] hover:bg-black/80 transition-colors duration-300 px-4 py-1 h-10 {center} justify-center'),
             cls=f'py-2 px-4 {between} items-center rounded-full w-full max-w-[400px] bg-white/50 backdrop-blur-lg border border-white/20'),
         cls=f'fixed top-0 w-full left-0 p-4 {center} justify-center z-50'),
@@ -206,7 +206,7 @@ def footer():
                     Ul(
                     footer_link("Github", "https://github.com/AnswerDotAI/fasthtml", **_blank),
                     footer_link("Join Discord", "https://discord.gg/qcXvcxMhdP", **_blank),
-                    footer_link("Docs", "https://answerdotai.github.io/fasthtml", **_blank),
+                    footer_link("Docs", "https://docs.fastht.ml", **_blank),
                     footer_link("Site design", "https://tinloof.com/", **_blank),
                     cls="flex max-lg:flex-col max-lg:items-start gap-4 lg:gap-6 flex-wrap")),
                 cls="relative z-[1] mono-s flex max-lg:flex-col gap-6 text-white/80 px-4 lg:px-16 pb-16"),

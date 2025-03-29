@@ -109,7 +109,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta property="og:site_name" content="fasthtml">
 <meta name="twitter:title" content="Live Reloading – fasthtml">
 <meta name="twitter:description" content="The fastest way to create an HTML app">
-<meta name="twitter:image" content="https://answerdotai.github.io/fasthtml/og-image.png">
+<meta name="twitter:image" content="https://docs.fastht.ml/og-image.png">
 <meta name="twitter:creator" content="@jeremyphoward">
 <meta name="twitter:site" content="@answerdotai">
 <meta name="twitter:card" content="summary_large_image">
@@ -400,7 +400,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>app <span class="op">=</span> FastHTMLWithLiveReload()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Then in your terminal run <code>uvicorn</code> with reloading enabled.</p>
 <pre><code>uvicorn main:app --reload</code></pre>
-<p><strong>⚠️ Gotchas</strong> - A reload is only triggered when you save your changes. - <code>FastHTMLWithLiveReload</code> should only be used during development. - If your app spans multiple directories you might need to use the <code>--reload-dir</code> flag to watch all files in each directory. See the uvicorn <a href="https://www.uvicorn.org/settings/#development">docs</a> for more info. - The live reload script is only injected into the page when rendering <a href="https://answerdotai.github.io/fasthtml/explains/explaining_xt_components.html">ft components</a>.</p>
+<p><strong>⚠️ Gotchas</strong> - A reload is only triggered when you save your changes. - <code>FastHTMLWithLiveReload</code> should only be used during development. - If your app spans multiple directories you might need to use the <code>--reload-dir</code> flag to watch all files in each directory. See the uvicorn <a href="https://www.uvicorn.org/settings/#development">docs</a> for more info. - The live reload script is only injected into the page when rendering <a href="https://docs.fastht.ml/explains/explaining_xt_components.html">ft components</a>.</p>
 <section id="live-reloading-with-fast_app" class="level2">
 <h2 class="anchored" data-anchor-id="live-reloading-with-fast_app">Live reloading with <code>fast_app</code></h2>
 <p>In development the <code>fast_app</code> function provides the same functionality. It instantiates the <code>FastHTMLWithLiveReload</code> class if you pass <code>live=True</code>:</p>
