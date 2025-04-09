@@ -50,11 +50,11 @@ In this case, the returned element will replace the original `P` element (since 
 def get(): return P('Nice to be here!')
 ```
 
-As we discussed in the [HTMX foundations](/foundation#sec2) section, HTMX removes four critical constraints of HTML. It allows any event on any DOM element to call any HTTP method on any path and place the response anywhere in the DOM. If you haven't written a hypermedia-based application before, then we strongly recommend reading the [Hypermedia Systems book](https://hypermedia.systems/). It explains how to build hypermedia applications using HTMX; the techniques you learn there will be directly applicable to FastHTML.
+As we discussed in the [HTMX foundations](./foundation#sec2) section, HTMX removes four critical constraints of HTML. It allows any event on any DOM element to call any HTTP method on any path and place the response anywhere in the DOM. If you haven't written a hypermedia-based application before, then we strongly recommend reading the [Hypermedia Systems book](https://hypermedia.systems/). It explains how to build hypermedia applications using HTMX; the techniques you learn there will be directly applicable to FastHTML.
 """
 
 s3 = """
-[Uvicorn](https://www.uvicorn.org/) is, according to its website, "an ASGI web server". What does that even mean? As [we've discussed](/foundation#sec1), ASGI is a Python API that converts HTTP requests and responses into Python function calls. Uvicorn is a web server which a web browser can talk to, and it in turn talks to an ASGI application, returning its results back to the browser.
+[Uvicorn](https://www.uvicorn.org/) is, according to its website, "an ASGI web server". What does that even mean? As [we've discussed](./foundation#sec1), ASGI is a Python API that converts HTTP requests and responses into Python function calls. Uvicorn is a web server which a web browser can talk to, and it in turn talks to an ASGI application, returning its results back to the browser.
 
 Most of the time you'll run your FastHTML application by simply adding one line of code to the end of your `main.py` file: `serve()`. When you do, a message will be printed letting you know that you now have a web server running on your computer, and if you click on the provided link you'll see your application running. If you look at the source code for `main.py`, you'll see that the line of code that actually runs the server is calling Uvicorn to do the work:
 
