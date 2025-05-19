@@ -263,7 +263,7 @@ from fastcore.xtras import timed_cache
 
 @timed_cache(seconds=60)
 async def home():
-    return (Title(f"FastHTML - {description}"), 
+    return (Title(f"FastHTML - {description}"),
         Main(
             hero_section(),
             await component_preview_section(),
@@ -278,6 +278,5 @@ async def home():
 @rt("/")
 async def get(): return await home()
 
-
-
 serve()
+
