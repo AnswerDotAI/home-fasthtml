@@ -29,7 +29,7 @@ def NavBar(*c, # Component for right side of navbar (Often A tag links)
                 Div(*right_items,cls=(stringify(right_cls),'hidden md:flex'))), # Desktop Navbar 
             cls=('monster-navbar', stringify(cls))),
         DivCentered(*c, *right_items,
-                    cls=(stringify(mobile_cls),stringify(cls),'hidden md:hidden monster-navbar'), 
+                    cls=(stringify(mobile_cls),stringify(cls),'hidden md:hidden monster-navbar'),
                     id=menu_id))
 
 def NavLink(*args, cls='text-gray-800', target='_blank', **kw):
@@ -42,33 +42,30 @@ def BstPage(selidx, title, h2s, *c):
     return (
         Title(title),
         Container(
-            # NavBar
             NavBar(
                 *[NavLink(k, href=v, target=None, cls=TextT.bold if selidx==i else '') for i, (k,v) in enumerate(navitems[:-1])],
                 NavLink('Limits', href='javascript:void(0)', disabled=True, uk_tooltip='No limits!', cls=TextT.gray, target=None),
                 brand=A(Img(src=logo), href=fhurl),
                 right_items=[
                     NavLink('Docs', href=docs),
-                    
                     NavLink(Img(src='assets/github-mark/github-mark.svg', width=20, height=20), href=ghurl),
                 ],
-                cls='bg-[#3cdd8c] rounded-t-3xl p-2 py-5 px-4'
-            ),
+                cls='bg-[#3cdd8c] rounded-t-3xl p-2 py-5 px-4'),
 
-            # Main Content
             Container(
                 Grid(
                     Div(NavContainer(*[Li(A(h2, href=f'#sec{i+1}')) for i,h2 in enumerate(h2s)],
                         sticky=True, uk_scrollspy_nav=True), cls='hidden md:block col-span-1'),
                     Div(H1(title, cls='mb-12'), *c, cls='col-span-12 md:col-span-5'),
                     cols=6)),
+
             # Footer
             DividerLine(),
             Grid(
                     P("© 2024 onwards AnswerDotAI, Inc", cls=TextPresets.muted_lg),
                     DivCentered(A(Img(src=logo, height=24), href=fhurl)),
-                    DivRAligned(A("Home"), 
-                                _A("Docs",href='/docs'), 
+                    DivRAligned(A("Home"),
+                                _A("Docs",href='/docs'),
                                 _A("Company", href='https://www.answer.ai/'), cls=TextPresets.muted_lg+'space-x-4'),
                 ),
                 cls='py-8 mb-4' + ContainerT.xl))
