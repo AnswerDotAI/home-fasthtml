@@ -1,5 +1,4 @@
 python-fasthtml>=0.2.0
-numpy
 fastcore
 requests
 monsterui
