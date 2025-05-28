@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 from fastcore.utils import *
 import fastcore.xtras
 from lxml import etree

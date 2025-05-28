@@ -47,7 +47,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 parsed_date('2pm')
 ```
 
-    datetime.datetime(2025, 5, 17, 14, 0)
+    datetime.datetime(2025, 5, 19, 14, 0)
 
 ``` python
 isinstance(date.fromtimestamp(0), date)
@@ -282,6 +282,7 @@ response = client.post('/', json={}) # no param in request
 print(response.text)
 ```
 
+    b'{}'
     [<starlette.requests.Request object>, <starlette.applications.Starlette object>, '']
 
 If we remove the default value and re-run the request, we should get the
@@ -299,6 +300,7 @@ response = client.post('/', json={}) # no param in request
 print(response.text)
 ```
 
+    b'{}'
     Missing required field: a
 
 ------------------------------------------------------------------------
@@ -459,7 +461,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 ------------------------------------------------------------------------
 
 <a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/core.py#L445"
+href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/core.py#L446"
 target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### Redirect
@@ -480,7 +482,7 @@ print(' '.join(htmx_exts))
 ------------------------------------------------------------------------
 
 <a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/core.py#L480"
+href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/core.py#L481"
 target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### get_key
@@ -490,7 +492,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 ------------------------------------------------------------------------
 
 <a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/core.py#L501"
+href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/core.py#L502"
 target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### qp
@@ -524,7 +526,7 @@ test_eq(res, '/foo/5/bar/42?b=&c=1&c=2&e=')
 ------------------------------------------------------------------------
 
 <a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/core.py#L513"
+href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/core.py#L514"
 target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### def_hdrs
@@ -536,7 +538,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 ------------------------------------------------------------------------
 
 <a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/core.py#L535"
+href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/core.py#L536"
 target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### FastHTML
@@ -550,14 +552,15 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 >                secret_key=None, session_cookie='session_', max_age=31536000,
 >                sess_path='/', same_site='lax', sess_https_only=False,
 >                sess_domain=None, key_fname='.sesskey', body_wrap=<function
->                noop_body>, htmlkw=None, nb_hdrs=False, **bodykw)
+>                noop_body>, htmlkw=None, nb_hdrs=False, canonical=True,
+>                **bodykw)
 
 *Creates an Starlette application.*
 
 ------------------------------------------------------------------------
 
 <a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/core.py#L615"
+href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/core.py#L616"
 target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### FastHTML.ws
@@ -570,7 +573,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 ------------------------------------------------------------------------
 
 <a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/core.py#L630"
+href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/core.py#L631"
 target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### nested_name
@@ -595,7 +598,7 @@ nested_name(func)
 ------------------------------------------------------------------------
 
 <a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/core.py#L651"
+href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/core.py#L652"
 target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### FastHTML.route
@@ -627,7 +630,7 @@ foo.to(a='bar', b=[1,2])
 ------------------------------------------------------------------------
 
 <a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/core.py#L659"
+href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/core.py#L660"
 target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### serve
@@ -703,7 +706,7 @@ variable</td>
 ------------------------------------------------------------------------
 
 <a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/core.py#L682"
+href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/core.py#L683"
 target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### Client
@@ -761,30 +764,6 @@ def get(): return H1('bar')
 txt = cli.get('/xt2').text
 assert '<title>FastHTML page</title>' in txt and '<h1>bar</h1>' in txt and '<html>' in txt
 ```
-
-``` python
-print(txt)
-```
-
-     <!doctype html>
-     <html>
-       <head>
-         <title>FastHTML page</title>
-         <meta charset="utf-8">
-         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-    <script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.4/dist/htmx.min.js"></script><script src="https://cdn.jsdelivr.net/gh/answerdotai/fasthtml-js@1.0.12/fasthtml.js"></script><script src="https://cdn.jsdelivr.net/gh/answerdotai/surreal@main/surreal.js"></script><script src="https://cdn.jsdelivr.net/gh/gnat/css-scope-inline@main/script.js"></script><script>
-        function sendmsg() {
-            window.parent.postMessage({height: document.documentElement.offsetHeight}, '*');
-        }
-        window.onload = function() {
-            sendmsg();
-            document.body.addEventListener('htmx:afterSettle',    sendmsg);
-            document.body.addEventListener('htmx:wsAfterMessage', sendmsg);
-        };</script>   </head>
-       <body>
-         <h1>bar</h1>
-       </body>
-     </html>
 
 ``` python
 @rt("/hi")
@@ -1154,6 +1133,8 @@ response = cli.post('/', headers={"Content-Type": "application/json"}, data=s).t
 assert "<title>It worked!</title>" in response and "<p>15, Lorem</p>" in response
 ```
 
+    b'{"b": "Lorem", "a": 15}'
+
 ``` python
 # Testing POST with Content-Type: application/json
 @app.post("/bodytext")
@@ -1206,9 +1187,9 @@ time.sleep(0.01)
 cli.get('/getsess').text
 ```
 
-    Set to 2025-05-17 09:47:52.421243
+    Set to 2025-05-19 11:46:01.972924
 
-    'Session time: 2025-05-17 09:47:52.421243'
+    'Session time: 2025-05-19 11:46:01.972924'
 
 ``` python
 @rt("/sess-first")
@@ -1302,7 +1283,7 @@ test_eq(cli.get('/locked', auth=("testuser","spycraft")).text, 'Hello, testuser'
 ------------------------------------------------------------------------
 
 <a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/core.py#L694"
+href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/core.py#L695"
 target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### RouteFuncs
@@ -1314,7 +1295,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 ------------------------------------------------------------------------
 
 <a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/core.py#L704"
+href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/core.py#L705"
 target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### APIRouter
@@ -1459,7 +1440,7 @@ app,cli,rt = get_cli(FastHTML(secret_key='soopersecret'))
 ------------------------------------------------------------------------
 
 <a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/core.py#L747"
+href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/core.py#L748"
 target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### cookie
@@ -1482,12 +1463,30 @@ time.sleep(0.01)
 cli.get('/getcookie').text
 ```
 
-    'Cookie was set at time 09:47:53.179943'
+     <!doctype html>
+     <html>
+       <head>
+         <title>FastHTML page</title>
+         <meta charset="utf-8">
+         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.4/dist/htmx.min.js"></script><script src="https://cdn.jsdelivr.net/gh/answerdotai/fasthtml-js@1.0.12/fasthtml.js"></script><script src="https://cdn.jsdelivr.net/gh/answerdotai/surreal@main/surreal.js"></script><script src="https://cdn.jsdelivr.net/gh/gnat/css-scope-inline@main/script.js"></script><script>
+        function sendmsg() {
+            window.parent.postMessage({height: document.documentElement.offsetHeight}, '*');
+        }
+        window.onload = function() {
+            sendmsg();
+            document.body.addEventListener('htmx:afterSettle',    sendmsg);
+            document.body.addEventListener('htmx:wsAfterMessage', sendmsg);
+        };</script>   </head>
+       <body></body>
+     </html>
+
+    'Cookie was set at time 11:46:35.877920'
 
 ------------------------------------------------------------------------
 
 <a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/core.py#L765"
+href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/core.py#L766"
 target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### reg_re_param
@@ -1497,7 +1496,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 ------------------------------------------------------------------------
 
 <a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/core.py#L776"
+href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/core.py#L777"
 target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### FastHTML.static_route_exts
@@ -1525,7 +1524,7 @@ assert 'These are the source notebooks for FastHTML' in cli.get('/README.txt').t
 ------------------------------------------------------------------------
 
 <a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/core.py#L783"
+href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/core.py#L784"
 target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### FastHTML.static_route
@@ -1543,7 +1542,7 @@ assert 'THIS FILE WAS AUTOGENERATED' in cli.get('/README.md').text
 ------------------------------------------------------------------------
 
 <a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/core.py#L789"
+href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/core.py#L790"
 target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### MiddlewareBase
@@ -1555,7 +1554,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 ------------------------------------------------------------------------
 
 <a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/core.py#L797"
+href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/core.py#L798"
 target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### FtResponse
@@ -1669,7 +1668,7 @@ r.json()
 ------------------------------------------------------------------------
 
 <a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/core.py#L812"
+href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/core.py#L813"
 target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### unqid
@@ -1679,7 +1678,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 ------------------------------------------------------------------------
 
 <a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/core.py#L823"
+href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/core.py#L824"
 target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### setup_ws
@@ -1689,7 +1688,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 ------------------------------------------------------------------------
 
 <a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/core.py#L837"
+href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/core.py#L838"
 target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### FastHTML.devtools_json
