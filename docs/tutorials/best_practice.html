@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>WebSockets – fasthtml</title>
+<title>FastHTML Best Practices – fasthtml</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -104,16 +104,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <link rel="stylesheet" href="../styles.css">
-<meta property="og:title" content="WebSockets – fasthtml">
+<meta property="og:title" content="FastHTML Best Practices – fasthtml">
 <meta property="og:description" content="The fastest way to create an HTML app">
 <meta property="og:site_name" content="fasthtml">
-<meta name="twitter:title" content="WebSockets – fasthtml">
+<meta name="twitter:title" content="FastHTML Best Practices – fasthtml">
 <meta name="twitter:description" content="The fastest way to create an HTML app">
 <meta name="twitter:image" content="https://www.fastht.ml/docs/og-image.png">
 <meta name="twitter:creator" content="@jeremyphoward">
 <meta name="twitter:site" content="@answerdotai">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="canonical" href="https://www.fastht.ml/docs/explains/websockets.html">
+<link rel="canonical" href="https://www.fastht.ml/docs/tutorials/best_practice.html">
 </head>
 
 <body class="nav-sidebar floating nav-fixed">
@@ -164,7 +164,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../explains/background_tasks.html">Explanations</a></li><li class="breadcrumb-item"><a href="../explains/websockets.html">WebSockets</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../tutorials/index.html">Tutorials</a></li><li class="breadcrumb-item"><a href="../tutorials/best_practice.html">FastHTML Best Practices</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -211,7 +211,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../tutorials/best_practice.html" class="sidebar-item-text sidebar-link">
+  <a href="../tutorials/best_practice.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">FastHTML Best Practices</span></a>
   </div>
 </li>
@@ -276,7 +276,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../explains/websockets.html" class="sidebar-item-text sidebar-link active">
+  <a href="../explains/websockets.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">WebSockets</span></a>
   </div>
 </li>
@@ -404,20 +404,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#session-data-in-websockets" id="toc-session-data-in-websockets" class="nav-link active" data-scroll-target="#session-data-in-websockets">Session data in Websockets</a></li>
-  <li><a href="#real-time-chat-app" id="toc-real-time-chat-app" class="nav-link" data-scroll-target="#real-time-chat-app">Real-Time Chat App</a>
-  <ul class="collapse">
-  <li><a href="#a-work-in-progress" id="toc-a-work-in-progress" class="nav-link" data-scroll-target="#a-work-in-progress">A Work in Progress</a></li>
-  </ul></li>
+  <li><a href="#database-table-creation---use-dataclasses-and-idempotent-patterns" id="toc-database-table-creation---use-dataclasses-and-idempotent-patterns" class="nav-link active" data-scroll-target="#database-table-creation---use-dataclasses-and-idempotent-patterns">Database Table Creation - Use dataclasses and idempotent patterns</a></li>
+  <li><a href="#route-naming-conventions---let-function-names-define-routes" id="toc-route-naming-conventions---let-function-names-define-routes" class="nav-link" data-scroll-target="#route-naming-conventions---let-function-names-define-routes">Route Naming Conventions - Let function names define routes</a></li>
+  <li><a href="#query-parameters-over-path-parameters---cleaner-url-patterns" id="toc-query-parameters-over-path-parameters---cleaner-url-patterns" class="nav-link" data-scroll-target="#query-parameters-over-path-parameters---cleaner-url-patterns">Query Parameters over Path Parameters - Cleaner URL patterns</a></li>
+  <li><a href="#leverage-return-values---chain-operations-in-one-line" id="toc-leverage-return-values---chain-operations-in-one-line" class="nav-link" data-scroll-target="#leverage-return-values---chain-operations-in-one-line">Leverage Return Values - Chain operations in one line</a></li>
+  <li><a href="#use-.to-for-url-generation---type-safe-route-references" id="toc-use-.to-for-url-generation---type-safe-route-references" class="nav-link" data-scroll-target="#use-.to-for-url-generation---type-safe-route-references">Use <code>.to()</code> for URL Generation - Type-safe route references</a></li>
+  <li><a href="#built-in-css-frameworks---picocss-comes-free-with-fast_app" id="toc-built-in-css-frameworks---picocss-comes-free-with-fast_app" class="nav-link" data-scroll-target="#built-in-css-frameworks---picocss-comes-free-with-fast_app">Built-in CSS Frameworks - PicoCSS comes free with fast_app()</a></li>
+  <li><a href="#smart-defaults---titled-creates-container-serve-handles-main" id="toc-smart-defaults---titled-creates-container-serve-handles-main" class="nav-link" data-scroll-target="#smart-defaults---titled-creates-container-serve-handles-main">Smart Defaults - Titled creates Container, serve() handles main</a></li>
+  <li><a href="#fasthtml-handles-iterables---no-unpacking-needed-for-generators" id="toc-fasthtml-handles-iterables---no-unpacking-needed-for-generators" class="nav-link" data-scroll-target="#fasthtml-handles-iterables---no-unpacking-needed-for-generators">FastHTML Handles Iterables - No unpacking needed for generators</a></li>
+  <li><a href="#functional-patterns---use-map-over-list-comprehensions" id="toc-functional-patterns---use-map-over-list-comprehensions" class="nav-link" data-scroll-target="#functional-patterns---use-map-over-list-comprehensions">Functional Patterns - Use map() over list comprehensions</a></li>
+  <li><a href="#minimal-code---remove-comments-and-unnecessary-returns" id="toc-minimal-code---remove-comments-and-unnecessary-returns" class="nav-link" data-scroll-target="#minimal-code---remove-comments-and-unnecessary-returns">Minimal Code - Remove comments and unnecessary returns</a></li>
+  <li><a href="#use-post-for-all-mutations" id="toc-use-post-for-all-mutations" class="nav-link" data-scroll-target="#use-post-for-all-mutations">Use POST for All Mutations</a></li>
+  <li><a href="#modern-htmx-event-syntax" id="toc-modern-htmx-event-syntax" class="nav-link" data-scroll-target="#modern-htmx-event-syntax">Modern HTMX Event Syntax</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/AnswerDotAI/fasthtml/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="websockets.html.md"><i class="bi bi-file-code"></i>CommonMark</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/AnswerDotAI/fasthtml/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="best_practice.md"><i class="bi bi-file-code"></i>CommonMark</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../explains/background_tasks.html">Explanations</a></li><li class="breadcrumb-item"><a href="../explains/websockets.html">WebSockets</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../tutorials/index.html">Tutorials</a></li><li class="breadcrumb-item"><a href="../tutorials/best_practice.html">FastHTML Best Practices</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">WebSockets</h1>
+<h1 class="title">FastHTML Best Practices</h1>
 </div>
 
 
@@ -434,129 +441,157 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<!-- WARNING: THIS FILE WAS AUTOGENERATED! DO NOT EDIT! -->
-<p>Websockets are a protocol for two-way, persistent communication between a client and server. This is different from HTTP, which uses a request/response model where the client sends a request and the server responds. With websockets, either party can send messages at any time, and the other party can respond.</p>
-<p>This allows for different applications to be built, including things like chat apps, live-updating dashboards, and real-time collaborative tools, which would require constant polling of the server for updates with HTTP.</p>
-<p>In FastHTML, you can create a websocket route using the <code>@app.ws</code> decorator. This decorator takes a route path, and optional <code>conn</code> and <code>disconn</code> parameters representing the <code>on_connect</code> and <code>on_disconnect</code> callbacks in websockets, respectively. The function decorated by <code>@app.ws</code> is the main function that is called when a message is received.</p>
-<p>Here’s an example of a basic websocket route:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="at">@app.ws</span>(<span class="st">'/ws'</span>, conn<span class="op">=</span>on_conn, disconn<span class="op">=</span>on_disconn)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="cf">async</span> <span class="kw">def</span> on_message(msg:<span class="bu">str</span>, send):</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">await</span> send(Div(<span class="st">'Hello '</span> <span class="op">+</span> msg, <span class="bu">id</span><span class="op">=</span><span class="st">'notifications'</span>))</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">await</span> send(Div(<span class="st">'Goodbye '</span> <span class="op">+</span> msg, <span class="bu">id</span><span class="op">=</span><span class="st">'notifications'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>The <code>on_message</code> function is the main function that is called when a message is received and can be named however you like. Similar to standard routes, the arguments to <code>on_message</code> are automatically parsed from the websocket payload for you, so you don’t need to manually parse the message content. However, certain argument names are reserved for special purposes. Here are the most important ones:</p>
-<ul>
-<li><code>send</code> is a function that can be used to send text data to the client.</li>
-<li><code>data</code> is a dictionary containing the data sent by the client.</li>
-<li><code>ws</code> is a reference to the websocket object.</li>
-</ul>
-<p>For example, we can send a message to the client that just connected like this:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="cf">async</span> <span class="kw">def</span> on_conn(send):</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">await</span> send(Div(<span class="st">'Hello, world!'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Or if we receive a message from the client, we can send a message back to them:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="at">@app.ws</span>(<span class="st">'/ws'</span>, conn<span class="op">=</span>on_conn, disconn<span class="op">=</span>on_disconn)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="cf">async</span> <span class="kw">def</span> on_message(msg:<span class="bu">str</span>, send):</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">await</span> send(Div(<span class="st">'You said: '</span> <span class="op">+</span> msg, <span class="bu">id</span><span class="op">=</span><span class="st">'notifications'</span>))</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># or...</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> Div(<span class="st">'You said: '</span> <span class="op">+</span> msg, <span class="bu">id</span><span class="op">=</span><span class="st">'notifications'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>On the client side, we can use HTMX’s websocket extension to open a websocket connection and send/receive messages. For example:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> fasthtml.common <span class="im">import</span> <span class="op">*</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>app <span class="op">=</span> FastHTML(exts<span class="op">=</span><span class="st">'ws'</span>)</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="at">@app.get</span>(<span class="st">'/'</span>)</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> home():</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    cts <span class="op">=</span> Div(</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>        Div(<span class="bu">id</span><span class="op">=</span><span class="st">'notifications'</span>),</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>        Form(Input(<span class="bu">id</span><span class="op">=</span><span class="st">'msg'</span>), <span class="bu">id</span><span class="op">=</span><span class="st">'form'</span>, ws_send<span class="op">=</span><span class="va">True</span>),</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>        hx_ext<span class="op">=</span><span class="st">'ws'</span>, ws_connect<span class="op">=</span><span class="st">'/ws'</span>)</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> Titled(<span class="st">'Websocket Test'</span>, cts)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>This will create a websocket connection to the server on route <code>/ws</code>, and send any form submissions to the server via the websocket. The server will then respond by sending a message back to the client. The client will then update the message div with the message from the server using Out of Band Swaps, which means that the content is swapped with the same id without reloading the page.</p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Make sure you set <code>exts='ws'</code> when creating your <a href="https://www.fastht.ml/docs/api/core.html#fasthtml"><code>FastHTML</code></a> object if you want to use websockets so the extension is loaded.</p>
-</div>
-</div>
-<p>Putting it all together, the code for the client and server should look like this:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> fasthtml.common <span class="im">import</span> <span class="op">*</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>app <span class="op">=</span> FastHTML(exts<span class="op">=</span><span class="st">'ws'</span>)</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>rt <span class="op">=</span> app.route</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="at">@rt</span>(<span class="st">'/'</span>)</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get():</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    cts <span class="op">=</span> Div(</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>        Div(<span class="bu">id</span><span class="op">=</span><span class="st">'notifications'</span>),</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>        Form(Input(<span class="bu">id</span><span class="op">=</span><span class="st">'msg'</span>), <span class="bu">id</span><span class="op">=</span><span class="st">'form'</span>, ws_send<span class="op">=</span><span class="va">True</span>),</span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>        hx_ext<span class="op">=</span><span class="st">'ws'</span>, ws_connect<span class="op">=</span><span class="st">'/ws'</span>)</span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> Titled(<span class="st">'Websocket Test'</span>, cts)</span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="at">@app.ws</span>(<span class="st">'/ws'</span>)</span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="cf">async</span> <span class="kw">def</span> ws(msg:<span class="bu">str</span>, send):</span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">await</span> send(Div(<span class="st">'Hello '</span> <span class="op">+</span> msg, <span class="bu">id</span><span class="op">=</span><span class="st">'notifications'</span>))</span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>serve()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>This is a fairly simple example and could be done just as easily with standard HTTP requests, but it illustrates the basic idea of how websockets work. Let’s look at a more complex example next.</p>
-<section id="session-data-in-websockets" class="level2">
-<h2 class="anchored" data-anchor-id="session-data-in-websockets">Session data in Websockets</h2>
-<p>Session data is shared between standard HTTP routes and Websockets. This means you can access, for example, logged in user ID inside websocket handler:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> fasthtml.common <span class="im">import</span> <span class="op">*</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>app <span class="op">=</span> FastHTML(exts<span class="op">=</span><span class="st">'ws'</span>)</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>rt <span class="op">=</span> app.route</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="at">@rt</span>(<span class="st">'/login'</span>)</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get(session):</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    session[<span class="st">"person"</span>] <span class="op">=</span> <span class="st">"Bob"</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="st">"ok"</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="at">@app.ws</span>(<span class="st">'/ws'</span>)</span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="cf">async</span> <span class="kw">def</span> ws(msg:<span class="bu">str</span>, send, session):</span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">await</span> send(Div(<span class="ss">f'Hello </span><span class="sc">{</span>session<span class="sc">.</span>get(<span class="st">"person"</span>)<span class="sc">}</span><span class="ss">'</span> <span class="op">+</span> msg, <span class="bu">id</span><span class="op">=</span><span class="st">'notifications'</span>))</span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>serve()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>FastHTML applications are different to applications using FastAPI/react, Django, etc. Don’t assume that FastHTML best practices are the same as those for other frameworks. Best practices embody the fast.ai philosophy: remove ceremony, leverage smart defaults, and write code that’s both concise and clear. The following are some particular opportunities that both humans and language models sometimes miss:</p>
+<section id="database-table-creation---use-dataclasses-and-idempotent-patterns" class="level2">
+<h2 class="anchored" data-anchor-id="database-table-creation---use-dataclasses-and-idempotent-patterns">Database Table Creation - Use dataclasses and idempotent patterns</h2>
+<p><strong>Before:</strong></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>todos <span class="op">=</span> db.t.todos</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="kw">not</span> todos.exists():</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>todos.create(<span class="bu">id</span><span class="op">=</span><span class="bu">int</span>, task<span class="op">=</span><span class="bu">str</span>, completed<span class="op">=</span><span class="bu">bool</span>, created<span class="op">=</span><span class="bu">str</span>, pk<span class="op">=</span><span class="st">'id'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>After:</strong></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Todo: <span class="bu">id</span>:<span class="bu">int</span><span class="op">;</span> task:<span class="bu">str</span><span class="op">;</span> completed:<span class="bu">bool</span><span class="op">;</span> created:<span class="bu">str</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>todos <span class="op">=</span> db.create(Todo)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>FastLite’s <code>create()</code> is idempotent - it creates the table if needed and returns the table object either way. Using a dataclass-style definition is cleaner and more Pythonic. The <code>id</code> field is automatically the primary key.</p>
 </section>
-<section id="real-time-chat-app" class="level2">
-<h2 class="anchored" data-anchor-id="real-time-chat-app">Real-Time Chat App</h2>
-<p>Let’s put our new websocket knowledge to use by building a simple chat app. We will create a chat app where multiple users can send and receive messages in real time.</p>
-<p>Let’s start by defining the app and the home page:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> fasthtml.common <span class="im">import</span> <span class="op">*</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>app <span class="op">=</span> FastHTML(exts<span class="op">=</span><span class="st">'ws'</span>)</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>rt <span class="op">=</span> app.route</span>
+<section id="route-naming-conventions---let-function-names-define-routes" class="level2">
+<h2 class="anchored" data-anchor-id="route-naming-conventions---let-function-names-define-routes">Route Naming Conventions - Let function names define routes</h2>
+<p><strong>Before:</strong></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="at">@rt</span>(<span class="st">"/"</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get(): <span class="cf">return</span> Titled(<span class="st">"Todo List"</span>, ...)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="at">@rt</span>(<span class="st">"/add"</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> post(task: <span class="bu">str</span>): ...</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>After:</strong></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="at">@rt</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> index(): <span class="cf">return</span> Titled(<span class="st">"Todo List"</span>, ...) <span class="co"># Special name for "/"</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="at">@rt</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> add(task: <span class="bu">str</span>): ... <span class="co"># Function name becomes route</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Use <code>@rt</code> without arguments and let the function name define the route. The special name <code>index</code> maps to <code>/</code>.</p>
+</section>
+<section id="query-parameters-over-path-parameters---cleaner-url-patterns" class="level2">
+<h2 class="anchored" data-anchor-id="query-parameters-over-path-parameters---cleaner-url-patterns">Query Parameters over Path Parameters - Cleaner URL patterns</h2>
+<p><strong>Before:</strong></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="at">@rt</span>(<span class="st">"/toggle/</span><span class="sc">{todo_id}</span><span class="st">"</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> post(todo_id: <span class="bu">int</span>): ...</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># URL: /toggle/123</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>After:</strong></p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="at">@rt</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> toggle(<span class="bu">id</span>: <span class="bu">int</span>): ...</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># URL: /toggle?id=123</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Query parameters are more idiomatic in FastHTML and avoid duplicating param names in the path.</p>
+</section>
+<section id="leverage-return-values---chain-operations-in-one-line" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="leverage-return-values---chain-operations-in-one-line">Leverage Return Values - Chain operations in one line</h2>
+<div class="column-body-outset">
+<p><strong>Before:</strong></p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="at">@rt</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> add(task: <span class="bu">str</span>):</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  new_todo <span class="op">=</span> todos.insert(task<span class="op">=</span>task, completed<span class="op">=</span><span class="va">False</span>, created<span class="op">=</span>datetime.now().isoformat())</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> todo_item(todos[new_todo])</span>
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>msgs <span class="op">=</span> []</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="at">@rt</span>(<span class="st">'/'</span>)</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> home(): <span class="cf">return</span> Div(</span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    Div(Ul(<span class="op">*</span>[Li(m) <span class="cf">for</span> m <span class="kw">in</span> msgs], <span class="bu">id</span><span class="op">=</span><span class="st">'msg-list'</span>)),</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    Form(Input(<span class="bu">id</span><span class="op">=</span><span class="st">'msg'</span>), <span class="bu">id</span><span class="op">=</span><span class="st">'form'</span>, ws_send<span class="op">=</span><span class="va">True</span>),</span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    hx_ext<span class="op">=</span><span class="st">'ws'</span>, ws_connect<span class="op">=</span><span class="st">'/ws'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Now, let’s handle the websocket connection. We’ll add a new route for this along with an <code>on_conn</code> and <code>on_disconn</code> function to keep track of the users currently connected to the websocket. Finally, we will handle the logic for sending messages to all connected users.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>users <span class="op">=</span> {}</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> on_conn(ws, send): users[<span class="bu">str</span>(<span class="bu">id</span>(ws))] <span class="op">=</span> send</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> on_disconn(ws): users.pop(<span class="bu">str</span>(<span class="bu">id</span>(ws)), <span class="va">None</span>)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="at">@rt</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> toggle(<span class="bu">id</span>: <span class="bu">int</span>):</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  todo <span class="op">=</span> todos[<span class="bu">id</span>]</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  todos.update(completed<span class="op">=</span><span class="kw">not</span> todo.completed, <span class="bu">id</span><span class="op">=</span><span class="bu">id</span>)</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> todo_item(todos[<span class="bu">id</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>After:</strong></p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="at">@rt</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> add(task: <span class="bu">str</span>):</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> todo_item(todos.insert(task<span class="op">=</span>task, completed<span class="op">=</span><span class="va">False</span>, created<span class="op">=</span>datetime.now().isoformat()))</span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="at">@app.ws</span>(<span class="st">'/ws'</span>, conn<span class="op">=</span>on_conn, disconn<span class="op">=</span>on_disconn)</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="cf">async</span> <span class="kw">def</span> ws(msg:<span class="bu">str</span>):</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    msgs.append(msg)</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Use associated `send` function to send message to each user</span></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> u <span class="kw">in</span> users.values(): <span class="cf">await</span> u(Ul(<span class="op">*</span>[Li(m) <span class="cf">for</span> m <span class="kw">in</span> msgs], <span class="bu">id</span><span class="op">=</span><span class="st">'msg-list'</span>))</span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>serve()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>We can now run this app with <code>python chat_ws.py</code> and open multiple browser tabs to <code>http://localhost:5001</code>. You should be able to send messages in one tab and see them appear in the other tabs.</p>
-<section id="a-work-in-progress" class="level3">
-<h3 class="anchored" data-anchor-id="a-work-in-progress">A Work in Progress</h3>
-<p>This page (and Websocket support in FastHTML) is a work in progress. Questions, PRs, and feedback are welcome!</p>
-
-
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="at">@rt</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> toggle(<span class="bu">id</span>: <span class="bu">int</span>):</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> todo_item(todos.update(completed<span class="op">=</span><span class="kw">not</span> todos[<span class="bu">id</span>].completed, <span class="bu">id</span><span class="op">=</span><span class="bu">id</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Both <code>insert()</code> and <code>update()</code> return the affected object, enabling functional chaining.</p>
+</div>
 </section>
+<section id="use-.to-for-url-generation---type-safe-route-references" class="level2">
+<h2 class="anchored" data-anchor-id="use-.to-for-url-generation---type-safe-route-references">Use <code>.to()</code> for URL Generation - Type-safe route references</h2>
+<p><strong>Before:</strong></p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>hx_post<span class="op">=</span><span class="ss">f"/toggle?id=</span><span class="sc">{</span>todo<span class="sc">.</span><span class="bu">id</span><span class="sc">}</span><span class="ss">"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>After:</strong></p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>hx_post<span class="op">=</span>toggle.to(<span class="bu">id</span><span class="op">=</span>todo.<span class="bu">id</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The <code>.to()</code> method generates URLs with type safety and is refactoring-friendly.</p>
+</section>
+<section id="built-in-css-frameworks---picocss-comes-free-with-fast_app" class="level2">
+<h2 class="anchored" data-anchor-id="built-in-css-frameworks---picocss-comes-free-with-fast_app">Built-in CSS Frameworks - PicoCSS comes free with fast_app()</h2>
+<p><strong>Before:</strong></p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>style <span class="op">=</span> Style(<span class="st">"""</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="st">.todo-container { max-width: 600px; margin: 0 auto; padding: 20px; }</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="st">/* ... many more lines ... */</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>After:</strong></p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Just use semantic HTML - Pico styles it automatically</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>Container(...), Article(...), Card(...), Group(...)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><code>fast_app()</code> includes PicoCSS by default. Use semantic HTML elements that Pico styles automatically. Use MonsterUI (like shadcn, but for FastHTML) for more complex UI needs.</p>
+</section>
+<section id="smart-defaults---titled-creates-container-serve-handles-main" class="level2">
+<h2 class="anchored" data-anchor-id="smart-defaults---titled-creates-container-serve-handles-main">Smart Defaults - Titled creates Container, serve() handles main</h2>
+<p><strong>Before:</strong></p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="cf">return</span> Titled(<span class="st">"Todo List"</span>, Container(...))</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  serve()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>After:</strong></p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="cf">return</span> Titled(<span class="st">"Todo List"</span>, ...)  <span class="co"># Container is automatic</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>serve()  <span class="co"># No need for if __name__ guard</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><code>Titled</code> already wraps content in a <code>Container</code>, and <code>serve()</code> handles the main check internally.</p>
+</section>
+<section id="fasthtml-handles-iterables---no-unpacking-needed-for-generators" class="level2">
+<h2 class="anchored" data-anchor-id="fasthtml-handles-iterables---no-unpacking-needed-for-generators">FastHTML Handles Iterables - No unpacking needed for generators</h2>
+<p><strong>Before:</strong></p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>Section(<span class="op">*</span>[todo_item(todo) <span class="cf">for</span> todo <span class="kw">in</span> all_todos], <span class="bu">id</span><span class="op">=</span><span class="st">"todo-list"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>After:</strong></p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>Section(<span class="bu">map</span>(todo_item, all_todos), <span class="bu">id</span><span class="op">=</span><span class="st">"todo-list"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>FastHTML components accept iterables directly - no need to unpack with <code>*</code>.</p>
+</section>
+<section id="functional-patterns---use-map-over-list-comprehensions" class="level2">
+<h2 class="anchored" data-anchor-id="functional-patterns---use-map-over-list-comprehensions">Functional Patterns - Use map() over list comprehensions</h2>
+<p>List comprehensions are great, but <code>map()</code> is often cleaner for simple transformations, especially when combined with FastHTML’s iterable handling.</p>
+</section>
+<section id="minimal-code---remove-comments-and-unnecessary-returns" class="level2">
+<h2 class="anchored" data-anchor-id="minimal-code---remove-comments-and-unnecessary-returns">Minimal Code - Remove comments and unnecessary returns</h2>
+<p><strong>Before:</strong></p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="at">@rt</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> delete(<span class="bu">id</span>: <span class="bu">int</span>):</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Delete from database</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  todos.delete(<span class="bu">id</span>)</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Return empty response</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="st">""</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>After:</strong></p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="at">@rt</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> delete(<span class="bu">id</span>: <span class="bu">int</span>): todos.delete(<span class="bu">id</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Skip comments when code is self-documenting</li>
+<li>Don’t return empty strings - <code>None</code> is returned by default</li>
+<li>Use a single line for a single idea.</li>
+</ul>
+</section>
+<section id="use-post-for-all-mutations" class="level2">
+<h2 class="anchored" data-anchor-id="use-post-for-all-mutations">Use POST for All Mutations</h2>
+<p><strong>Before:</strong></p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>hx_delete<span class="op">=</span><span class="ss">f"/delete?id=</span><span class="sc">{</span>todo<span class="sc">.</span><span class="bu">id</span><span class="sc">}</span><span class="ss">"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>After:</strong></p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>hx_post<span class="op">=</span>delete.to(<span class="bu">id</span><span class="op">=</span>todo.<span class="bu">id</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>FastHTML routes handle only GET and POST by default. Using only these two verbs is more idiomatic and simpler.</p>
+</section>
+<section id="modern-htmx-event-syntax" class="level2">
+<h2 class="anchored" data-anchor-id="modern-htmx-event-syntax">Modern HTMX Event Syntax</h2>
+<p><strong>Before:</strong></p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>hx_on<span class="op">=</span><span class="st">"htmx:afterRequest: this.reset()"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>After:</strong></p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>hx_on__after_request<span class="op">=</span><span class="st">"this.reset()"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This works because:</p>
+<ul>
+<li><code>hx-on="event: code"</code> is deprecated; <code>hx-on-event="code"</code> is preferred</li>
+<li>FastHTML converts <code>_</code> to <code>-</code> (so <code>hx_on__after_request</code> becomes <code>hx-on--after-request</code>)</li>
+<li><code>::</code> in HTMX can be used as a shortcut for <code>:htmx:</code>.</li>
+<li>HTMX natively accepts <code>-</code> instead of <code>:</code> (so <code>-htmx-</code> works like <code>:htmx:</code>)</li>
+<li>HTMX accepts e.g <code>after-request</code> as an alternative to camelCase <code>afterRequest</code></li>
+</ul>
+
+
 </section>
 
 </main> <!-- /main -->

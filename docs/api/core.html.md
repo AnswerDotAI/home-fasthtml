@@ -47,7 +47,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 parsed_date('2pm')
 ```
 
-    datetime.datetime(2025, 5, 19, 14, 0)
+    datetime.datetime(2025, 5, 29, 14, 0)
 
 ``` python
 isinstance(date.fromtimestamp(0), date)
@@ -282,7 +282,6 @@ response = client.post('/', json={}) # no param in request
 print(response.text)
 ```
 
-    b'{}'
     [<starlette.requests.Request object>, <starlette.applications.Starlette object>, '']
 
 If we remove the default value and re-run the request, we should get the
@@ -300,7 +299,6 @@ response = client.post('/', json={}) # no param in request
 print(response.text)
 ```
 
-    b'{}'
     Missing required field: a
 
 ------------------------------------------------------------------------
@@ -1133,8 +1131,6 @@ response = cli.post('/', headers={"Content-Type": "application/json"}, data=s).t
 assert "<title>It worked!</title>" in response and "<p>15, Lorem</p>" in response
 ```
 
-    b'{"b": "Lorem", "a": 15}'
-
 ``` python
 # Testing POST with Content-Type: application/json
 @app.post("/bodytext")
@@ -1187,9 +1183,9 @@ time.sleep(0.01)
 cli.get('/getsess').text
 ```
 
-    Set to 2025-05-19 11:46:01.972924
+    Set to 2025-05-29 08:31:48.235262
 
-    'Session time: 2025-05-19 11:46:01.972924'
+    'Session time: 2025-05-29 08:31:48.235262'
 
 ``` python
 @rt("/sess-first")
@@ -1467,6 +1463,7 @@ cli.get('/getcookie').text
      <html>
        <head>
          <title>FastHTML page</title>
+         <link rel="canonical" href="http://testserver/setcookie">
          <meta charset="utf-8">
          <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.4/dist/htmx.min.js"></script><script src="https://cdn.jsdelivr.net/gh/answerdotai/fasthtml-js@1.0.12/fasthtml.js"></script><script src="https://cdn.jsdelivr.net/gh/answerdotai/surreal@main/surreal.js"></script><script src="https://cdn.jsdelivr.net/gh/gnat/css-scope-inline@main/script.js"></script><script>
@@ -1481,7 +1478,7 @@ cli.get('/getcookie').text
        <body></body>
      </html>
 
-    'Cookie was set at time 11:46:35.877920'
+    'Cookie was set at time 08:31:49.013668'
 
 ------------------------------------------------------------------------
 
@@ -1673,12 +1670,12 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### unqid
 
->  unqid ()
+>  unqid (seeded=False)
 
 ------------------------------------------------------------------------
 
 <a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/core.py#L824"
+href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/core.py#L825"
 target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### setup_ws
@@ -1688,7 +1685,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 ------------------------------------------------------------------------
 
 <a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/core.py#L838"
+href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/core.py#L839"
 target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### FastHTML.devtools_json
