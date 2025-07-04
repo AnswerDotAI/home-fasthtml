@@ -103,7 +103,6 @@
 
 - `class FastHTML`
     - `def __init__(self, debug, routes, middleware, title, exception_handlers, on_startup, on_shutdown, lifespan, hdrs, ftrs, exts, before, after, surreal, htmx, default_hdrs, sess_cls, secret_key, session_cookie, max_age, sess_path, same_site, sess_https_only, sess_domain, key_fname, body_wrap, htmlkw, nb_hdrs, canonical, **bodykw)`
-    - `def add_route(self, route)`
 
 - `@patch def ws(self, path, conn, disconn, name, middleware)`
     Add a websocket route at `path`
@@ -218,7 +217,7 @@
     - `def start(self)`
     - `def stop(self)`
 
-- `def HTMX(path, app, host, port, height, link, iframe)`
+- `def HTMX(path, host, app, port, height, link, iframe)`
     An iframe which displays the HTMX application in a notebook.
 
 ## fasthtml.live_reload

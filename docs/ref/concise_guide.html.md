@@ -514,9 +514,7 @@ async def ws(msg:str, send):
     return Div('Goodbye ' + msg, id="notifications"), mk_inp()
 ```
 
-Sample chatbot that uses FastHTML’s
-[`setup_ws`](https://www.fastht.ml/docs/api/core.html#setup_ws)
-function:
+Sample chatbot that uses FastHTML’s `setup_ws` function:
 
 ``` py
 app = FastHTML(exts='ws')

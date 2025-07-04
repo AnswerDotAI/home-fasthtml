@@ -215,12 +215,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../tutorials/best_practice.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">FastHTML Best Practices</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="../tutorials/jupyter_and_fasthtml.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Using Jupyter to write FastHTML</span></a>
   </div>
@@ -594,6 +588,9 @@ document.body.addEventListener('htmx:configRequest', (event) => {
 <pre><code>hi</code></pre>
 </div>
 </div>
+<div id="c881cfc5" class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>server.stop()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <hr>
 <p><a href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/jupyter.py#L101" target="_blank" style="float:right; font-size:smaller">source</a></p>
 </section>
@@ -605,8 +602,8 @@ document.body.addEventListener('htmx:configRequest', (event) => {
 </blockquote>
 <p><em>Start and stop an async Jupyter compatible uvicorn server with ASGI <code>app</code> on <code>port</code> with <code>log_level</code></em></p>
 <div id="959eb254" class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>server <span class="op">=</span> JupyUviAsync(app, port<span class="op">=</span>port)</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="cf">await</span> server.start()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>server <span class="op">=</span> JupyUviAsync(app, port<span class="op">=</span>port)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="cf">await</span> server.start()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 
 <script>
@@ -619,42 +616,31 @@ document.body.addEventListener('htmx:configRequest', (event) => {
 </div>
 </div>
 <div id="e4550d23" class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="cf">async</span> <span class="cf">with</span> AsyncClient() <span class="im">as</span> client:</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    r <span class="op">=</span> <span class="cf">await</span> client.get(<span class="ss">f'http://localhost:</span><span class="sc">{</span>port<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(r.text)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="cf">async</span> <span class="cf">with</span> AsyncClient() <span class="im">as</span> client:</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    r <span class="op">=</span> <span class="cf">await</span> client.get(<span class="ss">f'http://localhost:</span><span class="sc">{</span>port<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(r.text)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>hi</code></pre>
 </div>
 </div>
 <div id="7869af78" class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>server.stop()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>server.stop()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="using-a-notebook-as-a-web-app" class="level3">
 <h3 class="anchored" data-anchor-id="using-a-notebook-as-a-web-app">Using a notebook as a web app</h3>
 <p>You can also run an HTMX web app directly in a notebook. To make this work, you have to add the default FastHTML headers to the DOM of the notebook with <code>show(*def_hdrs())</code>. Additionally, you might find it convenient to use <em>auto_id</em> mode, in which the ID of an <code>FT</code> object is automatically generated if not provided.</p>
 <div id="9c2a85b6" class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>fh_cfg[<span class="st">'auto_id'</span> ]<span class="op">=</span><span class="va">True</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>fh_cfg[<span class="st">'auto_id'</span> ]<span class="op">=</span><span class="va">True</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>After importing <code>fasthtml.jupyter</code> and calling <a href="https://www.fastht.ml/docs/api/jupyter.html#render_ft"><code>render_ft()</code></a>, FT components render directly in the notebook.</p>
 <div id="694cdab5" class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>show(<span class="op">*</span>def_hdrs())</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>render_ft()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>show(<span class="op">*</span>def_hdrs())</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>render_ft()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<script src="https://unpkg.com/htmx.org@2.0.4/dist/htmx.min.js"></script><script src="https://cdn.jsdelivr.net/gh/answerdotai/fasthtml-js@1.0.12/fasthtml.js"></script><script src="https://cdn.jsdelivr.net/gh/answerdotai/surreal@main/surreal.js"></script><script src="https://cdn.jsdelivr.net/gh/gnat/css-scope-inline@main/script.js"></script><script id="_7KKmEIAnRE_-M4c4Lf5dJg">if (window.htmx) htmx.process(document.body)</script>
-</div>
-</div>
-<div id="cc1800a8" class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>(c <span class="op">:=</span> Div(<span class="st">'Cogito ergo sum'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display cell-output-markdown">
-<div id="_NNvXojeGS-eH1SZLG-pE4Q">
-<div id="_vzHRxQNEQiaSQnLdUFq2Mg">
-Cogito ergo sum
-</div>
-<script id="_SN7to4-bQ5O09J6vs2UvNA">if (window.htmx) htmx.process(document.body)</script>
-</div>
+<script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.4/dist/htmx.min.js"></script><script src="https://cdn.jsdelivr.net/gh/answerdotai/fasthtml-js@1.0.12/fasthtml.js"></script><script src="https://cdn.jsdelivr.net/gh/answerdotai/surreal@main/surreal.js"></script><script src="https://cdn.jsdelivr.net/gh/gnat/css-scope-inline@main/script.js"></script><script id="_DHTp7k3SRbaeAjPb6FGNOw">if (window.htmx) htmx.process(document.body)</script>
 </div>
 </div>
 <p>Handlers are written just like a regular web app:</p>
@@ -671,49 +657,60 @@ document.body.addEventListener('htmx:configRequest', (event) => {
 </script>
 </div>
 </div>
+<div id="a4f1b1f5" class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>(c <span class="op">:=</span> Div(<span class="st">''</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display cell-output-markdown">
+<div id="_Uxpzz_26TZeN-kzFA6LeKg">
+<div id="_9s4Pdqx7TxGcbe-7x7MKVQ">
+
+</div>
+<script id="_k1VVcEJeS3e1JxBePQpAnw">if (window.htmx) htmx.process(document.body)</script>
+</div>
+</div>
+</div>
 <div id="17b96ef1" class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="at">@rt</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> hoho(): <span class="cf">return</span> P(<span class="st">'loaded!'</span>), Div(<span class="st">'hee hee'</span>, <span class="bu">id</span><span class="op">=</span>c, hx_swap_oob<span class="op">=</span><span class="st">'true'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="at">@rt</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> hoho(): <span class="cf">return</span> P(<span class="st">'loaded!'</span>), Div(<span class="st">'hee hee'</span>, <span class="bu">id</span><span class="op">=</span>c, hx_swap_oob<span class="op">=</span><span class="st">'true'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>All the usual <code>hx_*</code> attributes can be used:</p>
 <div id="a694a095" class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>P(<span class="st">'not loaded'</span>, hx_get<span class="op">=</span>hoho, hx_trigger<span class="op">=</span><span class="st">'load'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>P(<span class="st">'not loaded'</span>, hx_get<span class="op">=</span>hoho, hx_trigger<span class="op">=</span><span class="st">'load'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<div id="_l0IdURqdSRu46RNQQPmMvA">
-<p hx-get="/hoho" hx-trigger="load" id="_WUPc1vlnQUStT30OWNXAHQ">
+<div id="_evO_Voq9Qi_5b-1p0oZS0g">
+<p hx-get="/hoho" hx-trigger="load" id="_gJNOsF9IQdmKesYSdh1qTA">
 not loaded
 </p>
-<script id="_o4Z4wNOxQXum9LI9N-YhRw">if (window.htmx) htmx.process(document.body)</script>
+<script id="_ow7qEPILT7OQmBtdrWq9xQ">if (window.htmx) htmx.process(document.body)</script>
 </div>
 </div>
 </div>
 <p>FT components can be used directly both as <code>id</code> values and as <code>hx_target</code> values.</p>
 <div id="d1116727" class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>(c <span class="op">:=</span> Div(<span class="st">''</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>(c <span class="op">:=</span> Div(<span class="st">''</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<div id="_C4mtvDiLQPyjFBL_N9guOQ">
-<div id="_dazDkLiNRi_5IRjKxnDApQ">
+<div id="_knZLzRRZSa_OAxB-fR4ksQ">
+<div id="_o4AwfFRyQWmVI9xjlOzMHA">
 
 </div>
-<script id="_wBaWxkrPTeyFjAjoTOAjaw">if (window.htmx) htmx.process(document.body)</script>
+<script id="_y2CD7-QJS-6s7XTrdTdVZw">if (window.htmx) htmx.process(document.body)</script>
 </div>
 </div>
 </div>
 <div id="9a79b3e5" class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="at">@rt</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> foo(): <span class="cf">return</span> Div(<span class="st">'foo bar'</span>)</span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>P(<span class="st">'hi'</span>, hx_get<span class="op">=</span>foo, hx_trigger<span class="op">=</span><span class="st">'load'</span>, hx_target<span class="op">=</span>c)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="at">@rt</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> foo(): <span class="cf">return</span> Div(<span class="st">'foo bar'</span>)</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>P(<span class="st">'hi'</span>, hx_get<span class="op">=</span>foo, hx_trigger<span class="op">=</span><span class="st">'load'</span>, hx_target<span class="op">=</span>c)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<div id="_mmZ8zN0IQRWcwaaJuPD17g">
-<p hx-get="/foo" hx-trigger="load" hx-target="#_dazDkLiNRi_5IRjKxnDApQ" id="_21sjPwFeSPKp3vncj4YJrQ">
+<div id="_irfLkUpwQxeAxNgcbzO7cA">
+<p hx-get="/foo" hx-trigger="load" hx-target="#_o4AwfFRyQWmVI9xjlOzMHA" id="_RtkS_DHNSNWtnCdfdhuyoA">
 hi
 </p>
-<script id="_iy4Ov4wQRsuuB6ekh8semw">if (window.htmx) htmx.process(document.body)</script>
+<script id="_GaeLaNuzS9ifDsTnO6pHYw">if (window.htmx) htmx.process(document.body)</script>
 </div>
 </div>
 </div>
 <div id="c5b33bfd" class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>server.stop()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>server.stop()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="running-apps-in-an-iframe" class="level3">
@@ -725,27 +722,27 @@ hi
 <section id="htmx" class="level3">
 <h3 class="anchored" data-anchor-id="htmx">HTMX</h3>
 <blockquote class="blockquote">
-<pre><code> HTMX (path='', app=None, host='localhost', port=8000, height='auto',
+<pre><code> HTMX (path='/', host='localhost', app=None, port=8000, height='auto',
        link=False, iframe=True)</code></pre>
 </blockquote>
 <p><em>An iframe which displays the HTMX application in a notebook.</em></p>
 <div id="cf152565" class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="at">@rt</span></span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> index():</span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> Div(</span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>        P(A(<span class="st">'Click me'</span>, hx_get<span class="op">=</span>update, hx_target<span class="op">=</span><span class="st">'#result'</span>)),</span>
-<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>        P(A(<span class="st">'No me!'</span>, hx_get<span class="op">=</span>update, hx_target<span class="op">=</span><span class="st">'#result'</span>)),</span>
-<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>        Div(<span class="bu">id</span><span class="op">=</span><span class="st">'result'</span>))</span>
-<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a><span class="at">@rt</span></span>
-<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> update(): <span class="cf">return</span> Div(P(<span class="st">'Hi!'</span>),P(<span class="st">'There!'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="at">@rt</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> index():</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> Div(</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>        P(A(<span class="st">'Click me'</span>, hx_get<span class="op">=</span>update, hx_target<span class="op">=</span><span class="st">'#result'</span>)),</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>        P(A(<span class="st">'No me!'</span>, hx_get<span class="op">=</span>update, hx_target<span class="op">=</span><span class="st">'#result'</span>)),</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>        Div(<span class="bu">id</span><span class="op">=</span><span class="st">'result'</span>))</span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a><span class="at">@rt</span></span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> update(): <span class="cf">return</span> Div(P(<span class="st">'Hi!'</span>),P(<span class="st">'There!'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="21cb0c40" class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>server.start()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>server.start()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="0063bb43" class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the notebook locally to see the HTMX iframe in action</span></span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>HTMX()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the notebook locally to see the HTMX iframe in action</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>HTMX()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <iframe src="http://localhost:8000" style="width: 100%; height: auto; border: none;" onload="{
         let frame = this;
@@ -757,10 +754,10 @@ hi
 </div>
 </div>
 <div id="dfc3271d" class="cell">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>server.stop()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>server.stop()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <hr>
-<p><a href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/jupyter.py#L135" target="_blank" style="float:right; font-size:smaller">source</a></p>
+<p><a href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/jupyter.py#L137" target="_blank" style="float:right; font-size:smaller">source</a></p>
 </section>
 <section id="ws_client" class="level3">
 <h3 class="anchored" data-anchor-id="ws_client">ws_client</h3>

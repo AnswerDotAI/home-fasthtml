@@ -215,12 +215,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../tutorials/best_practice.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">FastHTML Best Practices</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="../tutorials/jupyter_and_fasthtml.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Using Jupyter to write FastHTML</span></a>
   </div>
@@ -896,7 +890,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <hr>
-<p><a href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/components.py#L245" target="_blank" style="float:right; font-size:smaller">source</a></p>
+<p><a href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/components.py#L246" target="_blank" style="float:right; font-size:smaller">source</a></p>
 </section>
 <section id="sse_message" class="level3">
 <h3 class="anchored" data-anchor-id="sse_message">sse_message</h3>
@@ -929,12 +923,14 @@ data: &lt;/div&gt;
 </div>
 <div id="99773c69" class="cell">
 <div class="sourceCode cell-code" id="cb67"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> html2ft(<span class="st">'&lt;div id="foo"&gt;hi&lt;/div&gt;'</span>, attr1st<span class="op">=</span><span class="va">True</span>) <span class="op">==</span> <span class="st">"Div(id='foo')('hi')"</span></span>
-<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> html2ft(<span class="st">"""</span></span>
-<span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a><span class="st">  &lt;div x-show="open" x-transition:enter="transition duration-300" x-transition:enter-start="opacity-0 scale-90"&gt;Hello 👋&lt;/div&gt;</span></span>
-<span id="cb67-4"><a href="#cb67-4" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>) <span class="op">==</span> <span class="st">"Div('Hello 👋', x_show='open', **{'x-transition:enter': 'transition duration-300', 'x-transition:enter-start': 'opacity-0 scale-90'})"</span></span>
-<span id="cb67-5"><a href="#cb67-5" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> html2ft(<span class="st">'&lt;div x-transition:enter.scale.80 x-transition:leave.scale.90&gt;hello&lt;/div&gt;'</span>) <span class="op">==</span> <span class="st">"Div('hello', **{'x-transition:enter.scale.80': True, 'x-transition:leave.scale.90': True})"</span></span>
-<span id="cb67-6"><a href="#cb67-6" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> html2ft(<span class="st">"&lt;img alt=' ' /&gt;"</span>) <span class="op">==</span> <span class="st">"Img(alt=' ')"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> html2ft(<span class="st">'&lt;div id="foo" hidden&gt;hi&lt;/div&gt;'</span>, attr1st<span class="op">=</span><span class="va">True</span>) <span class="op">==</span> <span class="st">"Div(id='foo', hidden=True)('hi')"</span></span>
+<span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> html2ft(<span class="st">"""</span></span>
+<span id="cb67-4"><a href="#cb67-4" aria-hidden="true" tabindex="-1"></a><span class="st">  &lt;div x-show="open" x-transition:enter="transition duration-300" x-transition:enter-start="opacity-0 scale-90"&gt;Hello 👋&lt;/div&gt;</span></span>
+<span id="cb67-5"><a href="#cb67-5" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>) <span class="op">==</span> <span class="st">"Div('Hello 👋', x_show='open', **{'x-transition:enter': 'transition duration-300', 'x-transition:enter-start': 'opacity-0 scale-90'})"</span></span>
+<span id="cb67-6"><a href="#cb67-6" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> html2ft(<span class="st">'&lt;div x-transition:enter.scale.80 x-transition:leave.scale.90&gt;hello&lt;/div&gt;'</span>) <span class="op">==</span> <span class="st">"Div('hello', **{'x-transition:enter.scale.80': True, 'x-transition:leave.scale.90': True})"</span></span>
+<span id="cb67-7"><a href="#cb67-7" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> html2ft(<span class="st">"&lt;img alt=' ' /&gt;"</span>) <span class="op">==</span> <span class="st">"Img(alt=' ')"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>“## Export -</p>
 
 
 </section>

@@ -519,7 +519,7 @@ Form(
 ------------------------------------------------------------------------
 
 <a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/components.py#L245"
+href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/components.py#L246"
 target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### sse_message
@@ -551,9 +551,12 @@ test_html2ft('<div x-transition:enter.scale.80 x-transition:leave.scale.90>hello
 
 ``` python
 assert html2ft('<div id="foo">hi</div>', attr1st=True) == "Div(id='foo')('hi')"
+assert html2ft('<div id="foo" hidden>hi</div>', attr1st=True) == "Div(id='foo', hidden=True)('hi')"
 assert html2ft("""
   <div x-show="open" x-transition:enter="transition duration-300" x-transition:enter-start="opacity-0 scale-90">Hello 👋</div>
 """) == "Div('Hello 👋', x_show='open', **{'x-transition:enter': 'transition duration-300', 'x-transition:enter-start': 'opacity-0 scale-90'})"
 assert html2ft('<div x-transition:enter.scale.80 x-transition:leave.scale.90>hello</div>') == "Div('hello', **{'x-transition:enter.scale.80': True, 'x-transition:leave.scale.90': True})"
 assert html2ft("<img alt=' ' />") == "Img(alt=' ')"
 ```
+
+“## Export -

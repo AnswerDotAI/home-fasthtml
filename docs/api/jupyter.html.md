@@ -169,6 +169,10 @@ print((await AsyncClient().get(f'http://localhost:{port}')).text)
 
     hi
 
+``` python
+server.stop()
+```
+
 ------------------------------------------------------------------------
 
 <a
@@ -231,23 +235,7 @@ render_ft()
 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<script src="https://unpkg.com/htmx.org@2.0.4/dist/htmx.min.js"></script><script src="https://cdn.jsdelivr.net/gh/answerdotai/fasthtml-js@1.0.12/fasthtml.js"></script><script src="https://cdn.jsdelivr.net/gh/answerdotai/surreal@main/surreal.js"></script><script src="https://cdn.jsdelivr.net/gh/gnat/css-scope-inline@main/script.js"></script><script id="_7KKmEIAnRE_-M4c4Lf5dJg">if (window.htmx) htmx.process(document.body)</script>
-
-``` python
-(c := Div('Cogito ergo sum'))
-```
-
-<div id="_NNvXojeGS-eH1SZLG-pE4Q">
-
-<div id="_vzHRxQNEQiaSQnLdUFq2Mg">
-
-Cogito ergo sum
-
-</div>
-
-<script id="_SN7to4-bQ5O09J6vs2UvNA">if (window.htmx) htmx.process(document.body)</script>
-
-</div>
+<script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.4/dist/htmx.min.js"></script><script src="https://cdn.jsdelivr.net/gh/answerdotai/fasthtml-js@1.0.12/fasthtml.js"></script><script src="https://cdn.jsdelivr.net/gh/answerdotai/surreal@main/surreal.js"></script><script src="https://cdn.jsdelivr.net/gh/gnat/css-scope-inline@main/script.js"></script><script id="_DHTp7k3SRbaeAjPb6FGNOw">if (window.htmx) htmx.process(document.body)</script>
 
 Handlers are written just like a regular web app:
 
@@ -264,6 +252,20 @@ document.body.addEventListener('htmx:configRequest', (event) => {
 </script>
 
 ``` python
+(c := Div(''))
+```
+
+<div id="_Uxpzz_26TZeN-kzFA6LeKg">
+
+<div id="_9s4Pdqx7TxGcbe-7x7MKVQ">
+
+</div>
+
+<script id="_k1VVcEJeS3e1JxBePQpAnw">if (window.htmx) htmx.process(document.body)</script>
+
+</div>
+
+``` python
 @rt
 def hoho(): return P('loaded!'), Div('hee hee', id=c, hx_swap_oob='true')
 ```
@@ -274,14 +276,14 @@ All the usual `hx_*` attributes can be used:
 P('not loaded', hx_get=hoho, hx_trigger='load')
 ```
 
-<div id="_l0IdURqdSRu46RNQQPmMvA">
+<div id="_evO_Voq9Qi_5b-1p0oZS0g">
 
-<p hx-get="/hoho" hx-trigger="load" id="_WUPc1vlnQUStT30OWNXAHQ">
+<p hx-get="/hoho" hx-trigger="load" id="_gJNOsF9IQdmKesYSdh1qTA">
 
 not loaded
 </p>
 
-<script id="_o4Z4wNOxQXum9LI9N-YhRw">if (window.htmx) htmx.process(document.body)</script>
+<script id="_ow7qEPILT7OQmBtdrWq9xQ">if (window.htmx) htmx.process(document.body)</script>
 
 </div>
 
@@ -292,13 +294,13 @@ FT components can be used directly both as `id` values and as
 (c := Div(''))
 ```
 
-<div id="_C4mtvDiLQPyjFBL_N9guOQ">
+<div id="_knZLzRRZSa_OAxB-fR4ksQ">
 
-<div id="_dazDkLiNRi_5IRjKxnDApQ">
+<div id="_o4AwfFRyQWmVI9xjlOzMHA">
 
 </div>
 
-<script id="_wBaWxkrPTeyFjAjoTOAjaw">if (window.htmx) htmx.process(document.body)</script>
+<script id="_y2CD7-QJS-6s7XTrdTdVZw">if (window.htmx) htmx.process(document.body)</script>
 
 </div>
 
@@ -308,14 +310,14 @@ def foo(): return Div('foo bar')
 P('hi', hx_get=foo, hx_trigger='load', hx_target=c)
 ```
 
-<div id="_mmZ8zN0IQRWcwaaJuPD17g">
+<div id="_irfLkUpwQxeAxNgcbzO7cA">
 
-<p hx-get="/foo" hx-trigger="load" hx-target="#_dazDkLiNRi_5IRjKxnDApQ" id="_21sjPwFeSPKp3vncj4YJrQ">
+<p hx-get="/foo" hx-trigger="load" hx-target="#_o4AwfFRyQWmVI9xjlOzMHA" id="_RtkS_DHNSNWtnCdfdhuyoA">
 
 hi
 </p>
 
-<script id="_iy4Ov4wQRsuuB6ekh8semw">if (window.htmx) htmx.process(document.body)</script>
+<script id="_GaeLaNuzS9ifDsTnO6pHYw">if (window.htmx) htmx.process(document.body)</script>
 
 </div>
 
@@ -338,7 +340,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### HTMX
 
->  HTMX (path='', app=None, host='localhost', port=8000, height='auto',
+>  HTMX (path='/', host='localhost', app=None, port=8000, height='auto',
 >            link=False, iframe=True)
 
 *An iframe which displays the HTMX application in a notebook.*
@@ -379,7 +381,7 @@ server.stop()
 ------------------------------------------------------------------------
 
 <a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/jupyter.py#L135"
+href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/jupyter.py#L137"
 target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### ws_client

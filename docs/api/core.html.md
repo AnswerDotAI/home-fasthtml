@@ -47,7 +47,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 parsed_date('2pm')
 ```
 
-    datetime.datetime(2025, 5, 29, 14, 0)
+    datetime.datetime(2025, 7, 2, 14, 0)
 
 ``` python
 isinstance(date.fromtimestamp(0), date)
@@ -206,7 +206,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 ### JSONResponse
 
 >  JSONResponse (content:Any, status_code:int=200,
->                    headers:Optional[Mapping[str,str]]=None,
+>                    headers:collections.abc.Mapping[str,str]|None=None,
 >                    media_type:str|None=None,
 >                    background:starlette.background.BackgroundTask|None=None)
 
@@ -558,7 +558,17 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 ------------------------------------------------------------------------
 
 <a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/core.py#L616"
+href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/core.py#L573"
+target="_blank" style="float:right; font-size:smaller">source</a>
+
+### FastHTML.add_route
+
+>  FastHTML.add_route (route)
+
+------------------------------------------------------------------------
+
+<a
+href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/core.py#L618"
 target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### FastHTML.ws
@@ -571,7 +581,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 ------------------------------------------------------------------------
 
 <a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/core.py#L631"
+href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/core.py#L633"
 target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### nested_name
@@ -596,7 +606,7 @@ nested_name(func)
 ------------------------------------------------------------------------
 
 <a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/core.py#L652"
+href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/core.py#L654"
 target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### FastHTML.route
@@ -628,7 +638,17 @@ foo.to(a='bar', b=[1,2])
 ------------------------------------------------------------------------
 
 <a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/core.py#L660"
+href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/core.py#L663"
+target="_blank" style="float:right; font-size:smaller">source</a>
+
+### FastHTML.set_lifespan
+
+>  FastHTML.set_lifespan (value)
+
+------------------------------------------------------------------------
+
+<a
+href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/core.py#L668"
 target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### serve
@@ -704,7 +724,7 @@ variable</td>
 ------------------------------------------------------------------------
 
 <a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/core.py#L683"
+href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/core.py#L691"
 target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### Client
@@ -976,10 +996,18 @@ rt = app.route
 cli = TestClient(app)
 @app.route(r'/static/{path:path}.jpg')
 def index(path:str): return f'got {path}'
+@app.route(r'/static/{path:path}')
+def foo(path:str, a:int): return f'also got {path},{a}'
 cli.get('/static/sub/a.b.jpg').text
 ```
 
     'got sub/a.b'
+
+``` python
+cli.get('/static/sub/a.b?a=1').text
+```
+
+    'also got sub/a.b,1'
 
 ``` python
 app.chk = 'foo'
@@ -1279,7 +1307,7 @@ test_eq(cli.get('/locked', auth=("testuser","spycraft")).text, 'Hello, testuser'
 ------------------------------------------------------------------------
 
 <a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/core.py#L695"
+href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/core.py#L703"
 target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### RouteFuncs
@@ -1291,7 +1319,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 ------------------------------------------------------------------------
 
 <a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/core.py#L705"
+href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/core.py#L713"
 target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### APIRouter
@@ -1436,7 +1464,7 @@ app,cli,rt = get_cli(FastHTML(secret_key='soopersecret'))
 ------------------------------------------------------------------------
 
 <a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/core.py#L748"
+href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/core.py#L756"
 target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### cookie
@@ -1483,7 +1511,7 @@ cli.get('/getcookie').text
 ------------------------------------------------------------------------
 
 <a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/core.py#L766"
+href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/core.py#L774"
 target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### reg_re_param
@@ -1493,7 +1521,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 ------------------------------------------------------------------------
 
 <a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/core.py#L777"
+href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/core.py#L785"
 target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### FastHTML.static_route_exts
@@ -1521,7 +1549,7 @@ assert 'These are the source notebooks for FastHTML' in cli.get('/README.txt').t
 ------------------------------------------------------------------------
 
 <a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/core.py#L784"
+href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/core.py#L792"
 target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### FastHTML.static_route
@@ -1539,7 +1567,7 @@ assert 'THIS FILE WAS AUTOGENERATED' in cli.get('/README.md').text
 ------------------------------------------------------------------------
 
 <a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/core.py#L790"
+href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/core.py#L798"
 target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### MiddlewareBase
@@ -1551,7 +1579,7 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 ------------------------------------------------------------------------
 
 <a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/core.py#L798"
+href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/core.py#L806"
 target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### FtResponse
@@ -1665,7 +1693,7 @@ r.json()
 ------------------------------------------------------------------------
 
 <a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/core.py#L813"
+href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/core.py#L821"
 target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### unqid
@@ -1675,17 +1703,17 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 ------------------------------------------------------------------------
 
 <a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/core.py#L825"
+href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/core.py#L834"
 target="_blank" style="float:right; font-size:smaller">source</a>
 
-### setup_ws
+### FastHTML.setup_ws
 
->  setup_ws (app, f=<function noop>)
+>  FastHTML.setup_ws (app:__main__.FastHTML, f=<function noop>)
 
 ------------------------------------------------------------------------
 
 <a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/core.py#L839"
+href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/core.py#L848"
 target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### FastHTML.devtools_json
