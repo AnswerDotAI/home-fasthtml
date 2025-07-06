@@ -12,7 +12,7 @@ FastHTML brings together and builds on top of two well-established, astonishingl
 
 Uvicorn is the ASGI server used by FastHTML---that is, it is responsible for listening for HTTP messages, and converting them into the Python ASGI API. Then Starlette is responsible for taking this powerful single-function ASGI foundation and making it more convenient for programmers, by adding a small number of functions and classes that remove the boilerplate you would otherwise need to support ASGI. As a FastHTML user you very rarely need to know anything about the ASGI/Uvicorn/Starlette trio, other than that it is there in the background doing a lot of work for you!
 
-To learn more about how Uvicorn and Starlette work in FastHTML, see the relevant [technology section](/tech#sec3).
+To learn more about how Uvicorn and Starlette work in FastHTML, see the relevant [technology section](/about/tech#sec3).
 """
 
 s2 = """
@@ -27,7 +27,7 @@ HTML on its own provides only the most basic interaction mechanisms: you can cli
 
 HTMX was previously known as [Intercooler](https://intercoolerjs.org/). It is now over 10 years old---so it's a mature technology. HTMX/Intercooler is responsible for the idea that we can build on top of the fundamentals of the web, without sacrificing the ability to create modern, interactive web applications. Without it, FastHTML would not exist. HTMX is famous for its [memes](https://v1.htmx.org/essays/#memes), including the image above, which highlights how HTMX's approach returns us to the simplicity of the early days of the web (although perhaps now we should update that meme to FastHTML 2024, where we would have just 3 parts: browser, DOM, and a python file!)
 
-To learn more about how HTMX works and how to use it, see the [HTMX technology section](/tech#sec2). To understand the benefits of using HTMX in practice, watch [this talk](https://www.youtube.com/watch?v=3GObi93tjZI), which goes through a real case study of using HTMX to replace React in a complex large application. It shows how HTMX allowed the amount of code to be drastically reduced, the speed of the site got faster, and they were able to simplify their team structure by removing the need for frontend specialists.
+To learn more about how HTMX works and how to use it, see the [HTMX technology section](/about/tech#sec2). To understand the benefits of using HTMX in practice, watch [this talk](https://www.youtube.com/watch?v=3GObi93tjZI), which goes through a real case study of using HTMX to replace React in a complex large application. It shows how HTMX allowed the amount of code to be drastically reduced, the speed of the site got faster, and they were able to simplify their team structure by removing the need for frontend specialists.
 """
 
 s3 = """
@@ -61,7 +61,7 @@ When you understand that all web applications communicate like this, and your pr
 """
 
 s4 = """
-In the previous section, the server responded with the body "`hello`". But in practice, web server responses today generally are either HTML or JSON. With FastHTML (as we'll see in the [HTMX technology section](/tech#sec2)), our responses are nearly always HTML. Here's an example of a basic HTML page with a header and a body containing a paragraph (`<p>` tag).
+In the previous section, the server responded with the body "`hello`". But in practice, web server responses today generally are either HTML or JSON. With FastHTML (as we'll see in the [HTMX technology section](/about/tech#sec2)), our responses are nearly always HTML. Here's an example of a basic HTML page with a header and a body containing a paragraph (`<p>` tag).
 
 ```html
 <html>
@@ -72,7 +72,7 @@ In the previous section, the server responded with the body "`hello`". But in pr
 
 HTML creates structure, and the browser converts the HTML internally into a Document Object Model (DOM) element tree. To add styling to the browser's representation of a document, we add styles using *CSS*. One approach is to manually define styles in a CSS file---for instance [here's the stylesheet](https://github.com/AnswerDotAI/fh-bootstrap/blob/main/fh_bootstrap/assets/fh-bootstrap.css#L1) we're using for the site you're reading now, with the CSS rule which gives the above HTML block a light grey border and background.
 
-Most styles in most FastHTML applications won't be manually defined, but instead will come from a CSS framework like Bootstrap, DaisyUI, or Shoelace. FastHTML makes these easily available as [FT components](/components).
+Most styles in most FastHTML applications won't be manually defined, but instead will come from a CSS framework like Bootstrap, DaisyUI, or Shoelace. FastHTML makes these easily available as [FT components](/about/components).
 
 Although most of the logic of your application will generally be written in Python and made available over HTTP using FastHTML, you might well want some self-contained UI updates to happen directly in the browser. For this, you can write JavaScript and add it to the web page using FastHTML. This is not often strictly required, but can make some parts of your app faster, more concise, or add some convenient functionality from the browser's DOM API. For instance, we often add a "Copy" button with sample code in our apps, which requires using the DOM API, and therefore requires adding a little JavaScript. JavaScript was originally designed for this purpose, so it's a particularly good fit for adding client-side behaviours to applications.
 
