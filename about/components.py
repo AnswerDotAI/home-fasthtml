@@ -41,7 +41,7 @@ One good approach to creating components is to find things you like on the web a
 
 1. Right-click on the part of a web page that you want to use in your app, and choose 'Inspect'
 1. In the elements window that pops up, right-click on the element you want, choose 'Copy', and then 'Outer HTML'
-1. Now you've got HTML in your clipboard, you can automatically convert it to FastHTML: go to [h2f.answer.ai](https://h2x.answer.ai/), paste the HTML into the text area at the top, then the FastHTML code will appear at the bottom. Click the Copy icon at the top right of that code and then paste it into your Python app.
+1. Now you've got HTML in your clipboard, you can automatically convert it to FastHTML: go to [h2f.answer.ai](https://h2f.answer.ai/), paste the HTML into the text area at the top, then the FastHTML code will appear at the bottom. Click the Copy icon at the top right of that code and then paste it into your Python app.
 
 BTW, the h2f app mentioned above is written in around a dozen lines of code! You can see the [source code here](https://github.com/AnswerDotAI/fasthtml-example/blob/main/h2f/main.py).
 """
