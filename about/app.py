@@ -12,13 +12,14 @@ ghurl = 'https://github.com/AnswerDotAI/fasthtml'
 fhurl = 'https://fastht.ml'
 docs = '/docs'
 
-def NavBar(*c, # Component for right side of navbar (Often A tag links)
-           brand=None, # Brand/logo component for left side
-           right_items=None,
-           right_cls='items-center space-x-4', # Spacing for desktop links
-           mobile_cls='space-y-4', # Spacing for mobile links
-           cls='p-4', # Classes for navbar
-           )->FT: # Responsive NavBar
+def NavBar(
+    *c, # Component for right side of navbar (Often A tag links)
+    brand=None, # Brand/logo component for left side
+    right_items=None,
+    right_cls='items-center space-x-4', # Spacing for desktop links
+    mobile_cls='space-y-4', # Spacing for mobile links
+    cls='p-4', # Classes for navbar
+)->FT: # Responsive NavBar
     "Creates a responsive navigation bar with mobile menu support"
     menu_id = fh.unqid()
     mobile_icon = A(UkIcon("menu", width=30, height=30), cls="md:hidden", data_uk_toggle=f"target: #{menu_id}; cls: hidden")
