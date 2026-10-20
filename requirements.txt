@@ -1,3 +1,4 @@
+httpx
 python-fasthtml>=0.2.0
 fastcore
 requests
