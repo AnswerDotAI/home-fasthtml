@@ -79,10 +79,8 @@ development. Most of these mirror HTML tags such as `<div>`, `<p>`,
 `<a>`, `<title>`, and more. However, there are some extra tags added,
 including:
 
-- [`Titled`](https://www.fastht.ml/docs/api/xtend.html#titled), a
-  combination of the `Title()` and `H1()` tags
-- [`Socials`](https://www.fastht.ml/docs/api/xtend.html#socials),
-  renders popular social media tags
+- `Titled`, a combination of the `Title()` and `H1()` tags
+- `Socials`, renders popular social media tags
 
 ## The `fasthtml.ft` Namespace
 
@@ -200,7 +198,7 @@ that generate non-standard tags that are not in the FastHTML library.
 FastHTML supports created and defining those new tags flexibly.
 
 For more information, see the [Defining new ft
-components](../ref/defining_xt_component.html) reference page.
+components](../docs/ref/defining_xt_component.html) reference page.
 
 ## FT components and type hints
 

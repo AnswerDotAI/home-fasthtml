@@ -325,6 +325,10 @@ For convenience, FastHTML already defines a Pico component for you with
 `picolink`:
 
 ``` python
+from fasthtml.pico import picolink
+```
+
+``` python
 print(to_xml(picolink))
 ```
 
@@ -348,7 +352,7 @@ below:
 
 ``` python
 from fasthtml.common import *
-css = Style(':root {--pico-font-size:90%,--pico-font-family: Pacifico, cursive;}')
+css = Style(':root {--pico-font-size:90%;--pico-font-family: Pacifico, cursive;}')
 app = FastHTML(hdrs=(picolink, css))
 
 @app.route("/")
@@ -428,6 +432,14 @@ is fine, but modern web apps often don’t re-render the entire page, they
 just update a part of the page. In fact even very complicated
 applications are often implemented as ‘Single Page Apps’ (SPAs). This is
 where HTMX comes in.
+
+> **Note:** With traditional form submissions, refreshing the page after
+> a POST will prompt "Resubmit form data?" — potentially causing
+> duplicate entries. The standard fix is `return Redirect('/')` instead
+> of `return home()`, known as the
+> [Post/Redirect/Get](https://en.wikipedia.org/wiki/Post/Redirect/Get)
+> pattern. With HTMX (covered next), this isn’t needed since submissions
+> happen via AJAX.
 
 ## HTMX
 
@@ -510,12 +522,6 @@ variant for this tutorial, we recommend starting with this video
 tutorial from Jeremy:
 
 <https://www.youtube.com/embed/Auqrm7WFc0I>
-
-<figure>
-<img src="by_example_files/figure-commonmark/cell-53-1-image.png"
-alt="image.png" />
-<figcaption aria-hidden="true">image.png</figcaption>
-</figure>
 
 We’ve made a number of variants of this app - so in addition to the
 version shown in the video you can browse
@@ -613,7 +619,8 @@ similar to the todo list example, so let’s just quickly look at how we
 add the nice grid layout. This is what the result looks like:
 
 <figure>
-<img src="by_example_files/figure-commonmark/cell-58-1-image.png"
+<img
+src="https://github.com/AnswerDotAI/fasthtml-example/blob/main/image_app_simple/screenshot.png?raw=true"
 alt="image.png" />
 <figcaption aria-hidden="true">image.png</figcaption>
 </figure>
@@ -1146,7 +1153,7 @@ framework? In this example, let’s build a chatbot UI leveraging the
 result will look like this:
 
 <figure>
-<img src="by_example_files/figure-commonmark/cell-101-1-image.png"
+<img src="by_example_files/figure-commonmark/2d4dd32c-1-image.png"
 alt="image.png" />
 <figcaption aria-hidden="true">image.png</figcaption>
 </figure>
@@ -1394,7 +1401,7 @@ class Person:
         self.age = age
 
     def __ft__(self):
-        return ['div', [f'{self.name} is {self.age} years old.'], {}]
+        return Div(f'{self.name} is {self.age} years old.')
 
 p = Person('Jonathan', 28)
 print(to_xml(Div(p, "more text", cls="container")))
@@ -1442,9 +1449,8 @@ and larger ecosystem of reusable components.
 ## Custom Scripts and Styling
 
 There are many popular JavaScript and CSS libraries that can be used via
-a simple [`Script`](https://www.fastht.ml/docs/api/xtend.html#script) or
-[`Style`](https://www.fastht.ml/docs/api/xtend.html#style) tag. But in
-some cases you will need to write more custom code. FastHTML’s
+a simple `Script` or `Style` tag. But in some cases you will need to
+write more custom code. FastHTML’s
 [js.py](https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/js.py)
 contains a few examples that may be useful as reference.
 

@@ -12,13 +12,13 @@ You can create SVGs directly from strings, for instance (as always, use
 
 ``` python
 svg = '<svg width="50" height="50"><circle cx="20" cy="20" r="15" fill="red"></circle></svg>'
-show(NotStr(svg))
+show(Safe(svg))
 ```
 
 <svg width="50" height="50"><circle cx="20" cy="20" r="15" fill="red"></circle></svg>
 
 You can also use libraries such as
-[fa6-icons](https://www.fastht.ml/docs/fa6-icons/).
+[fa6-icons](https://github.com/AnswerDotAI/fa6-icons).
 
 To create and modify SVGs using a Python API, use the FT elements in
 `fasthtml.svg`, discussed below.
@@ -32,14 +32,14 @@ from fasthtml.svg import *
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/svg.py#L34"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
 ### Svg
 
->  Svg (*args, viewBox=None, h=None, w=None, height=None, width=None,
->           xmlns='http://www.w3.org/2000/svg', **kwargs)
+``` python
+def Svg(
+    *args, viewBox:NoneType=None, h:NoneType=None, w:NoneType=None, height:NoneType=None, width:NoneType=None,
+    xmlns:str='http://www.w3.org/2000/svg', **kwargs
+):
+```
 
 *An SVG tag; xmlns is added automatically, and viewBox defaults to
 height and width if not provided*
@@ -48,62 +48,58 @@ To create your own SVGs, use `SVG`. It will automatically set the
 `viewBox` from height and width if not provided.
 
 All of our shapes will have some convenient kwargs added by using
-[`ft_svg`](https://www.fastht.ml/docs/api/svg.html#ft_svg):
+`ft_svg`:
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/svg.py#L43"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
 ### ft_svg
 
->  ft_svg (tag:str, *c, transform=None, opacity=None, clip=None, mask=None,
->              filter=None, vector_effect=None, pointer_events=None,
->              target_id=None, hx_vals=None, hx_target=None, id=None, cls=None,
->              title=None, style=None, accesskey=None, contenteditable=None,
->              dir=None, draggable=None, enterkeyhint=None, hidden=None,
->              inert=None, inputmode=None, lang=None, popover=None,
->              spellcheck=None, tabindex=None, translate=None, hx_get=None,
->              hx_post=None, hx_put=None, hx_delete=None, hx_patch=None,
->              hx_trigger=None, hx_swap=None, hx_swap_oob=None, hx_include=None,
->              hx_select=None, hx_select_oob=None, hx_indicator=None,
->              hx_push_url=None, hx_confirm=None, hx_disable=None,
->              hx_replace_url=None, hx_disabled_elt=None, hx_ext=None,
->              hx_headers=None, hx_history=None, hx_history_elt=None,
->              hx_inherit=None, hx_params=None, hx_preserve=None,
->              hx_prompt=None, hx_request=None, hx_sync=None, hx_validate=None,
->              hx_on_blur=None, hx_on_change=None, hx_on_contextmenu=None,
->              hx_on_focus=None, hx_on_input=None, hx_on_invalid=None,
->              hx_on_reset=None, hx_on_select=None, hx_on_submit=None,
->              hx_on_keydown=None, hx_on_keypress=None, hx_on_keyup=None,
->              hx_on_click=None, hx_on_dblclick=None, hx_on_mousedown=None,
->              hx_on_mouseenter=None, hx_on_mouseleave=None,
->              hx_on_mousemove=None, hx_on_mouseout=None, hx_on_mouseover=None,
->              hx_on_mouseup=None, hx_on_wheel=None, hx_on__abort=None,
->              hx_on__after_on_load=None, hx_on__after_process_node=None,
->              hx_on__after_request=None, hx_on__after_settle=None,
->              hx_on__after_swap=None, hx_on__before_cleanup_element=None,
->              hx_on__before_on_load=None, hx_on__before_process_node=None,
->              hx_on__before_request=None, hx_on__before_swap=None,
->              hx_on__before_send=None, hx_on__before_transition=None,
->              hx_on__config_request=None, hx_on__confirm=None,
->              hx_on__history_cache_error=None, hx_on__history_cache_miss=None,
->              hx_on__history_cache_miss_error=None,
->              hx_on__history_cache_miss_load=None, hx_on__history_restore=None,
->              hx_on__before_history_save=None, hx_on__load=None,
->              hx_on__no_sse_source_error=None, hx_on__on_load_error=None,
->              hx_on__oob_after_swap=None, hx_on__oob_before_swap=None,
->              hx_on__oob_error_no_target=None, hx_on__prompt=None,
->              hx_on__pushed_into_history=None, hx_on__replaced_in_history=None,
->              hx_on__response_error=None, hx_on__send_abort=None,
->              hx_on__send_error=None, hx_on__sse_error=None,
->              hx_on__sse_open=None, hx_on__swap_error=None,
->              hx_on__target_error=None, hx_on__timeout=None,
->              hx_on__validation_validate=None, hx_on__validation_failed=None,
->              hx_on__validation_halted=None, hx_on__xhr_abort=None,
->              hx_on__xhr_loadend=None, hx_on__xhr_loadstart=None,
->              hx_on__xhr_progress=None)
+``` python
+def ft_svg(
+    tag:str, *c, transform:NoneType=None, opacity:NoneType=None, clip:NoneType=None, mask:NoneType=None,
+    filter:NoneType=None, vector_effect:NoneType=None, pointer_events:NoneType=None, target_id:NoneType=None,
+    hx_vals:NoneType=None, hx_target:NoneType=None, id:NoneType=None, cls:NoneType=None, title:NoneType=None,
+    style:NoneType=None, accesskey:NoneType=None, contenteditable:NoneType=None, dir:NoneType=None,
+    draggable:NoneType=None, enterkeyhint:NoneType=None, hidden:NoneType=None, inert:NoneType=None,
+    inputmode:NoneType=None, lang:NoneType=None, popover:NoneType=None, spellcheck:NoneType=None,
+    tabindex:NoneType=None, translate:NoneType=None, hx_get:NoneType=None, hx_post:NoneType=None,
+    hx_put:NoneType=None, hx_delete:NoneType=None, hx_patch:NoneType=None, hx_trigger:NoneType=None,
+    hx_swap:NoneType=None, hx_swap_oob:NoneType=None, hx_include:NoneType=None, hx_select:NoneType=None,
+    hx_select_oob:NoneType=None, hx_indicator:NoneType=None, hx_push_url:NoneType=None, hx_confirm:NoneType=None,
+    hx_disable:NoneType=None, hx_replace_url:NoneType=None, hx_disabled_elt:NoneType=None, hx_ext:NoneType=None,
+    hx_headers:NoneType=None, hx_history:NoneType=None, hx_history_elt:NoneType=None, hx_inherit:NoneType=None,
+    hx_params:NoneType=None, hx_preserve:NoneType=None, hx_prompt:NoneType=None, hx_request:NoneType=None,
+    hx_sync:NoneType=None, hx_validate:NoneType=None, hx_action:NoneType=None, hx_method:NoneType=None,
+    hx_config:NoneType=None, hx_ignore:NoneType=None, hx_on_blur:NoneType=None, hx_on_change:NoneType=None,
+    hx_on_contextmenu:NoneType=None, hx_on_focus:NoneType=None, hx_on_input:NoneType=None,
+    hx_on_invalid:NoneType=None, hx_on_reset:NoneType=None, hx_on_select:NoneType=None, hx_on_submit:NoneType=None,
+    hx_on_keydown:NoneType=None, hx_on_keypress:NoneType=None, hx_on_keyup:NoneType=None, hx_on_click:NoneType=None,
+    hx_on_dblclick:NoneType=None, hx_on_mousedown:NoneType=None, hx_on_mouseenter:NoneType=None,
+    hx_on_mouseleave:NoneType=None, hx_on_mousemove:NoneType=None, hx_on_mouseout:NoneType=None,
+    hx_on_mouseover:NoneType=None, hx_on_mouseup:NoneType=None, hx_on_wheel:NoneType=None,
+    hx_on__abort:NoneType=None, hx_on__after_on_load:NoneType=None, hx_on__after_process_node:NoneType=None,
+    hx_on__after_request:NoneType=None, hx_on__after_settle:NoneType=None, hx_on__after_swap:NoneType=None,
+    hx_on__before_cleanup_element:NoneType=None, hx_on__before_on_load:NoneType=None,
+    hx_on__before_process_node:NoneType=None, hx_on__before_request:NoneType=None, hx_on__before_swap:NoneType=None,
+    hx_on__before_send:NoneType=None, hx_on__before_transition:NoneType=None, hx_on__config_request:NoneType=None,
+    hx_on__confirm:NoneType=None, hx_on__history_cache_error:NoneType=None, hx_on__history_cache_miss:NoneType=None,
+    hx_on__history_cache_miss_error:NoneType=None, hx_on__history_cache_miss_load:NoneType=None,
+    hx_on__history_restore:NoneType=None, hx_on__before_history_save:NoneType=None, hx_on__load:NoneType=None,
+    hx_on__no_sse_source_error:NoneType=None, hx_on__on_load_error:NoneType=None,
+    hx_on__oob_after_swap:NoneType=None, hx_on__oob_before_swap:NoneType=None,
+    hx_on__oob_error_no_target:NoneType=None, hx_on__prompt:NoneType=None, hx_on__pushed_into_history:NoneType=None,
+    hx_on__replaced_in_history:NoneType=None, hx_on__response_error:NoneType=None, hx_on__send_abort:NoneType=None,
+    hx_on__send_error:NoneType=None, hx_on__sse_error:NoneType=None, hx_on__sse_open:NoneType=None,
+    hx_on__swap_error:NoneType=None, hx_on__target_error:NoneType=None, hx_on__timeout:NoneType=None,
+    hx_on__validation_validate:NoneType=None, hx_on__validation_failed:NoneType=None,
+    hx_on__validation_halted:NoneType=None, hx_on__xhr_abort:NoneType=None, hx_on__xhr_loadend:NoneType=None,
+    hx_on__xhr_loadstart:NoneType=None, hx_on__xhr_progress:NoneType=None, hx_on__after_init:NoneType=None,
+    hx_on__before_cleanup:NoneType=None, hx_on__before_history_update:NoneType=None,
+    hx_on__before_init:NoneType=None, hx_on__before_process:NoneType=None,
+    hx_on__before_history_restore:NoneType=None, hx_on__after_history_push:NoneType=None,
+    hx_on__after_history_replace:NoneType=None, hx_on__error:NoneType=None
+):
+```
 
 *Create a standard `FT` element with some SVG-specific attrs*
 
@@ -117,59 +113,56 @@ def demo(el, h=50, w=50): return show(Svg(h=h,w=w)(el))
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/svg.py#L51"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
 ### Rect
 
->  Rect (width, height, x=0, y=0, fill=None, stroke=None, stroke_width=None,
->            rx=None, ry=None, transform=None, opacity=None, clip=None,
->            mask=None, filter=None, vector_effect=None, pointer_events=None,
->            target_id=None, hx_vals=None, hx_target=None, id=None, cls=None,
->            title=None, style=None, accesskey=None, contenteditable=None,
->            dir=None, draggable=None, enterkeyhint=None, hidden=None,
->            inert=None, inputmode=None, lang=None, popover=None,
->            spellcheck=None, tabindex=None, translate=None, hx_get=None,
->            hx_post=None, hx_put=None, hx_delete=None, hx_patch=None,
->            hx_trigger=None, hx_swap=None, hx_swap_oob=None, hx_include=None,
->            hx_select=None, hx_select_oob=None, hx_indicator=None,
->            hx_push_url=None, hx_confirm=None, hx_disable=None,
->            hx_replace_url=None, hx_disabled_elt=None, hx_ext=None,
->            hx_headers=None, hx_history=None, hx_history_elt=None,
->            hx_inherit=None, hx_params=None, hx_preserve=None, hx_prompt=None,
->            hx_request=None, hx_sync=None, hx_validate=None, hx_on_blur=None,
->            hx_on_change=None, hx_on_contextmenu=None, hx_on_focus=None,
->            hx_on_input=None, hx_on_invalid=None, hx_on_reset=None,
->            hx_on_select=None, hx_on_submit=None, hx_on_keydown=None,
->            hx_on_keypress=None, hx_on_keyup=None, hx_on_click=None,
->            hx_on_dblclick=None, hx_on_mousedown=None, hx_on_mouseenter=None,
->            hx_on_mouseleave=None, hx_on_mousemove=None, hx_on_mouseout=None,
->            hx_on_mouseover=None, hx_on_mouseup=None, hx_on_wheel=None,
->            hx_on__abort=None, hx_on__after_on_load=None,
->            hx_on__after_process_node=None, hx_on__after_request=None,
->            hx_on__after_settle=None, hx_on__after_swap=None,
->            hx_on__before_cleanup_element=None, hx_on__before_on_load=None,
->            hx_on__before_process_node=None, hx_on__before_request=None,
->            hx_on__before_swap=None, hx_on__before_send=None,
->            hx_on__before_transition=None, hx_on__config_request=None,
->            hx_on__confirm=None, hx_on__history_cache_error=None,
->            hx_on__history_cache_miss=None,
->            hx_on__history_cache_miss_error=None,
->            hx_on__history_cache_miss_load=None, hx_on__history_restore=None,
->            hx_on__before_history_save=None, hx_on__load=None,
->            hx_on__no_sse_source_error=None, hx_on__on_load_error=None,
->            hx_on__oob_after_swap=None, hx_on__oob_before_swap=None,
->            hx_on__oob_error_no_target=None, hx_on__prompt=None,
->            hx_on__pushed_into_history=None, hx_on__replaced_in_history=None,
->            hx_on__response_error=None, hx_on__send_abort=None,
->            hx_on__send_error=None, hx_on__sse_error=None,
->            hx_on__sse_open=None, hx_on__swap_error=None,
->            hx_on__target_error=None, hx_on__timeout=None,
->            hx_on__validation_validate=None, hx_on__validation_failed=None,
->            hx_on__validation_halted=None, hx_on__xhr_abort=None,
->            hx_on__xhr_loadend=None, hx_on__xhr_loadstart=None,
->            hx_on__xhr_progress=None)
+``` python
+def Rect(
+    width, height, x:int=0, y:int=0, fill:NoneType=None, stroke:NoneType=None, stroke_width:NoneType=None,
+    rx:NoneType=None, ry:NoneType=None, *, transform:NoneType=None, opacity:NoneType=None, clip:NoneType=None,
+    mask:NoneType=None, filter:NoneType=None, vector_effect:NoneType=None, pointer_events:NoneType=None,
+    target_id:NoneType=None, hx_vals:NoneType=None, hx_target:NoneType=None, id:NoneType=None, cls:NoneType=None,
+    title:NoneType=None, style:NoneType=None, accesskey:NoneType=None, contenteditable:NoneType=None,
+    dir:NoneType=None, draggable:NoneType=None, enterkeyhint:NoneType=None, hidden:NoneType=None,
+    inert:NoneType=None, inputmode:NoneType=None, lang:NoneType=None, popover:NoneType=None,
+    spellcheck:NoneType=None, tabindex:NoneType=None, translate:NoneType=None, hx_get:NoneType=None,
+    hx_post:NoneType=None, hx_put:NoneType=None, hx_delete:NoneType=None, hx_patch:NoneType=None,
+    hx_trigger:NoneType=None, hx_swap:NoneType=None, hx_swap_oob:NoneType=None, hx_include:NoneType=None,
+    hx_select:NoneType=None, hx_select_oob:NoneType=None, hx_indicator:NoneType=None, hx_push_url:NoneType=None,
+    hx_confirm:NoneType=None, hx_disable:NoneType=None, hx_replace_url:NoneType=None, hx_disabled_elt:NoneType=None,
+    hx_ext:NoneType=None, hx_headers:NoneType=None, hx_history:NoneType=None, hx_history_elt:NoneType=None,
+    hx_inherit:NoneType=None, hx_params:NoneType=None, hx_preserve:NoneType=None, hx_prompt:NoneType=None,
+    hx_request:NoneType=None, hx_sync:NoneType=None, hx_validate:NoneType=None, hx_action:NoneType=None,
+    hx_method:NoneType=None, hx_config:NoneType=None, hx_ignore:NoneType=None, hx_on_blur:NoneType=None,
+    hx_on_change:NoneType=None, hx_on_contextmenu:NoneType=None, hx_on_focus:NoneType=None,
+    hx_on_input:NoneType=None, hx_on_invalid:NoneType=None, hx_on_reset:NoneType=None, hx_on_select:NoneType=None,
+    hx_on_submit:NoneType=None, hx_on_keydown:NoneType=None, hx_on_keypress:NoneType=None, hx_on_keyup:NoneType=None,
+    hx_on_click:NoneType=None, hx_on_dblclick:NoneType=None, hx_on_mousedown:NoneType=None,
+    hx_on_mouseenter:NoneType=None, hx_on_mouseleave:NoneType=None, hx_on_mousemove:NoneType=None,
+    hx_on_mouseout:NoneType=None, hx_on_mouseover:NoneType=None, hx_on_mouseup:NoneType=None,
+    hx_on_wheel:NoneType=None, hx_on__abort:NoneType=None, hx_on__after_on_load:NoneType=None,
+    hx_on__after_process_node:NoneType=None, hx_on__after_request:NoneType=None, hx_on__after_settle:NoneType=None,
+    hx_on__after_swap:NoneType=None, hx_on__before_cleanup_element:NoneType=None,
+    hx_on__before_on_load:NoneType=None, hx_on__before_process_node:NoneType=None,
+    hx_on__before_request:NoneType=None, hx_on__before_swap:NoneType=None, hx_on__before_send:NoneType=None,
+    hx_on__before_transition:NoneType=None, hx_on__config_request:NoneType=None, hx_on__confirm:NoneType=None,
+    hx_on__history_cache_error:NoneType=None, hx_on__history_cache_miss:NoneType=None,
+    hx_on__history_cache_miss_error:NoneType=None, hx_on__history_cache_miss_load:NoneType=None,
+    hx_on__history_restore:NoneType=None, hx_on__before_history_save:NoneType=None, hx_on__load:NoneType=None,
+    hx_on__no_sse_source_error:NoneType=None, hx_on__on_load_error:NoneType=None,
+    hx_on__oob_after_swap:NoneType=None, hx_on__oob_before_swap:NoneType=None,
+    hx_on__oob_error_no_target:NoneType=None, hx_on__prompt:NoneType=None, hx_on__pushed_into_history:NoneType=None,
+    hx_on__replaced_in_history:NoneType=None, hx_on__response_error:NoneType=None, hx_on__send_abort:NoneType=None,
+    hx_on__send_error:NoneType=None, hx_on__sse_error:NoneType=None, hx_on__sse_open:NoneType=None,
+    hx_on__swap_error:NoneType=None, hx_on__target_error:NoneType=None, hx_on__timeout:NoneType=None,
+    hx_on__validation_validate:NoneType=None, hx_on__validation_failed:NoneType=None,
+    hx_on__validation_halted:NoneType=None, hx_on__xhr_abort:NoneType=None, hx_on__xhr_loadend:NoneType=None,
+    hx_on__xhr_loadstart:NoneType=None, hx_on__xhr_progress:NoneType=None, hx_on__after_init:NoneType=None,
+    hx_on__before_cleanup:NoneType=None, hx_on__before_history_update:NoneType=None,
+    hx_on__before_init:NoneType=None, hx_on__before_process:NoneType=None,
+    hx_on__before_history_restore:NoneType=None, hx_on__after_history_push:NoneType=None,
+    hx_on__after_history_replace:NoneType=None, hx_on__error:NoneType=None
+):
+```
 
 *A standard SVG `rect` element*
 
@@ -183,63 +176,59 @@ typing, e.g:
 demo(Rect(30, 30, fill='blue', rx=8, ry=8))
 ```
 
-<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 50 50" height="50" width="50"><rect width="30" height="30" fill="blue" rx="8" ry="8"></rect></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 50 50" height="50" width="50"><rect width="30" height="30" x="0" y="0" fill="blue" rx="8" ry="8"></rect></svg>
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/svg.py#L58"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
 ### Circle
 
->  Circle (r, cx=0, cy=0, fill=None, stroke=None, stroke_width=None,
->              transform=None, opacity=None, clip=None, mask=None, filter=None,
->              vector_effect=None, pointer_events=None, target_id=None,
->              hx_vals=None, hx_target=None, id=None, cls=None, title=None,
->              style=None, accesskey=None, contenteditable=None, dir=None,
->              draggable=None, enterkeyhint=None, hidden=None, inert=None,
->              inputmode=None, lang=None, popover=None, spellcheck=None,
->              tabindex=None, translate=None, hx_get=None, hx_post=None,
->              hx_put=None, hx_delete=None, hx_patch=None, hx_trigger=None,
->              hx_swap=None, hx_swap_oob=None, hx_include=None, hx_select=None,
->              hx_select_oob=None, hx_indicator=None, hx_push_url=None,
->              hx_confirm=None, hx_disable=None, hx_replace_url=None,
->              hx_disabled_elt=None, hx_ext=None, hx_headers=None,
->              hx_history=None, hx_history_elt=None, hx_inherit=None,
->              hx_params=None, hx_preserve=None, hx_prompt=None,
->              hx_request=None, hx_sync=None, hx_validate=None, hx_on_blur=None,
->              hx_on_change=None, hx_on_contextmenu=None, hx_on_focus=None,
->              hx_on_input=None, hx_on_invalid=None, hx_on_reset=None,
->              hx_on_select=None, hx_on_submit=None, hx_on_keydown=None,
->              hx_on_keypress=None, hx_on_keyup=None, hx_on_click=None,
->              hx_on_dblclick=None, hx_on_mousedown=None, hx_on_mouseenter=None,
->              hx_on_mouseleave=None, hx_on_mousemove=None, hx_on_mouseout=None,
->              hx_on_mouseover=None, hx_on_mouseup=None, hx_on_wheel=None,
->              hx_on__abort=None, hx_on__after_on_load=None,
->              hx_on__after_process_node=None, hx_on__after_request=None,
->              hx_on__after_settle=None, hx_on__after_swap=None,
->              hx_on__before_cleanup_element=None, hx_on__before_on_load=None,
->              hx_on__before_process_node=None, hx_on__before_request=None,
->              hx_on__before_swap=None, hx_on__before_send=None,
->              hx_on__before_transition=None, hx_on__config_request=None,
->              hx_on__confirm=None, hx_on__history_cache_error=None,
->              hx_on__history_cache_miss=None,
->              hx_on__history_cache_miss_error=None,
->              hx_on__history_cache_miss_load=None, hx_on__history_restore=None,
->              hx_on__before_history_save=None, hx_on__load=None,
->              hx_on__no_sse_source_error=None, hx_on__on_load_error=None,
->              hx_on__oob_after_swap=None, hx_on__oob_before_swap=None,
->              hx_on__oob_error_no_target=None, hx_on__prompt=None,
->              hx_on__pushed_into_history=None, hx_on__replaced_in_history=None,
->              hx_on__response_error=None, hx_on__send_abort=None,
->              hx_on__send_error=None, hx_on__sse_error=None,
->              hx_on__sse_open=None, hx_on__swap_error=None,
->              hx_on__target_error=None, hx_on__timeout=None,
->              hx_on__validation_validate=None, hx_on__validation_failed=None,
->              hx_on__validation_halted=None, hx_on__xhr_abort=None,
->              hx_on__xhr_loadend=None, hx_on__xhr_loadstart=None,
->              hx_on__xhr_progress=None)
+``` python
+def Circle(
+    r, cx:int=0, cy:int=0, fill:NoneType=None, stroke:NoneType=None, stroke_width:NoneType=None, *,
+    transform:NoneType=None, opacity:NoneType=None, clip:NoneType=None, mask:NoneType=None, filter:NoneType=None,
+    vector_effect:NoneType=None, pointer_events:NoneType=None, target_id:NoneType=None, hx_vals:NoneType=None,
+    hx_target:NoneType=None, id:NoneType=None, cls:NoneType=None, title:NoneType=None, style:NoneType=None,
+    accesskey:NoneType=None, contenteditable:NoneType=None, dir:NoneType=None, draggable:NoneType=None,
+    enterkeyhint:NoneType=None, hidden:NoneType=None, inert:NoneType=None, inputmode:NoneType=None,
+    lang:NoneType=None, popover:NoneType=None, spellcheck:NoneType=None, tabindex:NoneType=None,
+    translate:NoneType=None, hx_get:NoneType=None, hx_post:NoneType=None, hx_put:NoneType=None,
+    hx_delete:NoneType=None, hx_patch:NoneType=None, hx_trigger:NoneType=None, hx_swap:NoneType=None,
+    hx_swap_oob:NoneType=None, hx_include:NoneType=None, hx_select:NoneType=None, hx_select_oob:NoneType=None,
+    hx_indicator:NoneType=None, hx_push_url:NoneType=None, hx_confirm:NoneType=None, hx_disable:NoneType=None,
+    hx_replace_url:NoneType=None, hx_disabled_elt:NoneType=None, hx_ext:NoneType=None, hx_headers:NoneType=None,
+    hx_history:NoneType=None, hx_history_elt:NoneType=None, hx_inherit:NoneType=None, hx_params:NoneType=None,
+    hx_preserve:NoneType=None, hx_prompt:NoneType=None, hx_request:NoneType=None, hx_sync:NoneType=None,
+    hx_validate:NoneType=None, hx_action:NoneType=None, hx_method:NoneType=None, hx_config:NoneType=None,
+    hx_ignore:NoneType=None, hx_on_blur:NoneType=None, hx_on_change:NoneType=None, hx_on_contextmenu:NoneType=None,
+    hx_on_focus:NoneType=None, hx_on_input:NoneType=None, hx_on_invalid:NoneType=None, hx_on_reset:NoneType=None,
+    hx_on_select:NoneType=None, hx_on_submit:NoneType=None, hx_on_keydown:NoneType=None,
+    hx_on_keypress:NoneType=None, hx_on_keyup:NoneType=None, hx_on_click:NoneType=None, hx_on_dblclick:NoneType=None,
+    hx_on_mousedown:NoneType=None, hx_on_mouseenter:NoneType=None, hx_on_mouseleave:NoneType=None,
+    hx_on_mousemove:NoneType=None, hx_on_mouseout:NoneType=None, hx_on_mouseover:NoneType=None,
+    hx_on_mouseup:NoneType=None, hx_on_wheel:NoneType=None, hx_on__abort:NoneType=None,
+    hx_on__after_on_load:NoneType=None, hx_on__after_process_node:NoneType=None, hx_on__after_request:NoneType=None,
+    hx_on__after_settle:NoneType=None, hx_on__after_swap:NoneType=None, hx_on__before_cleanup_element:NoneType=None,
+    hx_on__before_on_load:NoneType=None, hx_on__before_process_node:NoneType=None,
+    hx_on__before_request:NoneType=None, hx_on__before_swap:NoneType=None, hx_on__before_send:NoneType=None,
+    hx_on__before_transition:NoneType=None, hx_on__config_request:NoneType=None, hx_on__confirm:NoneType=None,
+    hx_on__history_cache_error:NoneType=None, hx_on__history_cache_miss:NoneType=None,
+    hx_on__history_cache_miss_error:NoneType=None, hx_on__history_cache_miss_load:NoneType=None,
+    hx_on__history_restore:NoneType=None, hx_on__before_history_save:NoneType=None, hx_on__load:NoneType=None,
+    hx_on__no_sse_source_error:NoneType=None, hx_on__on_load_error:NoneType=None,
+    hx_on__oob_after_swap:NoneType=None, hx_on__oob_before_swap:NoneType=None,
+    hx_on__oob_error_no_target:NoneType=None, hx_on__prompt:NoneType=None, hx_on__pushed_into_history:NoneType=None,
+    hx_on__replaced_in_history:NoneType=None, hx_on__response_error:NoneType=None, hx_on__send_abort:NoneType=None,
+    hx_on__send_error:NoneType=None, hx_on__sse_error:NoneType=None, hx_on__sse_open:NoneType=None,
+    hx_on__swap_error:NoneType=None, hx_on__target_error:NoneType=None, hx_on__timeout:NoneType=None,
+    hx_on__validation_validate:NoneType=None, hx_on__validation_failed:NoneType=None,
+    hx_on__validation_halted:NoneType=None, hx_on__xhr_abort:NoneType=None, hx_on__xhr_loadend:NoneType=None,
+    hx_on__xhr_loadstart:NoneType=None, hx_on__xhr_progress:NoneType=None, hx_on__after_init:NoneType=None,
+    hx_on__before_cleanup:NoneType=None, hx_on__before_history_update:NoneType=None,
+    hx_on__before_init:NoneType=None, hx_on__before_process:NoneType=None,
+    hx_on__before_history_restore:NoneType=None, hx_on__after_history_push:NoneType=None,
+    hx_on__after_history_replace:NoneType=None, hx_on__error:NoneType=None
+):
+```
 
 *A standard SVG `circle` element*
 
@@ -251,59 +240,55 @@ demo(Circle(20, 25, 25, stroke='red', stroke_width=3))
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/svg.py#L64"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
 ### Ellipse
 
->  Ellipse (rx, ry, cx=0, cy=0, fill=None, stroke=None, stroke_width=None,
->               transform=None, opacity=None, clip=None, mask=None, filter=None,
->               vector_effect=None, pointer_events=None, target_id=None,
->               hx_vals=None, hx_target=None, id=None, cls=None, title=None,
->               style=None, accesskey=None, contenteditable=None, dir=None,
->               draggable=None, enterkeyhint=None, hidden=None, inert=None,
->               inputmode=None, lang=None, popover=None, spellcheck=None,
->               tabindex=None, translate=None, hx_get=None, hx_post=None,
->               hx_put=None, hx_delete=None, hx_patch=None, hx_trigger=None,
->               hx_swap=None, hx_swap_oob=None, hx_include=None, hx_select=None,
->               hx_select_oob=None, hx_indicator=None, hx_push_url=None,
->               hx_confirm=None, hx_disable=None, hx_replace_url=None,
->               hx_disabled_elt=None, hx_ext=None, hx_headers=None,
->               hx_history=None, hx_history_elt=None, hx_inherit=None,
->               hx_params=None, hx_preserve=None, hx_prompt=None,
->               hx_request=None, hx_sync=None, hx_validate=None,
->               hx_on_blur=None, hx_on_change=None, hx_on_contextmenu=None,
->               hx_on_focus=None, hx_on_input=None, hx_on_invalid=None,
->               hx_on_reset=None, hx_on_select=None, hx_on_submit=None,
->               hx_on_keydown=None, hx_on_keypress=None, hx_on_keyup=None,
->               hx_on_click=None, hx_on_dblclick=None, hx_on_mousedown=None,
->               hx_on_mouseenter=None, hx_on_mouseleave=None,
->               hx_on_mousemove=None, hx_on_mouseout=None, hx_on_mouseover=None,
->               hx_on_mouseup=None, hx_on_wheel=None, hx_on__abort=None,
->               hx_on__after_on_load=None, hx_on__after_process_node=None,
->               hx_on__after_request=None, hx_on__after_settle=None,
->               hx_on__after_swap=None, hx_on__before_cleanup_element=None,
->               hx_on__before_on_load=None, hx_on__before_process_node=None,
->               hx_on__before_request=None, hx_on__before_swap=None,
->               hx_on__before_send=None, hx_on__before_transition=None,
->               hx_on__config_request=None, hx_on__confirm=None,
->               hx_on__history_cache_error=None, hx_on__history_cache_miss=None,
->               hx_on__history_cache_miss_error=None,
->               hx_on__history_cache_miss_load=None,
->               hx_on__history_restore=None, hx_on__before_history_save=None,
->               hx_on__load=None, hx_on__no_sse_source_error=None,
->               hx_on__on_load_error=None, hx_on__oob_after_swap=None,
->               hx_on__oob_before_swap=None, hx_on__oob_error_no_target=None,
->               hx_on__prompt=None, hx_on__pushed_into_history=None,
->               hx_on__replaced_in_history=None, hx_on__response_error=None,
->               hx_on__send_abort=None, hx_on__send_error=None,
->               hx_on__sse_error=None, hx_on__sse_open=None,
->               hx_on__swap_error=None, hx_on__target_error=None,
->               hx_on__timeout=None, hx_on__validation_validate=None,
->               hx_on__validation_failed=None, hx_on__validation_halted=None,
->               hx_on__xhr_abort=None, hx_on__xhr_loadend=None,
->               hx_on__xhr_loadstart=None, hx_on__xhr_progress=None)
+``` python
+def Ellipse(
+    rx, ry, cx:int=0, cy:int=0, fill:NoneType=None, stroke:NoneType=None, stroke_width:NoneType=None, *,
+    transform:NoneType=None, opacity:NoneType=None, clip:NoneType=None, mask:NoneType=None, filter:NoneType=None,
+    vector_effect:NoneType=None, pointer_events:NoneType=None, target_id:NoneType=None, hx_vals:NoneType=None,
+    hx_target:NoneType=None, id:NoneType=None, cls:NoneType=None, title:NoneType=None, style:NoneType=None,
+    accesskey:NoneType=None, contenteditable:NoneType=None, dir:NoneType=None, draggable:NoneType=None,
+    enterkeyhint:NoneType=None, hidden:NoneType=None, inert:NoneType=None, inputmode:NoneType=None,
+    lang:NoneType=None, popover:NoneType=None, spellcheck:NoneType=None, tabindex:NoneType=None,
+    translate:NoneType=None, hx_get:NoneType=None, hx_post:NoneType=None, hx_put:NoneType=None,
+    hx_delete:NoneType=None, hx_patch:NoneType=None, hx_trigger:NoneType=None, hx_swap:NoneType=None,
+    hx_swap_oob:NoneType=None, hx_include:NoneType=None, hx_select:NoneType=None, hx_select_oob:NoneType=None,
+    hx_indicator:NoneType=None, hx_push_url:NoneType=None, hx_confirm:NoneType=None, hx_disable:NoneType=None,
+    hx_replace_url:NoneType=None, hx_disabled_elt:NoneType=None, hx_ext:NoneType=None, hx_headers:NoneType=None,
+    hx_history:NoneType=None, hx_history_elt:NoneType=None, hx_inherit:NoneType=None, hx_params:NoneType=None,
+    hx_preserve:NoneType=None, hx_prompt:NoneType=None, hx_request:NoneType=None, hx_sync:NoneType=None,
+    hx_validate:NoneType=None, hx_action:NoneType=None, hx_method:NoneType=None, hx_config:NoneType=None,
+    hx_ignore:NoneType=None, hx_on_blur:NoneType=None, hx_on_change:NoneType=None, hx_on_contextmenu:NoneType=None,
+    hx_on_focus:NoneType=None, hx_on_input:NoneType=None, hx_on_invalid:NoneType=None, hx_on_reset:NoneType=None,
+    hx_on_select:NoneType=None, hx_on_submit:NoneType=None, hx_on_keydown:NoneType=None,
+    hx_on_keypress:NoneType=None, hx_on_keyup:NoneType=None, hx_on_click:NoneType=None, hx_on_dblclick:NoneType=None,
+    hx_on_mousedown:NoneType=None, hx_on_mouseenter:NoneType=None, hx_on_mouseleave:NoneType=None,
+    hx_on_mousemove:NoneType=None, hx_on_mouseout:NoneType=None, hx_on_mouseover:NoneType=None,
+    hx_on_mouseup:NoneType=None, hx_on_wheel:NoneType=None, hx_on__abort:NoneType=None,
+    hx_on__after_on_load:NoneType=None, hx_on__after_process_node:NoneType=None, hx_on__after_request:NoneType=None,
+    hx_on__after_settle:NoneType=None, hx_on__after_swap:NoneType=None, hx_on__before_cleanup_element:NoneType=None,
+    hx_on__before_on_load:NoneType=None, hx_on__before_process_node:NoneType=None,
+    hx_on__before_request:NoneType=None, hx_on__before_swap:NoneType=None, hx_on__before_send:NoneType=None,
+    hx_on__before_transition:NoneType=None, hx_on__config_request:NoneType=None, hx_on__confirm:NoneType=None,
+    hx_on__history_cache_error:NoneType=None, hx_on__history_cache_miss:NoneType=None,
+    hx_on__history_cache_miss_error:NoneType=None, hx_on__history_cache_miss_load:NoneType=None,
+    hx_on__history_restore:NoneType=None, hx_on__before_history_save:NoneType=None, hx_on__load:NoneType=None,
+    hx_on__no_sse_source_error:NoneType=None, hx_on__on_load_error:NoneType=None,
+    hx_on__oob_after_swap:NoneType=None, hx_on__oob_before_swap:NoneType=None,
+    hx_on__oob_error_no_target:NoneType=None, hx_on__prompt:NoneType=None, hx_on__pushed_into_history:NoneType=None,
+    hx_on__replaced_in_history:NoneType=None, hx_on__response_error:NoneType=None, hx_on__send_abort:NoneType=None,
+    hx_on__send_error:NoneType=None, hx_on__sse_error:NoneType=None, hx_on__sse_open:NoneType=None,
+    hx_on__swap_error:NoneType=None, hx_on__target_error:NoneType=None, hx_on__timeout:NoneType=None,
+    hx_on__validation_validate:NoneType=None, hx_on__validation_failed:NoneType=None,
+    hx_on__validation_halted:NoneType=None, hx_on__xhr_abort:NoneType=None, hx_on__xhr_loadend:NoneType=None,
+    hx_on__xhr_loadstart:NoneType=None, hx_on__xhr_progress:NoneType=None, hx_on__after_init:NoneType=None,
+    hx_on__before_cleanup:NoneType=None, hx_on__before_history_update:NoneType=None,
+    hx_on__before_init:NoneType=None, hx_on__before_process:NoneType=None,
+    hx_on__before_history_restore:NoneType=None, hx_on__after_history_push:NoneType=None,
+    hx_on__after_history_replace:NoneType=None, hx_on__error:NoneType=None
+):
+```
 
 *A standard SVG `ellipse` element*
 
@@ -315,14 +300,14 @@ demo(Ellipse(20, 10, 25, 25))
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/svg.py#L69"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
 ### transformd
 
->  transformd (translate=None, scale=None, rotate=None, skewX=None,
->                  skewY=None, matrix=None)
+``` python
+def transformd(
+    translate:NoneType=None, scale:NoneType=None, rotate:NoneType=None, skewX:NoneType=None, skewY:NoneType=None,
+    matrix:NoneType=None
+):
+```
 
 *Create an SVG `transform` kwarg dict*
 
@@ -341,124 +326,121 @@ demo(Ellipse(20, 10, 25, 25, **rot))
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/svg.py#L82"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
 ### Line
 
->  Line (x1, y1, x2=0, y2=0, stroke='black', w=None, stroke_width=1,
->            transform=None, opacity=None, clip=None, mask=None, filter=None,
->            vector_effect=None, pointer_events=None, target_id=None,
->            hx_vals=None, hx_target=None, id=None, cls=None, title=None,
->            style=None, accesskey=None, contenteditable=None, dir=None,
->            draggable=None, enterkeyhint=None, hidden=None, inert=None,
->            inputmode=None, lang=None, popover=None, spellcheck=None,
->            tabindex=None, translate=None, hx_get=None, hx_post=None,
->            hx_put=None, hx_delete=None, hx_patch=None, hx_trigger=None,
->            hx_swap=None, hx_swap_oob=None, hx_include=None, hx_select=None,
->            hx_select_oob=None, hx_indicator=None, hx_push_url=None,
->            hx_confirm=None, hx_disable=None, hx_replace_url=None,
->            hx_disabled_elt=None, hx_ext=None, hx_headers=None,
->            hx_history=None, hx_history_elt=None, hx_inherit=None,
->            hx_params=None, hx_preserve=None, hx_prompt=None, hx_request=None,
->            hx_sync=None, hx_validate=None, hx_on_blur=None, hx_on_change=None,
->            hx_on_contextmenu=None, hx_on_focus=None, hx_on_input=None,
->            hx_on_invalid=None, hx_on_reset=None, hx_on_select=None,
->            hx_on_submit=None, hx_on_keydown=None, hx_on_keypress=None,
->            hx_on_keyup=None, hx_on_click=None, hx_on_dblclick=None,
->            hx_on_mousedown=None, hx_on_mouseenter=None, hx_on_mouseleave=None,
->            hx_on_mousemove=None, hx_on_mouseout=None, hx_on_mouseover=None,
->            hx_on_mouseup=None, hx_on_wheel=None, hx_on__abort=None,
->            hx_on__after_on_load=None, hx_on__after_process_node=None,
->            hx_on__after_request=None, hx_on__after_settle=None,
->            hx_on__after_swap=None, hx_on__before_cleanup_element=None,
->            hx_on__before_on_load=None, hx_on__before_process_node=None,
->            hx_on__before_request=None, hx_on__before_swap=None,
->            hx_on__before_send=None, hx_on__before_transition=None,
->            hx_on__config_request=None, hx_on__confirm=None,
->            hx_on__history_cache_error=None, hx_on__history_cache_miss=None,
->            hx_on__history_cache_miss_error=None,
->            hx_on__history_cache_miss_load=None, hx_on__history_restore=None,
->            hx_on__before_history_save=None, hx_on__load=None,
->            hx_on__no_sse_source_error=None, hx_on__on_load_error=None,
->            hx_on__oob_after_swap=None, hx_on__oob_before_swap=None,
->            hx_on__oob_error_no_target=None, hx_on__prompt=None,
->            hx_on__pushed_into_history=None, hx_on__replaced_in_history=None,
->            hx_on__response_error=None, hx_on__send_abort=None,
->            hx_on__send_error=None, hx_on__sse_error=None,
->            hx_on__sse_open=None, hx_on__swap_error=None,
->            hx_on__target_error=None, hx_on__timeout=None,
->            hx_on__validation_validate=None, hx_on__validation_failed=None,
->            hx_on__validation_halted=None, hx_on__xhr_abort=None,
->            hx_on__xhr_loadend=None, hx_on__xhr_loadstart=None,
->            hx_on__xhr_progress=None)
+``` python
+def Line(
+    x1, y1, x2:int=0, y2:int=0, stroke:NoneType=None, w:NoneType=None, stroke_width:NoneType=None, *,
+    transform:NoneType=None, opacity:NoneType=None, clip:NoneType=None, mask:NoneType=None, filter:NoneType=None,
+    vector_effect:NoneType=None, pointer_events:NoneType=None, target_id:NoneType=None, hx_vals:NoneType=None,
+    hx_target:NoneType=None, id:NoneType=None, cls:NoneType=None, title:NoneType=None, style:NoneType=None,
+    accesskey:NoneType=None, contenteditable:NoneType=None, dir:NoneType=None, draggable:NoneType=None,
+    enterkeyhint:NoneType=None, hidden:NoneType=None, inert:NoneType=None, inputmode:NoneType=None,
+    lang:NoneType=None, popover:NoneType=None, spellcheck:NoneType=None, tabindex:NoneType=None,
+    translate:NoneType=None, hx_get:NoneType=None, hx_post:NoneType=None, hx_put:NoneType=None,
+    hx_delete:NoneType=None, hx_patch:NoneType=None, hx_trigger:NoneType=None, hx_swap:NoneType=None,
+    hx_swap_oob:NoneType=None, hx_include:NoneType=None, hx_select:NoneType=None, hx_select_oob:NoneType=None,
+    hx_indicator:NoneType=None, hx_push_url:NoneType=None, hx_confirm:NoneType=None, hx_disable:NoneType=None,
+    hx_replace_url:NoneType=None, hx_disabled_elt:NoneType=None, hx_ext:NoneType=None, hx_headers:NoneType=None,
+    hx_history:NoneType=None, hx_history_elt:NoneType=None, hx_inherit:NoneType=None, hx_params:NoneType=None,
+    hx_preserve:NoneType=None, hx_prompt:NoneType=None, hx_request:NoneType=None, hx_sync:NoneType=None,
+    hx_validate:NoneType=None, hx_action:NoneType=None, hx_method:NoneType=None, hx_config:NoneType=None,
+    hx_ignore:NoneType=None, hx_on_blur:NoneType=None, hx_on_change:NoneType=None, hx_on_contextmenu:NoneType=None,
+    hx_on_focus:NoneType=None, hx_on_input:NoneType=None, hx_on_invalid:NoneType=None, hx_on_reset:NoneType=None,
+    hx_on_select:NoneType=None, hx_on_submit:NoneType=None, hx_on_keydown:NoneType=None,
+    hx_on_keypress:NoneType=None, hx_on_keyup:NoneType=None, hx_on_click:NoneType=None, hx_on_dblclick:NoneType=None,
+    hx_on_mousedown:NoneType=None, hx_on_mouseenter:NoneType=None, hx_on_mouseleave:NoneType=None,
+    hx_on_mousemove:NoneType=None, hx_on_mouseout:NoneType=None, hx_on_mouseover:NoneType=None,
+    hx_on_mouseup:NoneType=None, hx_on_wheel:NoneType=None, hx_on__abort:NoneType=None,
+    hx_on__after_on_load:NoneType=None, hx_on__after_process_node:NoneType=None, hx_on__after_request:NoneType=None,
+    hx_on__after_settle:NoneType=None, hx_on__after_swap:NoneType=None, hx_on__before_cleanup_element:NoneType=None,
+    hx_on__before_on_load:NoneType=None, hx_on__before_process_node:NoneType=None,
+    hx_on__before_request:NoneType=None, hx_on__before_swap:NoneType=None, hx_on__before_send:NoneType=None,
+    hx_on__before_transition:NoneType=None, hx_on__config_request:NoneType=None, hx_on__confirm:NoneType=None,
+    hx_on__history_cache_error:NoneType=None, hx_on__history_cache_miss:NoneType=None,
+    hx_on__history_cache_miss_error:NoneType=None, hx_on__history_cache_miss_load:NoneType=None,
+    hx_on__history_restore:NoneType=None, hx_on__before_history_save:NoneType=None, hx_on__load:NoneType=None,
+    hx_on__no_sse_source_error:NoneType=None, hx_on__on_load_error:NoneType=None,
+    hx_on__oob_after_swap:NoneType=None, hx_on__oob_before_swap:NoneType=None,
+    hx_on__oob_error_no_target:NoneType=None, hx_on__prompt:NoneType=None, hx_on__pushed_into_history:NoneType=None,
+    hx_on__replaced_in_history:NoneType=None, hx_on__response_error:NoneType=None, hx_on__send_abort:NoneType=None,
+    hx_on__send_error:NoneType=None, hx_on__sse_error:NoneType=None, hx_on__sse_open:NoneType=None,
+    hx_on__swap_error:NoneType=None, hx_on__target_error:NoneType=None, hx_on__timeout:NoneType=None,
+    hx_on__validation_validate:NoneType=None, hx_on__validation_failed:NoneType=None,
+    hx_on__validation_halted:NoneType=None, hx_on__xhr_abort:NoneType=None, hx_on__xhr_loadend:NoneType=None,
+    hx_on__xhr_loadstart:NoneType=None, hx_on__xhr_progress:NoneType=None, hx_on__after_init:NoneType=None,
+    hx_on__before_cleanup:NoneType=None, hx_on__before_history_update:NoneType=None,
+    hx_on__before_init:NoneType=None, hx_on__before_process:NoneType=None,
+    hx_on__before_history_restore:NoneType=None, hx_on__after_history_push:NoneType=None,
+    hx_on__after_history_replace:NoneType=None, hx_on__error:NoneType=None
+):
+```
 
 *A standard SVG `line` element*
 
 ``` python
-demo(Line(20, 30, w=3))
+demo(Line(20, 30, w=3, stroke='black'))
 ```
 
-<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 50 50" height="50" width="50"><line x1="20" y1="30" stroke="black" stroke-width="3"></line></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 50 50" height="50" width="50"><line x1="20" y1="30" x2="0" y2="0" stroke="black" stroke-width="3"></line></svg>
+
+``` python
+demo(Svg(G(Line(0, 0, 100, 100), Line(100, 0, 0, 100), stroke='red', stroke_width=3)))
+```
+
+<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 50 50" height="50" width="50"><svg xmlns="http://www.w3.org/2000/svg"><g stroke="red" stroke-width="3"><line x1="0" y1="0" x2="100" y2="100"></line><line x1="100" y1="0" x2="0" y2="100"></line></g></svg></svg>
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/svg.py#L89"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
 ### Polyline
 
->  Polyline (*args, points=None, fill=None, stroke=None, stroke_width=None,
->                transform=None, opacity=None, clip=None, mask=None,
->                filter=None, vector_effect=None, pointer_events=None,
->                target_id=None, hx_vals=None, hx_target=None, id=None,
->                cls=None, title=None, style=None, accesskey=None,
->                contenteditable=None, dir=None, draggable=None,
->                enterkeyhint=None, hidden=None, inert=None, inputmode=None,
->                lang=None, popover=None, spellcheck=None, tabindex=None,
->                translate=None, hx_get=None, hx_post=None, hx_put=None,
->                hx_delete=None, hx_patch=None, hx_trigger=None, hx_swap=None,
->                hx_swap_oob=None, hx_include=None, hx_select=None,
->                hx_select_oob=None, hx_indicator=None, hx_push_url=None,
->                hx_confirm=None, hx_disable=None, hx_replace_url=None,
->                hx_disabled_elt=None, hx_ext=None, hx_headers=None,
->                hx_history=None, hx_history_elt=None, hx_inherit=None,
->                hx_params=None, hx_preserve=None, hx_prompt=None,
->                hx_request=None, hx_sync=None, hx_validate=None,
->                hx_on_blur=None, hx_on_change=None, hx_on_contextmenu=None,
->                hx_on_focus=None, hx_on_input=None, hx_on_invalid=None,
->                hx_on_reset=None, hx_on_select=None, hx_on_submit=None,
->                hx_on_keydown=None, hx_on_keypress=None, hx_on_keyup=None,
->                hx_on_click=None, hx_on_dblclick=None, hx_on_mousedown=None,
->                hx_on_mouseenter=None, hx_on_mouseleave=None,
->                hx_on_mousemove=None, hx_on_mouseout=None,
->                hx_on_mouseover=None, hx_on_mouseup=None, hx_on_wheel=None,
->                hx_on__abort=None, hx_on__after_on_load=None,
->                hx_on__after_process_node=None, hx_on__after_request=None,
->                hx_on__after_settle=None, hx_on__after_swap=None,
->                hx_on__before_cleanup_element=None, hx_on__before_on_load=None,
->                hx_on__before_process_node=None, hx_on__before_request=None,
->                hx_on__before_swap=None, hx_on__before_send=None,
->                hx_on__before_transition=None, hx_on__config_request=None,
->                hx_on__confirm=None, hx_on__history_cache_error=None,
->                hx_on__history_cache_miss=None,
->                hx_on__history_cache_miss_error=None,
->                hx_on__history_cache_miss_load=None,
->                hx_on__history_restore=None, hx_on__before_history_save=None,
->                hx_on__load=None, hx_on__no_sse_source_error=None,
->                hx_on__on_load_error=None, hx_on__oob_after_swap=None,
->                hx_on__oob_before_swap=None, hx_on__oob_error_no_target=None,
->                hx_on__prompt=None, hx_on__pushed_into_history=None,
->                hx_on__replaced_in_history=None, hx_on__response_error=None,
->                hx_on__send_abort=None, hx_on__send_error=None,
->                hx_on__sse_error=None, hx_on__sse_open=None,
->                hx_on__swap_error=None, hx_on__target_error=None,
->                hx_on__timeout=None, hx_on__validation_validate=None,
->                hx_on__validation_failed=None, hx_on__validation_halted=None,
->                hx_on__xhr_abort=None, hx_on__xhr_loadend=None,
->                hx_on__xhr_loadstart=None, hx_on__xhr_progress=None)
+``` python
+def Polyline(
+    *args, points:NoneType=None, fill:NoneType=None, stroke:NoneType=None, stroke_width:NoneType=None,
+    transform:NoneType=None, opacity:NoneType=None, clip:NoneType=None, mask:NoneType=None, filter:NoneType=None,
+    vector_effect:NoneType=None, pointer_events:NoneType=None, target_id:NoneType=None, hx_vals:NoneType=None,
+    hx_target:NoneType=None, id:NoneType=None, cls:NoneType=None, title:NoneType=None, style:NoneType=None,
+    accesskey:NoneType=None, contenteditable:NoneType=None, dir:NoneType=None, draggable:NoneType=None,
+    enterkeyhint:NoneType=None, hidden:NoneType=None, inert:NoneType=None, inputmode:NoneType=None,
+    lang:NoneType=None, popover:NoneType=None, spellcheck:NoneType=None, tabindex:NoneType=None,
+    translate:NoneType=None, hx_get:NoneType=None, hx_post:NoneType=None, hx_put:NoneType=None,
+    hx_delete:NoneType=None, hx_patch:NoneType=None, hx_trigger:NoneType=None, hx_swap:NoneType=None,
+    hx_swap_oob:NoneType=None, hx_include:NoneType=None, hx_select:NoneType=None, hx_select_oob:NoneType=None,
+    hx_indicator:NoneType=None, hx_push_url:NoneType=None, hx_confirm:NoneType=None, hx_disable:NoneType=None,
+    hx_replace_url:NoneType=None, hx_disabled_elt:NoneType=None, hx_ext:NoneType=None, hx_headers:NoneType=None,
+    hx_history:NoneType=None, hx_history_elt:NoneType=None, hx_inherit:NoneType=None, hx_params:NoneType=None,
+    hx_preserve:NoneType=None, hx_prompt:NoneType=None, hx_request:NoneType=None, hx_sync:NoneType=None,
+    hx_validate:NoneType=None, hx_action:NoneType=None, hx_method:NoneType=None, hx_config:NoneType=None,
+    hx_ignore:NoneType=None, hx_on_blur:NoneType=None, hx_on_change:NoneType=None, hx_on_contextmenu:NoneType=None,
+    hx_on_focus:NoneType=None, hx_on_input:NoneType=None, hx_on_invalid:NoneType=None, hx_on_reset:NoneType=None,
+    hx_on_select:NoneType=None, hx_on_submit:NoneType=None, hx_on_keydown:NoneType=None,
+    hx_on_keypress:NoneType=None, hx_on_keyup:NoneType=None, hx_on_click:NoneType=None, hx_on_dblclick:NoneType=None,
+    hx_on_mousedown:NoneType=None, hx_on_mouseenter:NoneType=None, hx_on_mouseleave:NoneType=None,
+    hx_on_mousemove:NoneType=None, hx_on_mouseout:NoneType=None, hx_on_mouseover:NoneType=None,
+    hx_on_mouseup:NoneType=None, hx_on_wheel:NoneType=None, hx_on__abort:NoneType=None,
+    hx_on__after_on_load:NoneType=None, hx_on__after_process_node:NoneType=None, hx_on__after_request:NoneType=None,
+    hx_on__after_settle:NoneType=None, hx_on__after_swap:NoneType=None, hx_on__before_cleanup_element:NoneType=None,
+    hx_on__before_on_load:NoneType=None, hx_on__before_process_node:NoneType=None,
+    hx_on__before_request:NoneType=None, hx_on__before_swap:NoneType=None, hx_on__before_send:NoneType=None,
+    hx_on__before_transition:NoneType=None, hx_on__config_request:NoneType=None, hx_on__confirm:NoneType=None,
+    hx_on__history_cache_error:NoneType=None, hx_on__history_cache_miss:NoneType=None,
+    hx_on__history_cache_miss_error:NoneType=None, hx_on__history_cache_miss_load:NoneType=None,
+    hx_on__history_restore:NoneType=None, hx_on__before_history_save:NoneType=None, hx_on__load:NoneType=None,
+    hx_on__no_sse_source_error:NoneType=None, hx_on__on_load_error:NoneType=None,
+    hx_on__oob_after_swap:NoneType=None, hx_on__oob_before_swap:NoneType=None,
+    hx_on__oob_error_no_target:NoneType=None, hx_on__prompt:NoneType=None, hx_on__pushed_into_history:NoneType=None,
+    hx_on__replaced_in_history:NoneType=None, hx_on__response_error:NoneType=None, hx_on__send_abort:NoneType=None,
+    hx_on__send_error:NoneType=None, hx_on__sse_error:NoneType=None, hx_on__sse_open:NoneType=None,
+    hx_on__swap_error:NoneType=None, hx_on__target_error:NoneType=None, hx_on__timeout:NoneType=None,
+    hx_on__validation_validate:NoneType=None, hx_on__validation_failed:NoneType=None,
+    hx_on__validation_halted:NoneType=None, hx_on__xhr_abort:NoneType=None, hx_on__xhr_loadend:NoneType=None,
+    hx_on__xhr_loadstart:NoneType=None, hx_on__xhr_progress:NoneType=None, hx_on__after_init:NoneType=None,
+    hx_on__before_cleanup:NoneType=None, hx_on__before_history_update:NoneType=None,
+    hx_on__before_init:NoneType=None, hx_on__before_process:NoneType=None,
+    hx_on__before_history_restore:NoneType=None, hx_on__after_history_push:NoneType=None,
+    hx_on__after_history_replace:NoneType=None, hx_on__error:NoneType=None
+):
+```
 
 *A standard SVG `polyline` element*
 
@@ -477,59 +459,55 @@ demo(Polyline(points='0,0 10,10 20,0 30,10 40,0', fill='purple', stroke_width=2)
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/svg.py#L96"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
 ### Polygon
 
->  Polygon (*args, points=None, fill=None, stroke=None, stroke_width=None,
->               transform=None, opacity=None, clip=None, mask=None, filter=None,
->               vector_effect=None, pointer_events=None, target_id=None,
->               hx_vals=None, hx_target=None, id=None, cls=None, title=None,
->               style=None, accesskey=None, contenteditable=None, dir=None,
->               draggable=None, enterkeyhint=None, hidden=None, inert=None,
->               inputmode=None, lang=None, popover=None, spellcheck=None,
->               tabindex=None, translate=None, hx_get=None, hx_post=None,
->               hx_put=None, hx_delete=None, hx_patch=None, hx_trigger=None,
->               hx_swap=None, hx_swap_oob=None, hx_include=None, hx_select=None,
->               hx_select_oob=None, hx_indicator=None, hx_push_url=None,
->               hx_confirm=None, hx_disable=None, hx_replace_url=None,
->               hx_disabled_elt=None, hx_ext=None, hx_headers=None,
->               hx_history=None, hx_history_elt=None, hx_inherit=None,
->               hx_params=None, hx_preserve=None, hx_prompt=None,
->               hx_request=None, hx_sync=None, hx_validate=None,
->               hx_on_blur=None, hx_on_change=None, hx_on_contextmenu=None,
->               hx_on_focus=None, hx_on_input=None, hx_on_invalid=None,
->               hx_on_reset=None, hx_on_select=None, hx_on_submit=None,
->               hx_on_keydown=None, hx_on_keypress=None, hx_on_keyup=None,
->               hx_on_click=None, hx_on_dblclick=None, hx_on_mousedown=None,
->               hx_on_mouseenter=None, hx_on_mouseleave=None,
->               hx_on_mousemove=None, hx_on_mouseout=None, hx_on_mouseover=None,
->               hx_on_mouseup=None, hx_on_wheel=None, hx_on__abort=None,
->               hx_on__after_on_load=None, hx_on__after_process_node=None,
->               hx_on__after_request=None, hx_on__after_settle=None,
->               hx_on__after_swap=None, hx_on__before_cleanup_element=None,
->               hx_on__before_on_load=None, hx_on__before_process_node=None,
->               hx_on__before_request=None, hx_on__before_swap=None,
->               hx_on__before_send=None, hx_on__before_transition=None,
->               hx_on__config_request=None, hx_on__confirm=None,
->               hx_on__history_cache_error=None, hx_on__history_cache_miss=None,
->               hx_on__history_cache_miss_error=None,
->               hx_on__history_cache_miss_load=None,
->               hx_on__history_restore=None, hx_on__before_history_save=None,
->               hx_on__load=None, hx_on__no_sse_source_error=None,
->               hx_on__on_load_error=None, hx_on__oob_after_swap=None,
->               hx_on__oob_before_swap=None, hx_on__oob_error_no_target=None,
->               hx_on__prompt=None, hx_on__pushed_into_history=None,
->               hx_on__replaced_in_history=None, hx_on__response_error=None,
->               hx_on__send_abort=None, hx_on__send_error=None,
->               hx_on__sse_error=None, hx_on__sse_open=None,
->               hx_on__swap_error=None, hx_on__target_error=None,
->               hx_on__timeout=None, hx_on__validation_validate=None,
->               hx_on__validation_failed=None, hx_on__validation_halted=None,
->               hx_on__xhr_abort=None, hx_on__xhr_loadend=None,
->               hx_on__xhr_loadstart=None, hx_on__xhr_progress=None)
+``` python
+def Polygon(
+    *args, points:NoneType=None, fill:NoneType=None, stroke:NoneType=None, stroke_width:NoneType=None,
+    transform:NoneType=None, opacity:NoneType=None, clip:NoneType=None, mask:NoneType=None, filter:NoneType=None,
+    vector_effect:NoneType=None, pointer_events:NoneType=None, target_id:NoneType=None, hx_vals:NoneType=None,
+    hx_target:NoneType=None, id:NoneType=None, cls:NoneType=None, title:NoneType=None, style:NoneType=None,
+    accesskey:NoneType=None, contenteditable:NoneType=None, dir:NoneType=None, draggable:NoneType=None,
+    enterkeyhint:NoneType=None, hidden:NoneType=None, inert:NoneType=None, inputmode:NoneType=None,
+    lang:NoneType=None, popover:NoneType=None, spellcheck:NoneType=None, tabindex:NoneType=None,
+    translate:NoneType=None, hx_get:NoneType=None, hx_post:NoneType=None, hx_put:NoneType=None,
+    hx_delete:NoneType=None, hx_patch:NoneType=None, hx_trigger:NoneType=None, hx_swap:NoneType=None,
+    hx_swap_oob:NoneType=None, hx_include:NoneType=None, hx_select:NoneType=None, hx_select_oob:NoneType=None,
+    hx_indicator:NoneType=None, hx_push_url:NoneType=None, hx_confirm:NoneType=None, hx_disable:NoneType=None,
+    hx_replace_url:NoneType=None, hx_disabled_elt:NoneType=None, hx_ext:NoneType=None, hx_headers:NoneType=None,
+    hx_history:NoneType=None, hx_history_elt:NoneType=None, hx_inherit:NoneType=None, hx_params:NoneType=None,
+    hx_preserve:NoneType=None, hx_prompt:NoneType=None, hx_request:NoneType=None, hx_sync:NoneType=None,
+    hx_validate:NoneType=None, hx_action:NoneType=None, hx_method:NoneType=None, hx_config:NoneType=None,
+    hx_ignore:NoneType=None, hx_on_blur:NoneType=None, hx_on_change:NoneType=None, hx_on_contextmenu:NoneType=None,
+    hx_on_focus:NoneType=None, hx_on_input:NoneType=None, hx_on_invalid:NoneType=None, hx_on_reset:NoneType=None,
+    hx_on_select:NoneType=None, hx_on_submit:NoneType=None, hx_on_keydown:NoneType=None,
+    hx_on_keypress:NoneType=None, hx_on_keyup:NoneType=None, hx_on_click:NoneType=None, hx_on_dblclick:NoneType=None,
+    hx_on_mousedown:NoneType=None, hx_on_mouseenter:NoneType=None, hx_on_mouseleave:NoneType=None,
+    hx_on_mousemove:NoneType=None, hx_on_mouseout:NoneType=None, hx_on_mouseover:NoneType=None,
+    hx_on_mouseup:NoneType=None, hx_on_wheel:NoneType=None, hx_on__abort:NoneType=None,
+    hx_on__after_on_load:NoneType=None, hx_on__after_process_node:NoneType=None, hx_on__after_request:NoneType=None,
+    hx_on__after_settle:NoneType=None, hx_on__after_swap:NoneType=None, hx_on__before_cleanup_element:NoneType=None,
+    hx_on__before_on_load:NoneType=None, hx_on__before_process_node:NoneType=None,
+    hx_on__before_request:NoneType=None, hx_on__before_swap:NoneType=None, hx_on__before_send:NoneType=None,
+    hx_on__before_transition:NoneType=None, hx_on__config_request:NoneType=None, hx_on__confirm:NoneType=None,
+    hx_on__history_cache_error:NoneType=None, hx_on__history_cache_miss:NoneType=None,
+    hx_on__history_cache_miss_error:NoneType=None, hx_on__history_cache_miss_load:NoneType=None,
+    hx_on__history_restore:NoneType=None, hx_on__before_history_save:NoneType=None, hx_on__load:NoneType=None,
+    hx_on__no_sse_source_error:NoneType=None, hx_on__on_load_error:NoneType=None,
+    hx_on__oob_after_swap:NoneType=None, hx_on__oob_before_swap:NoneType=None,
+    hx_on__oob_error_no_target:NoneType=None, hx_on__prompt:NoneType=None, hx_on__pushed_into_history:NoneType=None,
+    hx_on__replaced_in_history:NoneType=None, hx_on__response_error:NoneType=None, hx_on__send_abort:NoneType=None,
+    hx_on__send_error:NoneType=None, hx_on__sse_error:NoneType=None, hx_on__sse_open:NoneType=None,
+    hx_on__swap_error:NoneType=None, hx_on__target_error:NoneType=None, hx_on__timeout:NoneType=None,
+    hx_on__validation_validate:NoneType=None, hx_on__validation_failed:NoneType=None,
+    hx_on__validation_halted:NoneType=None, hx_on__xhr_abort:NoneType=None, hx_on__xhr_loadend:NoneType=None,
+    hx_on__xhr_loadstart:NoneType=None, hx_on__xhr_progress:NoneType=None, hx_on__after_init:NoneType=None,
+    hx_on__before_cleanup:NoneType=None, hx_on__before_history_update:NoneType=None,
+    hx_on__before_init:NoneType=None, hx_on__before_process:NoneType=None,
+    hx_on__before_history_restore:NoneType=None, hx_on__after_history_push:NoneType=None,
+    hx_on__after_history_replace:NoneType=None, hx_on__error:NoneType=None
+):
+```
 
 *A standard SVG `polygon` element*
 
@@ -549,60 +527,57 @@ demo(Polygon(points='25,5 43.3,15 43.3,35 25,45 6.7,35 6.7,15',
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/svg.py#L103"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
 ### Text
 
->  Text (*args, x=0, y=0, font_family=None, font_size=None, fill=None,
->            text_anchor=None, dominant_baseline=None, font_weight=None,
->            font_style=None, text_decoration=None, transform=None,
->            opacity=None, clip=None, mask=None, filter=None,
->            vector_effect=None, pointer_events=None, target_id=None,
->            hx_vals=None, hx_target=None, id=None, cls=None, title=None,
->            style=None, accesskey=None, contenteditable=None, dir=None,
->            draggable=None, enterkeyhint=None, hidden=None, inert=None,
->            inputmode=None, lang=None, popover=None, spellcheck=None,
->            tabindex=None, translate=None, hx_get=None, hx_post=None,
->            hx_put=None, hx_delete=None, hx_patch=None, hx_trigger=None,
->            hx_swap=None, hx_swap_oob=None, hx_include=None, hx_select=None,
->            hx_select_oob=None, hx_indicator=None, hx_push_url=None,
->            hx_confirm=None, hx_disable=None, hx_replace_url=None,
->            hx_disabled_elt=None, hx_ext=None, hx_headers=None,
->            hx_history=None, hx_history_elt=None, hx_inherit=None,
->            hx_params=None, hx_preserve=None, hx_prompt=None, hx_request=None,
->            hx_sync=None, hx_validate=None, hx_on_blur=None, hx_on_change=None,
->            hx_on_contextmenu=None, hx_on_focus=None, hx_on_input=None,
->            hx_on_invalid=None, hx_on_reset=None, hx_on_select=None,
->            hx_on_submit=None, hx_on_keydown=None, hx_on_keypress=None,
->            hx_on_keyup=None, hx_on_click=None, hx_on_dblclick=None,
->            hx_on_mousedown=None, hx_on_mouseenter=None, hx_on_mouseleave=None,
->            hx_on_mousemove=None, hx_on_mouseout=None, hx_on_mouseover=None,
->            hx_on_mouseup=None, hx_on_wheel=None, hx_on__abort=None,
->            hx_on__after_on_load=None, hx_on__after_process_node=None,
->            hx_on__after_request=None, hx_on__after_settle=None,
->            hx_on__after_swap=None, hx_on__before_cleanup_element=None,
->            hx_on__before_on_load=None, hx_on__before_process_node=None,
->            hx_on__before_request=None, hx_on__before_swap=None,
->            hx_on__before_send=None, hx_on__before_transition=None,
->            hx_on__config_request=None, hx_on__confirm=None,
->            hx_on__history_cache_error=None, hx_on__history_cache_miss=None,
->            hx_on__history_cache_miss_error=None,
->            hx_on__history_cache_miss_load=None, hx_on__history_restore=None,
->            hx_on__before_history_save=None, hx_on__load=None,
->            hx_on__no_sse_source_error=None, hx_on__on_load_error=None,
->            hx_on__oob_after_swap=None, hx_on__oob_before_swap=None,
->            hx_on__oob_error_no_target=None, hx_on__prompt=None,
->            hx_on__pushed_into_history=None, hx_on__replaced_in_history=None,
->            hx_on__response_error=None, hx_on__send_abort=None,
->            hx_on__send_error=None, hx_on__sse_error=None,
->            hx_on__sse_open=None, hx_on__swap_error=None,
->            hx_on__target_error=None, hx_on__timeout=None,
->            hx_on__validation_validate=None, hx_on__validation_failed=None,
->            hx_on__validation_halted=None, hx_on__xhr_abort=None,
->            hx_on__xhr_loadend=None, hx_on__xhr_loadstart=None,
->            hx_on__xhr_progress=None)
+``` python
+def Text(
+    *args, x:int=0, y:int=0, font_family:NoneType=None, font_size:NoneType=None, fill:NoneType=None,
+    text_anchor:NoneType=None, dominant_baseline:NoneType=None, font_weight:NoneType=None, font_style:NoneType=None,
+    text_decoration:NoneType=None, transform:NoneType=None, opacity:NoneType=None, clip:NoneType=None,
+    mask:NoneType=None, filter:NoneType=None, vector_effect:NoneType=None, pointer_events:NoneType=None,
+    target_id:NoneType=None, hx_vals:NoneType=None, hx_target:NoneType=None, id:NoneType=None, cls:NoneType=None,
+    title:NoneType=None, style:NoneType=None, accesskey:NoneType=None, contenteditable:NoneType=None,
+    dir:NoneType=None, draggable:NoneType=None, enterkeyhint:NoneType=None, hidden:NoneType=None,
+    inert:NoneType=None, inputmode:NoneType=None, lang:NoneType=None, popover:NoneType=None,
+    spellcheck:NoneType=None, tabindex:NoneType=None, translate:NoneType=None, hx_get:NoneType=None,
+    hx_post:NoneType=None, hx_put:NoneType=None, hx_delete:NoneType=None, hx_patch:NoneType=None,
+    hx_trigger:NoneType=None, hx_swap:NoneType=None, hx_swap_oob:NoneType=None, hx_include:NoneType=None,
+    hx_select:NoneType=None, hx_select_oob:NoneType=None, hx_indicator:NoneType=None, hx_push_url:NoneType=None,
+    hx_confirm:NoneType=None, hx_disable:NoneType=None, hx_replace_url:NoneType=None, hx_disabled_elt:NoneType=None,
+    hx_ext:NoneType=None, hx_headers:NoneType=None, hx_history:NoneType=None, hx_history_elt:NoneType=None,
+    hx_inherit:NoneType=None, hx_params:NoneType=None, hx_preserve:NoneType=None, hx_prompt:NoneType=None,
+    hx_request:NoneType=None, hx_sync:NoneType=None, hx_validate:NoneType=None, hx_action:NoneType=None,
+    hx_method:NoneType=None, hx_config:NoneType=None, hx_ignore:NoneType=None, hx_on_blur:NoneType=None,
+    hx_on_change:NoneType=None, hx_on_contextmenu:NoneType=None, hx_on_focus:NoneType=None,
+    hx_on_input:NoneType=None, hx_on_invalid:NoneType=None, hx_on_reset:NoneType=None, hx_on_select:NoneType=None,
+    hx_on_submit:NoneType=None, hx_on_keydown:NoneType=None, hx_on_keypress:NoneType=None, hx_on_keyup:NoneType=None,
+    hx_on_click:NoneType=None, hx_on_dblclick:NoneType=None, hx_on_mousedown:NoneType=None,
+    hx_on_mouseenter:NoneType=None, hx_on_mouseleave:NoneType=None, hx_on_mousemove:NoneType=None,
+    hx_on_mouseout:NoneType=None, hx_on_mouseover:NoneType=None, hx_on_mouseup:NoneType=None,
+    hx_on_wheel:NoneType=None, hx_on__abort:NoneType=None, hx_on__after_on_load:NoneType=None,
+    hx_on__after_process_node:NoneType=None, hx_on__after_request:NoneType=None, hx_on__after_settle:NoneType=None,
+    hx_on__after_swap:NoneType=None, hx_on__before_cleanup_element:NoneType=None,
+    hx_on__before_on_load:NoneType=None, hx_on__before_process_node:NoneType=None,
+    hx_on__before_request:NoneType=None, hx_on__before_swap:NoneType=None, hx_on__before_send:NoneType=None,
+    hx_on__before_transition:NoneType=None, hx_on__config_request:NoneType=None, hx_on__confirm:NoneType=None,
+    hx_on__history_cache_error:NoneType=None, hx_on__history_cache_miss:NoneType=None,
+    hx_on__history_cache_miss_error:NoneType=None, hx_on__history_cache_miss_load:NoneType=None,
+    hx_on__history_restore:NoneType=None, hx_on__before_history_save:NoneType=None, hx_on__load:NoneType=None,
+    hx_on__no_sse_source_error:NoneType=None, hx_on__on_load_error:NoneType=None,
+    hx_on__oob_after_swap:NoneType=None, hx_on__oob_before_swap:NoneType=None,
+    hx_on__oob_error_no_target:NoneType=None, hx_on__prompt:NoneType=None, hx_on__pushed_into_history:NoneType=None,
+    hx_on__replaced_in_history:NoneType=None, hx_on__response_error:NoneType=None, hx_on__send_abort:NoneType=None,
+    hx_on__send_error:NoneType=None, hx_on__sse_error:NoneType=None, hx_on__sse_open:NoneType=None,
+    hx_on__swap_error:NoneType=None, hx_on__target_error:NoneType=None, hx_on__timeout:NoneType=None,
+    hx_on__validation_validate:NoneType=None, hx_on__validation_failed:NoneType=None,
+    hx_on__validation_halted:NoneType=None, hx_on__xhr_abort:NoneType=None, hx_on__xhr_loadend:NoneType=None,
+    hx_on__xhr_loadstart:NoneType=None, hx_on__xhr_progress:NoneType=None, hx_on__after_init:NoneType=None,
+    hx_on__before_cleanup:NoneType=None, hx_on__before_history_update:NoneType=None,
+    hx_on__before_init:NoneType=None, hx_on__before_process:NoneType=None,
+    hx_on__before_history_restore:NoneType=None, hx_on__after_history_push:NoneType=None,
+    hx_on__after_history_replace:NoneType=None, hx_on__error:NoneType=None
+):
+```
 
 *A standard SVG `text` element*
 
@@ -619,76 +594,71 @@ interface for constructing them:
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/svg.py#L111"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
 ### PathFT
 
->  PathFT (tag:str, cs:tuple, attrs:dict=None, void_=False, **kwargs)
+``` python
+def PathFT(
+    tag:str, cs:tuple, attrs:dict=None, void_:bool=False, **kwargs
+):
+```
 
 *A ‘Fast Tag’ structure, containing `tag`,`children`,and `attrs`*
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/svg.py#L159"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
 ### Path
 
->  Path (d='', fill=None, stroke=None, stroke_width=None, transform=None,
->            opacity=None, clip=None, mask=None, filter=None,
->            vector_effect=None, pointer_events=None, target_id=None,
->            hx_vals=None, hx_target=None, id=None, cls=None, title=None,
->            style=None, accesskey=None, contenteditable=None, dir=None,
->            draggable=None, enterkeyhint=None, hidden=None, inert=None,
->            inputmode=None, lang=None, popover=None, spellcheck=None,
->            tabindex=None, translate=None, hx_get=None, hx_post=None,
->            hx_put=None, hx_delete=None, hx_patch=None, hx_trigger=None,
->            hx_swap=None, hx_swap_oob=None, hx_include=None, hx_select=None,
->            hx_select_oob=None, hx_indicator=None, hx_push_url=None,
->            hx_confirm=None, hx_disable=None, hx_replace_url=None,
->            hx_disabled_elt=None, hx_ext=None, hx_headers=None,
->            hx_history=None, hx_history_elt=None, hx_inherit=None,
->            hx_params=None, hx_preserve=None, hx_prompt=None, hx_request=None,
->            hx_sync=None, hx_validate=None, hx_on_blur=None, hx_on_change=None,
->            hx_on_contextmenu=None, hx_on_focus=None, hx_on_input=None,
->            hx_on_invalid=None, hx_on_reset=None, hx_on_select=None,
->            hx_on_submit=None, hx_on_keydown=None, hx_on_keypress=None,
->            hx_on_keyup=None, hx_on_click=None, hx_on_dblclick=None,
->            hx_on_mousedown=None, hx_on_mouseenter=None, hx_on_mouseleave=None,
->            hx_on_mousemove=None, hx_on_mouseout=None, hx_on_mouseover=None,
->            hx_on_mouseup=None, hx_on_wheel=None, hx_on__abort=None,
->            hx_on__after_on_load=None, hx_on__after_process_node=None,
->            hx_on__after_request=None, hx_on__after_settle=None,
->            hx_on__after_swap=None, hx_on__before_cleanup_element=None,
->            hx_on__before_on_load=None, hx_on__before_process_node=None,
->            hx_on__before_request=None, hx_on__before_swap=None,
->            hx_on__before_send=None, hx_on__before_transition=None,
->            hx_on__config_request=None, hx_on__confirm=None,
->            hx_on__history_cache_error=None, hx_on__history_cache_miss=None,
->            hx_on__history_cache_miss_error=None,
->            hx_on__history_cache_miss_load=None, hx_on__history_restore=None,
->            hx_on__before_history_save=None, hx_on__load=None,
->            hx_on__no_sse_source_error=None, hx_on__on_load_error=None,
->            hx_on__oob_after_swap=None, hx_on__oob_before_swap=None,
->            hx_on__oob_error_no_target=None, hx_on__prompt=None,
->            hx_on__pushed_into_history=None, hx_on__replaced_in_history=None,
->            hx_on__response_error=None, hx_on__send_abort=None,
->            hx_on__send_error=None, hx_on__sse_error=None,
->            hx_on__sse_open=None, hx_on__swap_error=None,
->            hx_on__target_error=None, hx_on__timeout=None,
->            hx_on__validation_validate=None, hx_on__validation_failed=None,
->            hx_on__validation_halted=None, hx_on__xhr_abort=None,
->            hx_on__xhr_loadend=None, hx_on__xhr_loadstart=None,
->            hx_on__xhr_progress=None)
+``` python
+def Path(
+    d:str='', fill:NoneType=None, stroke:NoneType=None, stroke_width:NoneType=None, *, transform:NoneType=None,
+    opacity:NoneType=None, clip:NoneType=None, mask:NoneType=None, filter:NoneType=None, vector_effect:NoneType=None,
+    pointer_events:NoneType=None, target_id:NoneType=None, hx_vals:NoneType=None, hx_target:NoneType=None,
+    id:NoneType=None, cls:NoneType=None, title:NoneType=None, style:NoneType=None, accesskey:NoneType=None,
+    contenteditable:NoneType=None, dir:NoneType=None, draggable:NoneType=None, enterkeyhint:NoneType=None,
+    hidden:NoneType=None, inert:NoneType=None, inputmode:NoneType=None, lang:NoneType=None, popover:NoneType=None,
+    spellcheck:NoneType=None, tabindex:NoneType=None, translate:NoneType=None, hx_get:NoneType=None,
+    hx_post:NoneType=None, hx_put:NoneType=None, hx_delete:NoneType=None, hx_patch:NoneType=None,
+    hx_trigger:NoneType=None, hx_swap:NoneType=None, hx_swap_oob:NoneType=None, hx_include:NoneType=None,
+    hx_select:NoneType=None, hx_select_oob:NoneType=None, hx_indicator:NoneType=None, hx_push_url:NoneType=None,
+    hx_confirm:NoneType=None, hx_disable:NoneType=None, hx_replace_url:NoneType=None, hx_disabled_elt:NoneType=None,
+    hx_ext:NoneType=None, hx_headers:NoneType=None, hx_history:NoneType=None, hx_history_elt:NoneType=None,
+    hx_inherit:NoneType=None, hx_params:NoneType=None, hx_preserve:NoneType=None, hx_prompt:NoneType=None,
+    hx_request:NoneType=None, hx_sync:NoneType=None, hx_validate:NoneType=None, hx_action:NoneType=None,
+    hx_method:NoneType=None, hx_config:NoneType=None, hx_ignore:NoneType=None, hx_on_blur:NoneType=None,
+    hx_on_change:NoneType=None, hx_on_contextmenu:NoneType=None, hx_on_focus:NoneType=None,
+    hx_on_input:NoneType=None, hx_on_invalid:NoneType=None, hx_on_reset:NoneType=None, hx_on_select:NoneType=None,
+    hx_on_submit:NoneType=None, hx_on_keydown:NoneType=None, hx_on_keypress:NoneType=None, hx_on_keyup:NoneType=None,
+    hx_on_click:NoneType=None, hx_on_dblclick:NoneType=None, hx_on_mousedown:NoneType=None,
+    hx_on_mouseenter:NoneType=None, hx_on_mouseleave:NoneType=None, hx_on_mousemove:NoneType=None,
+    hx_on_mouseout:NoneType=None, hx_on_mouseover:NoneType=None, hx_on_mouseup:NoneType=None,
+    hx_on_wheel:NoneType=None, hx_on__abort:NoneType=None, hx_on__after_on_load:NoneType=None,
+    hx_on__after_process_node:NoneType=None, hx_on__after_request:NoneType=None, hx_on__after_settle:NoneType=None,
+    hx_on__after_swap:NoneType=None, hx_on__before_cleanup_element:NoneType=None,
+    hx_on__before_on_load:NoneType=None, hx_on__before_process_node:NoneType=None,
+    hx_on__before_request:NoneType=None, hx_on__before_swap:NoneType=None, hx_on__before_send:NoneType=None,
+    hx_on__before_transition:NoneType=None, hx_on__config_request:NoneType=None, hx_on__confirm:NoneType=None,
+    hx_on__history_cache_error:NoneType=None, hx_on__history_cache_miss:NoneType=None,
+    hx_on__history_cache_miss_error:NoneType=None, hx_on__history_cache_miss_load:NoneType=None,
+    hx_on__history_restore:NoneType=None, hx_on__before_history_save:NoneType=None, hx_on__load:NoneType=None,
+    hx_on__no_sse_source_error:NoneType=None, hx_on__on_load_error:NoneType=None,
+    hx_on__oob_after_swap:NoneType=None, hx_on__oob_before_swap:NoneType=None,
+    hx_on__oob_error_no_target:NoneType=None, hx_on__prompt:NoneType=None, hx_on__pushed_into_history:NoneType=None,
+    hx_on__replaced_in_history:NoneType=None, hx_on__response_error:NoneType=None, hx_on__send_abort:NoneType=None,
+    hx_on__send_error:NoneType=None, hx_on__sse_error:NoneType=None, hx_on__sse_open:NoneType=None,
+    hx_on__swap_error:NoneType=None, hx_on__target_error:NoneType=None, hx_on__timeout:NoneType=None,
+    hx_on__validation_validate:NoneType=None, hx_on__validation_failed:NoneType=None,
+    hx_on__validation_halted:NoneType=None, hx_on__xhr_abort:NoneType=None, hx_on__xhr_loadend:NoneType=None,
+    hx_on__xhr_loadstart:NoneType=None, hx_on__xhr_progress:NoneType=None, hx_on__after_init:NoneType=None,
+    hx_on__before_cleanup:NoneType=None, hx_on__before_history_update:NoneType=None,
+    hx_on__before_init:NoneType=None, hx_on__before_process:NoneType=None,
+    hx_on__before_history_restore:NoneType=None, hx_on__after_history_push:NoneType=None,
+    hx_on__after_history_replace:NoneType=None, hx_on__error:NoneType=None
+):
+```
 
 *Create a standard `path` SVG element. This is a special object*
 
-Let’s create a square shape, but using
-[`Path`](https://www.fastht.ml/docs/api/svg.html#path) instead of
-[`Rect`](https://www.fastht.ml/docs/api/svg.html#rect):
+Let’s create a square shape, but using `Path` instead of `Rect`:
 
 - M(10, 10): Move to starting point (10, 10)
 - L(40, 10): Line to (40, 10) - top edge
@@ -752,121 +722,119 @@ demo(Path(d='M25 45 C25 45 10 35 10 25 A15 15 0 1 1 40 25 C40 35 25 45 25 45 Z')
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/svg.py#L117"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
 ### PathFT.M
 
->  PathFT.M (x, y)
+``` python
+def M(
+    x, y
+):
+```
 
 *Move to.*
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/svg.py#L121"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
 ### PathFT.L
 
->  PathFT.L (x, y)
+``` python
+def L(
+    x, y
+):
+```
 
 *Line to.*
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/svg.py#L125"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
 ### PathFT.H
 
->  PathFT.H (x)
+``` python
+def H(
+    x
+):
+```
 
 *Horizontal line to.*
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/svg.py#L129"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
 ### PathFT.V
 
->  PathFT.V (y)
+``` python
+def V(
+    y
+):
+```
 
 *Vertical line to.*
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/svg.py#L133"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
 ### PathFT.Z
 
->  PathFT.Z ()
+``` python
+def Z():
+```
 
 *Close path.*
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/svg.py#L137"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
 ### PathFT.C
 
->  PathFT.C (x1, y1, x2, y2, x, y)
+``` python
+def C(
+    x1, y1, x2, y2, x, y
+):
+```
 
 *Cubic Bézier curve.*
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/svg.py#L141"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
 ### PathFT.S
 
->  PathFT.S (x2, y2, x, y)
+``` python
+def S(
+    x2, y2, x, y
+):
+```
 
 *Smooth cubic Bézier curve.*
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/svg.py#L145"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
 ### PathFT.Q
 
->  PathFT.Q (x1, y1, x, y)
+``` python
+def Q(
+    x1, y1, x, y
+):
+```
 
 *Quadratic Bézier curve.*
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/svg.py#L149"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
 ### PathFT.T
 
->  PathFT.T (x, y)
+``` python
+def T(
+    x, y
+):
+```
 
 *Smooth quadratic Bézier curve.*
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/svg.py#L153"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
 ### PathFT.A
 
->  PathFT.A (rx, ry, x_axis_rotation, large_arc_flag, sweep_flag, x, y)
+``` python
+def A(
+    rx, ry, x_axis_rotation, large_arc_flag, sweep_flag, x, y
+):
+```
 
 *Elliptical Arc.*
 
@@ -874,41 +842,36 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/svg.py#L167"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
 ### SvgOob
 
->  SvgOob (*args, **kwargs)
+``` python
+def SvgOob(
+    *args, **kwargs
+):
+```
 
 *Wraps an SVG shape as required for an HTMX OOB swap*
 
 When returning an SVG shape out-of-band (OOB) in HTMX, you need to wrap
-it with [`SvgOob`](https://www.fastht.ml/docs/api/svg.html#svgoob) to
-have it appear correctly.
-([`SvgOob`](https://www.fastht.ml/docs/api/svg.html#svgoob) is just a
+it with `SvgOob` to have it appear correctly. (`SvgOob` is just a
 shortcut for `Template(Svg(...))`, which is the trick that makes SVG OOB
 swaps work.)
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/svg.py#L172"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
 ### SvgInb
 
->  SvgInb (*args, **kwargs)
+``` python
+def SvgInb(
+    *args, **kwargs
+):
+```
 
 *Wraps an SVG shape as required for an HTMX inband swap*
 
 When returning an SVG shape in-band in HTMX, either have the calling
 element include `hx_select='svg>*'`, or `**svg_inb` (which are two ways
-of saying the same thing), or wrap the response with
-[`SvgInb`](https://www.fastht.ml/docs/api/svg.html#svginb) to have it
-appear correctly.
-([`SvgInb`](https://www.fastht.ml/docs/api/svg.html#svginb) is just a
-shortcut for the tuple
+of saying the same thing), or wrap the response with `SvgInb` to have it
+appear correctly. (`SvgInb` is just a shortcut for the tuple
 `(Svg(...), HtmxResponseHeaders(hx_reselect='svg>*'))`, which is the
 trick that makes SVG in-band swaps work.)

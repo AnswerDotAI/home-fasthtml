@@ -20,8 +20,8 @@ JSON service. FastHTML is mainly for making HTML web apps, not APIs).
 </div>
 
 Note that you need to include the types of your parameters, so that
-[`FastHTML`](https://www.fastht.ml/docs/api/core.html#fasthtml) knows
-what to pass to your function. Here, we’re just expecting a string:
+`FastHTML` knows what to pass to your function. Here, we’re just
+expecting a string:
 
 ``` python
 from fasthtml.common import *
@@ -169,8 +169,8 @@ Sometimes a FastHTML project can grow so weildy that putting all the
 routes into `main.py` becomes unweildy. Or, we install a FastHTML- or
 Starlette-based package that requires us to add routes.
 
-First let’s create a `books.py` module, that represents all the
-user-related views:
+First let’s create a `books.py` module containing the views for
+displaying books:
 
 ``` python
 # books.py

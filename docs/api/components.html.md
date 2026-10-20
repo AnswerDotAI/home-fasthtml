@@ -30,17 +30,15 @@ Elsewhere, they are represented as their underlying data structure:
 print(repr(sentence))
 ```
 
-    p((strong(('FastHTML is ', i(('Fast',),{})),{}),),{'id': 'sentence_id'})
+    <p id="sentence_id"><strong>FastHTML is <i>Fast</i></strong></p>
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/components.py#L37"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
 ### FT.\_\_str\_\_
 
->  FT.__str__ ()
+``` python
+def __str__():
+```
 
 *Return str(self).*
 
@@ -55,13 +53,13 @@ f'hx_target=#{sentence}'
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/components.py#L41"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
 ### FT.\_\_radd\_\_
 
->  FT.__radd__ (b)
+``` python
+def __radd__(
+    b
+):
+```
 
 ``` python
 'hx_target=#' + sentence
@@ -71,13 +69,13 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/components.py#L45"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
 ### FT.\_\_add\_\_
 
->  FT.__add__ (b)
+``` python
+def __add__(
+    b
+):
+```
 
 ``` python
 sentence + '...'
@@ -87,26 +85,30 @@ sentence + '...'
 
 ### fh_html and fh_hx
 
-------------------------------------------------------------------------
+``` python
+test_eq(len(hx_attrs), len(set(hx_attrs)))
+```
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/components.py#L74"
-target="_blank" style="float:right; font-size:smaller">source</a>
+------------------------------------------------------------------------
 
 ### attrmap_x
 
->  attrmap_x (o)
+``` python
+def attrmap_x(
+    o
+):
+```
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/components.py#L86"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
 ### ft_html
 
->  ft_html (tag:str, *c, id=None, cls=None, title=None, style=None,
->               attrmap=None, valmap=None, ft_cls=None, **kwargs)
+``` python
+def ft_html(
+    tag:str, *c, id:NoneType=None, cls:NoneType=None, title:NoneType=None, style:NoneType=None,
+    attrmap:NoneType=None, valmap:NoneType=None, ft_cls:NoneType=None, **kwargs
+):
+```
 
 ``` python
 ft_html('a', **{'@click.away':1})
@@ -146,56 +148,53 @@ ft_html('a', id=c)
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/components.py#L102"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
 ### ft_hx
 
->  ft_hx (tag:str, *c, target_id=None, hx_vals=None, hx_target=None,
->             id=None, cls=None, title=None, style=None, accesskey=None,
->             contenteditable=None, dir=None, draggable=None, enterkeyhint=None,
->             hidden=None, inert=None, inputmode=None, lang=None, popover=None,
->             spellcheck=None, tabindex=None, translate=None, hx_get=None,
->             hx_post=None, hx_put=None, hx_delete=None, hx_patch=None,
->             hx_trigger=None, hx_swap=None, hx_swap_oob=None, hx_include=None,
->             hx_select=None, hx_select_oob=None, hx_indicator=None,
->             hx_push_url=None, hx_confirm=None, hx_disable=None,
->             hx_replace_url=None, hx_disabled_elt=None, hx_ext=None,
->             hx_headers=None, hx_history=None, hx_history_elt=None,
->             hx_inherit=None, hx_params=None, hx_preserve=None, hx_prompt=None,
->             hx_request=None, hx_sync=None, hx_validate=None, hx_on_blur=None,
->             hx_on_change=None, hx_on_contextmenu=None, hx_on_focus=None,
->             hx_on_input=None, hx_on_invalid=None, hx_on_reset=None,
->             hx_on_select=None, hx_on_submit=None, hx_on_keydown=None,
->             hx_on_keypress=None, hx_on_keyup=None, hx_on_click=None,
->             hx_on_dblclick=None, hx_on_mousedown=None, hx_on_mouseenter=None,
->             hx_on_mouseleave=None, hx_on_mousemove=None, hx_on_mouseout=None,
->             hx_on_mouseover=None, hx_on_mouseup=None, hx_on_wheel=None,
->             hx_on__abort=None, hx_on__after_on_load=None,
->             hx_on__after_process_node=None, hx_on__after_request=None,
->             hx_on__after_settle=None, hx_on__after_swap=None,
->             hx_on__before_cleanup_element=None, hx_on__before_on_load=None,
->             hx_on__before_process_node=None, hx_on__before_request=None,
->             hx_on__before_swap=None, hx_on__before_send=None,
->             hx_on__before_transition=None, hx_on__config_request=None,
->             hx_on__confirm=None, hx_on__history_cache_error=None,
->             hx_on__history_cache_miss=None,
->             hx_on__history_cache_miss_error=None,
->             hx_on__history_cache_miss_load=None, hx_on__history_restore=None,
->             hx_on__before_history_save=None, hx_on__load=None,
->             hx_on__no_sse_source_error=None, hx_on__on_load_error=None,
->             hx_on__oob_after_swap=None, hx_on__oob_before_swap=None,
->             hx_on__oob_error_no_target=None, hx_on__prompt=None,
->             hx_on__pushed_into_history=None, hx_on__replaced_in_history=None,
->             hx_on__response_error=None, hx_on__send_abort=None,
->             hx_on__send_error=None, hx_on__sse_error=None,
->             hx_on__sse_open=None, hx_on__swap_error=None,
->             hx_on__target_error=None, hx_on__timeout=None,
->             hx_on__validation_validate=None, hx_on__validation_failed=None,
->             hx_on__validation_halted=None, hx_on__xhr_abort=None,
->             hx_on__xhr_loadend=None, hx_on__xhr_loadstart=None,
->             hx_on__xhr_progress=None, **kwargs)
+``` python
+def ft_hx(
+    tag:str, *c, target_id:NoneType=None, hx_vals:NoneType=None, hx_target:NoneType=None, id:NoneType=None,
+    cls:NoneType=None, title:NoneType=None, style:NoneType=None, accesskey:NoneType=None,
+    contenteditable:NoneType=None, dir:NoneType=None, draggable:NoneType=None, enterkeyhint:NoneType=None,
+    hidden:NoneType=None, inert:NoneType=None, inputmode:NoneType=None, lang:NoneType=None, popover:NoneType=None,
+    spellcheck:NoneType=None, tabindex:NoneType=None, translate:NoneType=None, hx_get:NoneType=None,
+    hx_post:NoneType=None, hx_put:NoneType=None, hx_delete:NoneType=None, hx_patch:NoneType=None,
+    hx_trigger:NoneType=None, hx_swap:NoneType=None, hx_swap_oob:NoneType=None, hx_include:NoneType=None,
+    hx_select:NoneType=None, hx_select_oob:NoneType=None, hx_indicator:NoneType=None, hx_push_url:NoneType=None,
+    hx_confirm:NoneType=None, hx_disable:NoneType=None, hx_replace_url:NoneType=None, hx_disabled_elt:NoneType=None,
+    hx_ext:NoneType=None, hx_headers:NoneType=None, hx_history:NoneType=None, hx_history_elt:NoneType=None,
+    hx_inherit:NoneType=None, hx_params:NoneType=None, hx_preserve:NoneType=None, hx_prompt:NoneType=None,
+    hx_request:NoneType=None, hx_sync:NoneType=None, hx_validate:NoneType=None, hx_action:NoneType=None,
+    hx_method:NoneType=None, hx_config:NoneType=None, hx_ignore:NoneType=None, hx_on_blur:NoneType=None,
+    hx_on_change:NoneType=None, hx_on_contextmenu:NoneType=None, hx_on_focus:NoneType=None,
+    hx_on_input:NoneType=None, hx_on_invalid:NoneType=None, hx_on_reset:NoneType=None, hx_on_select:NoneType=None,
+    hx_on_submit:NoneType=None, hx_on_keydown:NoneType=None, hx_on_keypress:NoneType=None, hx_on_keyup:NoneType=None,
+    hx_on_click:NoneType=None, hx_on_dblclick:NoneType=None, hx_on_mousedown:NoneType=None,
+    hx_on_mouseenter:NoneType=None, hx_on_mouseleave:NoneType=None, hx_on_mousemove:NoneType=None,
+    hx_on_mouseout:NoneType=None, hx_on_mouseover:NoneType=None, hx_on_mouseup:NoneType=None,
+    hx_on_wheel:NoneType=None, hx_on__abort:NoneType=None, hx_on__after_on_load:NoneType=None,
+    hx_on__after_process_node:NoneType=None, hx_on__after_request:NoneType=None, hx_on__after_settle:NoneType=None,
+    hx_on__after_swap:NoneType=None, hx_on__before_cleanup_element:NoneType=None,
+    hx_on__before_on_load:NoneType=None, hx_on__before_process_node:NoneType=None,
+    hx_on__before_request:NoneType=None, hx_on__before_swap:NoneType=None, hx_on__before_send:NoneType=None,
+    hx_on__before_transition:NoneType=None, hx_on__config_request:NoneType=None, hx_on__confirm:NoneType=None,
+    hx_on__history_cache_error:NoneType=None, hx_on__history_cache_miss:NoneType=None,
+    hx_on__history_cache_miss_error:NoneType=None, hx_on__history_cache_miss_load:NoneType=None,
+    hx_on__history_restore:NoneType=None, hx_on__before_history_save:NoneType=None, hx_on__load:NoneType=None,
+    hx_on__no_sse_source_error:NoneType=None, hx_on__on_load_error:NoneType=None,
+    hx_on__oob_after_swap:NoneType=None, hx_on__oob_before_swap:NoneType=None,
+    hx_on__oob_error_no_target:NoneType=None, hx_on__prompt:NoneType=None, hx_on__pushed_into_history:NoneType=None,
+    hx_on__replaced_in_history:NoneType=None, hx_on__response_error:NoneType=None, hx_on__send_abort:NoneType=None,
+    hx_on__send_error:NoneType=None, hx_on__sse_error:NoneType=None, hx_on__sse_open:NoneType=None,
+    hx_on__swap_error:NoneType=None, hx_on__target_error:NoneType=None, hx_on__timeout:NoneType=None,
+    hx_on__validation_validate:NoneType=None, hx_on__validation_failed:NoneType=None,
+    hx_on__validation_halted:NoneType=None, hx_on__xhr_abort:NoneType=None, hx_on__xhr_loadend:NoneType=None,
+    hx_on__xhr_loadstart:NoneType=None, hx_on__xhr_progress:NoneType=None, hx_on__after_init:NoneType=None,
+    hx_on__before_cleanup:NoneType=None, hx_on__before_history_update:NoneType=None,
+    hx_on__before_init:NoneType=None, hx_on__before_process:NoneType=None,
+    hx_on__before_history_restore:NoneType=None, hx_on__after_history_push:NoneType=None,
+    hx_on__after_history_replace:NoneType=None, hx_on__error:NoneType=None, **kwargs
+):
+```
 
 ``` python
 ft_hx('a', hx_vals={'a':1})
@@ -227,13 +226,13 @@ Form(Button(target_id='foo', id='btn'),
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/components.py#L123"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
 ### File
 
->  File (fname)
+``` python
+def File(
+    fname
+):
+```
 
 *Use the unescaped text in file `fname` directly*
 
@@ -266,19 +265,18 @@ a
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/components.py#L128"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
 ### show
 
->  show (ft, *rest, iframe=False, height='auto', style=None)
+``` python
+def show(
+    ft, *rest, iframe:bool=False, height:str='auto', style:NoneType=None
+):
+```
 
 *Renders FT Components into HTML within a Jupyter notebook.*
 
-When placed within the
-[`show()`](https://www.fastht.ml/docs/api/components.html#show)
-function, this will render the HTML in Jupyter notebooks.
+When placed within the `show()` function, this will render the HTML in
+Jupyter notebooks.
 
 ``` python
 show(sentence)
@@ -314,19 +312,27 @@ show(fullpage, height=100, iframe=True)
     &lt;p&gt;Paragraph&lt;/p&gt;
   &lt;/body&gt;
 &lt;/html&gt;
-' width="100%" height="100" style="border: none; "></iframe>
+' frameborder="0" width="100%" height="100" style="border: none; "></iframe>
+
+Plain strings also work:
+
+``` python
+show("<p>Hi <i>everyone</i></p>")
+```
+
+<p>Hi <i>everyone</i></p>
 
 ### fill_form and find_inputs
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/components.py#L171"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
 ### fill_form
 
->  fill_form (form:fastcore.xml.FT, obj)
+``` python
+def fill_form(
+    form:fastcore.xml.FT, obj
+)->fastcore.xml.FT:
+```
 
 *Fills named items in `form` using attributes in `obj`*
 
@@ -396,13 +402,13 @@ c</label></fieldset></form>
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/components.py#L178"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
 ### fill_dataclass
 
->  fill_dataclass (src, dest)
+``` python
+def fill_dataclass(
+    src, dest
+):
+```
 
 *Modifies dataclass in-place and returns it*
 
@@ -416,13 +422,13 @@ nt
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/components.py#L184"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
 ### find_inputs
 
->  find_inputs (e, tags='input', **kw)
+``` python
+def find_inputs(
+    e, tags:str='input', **kw
+):
+```
 
 *Recursively find all elements in `e` with `tags` and attrs matching
 `kw`*
@@ -433,7 +439,7 @@ test_eq(len(inps), 1)
 inps
 ```
 
-    [input((),{'value': 'Profit', 'id': 'title', 'class': 'char', 'name': 'title'})]
+    [<input value="Profit" id="title" class="char" name="title">]
 
 You can also use lxml for more sophisticated searching:
 
@@ -442,27 +448,28 @@ elem = lx.fromstring(to_xml(form))
 test_eq(elem.xpath("//input[@id='title']/@value"), ['Profit'])
 ```
 
-------------------------------------------------------------------------
+Undefined exports like `MyTag` create a matching kebab-case tag
+(<my-tag>) via `ft_hx`. The logic lives in
+[`fastcore.xml.mk_getattr`](https://fastcore.fast.ai/xml.html#mk_getattr);
+here we just supply `ft_hx` as the tag factory so custom tags get htmx
+attribute handling.
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/components.py#L198"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
-### **getattr**
-
->  __getattr__ (tag)
-
-### html2ft
-
-------------------------------------------------------------------------
-
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/components.py#L206"
-target="_blank" style="float:right; font-size:smaller">source</a>
+``` python
+from fasthtml.components import BarBaz
+test_eq(to_xml(BarBaz(hx_get='/foo')), '<bar-baz hx-get="/foo"></bar-baz>')
+```
 
 ### html2ft
 
->  html2ft (html, attr1st=False)
+------------------------------------------------------------------------
+
+### html2ft
+
+``` python
+def html2ft(
+    html, attr1st:bool=False
+):
+```
 
 *Convert HTML to an `ft` expression*
 
@@ -518,13 +525,13 @@ Form(
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/components.py#L246"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
 ### sse_message
 
->  sse_message (elm, event='message')
+``` python
+def sse_message(
+    elm, event:str='message'
+):
+```
 
 *Convert element `elm` into a format suitable for SSE streaming*
 
@@ -541,10 +548,15 @@ print(sse_message(Div(P('hi'), P('there'))))
 ## Tests
 
 ``` python
+from bs4 import BeautifulSoup, Comment
+```
+
+``` python
 test_html2ft('<input value="Profit" name="title" id="title" class="char">', attr1st=True)
 test_html2ft('<input value="Profit" name="title" id="title" class="char">')
 test_html2ft('<div id="foo"></div>')
 test_html2ft('<div id="foo">hi</div>')
+test_html2ft('<div>Howdy <a href="https://answer.ai">answer</a> how are you?</div>')
 test_html2ft('<div x-show="open" x-transition:enter="transition duration-300" x-transition:enter-start="opacity-0 scale-90">Hello 👋</div>')
 test_html2ft('<div x-transition:enter.scale.80 x-transition:leave.scale.90>hello</div>')
 ```
@@ -558,5 +570,3 @@ assert html2ft("""
 assert html2ft('<div x-transition:enter.scale.80 x-transition:leave.scale.90>hello</div>') == "Div('hello', **{'x-transition:enter.scale.80': True, 'x-transition:leave.scale.90': True})"
 assert html2ft("<img alt=' ' />") == "Img(alt=' ')"
 ```
-
-“## Export -

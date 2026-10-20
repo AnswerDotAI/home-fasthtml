@@ -5,49 +5,23 @@
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/cli.py#L15"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
 ### railway_link
 
->  railway_link ()
+``` python
+def railway_link():
+```
 
 *Link the current directory to the current project’s Railway service*
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/cli.py#L33"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
 ### railway_deploy
 
->  railway_deploy (name:str, mount:<function bool_arg>=True)
+``` python
+def railway_deploy(
+    name:str, # The project name to deploy
+    mount:<function bool_arg at 0x10a5491c0>=True, # Create a mounted volume at /app/data?
+):
+```
 
 *Deploy a FastHTML app to Railway*
-
-<table>
-<thead>
-<tr>
-<th></th>
-<th><strong>Type</strong></th>
-<th><strong>Default</strong></th>
-<th><strong>Details</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>name</td>
-<td>str</td>
-<td></td>
-<td>The project name to deploy</td>
-</tr>
-<tr>
-<td>mount</td>
-<td>bool_arg</td>
-<td>True</td>
-<td>Create a mounted volume at /app/data?</td>
-</tr>
-</tbody>
-</table>

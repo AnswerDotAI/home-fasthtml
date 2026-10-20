@@ -18,6 +18,8 @@
 ## fasthtml.components
 
 > `ft_html` and `ft_hx` functions to add some conveniences to `ft`, along with a full set of basic HTML components, and functions to work with forms and `FT` conversion
+> 
+> Docs: https://www.fastht.ml/docs/api/components.html.md
 
 - `def File(fname)`
     Use the unescaped text in file `fname` directly
@@ -42,7 +44,49 @@
 
 ## fasthtml.core
 
-> The `FastHTML` subclass of `Starlette`, along with the `RouterX` and `RouteX` classes it automatically uses.
+> The `FastHTML` subclass of `Starlette`.
+> 
+> Create an app with `app = FastHTML()`. The `@rt` decorator adds routes (`rt = app.route`), inferring what it can from the function:
+> 
+>     @rt
+>     def index(): ...      # GET,POST /
+>     @rt
+>     def foo(): ...        # GET,POST /foo
+>     @rt('/hi')
+>     def get(): ...        # GET /hi (function named after a verb handles just that verb)
+>     @rt('/cards/{id}')
+>     class Cards: ...      # class route group: each verb-named method (get, patch, ...) becomes a handler
+> 
+> The decorated function doubles as a URL builder, so links never need hardcoded paths:
+> 
+>     A('More', href=foo.to(a=1))   # <a href="/foo?a=1"> `.to()` fills path params; the rest become query params.
+>     Div('...', hx_get=foo)        # route functions work directly as htmx attr values: hx-get="/foo"
+> 
+> Handlers return FT trees (from `fastcore.xml`), rendered as HTML automatically: a full page for regular requests, a bare fragment for HTMX requests. In a full page, top-level `Title`, `Meta`, `Link`, and `Style` items go in `<head>`; the rest goes in `<body>`. Strings are sent as HTML, dicts as JSON, and a Starlette `Response` is sent untouched. A return tuple may mix content with special items: any `HttpHeader` (e.g. from `cookie()` or `HtmxResponseHeaders()`) becomes a response header, any `BackgroundTask` runs after the response is sent, and the rest renders as content. `Redirect` picks the right redirect mechanism for HTMX vs regular requests, and `FtResponse` wraps FT content when you need the status code or headers.
+> 
+> Handler parameters are filled from the request: each is looked up in path, cookie, header (snake_case names match Hyphen-Case headers), query, then form data, and cast by calling its annotation on the value. Hyphens in form/query names match underscores in handler parameters and typed body fields. Exact names take precedence within each source. Dictionary and request access retain the original keys. `bool`, `int`, and `date` get smart string parsing; `UploadFile` passes through. Repeated params take the last value unless annotated `list[T]`, which collects them all. A param with no annotation and no special name is ignored, with a warning. A dataclass, TypedDict, namedtuple, or any annotated class collects the whole form body; a `__from_request__` classmethod customizes construction. A missing required param is a 400, a failed cast a 404. These special names need no annotation:
+> 
+>     req, ws   the Request / WebSocket connection
+>     sess      session dict
+>     app       the FastHTML app
+>     state     app.state
+>     scope     ASGI scope
+>     auth      scope['auth']
+>     htmx      HtmxHeaders (parsed HX-* request headers)
+>     body      raw body text
+>     data      parsed form data as a dict
+>     api       ApiReturn (API vs browser dual responses)
+>     send      websocket send function
+>     hdrs,ftrs the per-request copies of the app's `hdrs`/`ftrs` (head and footer content)
+>     htmlkw    the per-request copy of the app's `<html>` attrs
+>     bodykw    the per-request copy of the app's `<body>` attrs
+>     resp      the handler's response (injected into `after` functions)
+> 
+> `before`/`after` functions (app-level, with `Beforeware` skip patterns, or per-route `before=`) get the same param injection as handlers. A `before` returning a value responds with it and skips the handler (the usual auth-guard pattern).
+> 
+> See the [Handling Handlers tutorial](https://www.fastht.ml/docs/ref/handlers.html.md) for worked examples of the above.
+> 
+> Docs: https://www.fastht.ml/docs/api/core.html.md
 
 - `def parsed_date(s)`
     Convert `s` to a datetime
@@ -51,10 +95,14 @@
     Convert `s` from snake case to hyphenated and capitalised
 
 - `@dataclass class HtmxHeaders`
+    Parsed HX-* request headers
+
     - `def __bool__(self)`
-    - `def __init__(self, boosted, current_url, history_restore_request, prompt, request, target, trigger_name, trigger)`
+    - `def __init__(self, boosted, current_url, history_restore_request, prompt, request, request_type, source, target, trigger_name, trigger)`
 
 - `@dataclass class HttpHeader`
+    A response header as a k,v pair
+
     - `def __init__(self, k, v)`
 
 - `@use_kwargs_dict(**htmx_resps) def HtmxResponseHeaders(**kwargs)`
@@ -64,7 +112,15 @@
     Convert starlette form data to a dict
 
 - `def parse_form(req)`
-    Starlette errors on empty multipart forms, so this checks for that situation
+    Starlette errors on empty multipart/json forms and 500s on malformed multipart, so this handles those situations
+
+- `class ApiReturn`
+    Request param: call with browser and API responses; returns kwargs as JSON if the client accepts `application/json`, else `norm`
+
+    - `@classmethod def __from_request__(cls, data, req)`
+    - `def __init__(self, isapi)`
+    - `def __call__(self, norm, **kw)`
+    - `def __bool__(self)`
 
 - `class JSONResponse`
     Same as starlette's version, but auto-stringifies non serializable types
@@ -75,13 +131,25 @@
     Flatten lists
 
 - `class Beforeware`
+    Wrap a `before` function with `skip` path patterns that bypass it
+
     - `def __init__(self, f, skip)`
+    - `def __repr__(self)`
 
 - `def EventStream(s)`
     Create a text/event-stream response from `s`
 
+- `def signal_shutdown()`
+    Return an `asyncio.Event` set when uvicorn receives a shutdown signal
+
+- `def uri(_arg, **kwargs)`
+    Create a URI by URL-encoding `_arg` and appending query parameters from `kwargs`
+
+- `def decode_uri(s)`
+    Decode a URI created by `uri()` back into argument and keyword dict
+
 - `def flat_tuple(o)`
-    Flatten lists
+    Flatten nested iterables into a single tuple
 
 - `def noop_body(c, req)`
     Default Body wrap function which just returns the content
@@ -89,32 +157,70 @@
 - `def respond(req, heads, bdy)`
     Default FT response creation function
 
+- `def is_full_page(req, resp)`
+    Check if response should be rendered as full page or fragment
+
 - `class Redirect`
     Use HTMX or Starlette RedirectResponse as required to redirect to `loc`
 
     - `def __init__(self, loc)`
     - `def __response__(self, req)`
 
+- `def get_key(key, fname)`
+    Get session key from `key` param or read/create from file `fname`
+
 - `def qp(p, **kw)`
     Add parameters kw to path p
 
-- `def def_hdrs(htmx, surreal)`
+- `def def_hdrs(htmx, htmx4, surreal)`
     Default headers for a FastHTML app
 
+- `class Lifespan`
+    Combine `on_startup`/`on_shutdown` callbacks and an optional lifespan generator into one context manager
+
+    - `def __init__(self, startup, shutdown, ls)`
+    - `def __call__(self, app)`
+    - `def on_event(self, event_type)`
+
 - `class FastHTML`
-    - `def __init__(self, debug, routes, middleware, title, exception_handlers, on_startup, on_shutdown, lifespan, hdrs, ftrs, exts, before, after, surreal, htmx, default_hdrs, sess_cls, secret_key, session_cookie, max_age, sess_path, same_site, sess_https_only, sess_domain, key_fname, body_wrap, htmlkw, nb_hdrs, canonical, **bodykw)`
+    An HTML-first Starlette app: handler params filled from the request, FT returns rendered as pages or HTMX fragments
+
+    - `def __init__(self, debug, routes, middleware, title, exception_handlers, on_startup, on_shutdown, lifespan, hdrs, ftrs, exts, before, after, surreal, htmx, htmx4, default_hdrs, sess_cls, secret_key, session_cookie, max_age, sess_path, same_site, sess_https_only, sess_domain, key_fname, body_wrap, htmlkw, nb_hdrs, canonical, max_part_size, **bodykw)`
+    - `def on_event(self, event_type)`
+
+- `class HostRoute`
+    Route with optional host-header constraint using Starlette's {param} pattern syntax
+
+    - `def __init__(self, path, endpoint, **kwargs)`
+    - `def matches(self, scope)`
+    - `def __repr__(self)`
+
+- `@patch def add_route(self, route)`
+    Add or replace a route in the FastHTML app
 
 - `@patch def ws(self, path, conn, disconn, name, middleware)`
     Add a websocket route at `path`
 
+- `@patch def add_websocket_route(self, path, func, conn, disconn, name, middleware)`
+    Add a websocket route at `path` (Starlette-compatible API)
+
 - `def nested_name(f)`
     Get name of function `f` using '_' to join nested function names
 
-- `@patch def route(self, path, methods, name, include_in_schema, body_wrap)`
+- `@patch def route(self, path, methods, name, include_in_schema, body_wrap, host, before)`
     Add a route at `path`
 
-- `def serve(appname, app, host, port, reload, reload_includes, reload_excludes)`
+- `@patch def set_lifespan(self, value)`
+    Set the lifespan context manager for the FastHTML app
+
+- `def serve(appname, app, host, port, reload, procs, **kwargs)`
     Run the app in an async server, with live reload set as the default.
+
+- `def until_disconnect(req, coro)`
+    Await `coro`, cancelling it (and returning an empty response) if the client disconnects first
+
+- `def cancel_on_disconnect(f)`
+    Route decorator: cancel the handler when the client disconnects
 
 - `class Client`
     A simple httpx ASGI client that doesn't require `async`
@@ -122,6 +228,8 @@
     - `def __init__(self, app, url)`
 
 - `class RouteFuncs`
+    Attr-access store of named route functions (HTTP verb names excluded)
+
     - `def __init__(self)`
     - `def __setattr__(self, name, value)`
     - `def __getattr__(self, name)`
@@ -145,13 +253,40 @@
 - `def cookie(key, value, max_age, expires, path, domain, secure, httponly, samesite)`
     Create a 'set-cookie' `HttpHeader`
 
+- `def reg_re_param(m, s)`
+    Register a Starlette URL convertor named `m` matching regex `s`
+
 - `@patch def static_route_exts(self, prefix, static_path, exts)`
     Add a static route at URL path `prefix` with files from `static_path` and `exts` defined by `reg_re_param()`
 
 - `@patch def static_route(self, ext, prefix, static_path)`
     Add a static route at URL path `prefix` with files from `static_path` and single `ext` (including the '.')
 
+- `class StaticNoCache`
+    StaticFiles that sends `Cache-Control: no-cache`, so browsers revalidate on every use
+
+    - `def file_response(self, *args, **kwargs)`
+
+- `class StaticImmutable`
+    Like `StaticNoCache`, but marks responses as cacheable forever: for versioned URLs such as `vurl` links or content-hashed filenames
+
+    - `def file_response(self, *args, **kwargs)`
+
+- `def vurl(path, root)`
+    Return `path` as a URL with a `v` query param hashing the file's contents, so the URL changes when the file does
+
+- `def add_sig_param(f, name, typ, kind, default)`
+    Add a parameter to a function's signature
+
+- `class into`
+    Decorator to pass a route's return value into `func`, with keyword params added to the route signature
+
+    - `def __init__(self, func)`
+    - `def __call__(self, f)`
+
 - `class MiddlewareBase`
+    Base for middleware: passes non-http/ws scopes through, else returns the `HTTPConnection`
+
     - `def __call__(self, scope, receive, send)`
 
 - `class FtResponse`
@@ -160,16 +295,27 @@
     - `def __init__(self, content, status_code, headers, cls, media_type, background)`
     - `def __response__(self, req)`
 
+- `@patch def get_client(self, asink, **kw)`
+    Get an httpx client with session cookes set from `**kw`
+
+- `@patch def decode_session(self, cookie)`
+    Decode a signed session cookie
+
+- `@patch def get_testclient(self, **kw)`
+    Get a Starlette `TestClient` with session cookies set from `**kw`
+
 ## fasthtml.fastapp
 
 > The `fast_app` convenience wrapper
 
-- `def fast_app(db_file, render, hdrs, ftrs, tbls, before, middleware, live, debug, title, routes, exception_handlers, on_startup, on_shutdown, lifespan, default_hdrs, pico, surreal, htmx, exts, canonical, secret_key, key_fname, session_cookie, max_age, sess_path, same_site, sess_https_only, sess_domain, htmlkw, bodykw, reload_attempts, reload_interval, static_path, body_wrap, nb_hdrs, **kwargs)`
+- `def fast_app(db_file, render, hdrs, ftrs, tbls, before, middleware, live, debug, title, routes, exception_handlers, on_startup, on_shutdown, lifespan, default_hdrs, pico, surreal, htmx, htmx4, exts, canonical, secret_key, key_fname, session_cookie, max_age, sess_path, same_site, sess_https_only, sess_domain, htmlkw, bodykw, reload_attempts, reload_interval, static_path, body_wrap, nb_hdrs, **kwargs)`
     Create a FastHTML or FastHTMLWithLiveReload app.
 
 ## fasthtml.js
 
 > Basic external Javascript lib wrappers
+> 
+> Docs: https://www.fastht.ml/docs/api/js.html.md
 
 - `def light_media(css)`
     Render light media for day mode views
@@ -189,25 +335,23 @@
 ## fasthtml.jupyter
 
 > Use FastHTML in Jupyter notebooks
+> 
+> Docs: https://www.fastht.ml/docs/api/jupyter.html.md
 
-- `def nb_serve(app, log_level, port, host, **kwargs)`
-    Start a Jupyter compatible uvicorn server with ASGI `app` on `port` with `log_level`
+- `def nb_serve(app, log_level, port, host, daemon, **kwargs)`
+    Start a Jupyter compatible uvicorn server with ASGI `app` on `port` with `log_level`; use `daemon=True` for notebook tests so failed runs don't block process shutdown
 
 - `def nb_serve_async(app, log_level, port, host, **kwargs)`
     Async version of `nb_serve`
 
-- `def is_port_free(port, host)`
-    Check if `port` is free on `host`
-
-- `def wait_port_free(port, host, max_wait)`
-    Wait for `port` to be free on `host`
+- `def render_ft(**kw)`
+    Call once in a notebook or solveit dialog to auto-render components with HTMX support
 
 - `class JupyUvi`
     Start and stop a Jupyter compatible uvicorn server with ASGI `app` on `port` with `log_level`
 
-    - `def __init__(self, app, log_level, host, port, start, **kwargs)`
+    - `def __init__(self, app, log_level, host, port, start, live, live_rt, daemon, **kwargs)`
     - `def start(self)`
-    - `def start_async(self)`
     - `def stop(self)`
 
 - `class JupyUviAsync`
@@ -217,7 +361,7 @@
     - `def start(self)`
     - `def stop(self)`
 
-- `def HTMX(path, host, app, port, height, link, iframe)`
+- `def HTMX(path, host, app, port, height, link, iframe, client)`
     An iframe which displays the HTMX application in a notebook.
 
 ## fasthtml.live_reload
@@ -250,6 +394,8 @@
 ## fasthtml.oauth
 
 > Basic scaffolding for handling OAuth
+> 
+> Docs: https://www.fastht.ml/docs/api/oauth.html.md
 
 - `class GoogleAppClient`
     A `WebApplicationClient` for Google oauth2
@@ -280,10 +426,22 @@
     - `def __init__(self, domain, client_id, client_secret, code, scope, redirect_uri, **kwargs)`
     - `def login_link(self, req)`
 
+- `class AppleAppClient`
+    A `WebApplicationClient` for Apple Sign In
+
+    - `def __init__(self, client_id, key_id, team_id, private_key, code, scope, **kwargs)`
+    - `@property def client_secret`
+    - `def get_info(self, token)`
+        Decode user info from the ID token
+
+
 - `@patch def login_link(self, redirect_uri, scope, state, **kwargs)`
     Get a login link for this client
 
-- `def redir_url(request, redir_path, scheme)`
+- `def get_host(request)`
+    Get the host, preferring X-Forwarded-Host if available
+
+- `def redir_url(req, redir_path, scheme)`
     Get the redir url for the host in `request`
 
 - `@patch def parse_response(self, code, redirect_uri)`
@@ -295,11 +453,20 @@
 - `@patch def retr_info(self, code, redirect_uri)`
     Combines `parse_response` and `get_info`
 
+- `@patch def parse_response_async(self, code, redirect_uri)`
+    Get the token from the oauth2 server response
+
+- `@patch def get_info_async(self, token)`
+    Get the info for authenticated user
+
+- `@patch def retr_info_async(self, code, redirect_uri)`
+    Combines `parse_response` and `get_info`
+
 - `@patch def retr_id(self, code, redirect_uri)`
     Call `retr_info` and then return id/subscriber value
 
 - `class OAuth`
-    - `def __init__(self, app, cli, skip, redir_path, error_path, logout_path, login_path, https, http_patterns)`
+    - `def __init__(self, app, cli, skip, redir_path, error_path, logout_path, login_path, https, http_patterns, redir_method)`
     - `def redir_login(self, session)`
     - `def redir_url(self, req)`
     - `def login_link(self, req, scope, state)`
@@ -309,6 +476,9 @@
 
 - `@patch() def consent_url(self, proj)`
     Get Google OAuth consent screen URL
+
+- `@patch def update(self)`
+    Refresh the credentials if they are expired, and return them
 
 - `@patch def save(self, fname)`
     Save credentials to `fname`
@@ -322,6 +492,8 @@
 ## fasthtml.pico
 
 > Basic components for generating Pico CSS tags
+> 
+> Docs: https://www.fastht.ml/docs/api/pico.html.md
 
 - `@delegates(ft_hx, keep=True) def Card(*c, **kwargs)`
     A PicoCSS Card, implemented as an Article with optional Header and Footer
@@ -343,6 +515,8 @@
 
 ## fasthtml.stripe_otp
 
+> Docs: https://www.fastht.ml/docs/explains/stripe.html.md
+
 - `def create_price(app_nm, amt, currency)`
     Create a product and bind it to a price object. If product already exist just return the price list.
 
@@ -354,6 +528,8 @@
 ## fasthtml.svg
 
 > Simple SVG FT elements
+> 
+> Docs: https://www.fastht.ml/docs/api/svg.html.md
 
 - `def Svg(*args, **kwargs)`
     An SVG tag; xmlns is added automatically, and viewBox defaults to height and width if not provided
@@ -426,6 +602,8 @@
 ## fasthtml.xtend
 
 > Simple extensions to standard HTML components, such as adding sensible defaults
+> 
+> Docs: https://www.fastht.ml/docs/api/xtend.html.md
 
 - `@delegates(ft_hx, keep=True) def A(*c, **kwargs)`
     An A tag; `href` defaults to '#' for more concise use with HTMX
@@ -487,6 +665,9 @@
 - `def run_js(js, id, **kw)`
     Run `js` script, auto-generating `id` based on name of caller if needed, and js-escaping any `kw` params
 
+- `def HtmxOn(eventname, code)`
+    Run `code` on htmx event `eventname`; both the v2 (`htmx:camelCase`) and v4 (`htmx-dash-case`) spellings are bound, and only the loaded version's fires
+
 - `def jsd(org, repo, root, path, prov, typ, ver, esm, **kwargs)`
     jsdelivr `Script` or CSS `Link` tag, or URL
 
@@ -506,4 +687,34 @@
 
 - `def Favicon(light_icon, dark_icon)`
     Light and dark favicon headers
+
+- `def LdJson(typ, data, script, extra, **kwargs)`
+    A script tag containing JSON-LD structured data
+
+- `def LdContactPoint(contact_type, email, phone, script, **extra)`
+    Create a ContactPoint for JSON-LD
+
+- `def LdOrg(name, url, logo, alt_name, same_as, contact_points, script, **extra)`
+    JSON-LD Organization structured data
+
+- `def LdWebsite(name, url, script, **extra)`
+    Create JSON-LD WebSite structured data
+
+- `def LdCourseInstance(course_mode, start_date, end_date, location, instructor, script, **extra)`
+    Create a CourseInstance for JSON-LD
+
+- `def LdCourse(name, description, provider, course_instance, script, **extra)`
+    Create JSON-LD Course structured data
+
+- `def robots_txt(app, allow_all, disallow_paths, sitemap_url, crawl_delay)`
+    Add a /robots.txt route to the app
+
+- `def sitemap_url(url_info, loc_base)`
+    Create a sitemap URL element from url_info (string or dict)
+
+- `def sitemap_xml(app, urls, loc_base)`
+    Add a /sitemap.xml route to the app with list of URLs
+
+- `def upload_pb_attrs(id)`
+    Form `hx_on` progress attr that reveals and updates a hidden `upload_pb` of matching `id`
 

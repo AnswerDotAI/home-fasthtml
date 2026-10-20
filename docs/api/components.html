@@ -2,18 +2,24 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.40">
+<meta name="generator" content="quarto-1.10.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="description" content="ft_html and ft_hx functions to add some conveniences to ft, along with a full set of basic HTML components, and functions to work with forms and FT conversion">
 
-<title>Components – fasthtml</title>
+<title>Components – python-fasthtml</title>
 <style>
-code{white-space: pre-wrap;}
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -22,8 +28,9 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 /* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -34,7 +41,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -58,7 +65,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -66,15 +73,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
 <link href="../favicon.ico" rel="icon">
-<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-e463c5e664eae906a5c2eb38a07ecc3d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-3014c4ed71da8e0b014e168934d92dd4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -102,16 +110,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
 
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
 
 <link rel="stylesheet" href="../styles.css">
-<meta property="og:title" content="Components – fasthtml">
+<meta property="og:title" content="Components – python-fasthtml">
 <meta property="og:description" content="ft_html and ft_hx functions to add some conveniences to ft, along with a full set of basic HTML components, and functions to work with forms and FT conversion">
-<meta property="og:site_name" content="fasthtml">
-<meta name="twitter:title" content="Components – fasthtml">
+<meta property="og:site_name" content="python-fasthtml">
+<meta name="twitter:title" content="Components – python-fasthtml">
 <meta name="twitter:description" content="ft_html and ft_hx functions to add some conveniences to ft, along with a full set of basic HTML components, and functions to work with forms and FT conversion">
 <meta name="twitter:image" content="https://www.fastht.ml/docs/og-image.png">
 <meta name="twitter:creator" content="@jeremyphoward">
@@ -120,7 +128,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link rel="canonical" href="https://www.fastht.ml/docs/api/components.html">
 </head>
 
-<body class="nav-sidebar floating nav-fixed">
+<body class="nav-sidebar floating nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -128,7 +136,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a href="../index.html" class="navbar-brand navbar-brand-logo">
-    <img src="../logo.svg" alt="" class="navbar-logo">
+    <img src="../logo.svg" alt="" class="navbar-logo light-content">
+    <img src="../logo.svg" alt="" class="navbar-logo dark-content">
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -168,7 +177,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../api/core.html">Source</a></li><li class="breadcrumb-item"><a href="../api/components.html">Components</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../api/index.html">Source</a></li><li class="breadcrumb-item"><a href="../api/index.html">Source</a></li><li class="breadcrumb-item"><a href="../api/components.html">Components</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -195,6 +204,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           </a> 
       </div>
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../tutorials/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Tutorials</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../tutorials/by_example.html" class="sidebar-item-text sidebar-link">
@@ -221,15 +239,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
       </ul>
   </li>
+      </ul>
+  </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+            <a href="../explains/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Explanations</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../explains/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Explanations</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../explains/background_tasks.html" class="sidebar-item-text sidebar-link">
@@ -280,15 +309,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
       </ul>
   </li>
+      </ul>
+  </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+            <a href="../ref/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Reference</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../ref/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Reference</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../ref/concise_guide.html" class="sidebar-item-text sidebar-link">
@@ -327,15 +367,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
       </ul>
   </li>
+      </ul>
+  </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+            <a href="../api/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Source</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../api/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Source</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../api/core.html" class="sidebar-item-text sidebar-link">
@@ -392,6 +443,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
       </ul>
   </li>
+      </ul>
+  </li>
     </ul>
     </div>
 </nav>
@@ -403,32 +456,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#str-and-repr" id="toc-str-and-repr" class="nav-link active" data-scroll-target="#str-and-repr">Str and repr</a></li>
-  <li><a href="#ft.__str__" id="toc-ft.__str__" class="nav-link" data-scroll-target="#ft.__str__">FT.__str__</a></li>
-  <li><a href="#ft.__radd__" id="toc-ft.__radd__" class="nav-link" data-scroll-target="#ft.__radd__">FT.__radd__</a></li>
-  <li><a href="#ft.__add__" id="toc-ft.__add__" class="nav-link" data-scroll-target="#ft.__add__">FT.__add__</a></li>
   <li><a href="#fh_html-and-fh_hx" id="toc-fh_html-and-fh_hx" class="nav-link" data-scroll-target="#fh_html-and-fh_hx">fh_html and fh_hx</a></li>
-  <li><a href="#attrmap_x" id="toc-attrmap_x" class="nav-link" data-scroll-target="#attrmap_x">attrmap_x</a></li>
-  <li><a href="#ft_html" id="toc-ft_html" class="nav-link" data-scroll-target="#ft_html">ft_html</a></li>
-  <li><a href="#ft_hx" id="toc-ft_hx" class="nav-link" data-scroll-target="#ft_hx">ft_hx</a></li>
-  <li><a href="#file" id="toc-file" class="nav-link" data-scroll-target="#file">File</a></li>
   <li><a href="#show" id="toc-show" class="nav-link" data-scroll-target="#show">show</a></li>
-  <li><a href="#show-1" id="toc-show-1" class="nav-link" data-scroll-target="#show-1">show</a></li>
   <li><a href="#fill_form-and-find_inputs" id="toc-fill_form-and-find_inputs" class="nav-link" data-scroll-target="#fill_form-and-find_inputs">fill_form and find_inputs</a></li>
-  <li><a href="#fill_form" id="toc-fill_form" class="nav-link" data-scroll-target="#fill_form">fill_form</a></li>
-  <li><a href="#fill_dataclass" id="toc-fill_dataclass" class="nav-link" data-scroll-target="#fill_dataclass">fill_dataclass</a></li>
-  <li><a href="#find_inputs" id="toc-find_inputs" class="nav-link" data-scroll-target="#find_inputs">find_inputs</a></li>
-  <li><a href="#getattr" id="toc-getattr" class="nav-link" data-scroll-target="#getattr"><strong>getattr</strong></a></li>
   <li><a href="#html2ft" id="toc-html2ft" class="nav-link" data-scroll-target="#html2ft">html2ft</a></li>
-  <li><a href="#html2ft-1" id="toc-html2ft-1" class="nav-link" data-scroll-target="#html2ft-1">html2ft</a></li>
-  <li><a href="#sse_message" id="toc-sse_message" class="nav-link" data-scroll-target="#sse_message">sse_message</a></li>
   <li><a href="#tests" id="toc-tests" class="nav-link" data-scroll-target="#tests">Tests</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/AnswerDotAI/fasthtml/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="components.html.md"><i class="bi bi-file-code"></i>CommonMark</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/AnswerDotAI/fasthtml/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="components.html.md"><i class="bi bi-file-code"></i>Markdown</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../api/core.html">Source</a></li><li class="breadcrumb-item"><a href="../api/components.html">Components</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../api/index.html">Source</a></li><li class="breadcrumb-item"><a href="../api/index.html">Source</a></li><li class="breadcrumb-item"><a href="../api/components.html">Components</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">Components</h1>
 </div>
@@ -453,69 +492,69 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <!-- WARNING: THIS FILE WAS AUTOGENERATED! DO NOT EDIT! -->
-<div id="3ccb463a" class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> collections <span class="im">import</span> UserDict</span>
+<div id="3ccb463a" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-20T23:00:42.942027+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-20T23:00:42.952227+00:00&quot;,&quot;total&quot;:0.01020187500398606}}" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> collections <span class="im">import</span> UserDict</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> lxml <span class="im">import</span> html <span class="im">as</span> lx</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pprint <span class="im">import</span> pprint</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pprint <span class="im">import</span> pprint</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <section id="str-and-repr" class="level3">
 <h3 class="anchored" data-anchor-id="str-and-repr">Str and repr</h3>
 <p>In notebooks, FT components are rendered as their syntax highlighted XML/HTML:</p>
 <div id="f99aa358" class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>sentence <span class="op">=</span> P(Strong(<span class="st">"FastHTML is "</span>, I(<span class="st">"Fast"</span>)), <span class="bu">id</span><span class="op">=</span><span class="st">'sentence_id'</span>)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>sentence</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display cell-output-markdown">
-<div class="sourceCode" id="cb3"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">p</span><span class="ot"> id</span><span class="op">=</span><span class="st">"sentence_id"</span><span class="dt">&gt;</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">strong</span><span class="dt">&gt;</span>FastHTML is <span class="dt">&lt;</span><span class="kw">i</span><span class="dt">&gt;</span>Fast<span class="dt">&lt;/</span><span class="kw">i</span><span class="dt">&gt;&lt;/</span><span class="kw">strong</span><span class="dt">&gt;&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>sentence <span class="op">=</span> P(Strong(<span class="st">"FastHTML is "</span>, I(<span class="st">"Fast"</span>)), <span class="bu">id</span><span class="op">=</span><span class="st">'sentence_id'</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>sentence</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<p id="sentence_id"><strong>FastHTML is <i>Fast</i></strong></p>
 </div>
 </div>
 <p>Elsewhere, they are represented as their underlying data structure:</p>
 <div id="00e96e47" class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">repr</span>(sentence))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">repr</span>(sentence))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>p((strong(('FastHTML is ', i(('Fast',),{})),{}),),{'id': 'sentence_id'})</code></pre>
+<pre><code>&lt;p id="sentence_id"&gt;&lt;strong&gt;FastHTML is &lt;i&gt;Fast&lt;/i&gt;&lt;/strong&gt;&lt;/p&gt;</code></pre>
 </div>
 </div>
+<div id="5376b275" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-20T23:00:42.952846+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-20T23:00:45.047282+00:00&quot;,&quot;total&quot;:2.09442883299198}}" data-execution_count="4">
 <hr>
-<p><a href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/components.py#L37" target="_blank" style="float:right; font-size:smaller">source</a></p>
-</section>
 <section id="ft.__str__" class="level3">
 <h3 class="anchored" data-anchor-id="ft.__str__">FT.__str__</h3>
-<blockquote class="blockquote">
-<pre><code> FT.__str__ ()</code></pre>
-</blockquote>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> <span class="fu">__str__</span>():</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><em>Return str(self).</em></p>
+</section>
+</div>
 <p>If they have an id, then that id is used as the component’s str representation:</p>
 <div id="9b3316f1" class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ss">f'hx_target=#</span><span class="sc">{</span>sentence<span class="sc">}</span><span class="ss">'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ss">f'hx_target=#</span><span class="sc">{</span>sentence<span class="sc">}</span><span class="ss">'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <pre><code>'hx_target=#sentence_id'</code></pre>
 </div>
 </div>
+<div id="3ef5863a" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-20T23:00:45.048015+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-20T23:00:45.049639+00:00&quot;,&quot;total&quot;:0.0016257910174317658}}" data-execution_count="6">
 <hr>
-<p><a href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/components.py#L41" target="_blank" style="float:right; font-size:smaller">source</a></p>
-</section>
 <section id="ft.__radd__" class="level3">
 <h3 class="anchored" data-anchor-id="ft.__radd__">FT.__radd__</h3>
-<blockquote class="blockquote">
-<pre><code> FT.__radd__ (b)</code></pre>
-</blockquote>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> <span class="fu">__radd__</span>(</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    b</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>):</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+</div>
 <div id="977c8b24" class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">'hx_target=#'</span> <span class="op">+</span> sentence</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">'hx_target=#'</span> <span class="op">+</span> sentence</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <pre><code>'hx_target=#sentence_id'</code></pre>
 </div>
 </div>
+<div id="89532398" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-20T23:00:45.050312+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-20T23:00:45.051549+00:00&quot;,&quot;total&quot;:0.0012398330145515501}}" data-execution_count="8">
 <hr>
-<p><a href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/components.py#L45" target="_blank" style="float:right; font-size:smaller">source</a></p>
-</section>
 <section id="ft.__add__" class="level3">
 <h3 class="anchored" data-anchor-id="ft.__add__">FT.__add__</h3>
-<blockquote class="blockquote">
-<pre><code> FT.__add__ (b)</code></pre>
-</blockquote>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> <span class="fu">__add__</span>(</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    b</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>):</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+</div>
 <div id="2c3339cf" class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>sentence <span class="op">+</span> <span class="st">'...'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>sentence <span class="op">+</span> <span class="st">'...'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <pre><code>'sentence_id...'</code></pre>
 </div>
@@ -523,164 +562,169 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="fh_html-and-fh_hx" class="level3">
 <h3 class="anchored" data-anchor-id="fh_html-and-fh_hx">fh_html and fh_hx</h3>
+<div id="b1d59e8a" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>test_eq(<span class="bu">len</span>(hx_attrs), <span class="bu">len</span>(<span class="bu">set</span>(hx_attrs)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="630dd804" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-20T23:00:45.053453+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-20T23:00:45.054993+00:00&quot;,&quot;total&quot;:0.001542417041491717}}" data-execution_count="11">
 <hr>
-<p><a href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/components.py#L74" target="_blank" style="float:right; font-size:smaller">source</a></p>
-</section>
 <section id="attrmap_x" class="level3">
 <h3 class="anchored" data-anchor-id="attrmap_x">attrmap_x</h3>
-<blockquote class="blockquote">
-<pre><code> attrmap_x (o)</code></pre>
-</blockquote>
-<hr>
-<p><a href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/components.py#L86" target="_blank" style="float:right; font-size:smaller">source</a></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> attrmap_x(</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    o</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>):</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
+</div>
+<div id="934287a8" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-20T23:00:45.056515+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-20T23:00:45.058148+00:00&quot;,&quot;total&quot;:0.0016337920096702874}}" data-execution_count="14">
+<hr>
 <section id="ft_html" class="level3">
 <h3 class="anchored" data-anchor-id="ft_html">ft_html</h3>
-<blockquote class="blockquote">
-<pre><code> ft_html (tag:str, *c, id=None, cls=None, title=None, style=None,
-          attrmap=None, valmap=None, ft_cls=None, **kwargs)</code></pre>
-</blockquote>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> ft_html(</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    tag:<span class="bu">str</span>, <span class="op">*</span>c, <span class="bu">id</span>:NoneType<span class="op">=</span><span class="va">None</span>, cls:NoneType<span class="op">=</span><span class="va">None</span>, title:NoneType<span class="op">=</span><span class="va">None</span>, style:NoneType<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    attrmap:NoneType<span class="op">=</span><span class="va">None</span>, valmap:NoneType<span class="op">=</span><span class="va">None</span>, ft_cls:NoneType<span class="op">=</span><span class="va">None</span>, <span class="op">**</span>kwargs</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>):</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+</div>
 <div id="6434dea1" class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>ft_html(<span class="st">'a'</span>, <span class="op">**</span>{<span class="st">'@click.away'</span>:<span class="dv">1</span>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display cell-output-markdown">
-<div class="sourceCode" id="cb18"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">a</span><span class="ot"> </span><span class="er">@</span><span class="ot">click.away</span><span class="op">=</span><span class="st">"1"</span><span class="dt">&gt;&lt;/</span><span class="kw">a</span><span class="dt">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>ft_html(<span class="st">'a'</span>, <span class="op">**</span>{<span class="st">'@click.away'</span>:<span class="dv">1</span>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<a @click.away="1"></a>
 </div>
 </div>
 <div id="ed03b851" class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>ft_html(<span class="st">'a'</span>, {<span class="st">'@click.away'</span>:<span class="dv">1</span>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display cell-output-markdown">
-<div class="sourceCode" id="cb20"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">a</span><span class="ot"> </span><span class="er">@</span><span class="ot">click.away</span><span class="op">=</span><span class="st">"1"</span><span class="dt">&gt;&lt;/</span><span class="kw">a</span><span class="dt">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>ft_html(<span class="st">'a'</span>, {<span class="st">'@click.away'</span>:<span class="dv">1</span>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<a @click.away="1"></a>
 </div>
 </div>
 <div id="979e9bc8614fb3c1" class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>ft_html(<span class="st">'a'</span>, UserDict({<span class="st">'@click.away'</span>:<span class="dv">1</span>}))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display cell-output-markdown">
-<div class="sourceCode" id="cb22"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">a</span><span class="ot"> </span><span class="er">@</span><span class="ot">click.away</span><span class="op">=</span><span class="st">"1"</span><span class="dt">&gt;&lt;/</span><span class="kw">a</span><span class="dt">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>ft_html(<span class="st">'a'</span>, UserDict({<span class="st">'@click.away'</span>:<span class="dv">1</span>}))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<a @click.away="1"></a>
 </div>
 </div>
 <div id="1b62eed6" class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> Div(<span class="bu">id</span><span class="op">=</span><span class="st">'someid'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> Div(<span class="bu">id</span><span class="op">=</span><span class="st">'someid'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="a979e0a6" class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>ft_html(<span class="st">'a'</span>, <span class="bu">id</span><span class="op">=</span>c)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display cell-output-markdown">
-<div class="sourceCode" id="cb25"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">a</span><span class="ot"> id</span><span class="op">=</span><span class="st">"someid"</span><span class="ot"> name</span><span class="op">=</span><span class="st">"someid"</span><span class="dt">&gt;&lt;/</span><span class="kw">a</span><span class="dt">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>ft_html(<span class="st">'a'</span>, <span class="bu">id</span><span class="op">=</span>c)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<a id="someid" name="someid"></a>
 </div>
 </div>
+<div id="d4a1f590" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-20T23:00:45.058922+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-20T23:00:45.060940+00:00&quot;,&quot;total&quot;:0.0020187500049360096}}" data-execution_count="16">
 <hr>
-<p><a href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/components.py#L102" target="_blank" style="float:right; font-size:smaller">source</a></p>
-</section>
 <section id="ft_hx" class="level3">
 <h3 class="anchored" data-anchor-id="ft_hx">ft_hx</h3>
-<blockquote class="blockquote">
-<pre><code> ft_hx (tag:str, *c, target_id=None, hx_vals=None, hx_target=None,
-        id=None, cls=None, title=None, style=None, accesskey=None,
-        contenteditable=None, dir=None, draggable=None, enterkeyhint=None,
-        hidden=None, inert=None, inputmode=None, lang=None, popover=None,
-        spellcheck=None, tabindex=None, translate=None, hx_get=None,
-        hx_post=None, hx_put=None, hx_delete=None, hx_patch=None,
-        hx_trigger=None, hx_swap=None, hx_swap_oob=None, hx_include=None,
-        hx_select=None, hx_select_oob=None, hx_indicator=None,
-        hx_push_url=None, hx_confirm=None, hx_disable=None,
-        hx_replace_url=None, hx_disabled_elt=None, hx_ext=None,
-        hx_headers=None, hx_history=None, hx_history_elt=None,
-        hx_inherit=None, hx_params=None, hx_preserve=None, hx_prompt=None,
-        hx_request=None, hx_sync=None, hx_validate=None, hx_on_blur=None,
-        hx_on_change=None, hx_on_contextmenu=None, hx_on_focus=None,
-        hx_on_input=None, hx_on_invalid=None, hx_on_reset=None,
-        hx_on_select=None, hx_on_submit=None, hx_on_keydown=None,
-        hx_on_keypress=None, hx_on_keyup=None, hx_on_click=None,
-        hx_on_dblclick=None, hx_on_mousedown=None, hx_on_mouseenter=None,
-        hx_on_mouseleave=None, hx_on_mousemove=None, hx_on_mouseout=None,
-        hx_on_mouseover=None, hx_on_mouseup=None, hx_on_wheel=None,
-        hx_on__abort=None, hx_on__after_on_load=None,
-        hx_on__after_process_node=None, hx_on__after_request=None,
-        hx_on__after_settle=None, hx_on__after_swap=None,
-        hx_on__before_cleanup_element=None, hx_on__before_on_load=None,
-        hx_on__before_process_node=None, hx_on__before_request=None,
-        hx_on__before_swap=None, hx_on__before_send=None,
-        hx_on__before_transition=None, hx_on__config_request=None,
-        hx_on__confirm=None, hx_on__history_cache_error=None,
-        hx_on__history_cache_miss=None,
-        hx_on__history_cache_miss_error=None,
-        hx_on__history_cache_miss_load=None, hx_on__history_restore=None,
-        hx_on__before_history_save=None, hx_on__load=None,
-        hx_on__no_sse_source_error=None, hx_on__on_load_error=None,
-        hx_on__oob_after_swap=None, hx_on__oob_before_swap=None,
-        hx_on__oob_error_no_target=None, hx_on__prompt=None,
-        hx_on__pushed_into_history=None, hx_on__replaced_in_history=None,
-        hx_on__response_error=None, hx_on__send_abort=None,
-        hx_on__send_error=None, hx_on__sse_error=None,
-        hx_on__sse_open=None, hx_on__swap_error=None,
-        hx_on__target_error=None, hx_on__timeout=None,
-        hx_on__validation_validate=None, hx_on__validation_failed=None,
-        hx_on__validation_halted=None, hx_on__xhr_abort=None,
-        hx_on__xhr_loadend=None, hx_on__xhr_loadstart=None,
-        hx_on__xhr_progress=None, **kwargs)</code></pre>
-</blockquote>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> ft_hx(</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    tag:<span class="bu">str</span>, <span class="op">*</span>c, target_id:NoneType<span class="op">=</span><span class="va">None</span>, hx_vals:NoneType<span class="op">=</span><span class="va">None</span>, hx_target:NoneType<span class="op">=</span><span class="va">None</span>, <span class="bu">id</span>:NoneType<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    cls:NoneType<span class="op">=</span><span class="va">None</span>, title:NoneType<span class="op">=</span><span class="va">None</span>, style:NoneType<span class="op">=</span><span class="va">None</span>, accesskey:NoneType<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>    contenteditable:NoneType<span class="op">=</span><span class="va">None</span>, <span class="bu">dir</span>:NoneType<span class="op">=</span><span class="va">None</span>, draggable:NoneType<span class="op">=</span><span class="va">None</span>, enterkeyhint:NoneType<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>    hidden:NoneType<span class="op">=</span><span class="va">None</span>, inert:NoneType<span class="op">=</span><span class="va">None</span>, inputmode:NoneType<span class="op">=</span><span class="va">None</span>, lang:NoneType<span class="op">=</span><span class="va">None</span>, popover:NoneType<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>    spellcheck:NoneType<span class="op">=</span><span class="va">None</span>, tabindex:NoneType<span class="op">=</span><span class="va">None</span>, translate:NoneType<span class="op">=</span><span class="va">None</span>, hx_get:NoneType<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>    hx_post:NoneType<span class="op">=</span><span class="va">None</span>, hx_put:NoneType<span class="op">=</span><span class="va">None</span>, hx_delete:NoneType<span class="op">=</span><span class="va">None</span>, hx_patch:NoneType<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>    hx_trigger:NoneType<span class="op">=</span><span class="va">None</span>, hx_swap:NoneType<span class="op">=</span><span class="va">None</span>, hx_swap_oob:NoneType<span class="op">=</span><span class="va">None</span>, hx_include:NoneType<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>    hx_select:NoneType<span class="op">=</span><span class="va">None</span>, hx_select_oob:NoneType<span class="op">=</span><span class="va">None</span>, hx_indicator:NoneType<span class="op">=</span><span class="va">None</span>, hx_push_url:NoneType<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>    hx_confirm:NoneType<span class="op">=</span><span class="va">None</span>, hx_disable:NoneType<span class="op">=</span><span class="va">None</span>, hx_replace_url:NoneType<span class="op">=</span><span class="va">None</span>, hx_disabled_elt:NoneType<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>    hx_ext:NoneType<span class="op">=</span><span class="va">None</span>, hx_headers:NoneType<span class="op">=</span><span class="va">None</span>, hx_history:NoneType<span class="op">=</span><span class="va">None</span>, hx_history_elt:NoneType<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>    hx_inherit:NoneType<span class="op">=</span><span class="va">None</span>, hx_params:NoneType<span class="op">=</span><span class="va">None</span>, hx_preserve:NoneType<span class="op">=</span><span class="va">None</span>, hx_prompt:NoneType<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>    hx_request:NoneType<span class="op">=</span><span class="va">None</span>, hx_sync:NoneType<span class="op">=</span><span class="va">None</span>, hx_validate:NoneType<span class="op">=</span><span class="va">None</span>, hx_action:NoneType<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>    hx_method:NoneType<span class="op">=</span><span class="va">None</span>, hx_config:NoneType<span class="op">=</span><span class="va">None</span>, hx_ignore:NoneType<span class="op">=</span><span class="va">None</span>, hx_on_blur:NoneType<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>    hx_on_change:NoneType<span class="op">=</span><span class="va">None</span>, hx_on_contextmenu:NoneType<span class="op">=</span><span class="va">None</span>, hx_on_focus:NoneType<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>    hx_on_input:NoneType<span class="op">=</span><span class="va">None</span>, hx_on_invalid:NoneType<span class="op">=</span><span class="va">None</span>, hx_on_reset:NoneType<span class="op">=</span><span class="va">None</span>, hx_on_select:NoneType<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>    hx_on_submit:NoneType<span class="op">=</span><span class="va">None</span>, hx_on_keydown:NoneType<span class="op">=</span><span class="va">None</span>, hx_on_keypress:NoneType<span class="op">=</span><span class="va">None</span>, hx_on_keyup:NoneType<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>    hx_on_click:NoneType<span class="op">=</span><span class="va">None</span>, hx_on_dblclick:NoneType<span class="op">=</span><span class="va">None</span>, hx_on_mousedown:NoneType<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>    hx_on_mouseenter:NoneType<span class="op">=</span><span class="va">None</span>, hx_on_mouseleave:NoneType<span class="op">=</span><span class="va">None</span>, hx_on_mousemove:NoneType<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>    hx_on_mouseout:NoneType<span class="op">=</span><span class="va">None</span>, hx_on_mouseover:NoneType<span class="op">=</span><span class="va">None</span>, hx_on_mouseup:NoneType<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a>    hx_on_wheel:NoneType<span class="op">=</span><span class="va">None</span>, hx_on__abort:NoneType<span class="op">=</span><span class="va">None</span>, hx_on__after_on_load:NoneType<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a>    hx_on__after_process_node:NoneType<span class="op">=</span><span class="va">None</span>, hx_on__after_request:NoneType<span class="op">=</span><span class="va">None</span>, hx_on__after_settle:NoneType<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a>    hx_on__after_swap:NoneType<span class="op">=</span><span class="va">None</span>, hx_on__before_cleanup_element:NoneType<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a>    hx_on__before_on_load:NoneType<span class="op">=</span><span class="va">None</span>, hx_on__before_process_node:NoneType<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a>    hx_on__before_request:NoneType<span class="op">=</span><span class="va">None</span>, hx_on__before_swap:NoneType<span class="op">=</span><span class="va">None</span>, hx_on__before_send:NoneType<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb22-26"><a href="#cb22-26" aria-hidden="true" tabindex="-1"></a>    hx_on__before_transition:NoneType<span class="op">=</span><span class="va">None</span>, hx_on__config_request:NoneType<span class="op">=</span><span class="va">None</span>, hx_on__confirm:NoneType<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb22-27"><a href="#cb22-27" aria-hidden="true" tabindex="-1"></a>    hx_on__history_cache_error:NoneType<span class="op">=</span><span class="va">None</span>, hx_on__history_cache_miss:NoneType<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb22-28"><a href="#cb22-28" aria-hidden="true" tabindex="-1"></a>    hx_on__history_cache_miss_error:NoneType<span class="op">=</span><span class="va">None</span>, hx_on__history_cache_miss_load:NoneType<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb22-29"><a href="#cb22-29" aria-hidden="true" tabindex="-1"></a>    hx_on__history_restore:NoneType<span class="op">=</span><span class="va">None</span>, hx_on__before_history_save:NoneType<span class="op">=</span><span class="va">None</span>, hx_on__load:NoneType<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb22-30"><a href="#cb22-30" aria-hidden="true" tabindex="-1"></a>    hx_on__no_sse_source_error:NoneType<span class="op">=</span><span class="va">None</span>, hx_on__on_load_error:NoneType<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb22-31"><a href="#cb22-31" aria-hidden="true" tabindex="-1"></a>    hx_on__oob_after_swap:NoneType<span class="op">=</span><span class="va">None</span>, hx_on__oob_before_swap:NoneType<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb22-32"><a href="#cb22-32" aria-hidden="true" tabindex="-1"></a>    hx_on__oob_error_no_target:NoneType<span class="op">=</span><span class="va">None</span>, hx_on__prompt:NoneType<span class="op">=</span><span class="va">None</span>, hx_on__pushed_into_history:NoneType<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb22-33"><a href="#cb22-33" aria-hidden="true" tabindex="-1"></a>    hx_on__replaced_in_history:NoneType<span class="op">=</span><span class="va">None</span>, hx_on__response_error:NoneType<span class="op">=</span><span class="va">None</span>, hx_on__send_abort:NoneType<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb22-34"><a href="#cb22-34" aria-hidden="true" tabindex="-1"></a>    hx_on__send_error:NoneType<span class="op">=</span><span class="va">None</span>, hx_on__sse_error:NoneType<span class="op">=</span><span class="va">None</span>, hx_on__sse_open:NoneType<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb22-35"><a href="#cb22-35" aria-hidden="true" tabindex="-1"></a>    hx_on__swap_error:NoneType<span class="op">=</span><span class="va">None</span>, hx_on__target_error:NoneType<span class="op">=</span><span class="va">None</span>, hx_on__timeout:NoneType<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb22-36"><a href="#cb22-36" aria-hidden="true" tabindex="-1"></a>    hx_on__validation_validate:NoneType<span class="op">=</span><span class="va">None</span>, hx_on__validation_failed:NoneType<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb22-37"><a href="#cb22-37" aria-hidden="true" tabindex="-1"></a>    hx_on__validation_halted:NoneType<span class="op">=</span><span class="va">None</span>, hx_on__xhr_abort:NoneType<span class="op">=</span><span class="va">None</span>, hx_on__xhr_loadend:NoneType<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb22-38"><a href="#cb22-38" aria-hidden="true" tabindex="-1"></a>    hx_on__xhr_loadstart:NoneType<span class="op">=</span><span class="va">None</span>, hx_on__xhr_progress:NoneType<span class="op">=</span><span class="va">None</span>, hx_on__after_init:NoneType<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb22-39"><a href="#cb22-39" aria-hidden="true" tabindex="-1"></a>    hx_on__before_cleanup:NoneType<span class="op">=</span><span class="va">None</span>, hx_on__before_history_update:NoneType<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb22-40"><a href="#cb22-40" aria-hidden="true" tabindex="-1"></a>    hx_on__before_init:NoneType<span class="op">=</span><span class="va">None</span>, hx_on__before_process:NoneType<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb22-41"><a href="#cb22-41" aria-hidden="true" tabindex="-1"></a>    hx_on__before_history_restore:NoneType<span class="op">=</span><span class="va">None</span>, hx_on__after_history_push:NoneType<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb22-42"><a href="#cb22-42" aria-hidden="true" tabindex="-1"></a>    hx_on__after_history_replace:NoneType<span class="op">=</span><span class="va">None</span>, hx_on__error:NoneType<span class="op">=</span><span class="va">None</span>, <span class="op">**</span>kwargs</span>
+<span id="cb22-43"><a href="#cb22-43" aria-hidden="true" tabindex="-1"></a>):</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+</div>
 <div id="9f40e7f4" class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>ft_hx(<span class="st">'a'</span>, hx_vals<span class="op">=</span>{<span class="st">'a'</span>:<span class="dv">1</span>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display cell-output-markdown">
-<div class="sourceCode" id="cb28"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">a</span><span class="ot"> hx-vals</span><span class="op">=</span><span class="st">'{"a": 1}'</span><span class="dt">&gt;&lt;/</span><span class="kw">a</span><span class="dt">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>ft_hx(<span class="st">'a'</span>, hx_vals<span class="op">=</span>{<span class="st">'a'</span>:<span class="dv">1</span>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<a hx-vals="{&quot;a&quot;: 1}"></a>
 </div>
 </div>
 <div id="8ca91601" class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>ft_hx(<span class="st">'a'</span>, hx_target<span class="op">=</span>c)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display cell-output-markdown">
-<div class="sourceCode" id="cb30"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">a</span><span class="ot"> hx-target</span><span class="op">=</span><span class="st">"#someid"</span><span class="dt">&gt;&lt;/</span><span class="kw">a</span><span class="dt">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>ft_hx(<span class="st">'a'</span>, hx_target<span class="op">=</span>c)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<a hx-target="#someid"></a>
 </div>
 </div>
 <p>For tags that have a <code>name</code> attribute, it will be set to the value of <code>id</code> if not provided explicitly:</p>
 <div id="ecbcfa18" class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>Form(Button(target_id<span class="op">=</span><span class="st">'foo'</span>, <span class="bu">id</span><span class="op">=</span><span class="st">'btn'</span>),</span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>     hx_post<span class="op">=</span><span class="st">'/'</span>, target_id<span class="op">=</span><span class="st">'tgt'</span>, <span class="bu">id</span><span class="op">=</span><span class="st">'frm'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display cell-output-markdown">
-<div class="sourceCode" id="cb32"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">form</span><span class="ot"> hx-post</span><span class="op">=</span><span class="st">"/"</span><span class="ot"> hx-target</span><span class="op">=</span><span class="st">"#tgt"</span><span class="ot"> id</span><span class="op">=</span><span class="st">"frm"</span><span class="ot"> name</span><span class="op">=</span><span class="st">"frm"</span><span class="dt">&gt;&lt;</span><span class="kw">button</span><span class="ot"> hx-target</span><span class="op">=</span><span class="st">"#foo"</span><span class="ot"> id</span><span class="op">=</span><span class="st">"btn"</span><span class="ot"> name</span><span class="op">=</span><span class="st">"btn"</span><span class="dt">&gt;&lt;/</span><span class="kw">button</span><span class="dt">&gt;&lt;/</span><span class="kw">form</span><span class="dt">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>Form(Button(target_id<span class="op">=</span><span class="st">'foo'</span>, <span class="bu">id</span><span class="op">=</span><span class="st">'btn'</span>),</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>     hx_post<span class="op">=</span><span class="st">'/'</span>, target_id<span class="op">=</span><span class="st">'tgt'</span>, <span class="bu">id</span><span class="op">=</span><span class="st">'frm'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<form hx-post="/" hx-target="#tgt" id="frm" name="frm"><button hx-target="#foo" id="btn" name="btn"></button></form>
 </div>
 </div>
+<div id="ca47635a" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-20T23:00:45.063008+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-20T23:00:45.064495+00:00&quot;,&quot;total&quot;:0.001488333975430578}}" data-execution_count="20">
 <hr>
-<p><a href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/components.py#L123" target="_blank" style="float:right; font-size:smaller">source</a></p>
-</section>
 <section id="file" class="level3">
 <h3 class="anchored" data-anchor-id="file">File</h3>
-<blockquote class="blockquote">
-<pre><code> File (fname)</code></pre>
-</blockquote>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> File(</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>    fname</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>):</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><em>Use the unescaped text in file <code>fname</code> directly</em></p>
+</section>
+</div>
 <div id="8843495e" class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> Input(name<span class="op">=</span><span class="st">'nm'</span>)</span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>a</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display cell-output-markdown">
-<div class="sourceCode" id="cb35"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">input</span><span class="ot"> name</span><span class="op">=</span><span class="st">"nm"</span><span class="dt">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> Input(name<span class="op">=</span><span class="st">'nm'</span>)</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>a</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<input name="nm">
 </div>
 </div>
 <div id="a8bbd57c" class="cell">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>a(hx_swap_oob<span class="op">=</span><span class="st">'true'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display cell-output-markdown">
-<div class="sourceCode" id="cb37"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">input</span><span class="ot"> name</span><span class="op">=</span><span class="st">"nm"</span><span class="ot"> hx-swap-oob</span><span class="op">=</span><span class="st">"true"</span><span class="dt">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>a(hx_swap_oob<span class="op">=</span><span class="st">'true'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<input name="nm" hx-swap-oob="true">
 </div>
 </div>
 <div id="67146285" class="cell">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>a</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display cell-output-markdown">
-<div class="sourceCode" id="cb39"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">input</span><span class="ot"> name</span><span class="op">=</span><span class="st">"nm"</span><span class="ot"> hx-swap-oob</span><span class="op">=</span><span class="st">"true"</span><span class="dt">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>a</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<input name="nm" hx-swap-oob="true">
 </div>
 </div>
 </section>
 <section id="show" class="level3">
 <h3 class="anchored" data-anchor-id="show">show</h3>
+<div id="702a033f" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-20T23:00:45.065192+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-20T23:00:45.067112+00:00&quot;,&quot;total&quot;:0.001921290997415781}}" data-execution_count="22">
 <hr>
-<p><a href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/components.py#L128" target="_blank" style="float:right; font-size:smaller">source</a></p>
-</section>
 <section id="show-1" class="level3">
 <h3 class="anchored" data-anchor-id="show-1">show</h3>
-<blockquote class="blockquote">
-<pre><code> show (ft, *rest, iframe=False, height='auto', style=None)</code></pre>
-</blockquote>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> show(</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>    ft, <span class="op">*</span>rest, iframe:<span class="bu">bool</span><span class="op">=</span><span class="va">False</span>, height:<span class="bu">str</span><span class="op">=</span><span class="st">'auto'</span>, style:NoneType<span class="op">=</span><span class="va">None</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>):</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><em>Renders FT Components into HTML within a Jupyter notebook.</em></p>
-<p>When placed within the <a href="https://www.fastht.ml/docs/api/components.html#show"><code>show()</code></a> function, this will render the HTML in Jupyter notebooks.</p>
+</section>
+</div>
+<p>When placed within the <code>show()</code> function, this will render the HTML in Jupyter notebooks.</p>
 <div id="8d0c2583" class="cell">
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>show(sentence)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>show(sentence)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <p id="sentence_id">
 <strong>FastHTML is <i>Fast</i></strong></p>
@@ -688,18 +732,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>You can also display full embedded pages in an iframe:</p>
 <div id="30d3422d" class="cell">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>picocss <span class="op">=</span> <span class="st">"https://cdn.jsdelivr.net/npm/@picocss/pico@latest/css/pico.min.css"</span></span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>picolink <span class="op">=</span> (Link(rel<span class="op">=</span><span class="st">"stylesheet"</span>, href<span class="op">=</span>picocss))</span>
-<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>fullpage <span class="op">=</span> Html(</span>
-<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>    Head(picolink),</span>
-<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>    Body(</span>
-<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a>        H2(<span class="st">"Heading 2"</span>),</span>
-<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a>        P(<span class="st">"Paragraph"</span>)</span>
-<span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb42-10"><a href="#cb42-10" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb42-11"><a href="#cb42-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-12"><a href="#cb42-12" aria-hidden="true" tabindex="-1"></a>show(fullpage, height<span class="op">=</span><span class="dv">100</span>, iframe<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>picocss <span class="op">=</span> <span class="st">"https://cdn.jsdelivr.net/npm/@picocss/pico@latest/css/pico.min.css"</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>picolink <span class="op">=</span> (Link(rel<span class="op">=</span><span class="st">"stylesheet"</span>, href<span class="op">=</span>picocss))</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>fullpage <span class="op">=</span> Html(</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>    Head(picolink),</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>    Body(</span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>        H2(<span class="st">"Heading 2"</span>),</span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>        P(<span class="st">"Paragraph"</span>)</span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a>show(fullpage, height<span class="op">=</span><span class="dv">100</span>, iframe<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <iframe srcdoc="<!doctype html>
 <html>
@@ -711,195 +755,198 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <p>Paragraph</p>
   </body>
 </html>
-" width="100%" height="100" style="border: none; "></iframe>
+" frameborder="0" width="100%" height="100" style="border: none; "></iframe>
+</div>
+</div>
+<p>Plain strings also work:</p>
+<div id="727d32b3" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>show(<span class="st">"&lt;p&gt;Hi &lt;i&gt;everyone&lt;/i&gt;&lt;/p&gt;"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<p>Hi <i>everyone</i></p>
 </div>
 </div>
 </section>
 <section id="fill_form-and-find_inputs" class="level3">
 <h3 class="anchored" data-anchor-id="fill_form-and-find_inputs">fill_form and find_inputs</h3>
+<div id="38b43194" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-20T23:00:45.069112+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-20T23:00:45.070947+00:00&quot;,&quot;total&quot;:0.0018367500160820782}}" data-execution_count="25">
 <hr>
-<p><a href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/components.py#L171" target="_blank" style="float:right; font-size:smaller">source</a></p>
-</section>
 <section id="fill_form" class="level3">
 <h3 class="anchored" data-anchor-id="fill_form">fill_form</h3>
-<blockquote class="blockquote">
-<pre><code> fill_form (form:fastcore.xml.FT, obj)</code></pre>
-</blockquote>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> fill_form(</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>    form:fastcore.xml.FT, obj</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>)<span class="op">-&gt;</span>fastcore.xml.FT:</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><em>Fills named items in <code>form</code> using attributes in <code>obj</code></em></p>
+</section>
+</div>
 <div id="caef04d9" class="cell">
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="at">@dataclass</span></span>
-<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> TodoItem:</span>
-<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>    title:<span class="bu">str</span><span class="op">;</span> <span class="bu">id</span>:<span class="bu">int</span><span class="op">;</span> done:<span class="bu">bool</span><span class="op">;</span> details:<span class="bu">str</span><span class="op">;</span> opt:<span class="bu">str</span><span class="op">=</span><span class="st">'a'</span></span>
-<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>todo <span class="op">=</span> TodoItem(<span class="bu">id</span><span class="op">=</span><span class="dv">2</span>, title<span class="op">=</span><span class="st">"Profit"</span>, done<span class="op">=</span><span class="va">True</span>, details<span class="op">=</span><span class="st">"Details"</span>, opt<span class="op">=</span><span class="st">'b'</span>)</span>
-<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>check <span class="op">=</span> Label(Input(<span class="bu">type</span><span class="op">=</span><span class="st">"checkbox"</span>, cls<span class="op">=</span><span class="st">"checkboxer"</span>, name<span class="op">=</span><span class="st">"done"</span>, data_foo<span class="op">=</span><span class="st">"bar"</span>), <span class="st">"Done"</span>, cls<span class="op">=</span><span class="st">'px-2'</span>)</span>
-<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>form <span class="op">=</span> Form(Fieldset(Input(cls<span class="op">=</span><span class="st">"char"</span>, <span class="bu">id</span><span class="op">=</span><span class="st">"title"</span>, value<span class="op">=</span><span class="st">"a"</span>), check, Input(<span class="bu">type</span><span class="op">=</span><span class="st">"hidden"</span>, <span class="bu">id</span><span class="op">=</span><span class="st">"id"</span>),</span>
-<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a>                     Select(Option(value<span class="op">=</span><span class="st">'a'</span>), Option(value<span class="op">=</span><span class="st">'b'</span>), name<span class="op">=</span><span class="st">'opt'</span>),</span>
-<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a>                     Textarea(<span class="bu">id</span><span class="op">=</span><span class="st">'details'</span>), Button(<span class="st">"Save"</span>),</span>
-<span id="cb44-10"><a href="#cb44-10" aria-hidden="true" tabindex="-1"></a>                     name<span class="op">=</span><span class="st">"stuff"</span>))</span>
-<span id="cb44-11"><a href="#cb44-11" aria-hidden="true" tabindex="-1"></a>form <span class="op">=</span> fill_form(form, todo)</span>
-<span id="cb44-12"><a href="#cb44-12" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="st">'&lt;textarea id="details" name="details"&gt;Details&lt;/textarea&gt;'</span> <span class="kw">in</span> to_xml(form)</span>
-<span id="cb44-13"><a href="#cb44-13" aria-hidden="true" tabindex="-1"></a>form</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display cell-output-markdown">
-<div class="sourceCode" id="cb45"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">form</span><span class="dt">&gt;&lt;</span><span class="kw">fieldset</span><span class="ot"> name</span><span class="op">=</span><span class="st">"stuff"</span><span class="dt">&gt;</span>    <span class="dt">&lt;</span><span class="kw">input</span><span class="ot"> value</span><span class="op">=</span><span class="st">"Profit"</span><span class="ot"> id</span><span class="op">=</span><span class="st">"title"</span><span class="ot"> class</span><span class="op">=</span><span class="st">"char"</span><span class="ot"> name</span><span class="op">=</span><span class="st">"title"</span><span class="dt">&gt;</span></span>
-<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">label</span><span class="ot"> class</span><span class="op">=</span><span class="st">"px-2"</span><span class="dt">&gt;</span>      <span class="dt">&lt;</span><span class="kw">input</span><span class="ot"> type</span><span class="op">=</span><span class="st">"checkbox"</span><span class="ot"> name</span><span class="op">=</span><span class="st">"done"</span><span class="ot"> data-foo</span><span class="op">=</span><span class="st">"bar"</span><span class="ot"> class</span><span class="op">=</span><span class="st">"checkboxer"</span><span class="ot"> checked</span><span class="op">=</span><span class="st">"1"</span><span class="dt">&gt;</span></span>
-<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>Done<span class="dt">&lt;/</span><span class="kw">label</span><span class="dt">&gt;</span>    <span class="dt">&lt;</span><span class="kw">input</span><span class="ot"> type</span><span class="op">=</span><span class="st">"hidden"</span><span class="ot"> id</span><span class="op">=</span><span class="st">"id"</span><span class="ot"> name</span><span class="op">=</span><span class="st">"id"</span><span class="ot"> value</span><span class="op">=</span><span class="st">"2"</span><span class="dt">&gt;</span></span>
-<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">select</span><span class="ot"> name</span><span class="op">=</span><span class="st">"opt"</span><span class="dt">&gt;&lt;</span><span class="kw">option</span><span class="ot"> value</span><span class="op">=</span><span class="st">"a"</span><span class="dt">&gt;&lt;/</span><span class="kw">option</span><span class="dt">&gt;&lt;</span><span class="kw">option</span><span class="ot"> value</span><span class="op">=</span><span class="st">"b"</span><span class="ot"> selected</span><span class="op">=</span><span class="st">"1"</span><span class="dt">&gt;&lt;/</span><span class="kw">option</span><span class="dt">&gt;&lt;/</span><span class="kw">select</span><span class="dt">&gt;&lt;</span><span class="kw">textarea</span><span class="ot"> id</span><span class="op">=</span><span class="st">"details"</span><span class="ot"> name</span><span class="op">=</span><span class="st">"details"</span><span class="dt">&gt;</span>Details<span class="dt">&lt;/</span><span class="kw">textarea</span><span class="dt">&gt;&lt;</span><span class="kw">button</span><span class="dt">&gt;</span>Save<span class="dt">&lt;/</span><span class="kw">button</span><span class="dt">&gt;&lt;/</span><span class="kw">fieldset</span><span class="dt">&gt;&lt;/</span><span class="kw">form</span><span class="dt">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="at">@dataclass</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> TodoItem:</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>    title:<span class="bu">str</span><span class="op">;</span> <span class="bu">id</span>:<span class="bu">int</span><span class="op">;</span> done:<span class="bu">bool</span><span class="op">;</span> details:<span class="bu">str</span><span class="op">;</span> opt:<span class="bu">str</span><span class="op">=</span><span class="st">'a'</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>todo <span class="op">=</span> TodoItem(<span class="bu">id</span><span class="op">=</span><span class="dv">2</span>, title<span class="op">=</span><span class="st">"Profit"</span>, done<span class="op">=</span><span class="va">True</span>, details<span class="op">=</span><span class="st">"Details"</span>, opt<span class="op">=</span><span class="st">'b'</span>)</span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>check <span class="op">=</span> Label(Input(<span class="bu">type</span><span class="op">=</span><span class="st">"checkbox"</span>, cls<span class="op">=</span><span class="st">"checkboxer"</span>, name<span class="op">=</span><span class="st">"done"</span>, data_foo<span class="op">=</span><span class="st">"bar"</span>), <span class="st">"Done"</span>, cls<span class="op">=</span><span class="st">'px-2'</span>)</span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>form <span class="op">=</span> Form(Fieldset(Input(cls<span class="op">=</span><span class="st">"char"</span>, <span class="bu">id</span><span class="op">=</span><span class="st">"title"</span>, value<span class="op">=</span><span class="st">"a"</span>), check, Input(<span class="bu">type</span><span class="op">=</span><span class="st">"hidden"</span>, <span class="bu">id</span><span class="op">=</span><span class="st">"id"</span>),</span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>                     Select(Option(value<span class="op">=</span><span class="st">'a'</span>), Option(value<span class="op">=</span><span class="st">'b'</span>), name<span class="op">=</span><span class="st">'opt'</span>),</span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>                     Textarea(<span class="bu">id</span><span class="op">=</span><span class="st">'details'</span>), Button(<span class="st">"Save"</span>),</span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>                     name<span class="op">=</span><span class="st">"stuff"</span>))</span>
+<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a>form <span class="op">=</span> fill_form(form, todo)</span>
+<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="st">'&lt;textarea id="details" name="details"&gt;Details&lt;/textarea&gt;'</span> <span class="kw">in</span> to_xml(form)</span>
+<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a>form</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display no-overflow-x">
+<form><fieldset name="stuff"><input value="Profit" id="title" class="char" name="title"><label class="px-2"><input type="checkbox" name="done" data-foo="bar" class="checkboxer" checked="1">Done</label><input type="hidden" id="id" name="id" value="2"><select name="opt"><option value="a"></option><option value="b" selected="1"></option></select><textarea id="details" name="details">Details</textarea><button>Save</button></fieldset></form>
 </div>
 </div>
 <div id="1513cf64" class="cell">
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="at">@dataclass</span></span>
-<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MultiSelect:</span>
-<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>    items: <span class="bu">list</span>[<span class="bu">str</span>]</span>
-<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>multiselect <span class="op">=</span> MultiSelect(items<span class="op">=</span>[<span class="st">'a'</span>, <span class="st">'c'</span>])</span>
-<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a>multiform <span class="op">=</span> Form(Select(Option(<span class="st">'a'</span>, value<span class="op">=</span><span class="st">'a'</span>), Option(<span class="st">'b'</span>, value<span class="op">=</span><span class="st">'b'</span>), Option(<span class="st">'c'</span>, value<span class="op">=</span><span class="st">'c'</span>), multiple<span class="op">=</span><span class="st">'1'</span>, name<span class="op">=</span><span class="st">'items'</span>))</span>
-<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a>multiform <span class="op">=</span> fill_form(multiform, multiselect)</span>
-<span id="cb46-8"><a href="#cb46-8" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="st">'&lt;option value="a" selected="1"&gt;a&lt;/option&gt;'</span> <span class="kw">in</span> to_xml(multiform)</span>
-<span id="cb46-9"><a href="#cb46-9" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="st">'&lt;option value="b"&gt;b&lt;/option&gt;'</span> <span class="kw">in</span> to_xml(multiform)</span>
-<span id="cb46-10"><a href="#cb46-10" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="st">'&lt;option value="c" selected="1"&gt;c&lt;/option&gt;'</span> <span class="kw">in</span> to_xml(multiform)</span>
-<span id="cb46-11"><a href="#cb46-11" aria-hidden="true" tabindex="-1"></a>multiform</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display cell-output-markdown">
-<div class="sourceCode" id="cb47"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">form</span><span class="dt">&gt;&lt;</span><span class="kw">select</span><span class="ot"> multiple</span><span class="op">=</span><span class="st">"1"</span><span class="ot"> name</span><span class="op">=</span><span class="st">"items"</span><span class="dt">&gt;&lt;</span><span class="kw">option</span><span class="ot"> value</span><span class="op">=</span><span class="st">"a"</span><span class="ot"> selected</span><span class="op">=</span><span class="st">"1"</span><span class="dt">&gt;</span>a<span class="dt">&lt;/</span><span class="kw">option</span><span class="dt">&gt;&lt;</span><span class="kw">option</span><span class="ot"> value</span><span class="op">=</span><span class="st">"b"</span><span class="dt">&gt;</span>b<span class="dt">&lt;/</span><span class="kw">option</span><span class="dt">&gt;&lt;</span><span class="kw">option</span><span class="ot"> value</span><span class="op">=</span><span class="st">"c"</span><span class="ot"> selected</span><span class="op">=</span><span class="st">"1"</span><span class="dt">&gt;</span>c<span class="dt">&lt;/</span><span class="kw">option</span><span class="dt">&gt;&lt;/</span><span class="kw">select</span><span class="dt">&gt;&lt;/</span><span class="kw">form</span><span class="dt">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="at">@dataclass</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MultiSelect:</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>    items: <span class="bu">list</span>[<span class="bu">str</span>]</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>multiselect <span class="op">=</span> MultiSelect(items<span class="op">=</span>[<span class="st">'a'</span>, <span class="st">'c'</span>])</span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>multiform <span class="op">=</span> Form(Select(Option(<span class="st">'a'</span>, value<span class="op">=</span><span class="st">'a'</span>), Option(<span class="st">'b'</span>, value<span class="op">=</span><span class="st">'b'</span>), Option(<span class="st">'c'</span>, value<span class="op">=</span><span class="st">'c'</span>), multiple<span class="op">=</span><span class="st">'1'</span>, name<span class="op">=</span><span class="st">'items'</span>))</span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>multiform <span class="op">=</span> fill_form(multiform, multiselect)</span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="st">'&lt;option value="a" selected="1"&gt;a&lt;/option&gt;'</span> <span class="kw">in</span> to_xml(multiform)</span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="st">'&lt;option value="b"&gt;b&lt;/option&gt;'</span> <span class="kw">in</span> to_xml(multiform)</span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="st">'&lt;option value="c" selected="1"&gt;c&lt;/option&gt;'</span> <span class="kw">in</span> to_xml(multiform)</span>
+<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a>multiform</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display no-overflow-x">
+<form><select multiple="1" name="items"><option value="a" selected="1">a</option><option value="b">b</option><option value="c" selected="1">c</option></select></form>
 </div>
 </div>
 <div id="dd316f94-0695-44bf-96c2-45128a8b0644" class="cell">
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="at">@dataclass</span></span>
-<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MultiCheck:</span>
-<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>    items: <span class="bu">list</span>[<span class="bu">str</span>]</span>
-<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>multicheck <span class="op">=</span> MultiCheck(items<span class="op">=</span>[<span class="st">'a'</span>, <span class="st">'c'</span>])</span>
-<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a>multiform <span class="op">=</span> Form(Fieldset(Label(Input(<span class="bu">type</span><span class="op">=</span><span class="st">'checkbox'</span>, name<span class="op">=</span><span class="st">'items'</span>, value<span class="op">=</span><span class="st">'a'</span>), <span class="st">'a'</span>),</span>
-<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a>                          Label(Input(<span class="bu">type</span><span class="op">=</span><span class="st">'checkbox'</span>, name<span class="op">=</span><span class="st">'items'</span>, value<span class="op">=</span><span class="st">'b'</span>), <span class="st">'b'</span>),</span>
-<span id="cb48-8"><a href="#cb48-8" aria-hidden="true" tabindex="-1"></a>                          Label(Input(<span class="bu">type</span><span class="op">=</span><span class="st">'checkbox'</span>, name<span class="op">=</span><span class="st">'items'</span>, value<span class="op">=</span><span class="st">'c'</span>), <span class="st">'c'</span>)))</span>
-<span id="cb48-9"><a href="#cb48-9" aria-hidden="true" tabindex="-1"></a>multiform <span class="op">=</span> fill_form(multiform, multicheck)</span>
-<span id="cb48-10"><a href="#cb48-10" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="st">'&lt;input type="checkbox" name="items" value="a" checked="1"&gt;'</span> <span class="kw">in</span> to_xml(multiform)</span>
-<span id="cb48-11"><a href="#cb48-11" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="st">'&lt;input type="checkbox" name="items" value="b"&gt;'</span> <span class="kw">in</span> to_xml(multiform)</span>
-<span id="cb48-12"><a href="#cb48-12" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="st">'&lt;input type="checkbox" name="items" value="c" checked="1"&gt;'</span> <span class="kw">in</span> to_xml(multiform)</span>
-<span id="cb48-13"><a href="#cb48-13" aria-hidden="true" tabindex="-1"></a>multiform</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display cell-output-markdown">
-<div class="sourceCode" id="cb49"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">form</span><span class="dt">&gt;&lt;</span><span class="kw">fieldset</span><span class="dt">&gt;&lt;</span><span class="kw">label</span><span class="dt">&gt;</span>      <span class="dt">&lt;</span><span class="kw">input</span><span class="ot"> type</span><span class="op">=</span><span class="st">"checkbox"</span><span class="ot"> name</span><span class="op">=</span><span class="st">"items"</span><span class="ot"> value</span><span class="op">=</span><span class="st">"a"</span><span class="ot"> checked</span><span class="op">=</span><span class="st">"1"</span><span class="dt">&gt;</span></span>
-<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>a<span class="dt">&lt;/</span><span class="kw">label</span><span class="dt">&gt;&lt;</span><span class="kw">label</span><span class="dt">&gt;</span>      <span class="dt">&lt;</span><span class="kw">input</span><span class="ot"> type</span><span class="op">=</span><span class="st">"checkbox"</span><span class="ot"> name</span><span class="op">=</span><span class="st">"items"</span><span class="ot"> value</span><span class="op">=</span><span class="st">"b"</span><span class="dt">&gt;</span></span>
-<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>b<span class="dt">&lt;/</span><span class="kw">label</span><span class="dt">&gt;&lt;</span><span class="kw">label</span><span class="dt">&gt;</span>      <span class="dt">&lt;</span><span class="kw">input</span><span class="ot"> type</span><span class="op">=</span><span class="st">"checkbox"</span><span class="ot"> name</span><span class="op">=</span><span class="st">"items"</span><span class="ot"> value</span><span class="op">=</span><span class="st">"c"</span><span class="ot"> checked</span><span class="op">=</span><span class="st">"1"</span><span class="dt">&gt;</span></span>
-<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>c<span class="dt">&lt;/</span><span class="kw">label</span><span class="dt">&gt;&lt;/</span><span class="kw">fieldset</span><span class="dt">&gt;&lt;/</span><span class="kw">form</span><span class="dt">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="at">@dataclass</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MultiCheck:</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>    items: <span class="bu">list</span>[<span class="bu">str</span>]</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>multicheck <span class="op">=</span> MultiCheck(items<span class="op">=</span>[<span class="st">'a'</span>, <span class="st">'c'</span>])</span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>multiform <span class="op">=</span> Form(Fieldset(Label(Input(<span class="bu">type</span><span class="op">=</span><span class="st">'checkbox'</span>, name<span class="op">=</span><span class="st">'items'</span>, value<span class="op">=</span><span class="st">'a'</span>), <span class="st">'a'</span>),</span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>                          Label(Input(<span class="bu">type</span><span class="op">=</span><span class="st">'checkbox'</span>, name<span class="op">=</span><span class="st">'items'</span>, value<span class="op">=</span><span class="st">'b'</span>), <span class="st">'b'</span>),</span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>                          Label(Input(<span class="bu">type</span><span class="op">=</span><span class="st">'checkbox'</span>, name<span class="op">=</span><span class="st">'items'</span>, value<span class="op">=</span><span class="st">'c'</span>), <span class="st">'c'</span>)))</span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a>multiform <span class="op">=</span> fill_form(multiform, multicheck)</span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="st">'&lt;input type="checkbox" name="items" value="a" checked="1"&gt;'</span> <span class="kw">in</span> to_xml(multiform)</span>
+<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="st">'&lt;input type="checkbox" name="items" value="b"&gt;'</span> <span class="kw">in</span> to_xml(multiform)</span>
+<span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="st">'&lt;input type="checkbox" name="items" value="c" checked="1"&gt;'</span> <span class="kw">in</span> to_xml(multiform)</span>
+<span id="cb37-13"><a href="#cb37-13" aria-hidden="true" tabindex="-1"></a>multiform</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<form><fieldset><label><input type="checkbox" name="items" value="a" checked="1">a</label><label><input type="checkbox" name="items" value="b">b</label><label><input type="checkbox" name="items" value="c" checked="1">c</label></fieldset></form>
 </div>
 </div>
+<div id="ded81cef" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-20T23:00:45.071995+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-20T23:00:45.073666+00:00&quot;,&quot;total&quot;:0.0016731659998185933}}" data-execution_count="27">
 <hr>
-<p><a href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/components.py#L178" target="_blank" style="float:right; font-size:smaller">source</a></p>
-</section>
 <section id="fill_dataclass" class="level3">
 <h3 class="anchored" data-anchor-id="fill_dataclass">fill_dataclass</h3>
-<blockquote class="blockquote">
-<pre><code> fill_dataclass (src, dest)</code></pre>
-</blockquote>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> fill_dataclass(</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>    src, dest</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>):</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><em>Modifies dataclass in-place and returns it</em></p>
+</section>
+</div>
 <div id="77e3f785" class="cell">
-<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>nt <span class="op">=</span> TodoItem(<span class="st">''</span>, <span class="dv">0</span>, <span class="va">False</span>, <span class="st">''</span>)</span>
-<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>fill_dataclass(todo, nt)</span>
-<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>nt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>nt <span class="op">=</span> TodoItem(<span class="st">''</span>, <span class="dv">0</span>, <span class="va">False</span>, <span class="st">''</span>)</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>fill_dataclass(todo, nt)</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>nt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <pre><code>TodoItem(title='Profit', id=2, done=True, details='Details', opt='b')</code></pre>
 </div>
 </div>
+<div id="6a89577e" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-20T23:00:45.074500+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-20T23:00:45.076184+00:00&quot;,&quot;total&quot;:0.0016857079463079572}}" data-execution_count="29">
 <hr>
-<p><a href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/components.py#L184" target="_blank" style="float:right; font-size:smaller">source</a></p>
-</section>
 <section id="find_inputs" class="level3">
 <h3 class="anchored" data-anchor-id="find_inputs">find_inputs</h3>
-<blockquote class="blockquote">
-<pre><code> find_inputs (e, tags='input', **kw)</code></pre>
-</blockquote>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> find_inputs(</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>    e, tags:<span class="bu">str</span><span class="op">=</span><span class="st">'input'</span>, <span class="op">**</span>kw</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>):</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><em>Recursively find all elements in <code>e</code> with <code>tags</code> and attrs matching <code>kw</code></em></p>
+</section>
+</div>
 <div id="7e740aac" class="cell">
-<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>inps <span class="op">=</span> find_inputs(form, <span class="bu">id</span><span class="op">=</span><span class="st">'title'</span>)</span>
-<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>test_eq(<span class="bu">len</span>(inps), <span class="dv">1</span>)</span>
-<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>inps</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>inps <span class="op">=</span> find_inputs(form, <span class="bu">id</span><span class="op">=</span><span class="st">'title'</span>)</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>test_eq(<span class="bu">len</span>(inps), <span class="dv">1</span>)</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>inps</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<pre><code>[input((),{'value': 'Profit', 'id': 'title', 'class': 'char', 'name': 'title'})]</code></pre>
+<pre><code>[&lt;input value="Profit" id="title" class="char" name="title"&gt;]</code></pre>
 </div>
 </div>
 <p>You can also use lxml for more sophisticated searching:</p>
 <div id="e551de91" class="cell">
-<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>elem <span class="op">=</span> lx.fromstring(to_xml(form))</span>
-<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>test_eq(elem.xpath(<span class="st">"//input[@id='title']/@value"</span>), [<span class="st">'Profit'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>elem <span class="op">=</span> lx.fromstring(to_xml(form))</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>test_eq(elem.xpath(<span class="st">"//input[@id='title']/@value"</span>), [<span class="st">'Profit'</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<hr>
-<p><a href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/components.py#L198" target="_blank" style="float:right; font-size:smaller">source</a></p>
-</section>
-<section id="getattr" class="level3">
-<h3 class="anchored" data-anchor-id="getattr"><strong>getattr</strong></h3>
-<blockquote class="blockquote">
-<pre><code> __getattr__ (tag)</code></pre>
-</blockquote>
+<p>Undefined exports like <code>MyTag</code> create a matching kebab-case tag (<my-tag>) via <code>ft_hx</code>. The logic lives in <a href="https://fastcore.fast.ai/xml.html#mk_getattr"><code>fastcore.xml.mk_getattr</code></a>; here we just supply <code>ft_hx</code> as the tag factory so custom tags get htmx attribute handling.</my-tag></p>
+<div id="72f9f507" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-20T23:00:45.076826+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-20T23:00:45.077377+00:00&quot;,&quot;total&quot;:0.0005527500179596245}}" data-execution_count="31">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> fasthtml.components <span class="im">import</span> BarBaz</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>test_eq(to_xml(BarBaz(hx_get<span class="op">=</span><span class="st">'/foo'</span>)), <span class="st">'&lt;bar-baz hx-get="/foo"&gt;&lt;/bar-baz&gt;'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 </section>
 <section id="html2ft" class="level3">
 <h3 class="anchored" data-anchor-id="html2ft">html2ft</h3>
+<div id="3a45ddc2" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-20T23:00:45.079314+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-20T23:00:45.081865+00:00&quot;,&quot;total&quot;:0.0025534580345265567}}" data-execution_count="33">
 <hr>
-<p><a href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/components.py#L206" target="_blank" style="float:right; font-size:smaller">source</a></p>
-</section>
 <section id="html2ft-1" class="level3">
 <h3 class="anchored" data-anchor-id="html2ft-1">html2ft</h3>
-<blockquote class="blockquote">
-<pre><code> html2ft (html, attr1st=False)</code></pre>
-</blockquote>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> html2ft(</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>    html, attr1st:<span class="bu">bool</span><span class="op">=</span><span class="va">False</span></span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>):</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><em>Convert HTML to an <code>ft</code> expression</em></p>
+</section>
+</div>
 <div id="3569a964" class="cell">
-<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>h <span class="op">=</span> to_xml(form)</span>
-<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>hl_md(html2ft(h), <span class="st">'python'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>h <span class="op">=</span> to_xml(form)</span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>hl_md(html2ft(h), <span class="st">'python'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<div class="sourceCode" id="cb60"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>Form(</span>
-<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>    Fieldset(</span>
-<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a>        Input(value<span class="op">=</span><span class="st">'Profit'</span>, <span class="bu">id</span><span class="op">=</span><span class="st">'title'</span>, name<span class="op">=</span><span class="st">'title'</span>, cls<span class="op">=</span><span class="st">'char'</span>),</span>
-<span id="cb60-4"><a href="#cb60-4" aria-hidden="true" tabindex="-1"></a>        Label(</span>
-<span id="cb60-5"><a href="#cb60-5" aria-hidden="true" tabindex="-1"></a>            Input(<span class="bu">type</span><span class="op">=</span><span class="st">'checkbox'</span>, name<span class="op">=</span><span class="st">'done'</span>, data_foo<span class="op">=</span><span class="st">'bar'</span>, checked<span class="op">=</span><span class="st">'1'</span>, cls<span class="op">=</span><span class="st">'checkboxer'</span>),</span>
-<span id="cb60-6"><a href="#cb60-6" aria-hidden="true" tabindex="-1"></a>            <span class="st">'Done'</span>,</span>
-<span id="cb60-7"><a href="#cb60-7" aria-hidden="true" tabindex="-1"></a>            cls<span class="op">=</span><span class="st">'px-2'</span></span>
-<span id="cb60-8"><a href="#cb60-8" aria-hidden="true" tabindex="-1"></a>        ),</span>
-<span id="cb60-9"><a href="#cb60-9" aria-hidden="true" tabindex="-1"></a>        Input(<span class="bu">type</span><span class="op">=</span><span class="st">'hidden'</span>, <span class="bu">id</span><span class="op">=</span><span class="st">'id'</span>, name<span class="op">=</span><span class="st">'id'</span>, value<span class="op">=</span><span class="st">'2'</span>),</span>
-<span id="cb60-10"><a href="#cb60-10" aria-hidden="true" tabindex="-1"></a>        Select(</span>
-<span id="cb60-11"><a href="#cb60-11" aria-hidden="true" tabindex="-1"></a>            Option(value<span class="op">=</span><span class="st">'a'</span>),</span>
-<span id="cb60-12"><a href="#cb60-12" aria-hidden="true" tabindex="-1"></a>            Option(value<span class="op">=</span><span class="st">'b'</span>, selected<span class="op">=</span><span class="st">'1'</span>),</span>
-<span id="cb60-13"><a href="#cb60-13" aria-hidden="true" tabindex="-1"></a>            name<span class="op">=</span><span class="st">'opt'</span></span>
-<span id="cb60-14"><a href="#cb60-14" aria-hidden="true" tabindex="-1"></a>        ),</span>
-<span id="cb60-15"><a href="#cb60-15" aria-hidden="true" tabindex="-1"></a>        Textarea(<span class="st">'Details'</span>, <span class="bu">id</span><span class="op">=</span><span class="st">'details'</span>, name<span class="op">=</span><span class="st">'details'</span>),</span>
-<span id="cb60-16"><a href="#cb60-16" aria-hidden="true" tabindex="-1"></a>        Button(<span class="st">'Save'</span>),</span>
-<span id="cb60-17"><a href="#cb60-17" aria-hidden="true" tabindex="-1"></a>        name<span class="op">=</span><span class="st">'stuff'</span></span>
-<span id="cb60-18"><a href="#cb60-18" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb60-19"><a href="#cb60-19" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb48"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>Form(</span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>    Fieldset(</span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>        Input(value<span class="op">=</span><span class="st">'Profit'</span>, <span class="bu">id</span><span class="op">=</span><span class="st">'title'</span>, name<span class="op">=</span><span class="st">'title'</span>, cls<span class="op">=</span><span class="st">'char'</span>),</span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>        Label(</span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>            Input(<span class="bu">type</span><span class="op">=</span><span class="st">'checkbox'</span>, name<span class="op">=</span><span class="st">'done'</span>, data_foo<span class="op">=</span><span class="st">'bar'</span>, checked<span class="op">=</span><span class="st">'1'</span>, cls<span class="op">=</span><span class="st">'checkboxer'</span>),</span>
+<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a>            <span class="st">'Done'</span>,</span>
+<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a>            cls<span class="op">=</span><span class="st">'px-2'</span></span>
+<span id="cb48-8"><a href="#cb48-8" aria-hidden="true" tabindex="-1"></a>        ),</span>
+<span id="cb48-9"><a href="#cb48-9" aria-hidden="true" tabindex="-1"></a>        Input(<span class="bu">type</span><span class="op">=</span><span class="st">'hidden'</span>, <span class="bu">id</span><span class="op">=</span><span class="st">'id'</span>, name<span class="op">=</span><span class="st">'id'</span>, value<span class="op">=</span><span class="st">'2'</span>),</span>
+<span id="cb48-10"><a href="#cb48-10" aria-hidden="true" tabindex="-1"></a>        Select(</span>
+<span id="cb48-11"><a href="#cb48-11" aria-hidden="true" tabindex="-1"></a>            Option(value<span class="op">=</span><span class="st">'a'</span>),</span>
+<span id="cb48-12"><a href="#cb48-12" aria-hidden="true" tabindex="-1"></a>            Option(value<span class="op">=</span><span class="st">'b'</span>, selected<span class="op">=</span><span class="st">'1'</span>),</span>
+<span id="cb48-13"><a href="#cb48-13" aria-hidden="true" tabindex="-1"></a>            name<span class="op">=</span><span class="st">'opt'</span></span>
+<span id="cb48-14"><a href="#cb48-14" aria-hidden="true" tabindex="-1"></a>        ),</span>
+<span id="cb48-15"><a href="#cb48-15" aria-hidden="true" tabindex="-1"></a>        Textarea(<span class="st">'Details'</span>, <span class="bu">id</span><span class="op">=</span><span class="st">'details'</span>, name<span class="op">=</span><span class="st">'details'</span>),</span>
+<span id="cb48-16"><a href="#cb48-16" aria-hidden="true" tabindex="-1"></a>        Button(<span class="st">'Save'</span>),</span>
+<span id="cb48-17"><a href="#cb48-17" aria-hidden="true" tabindex="-1"></a>        name<span class="op">=</span><span class="st">'stuff'</span></span>
+<span id="cb48-18"><a href="#cb48-18" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb48-19"><a href="#cb48-19" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 <div id="af92d7d6" class="cell">
-<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>hl_md(html2ft(h, attr1st<span class="op">=</span><span class="va">True</span>), <span class="st">'python'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>hl_md(html2ft(h, attr1st<span class="op">=</span><span class="va">True</span>), <span class="st">'python'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<div class="sourceCode" id="cb62"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>Form(</span>
-<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>    Fieldset(name<span class="op">=</span><span class="st">'stuff'</span>)(</span>
-<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a>        Input(value<span class="op">=</span><span class="st">'Profit'</span>, <span class="bu">id</span><span class="op">=</span><span class="st">'title'</span>, name<span class="op">=</span><span class="st">'title'</span>, cls<span class="op">=</span><span class="st">'char'</span>)(),</span>
-<span id="cb62-4"><a href="#cb62-4" aria-hidden="true" tabindex="-1"></a>        Label(cls<span class="op">=</span><span class="st">'px-2'</span>)(</span>
-<span id="cb62-5"><a href="#cb62-5" aria-hidden="true" tabindex="-1"></a>            Input(<span class="bu">type</span><span class="op">=</span><span class="st">'checkbox'</span>, name<span class="op">=</span><span class="st">'done'</span>, data_foo<span class="op">=</span><span class="st">'bar'</span>, checked<span class="op">=</span><span class="st">'1'</span>, cls<span class="op">=</span><span class="st">'checkboxer'</span>)(),</span>
-<span id="cb62-6"><a href="#cb62-6" aria-hidden="true" tabindex="-1"></a>            <span class="st">'Done'</span></span>
-<span id="cb62-7"><a href="#cb62-7" aria-hidden="true" tabindex="-1"></a>        ),</span>
-<span id="cb62-8"><a href="#cb62-8" aria-hidden="true" tabindex="-1"></a>        Input(<span class="bu">type</span><span class="op">=</span><span class="st">'hidden'</span>, <span class="bu">id</span><span class="op">=</span><span class="st">'id'</span>, name<span class="op">=</span><span class="st">'id'</span>, value<span class="op">=</span><span class="st">'2'</span>)(),</span>
-<span id="cb62-9"><a href="#cb62-9" aria-hidden="true" tabindex="-1"></a>        Select(name<span class="op">=</span><span class="st">'opt'</span>)(</span>
-<span id="cb62-10"><a href="#cb62-10" aria-hidden="true" tabindex="-1"></a>            Option(value<span class="op">=</span><span class="st">'a'</span>)(),</span>
-<span id="cb62-11"><a href="#cb62-11" aria-hidden="true" tabindex="-1"></a>            Option(value<span class="op">=</span><span class="st">'b'</span>, selected<span class="op">=</span><span class="st">'1'</span>)()</span>
-<span id="cb62-12"><a href="#cb62-12" aria-hidden="true" tabindex="-1"></a>        ),</span>
-<span id="cb62-13"><a href="#cb62-13" aria-hidden="true" tabindex="-1"></a>        Textarea(<span class="bu">id</span><span class="op">=</span><span class="st">'details'</span>, name<span class="op">=</span><span class="st">'details'</span>)(<span class="st">'Details'</span>),</span>
-<span id="cb62-14"><a href="#cb62-14" aria-hidden="true" tabindex="-1"></a>        Button()(<span class="st">'Save'</span>)</span>
-<span id="cb62-15"><a href="#cb62-15" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb62-16"><a href="#cb62-16" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb50"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>Form(</span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>    Fieldset(name<span class="op">=</span><span class="st">'stuff'</span>)(</span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>        Input(value<span class="op">=</span><span class="st">'Profit'</span>, <span class="bu">id</span><span class="op">=</span><span class="st">'title'</span>, name<span class="op">=</span><span class="st">'title'</span>, cls<span class="op">=</span><span class="st">'char'</span>)(),</span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>        Label(cls<span class="op">=</span><span class="st">'px-2'</span>)(</span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a>            Input(<span class="bu">type</span><span class="op">=</span><span class="st">'checkbox'</span>, name<span class="op">=</span><span class="st">'done'</span>, data_foo<span class="op">=</span><span class="st">'bar'</span>, checked<span class="op">=</span><span class="st">'1'</span>, cls<span class="op">=</span><span class="st">'checkboxer'</span>)(),</span>
+<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a>            <span class="st">'Done'</span></span>
+<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a>        ),</span>
+<span id="cb50-8"><a href="#cb50-8" aria-hidden="true" tabindex="-1"></a>        Input(<span class="bu">type</span><span class="op">=</span><span class="st">'hidden'</span>, <span class="bu">id</span><span class="op">=</span><span class="st">'id'</span>, name<span class="op">=</span><span class="st">'id'</span>, value<span class="op">=</span><span class="st">'2'</span>)(),</span>
+<span id="cb50-9"><a href="#cb50-9" aria-hidden="true" tabindex="-1"></a>        Select(name<span class="op">=</span><span class="st">'opt'</span>)(</span>
+<span id="cb50-10"><a href="#cb50-10" aria-hidden="true" tabindex="-1"></a>            Option(value<span class="op">=</span><span class="st">'a'</span>)(),</span>
+<span id="cb50-11"><a href="#cb50-11" aria-hidden="true" tabindex="-1"></a>            Option(value<span class="op">=</span><span class="st">'b'</span>, selected<span class="op">=</span><span class="st">'1'</span>)()</span>
+<span id="cb50-12"><a href="#cb50-12" aria-hidden="true" tabindex="-1"></a>        ),</span>
+<span id="cb50-13"><a href="#cb50-13" aria-hidden="true" tabindex="-1"></a>        Textarea(<span class="bu">id</span><span class="op">=</span><span class="st">'details'</span>, name<span class="op">=</span><span class="st">'details'</span>)(<span class="st">'Details'</span>),</span>
+<span id="cb50-14"><a href="#cb50-14" aria-hidden="true" tabindex="-1"></a>        Button()(<span class="st">'Save'</span>)</span>
+<span id="cb50-15"><a href="#cb50-15" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb50-16"><a href="#cb50-16" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
+<div id="87e9e216" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-20T23:00:45.082607+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-20T23:00:45.084242+00:00&quot;,&quot;total&quot;:0.0016373330145142972}}" data-execution_count="35">
 <hr>
-<p><a href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/components.py#L246" target="_blank" style="float:right; font-size:smaller">source</a></p>
-</section>
 <section id="sse_message" class="level3">
 <h3 class="anchored" data-anchor-id="sse_message">sse_message</h3>
-<blockquote class="blockquote">
-<pre><code> sse_message (elm, event='message')</code></pre>
-</blockquote>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb51"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> sse_message(</span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>    elm, event:<span class="bu">str</span><span class="op">=</span><span class="st">'message'</span></span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>):</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><em>Convert element <code>elm</code> into a format suitable for SSE streaming</em></p>
+</section>
+</div>
 <div id="50d18540" class="cell">
-<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sse_message(Div(P(<span class="st">'hi'</span>), P(<span class="st">'there'</span>))))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb52"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sse_message(Div(P(<span class="st">'hi'</span>), P(<span class="st">'there'</span>))))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>event: message
 data: &lt;div&gt;
@@ -913,260 +960,281 @@ data: &lt;/div&gt;
 </section>
 <section id="tests" class="level2">
 <h2 class="anchored" data-anchor-id="tests">Tests</h2>
+<div id="54cccf7a" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-20T23:00:45.084351+00:00&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-20T23:00:45.106972+00:00&quot;,&quot;total&quot;:0.022622833028435707}}" data-execution_count="36">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb54"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> bs4 <span class="im">import</span> BeautifulSoup, Comment</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 <div id="517bcd86" class="cell">
-<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>test_html2ft(<span class="st">'&lt;input value="Profit" name="title" id="title" class="char"&gt;'</span>, attr1st<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>test_html2ft(<span class="st">'&lt;input value="Profit" name="title" id="title" class="char"&gt;'</span>)</span>
-<span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a>test_html2ft(<span class="st">'&lt;div id="foo"&gt;&lt;/div&gt;'</span>)</span>
-<span id="cb66-4"><a href="#cb66-4" aria-hidden="true" tabindex="-1"></a>test_html2ft(<span class="st">'&lt;div id="foo"&gt;hi&lt;/div&gt;'</span>)</span>
-<span id="cb66-5"><a href="#cb66-5" aria-hidden="true" tabindex="-1"></a>test_html2ft(<span class="st">'&lt;div x-show="open" x-transition:enter="transition duration-300" x-transition:enter-start="opacity-0 scale-90"&gt;Hello 👋&lt;/div&gt;'</span>)</span>
-<span id="cb66-6"><a href="#cb66-6" aria-hidden="true" tabindex="-1"></a>test_html2ft(<span class="st">'&lt;div x-transition:enter.scale.80 x-transition:leave.scale.90&gt;hello&lt;/div&gt;'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb55"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>test_html2ft(<span class="st">'&lt;input value="Profit" name="title" id="title" class="char"&gt;'</span>, attr1st<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>test_html2ft(<span class="st">'&lt;input value="Profit" name="title" id="title" class="char"&gt;'</span>)</span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>test_html2ft(<span class="st">'&lt;div id="foo"&gt;&lt;/div&gt;'</span>)</span>
+<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a>test_html2ft(<span class="st">'&lt;div id="foo"&gt;hi&lt;/div&gt;'</span>)</span>
+<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a>test_html2ft(<span class="st">'&lt;div&gt;Howdy &lt;a href="https://answer.ai"&gt;answer&lt;/a&gt; how are you?&lt;/div&gt;'</span>)</span>
+<span id="cb55-6"><a href="#cb55-6" aria-hidden="true" tabindex="-1"></a>test_html2ft(<span class="st">'&lt;div x-show="open" x-transition:enter="transition duration-300" x-transition:enter-start="opacity-0 scale-90"&gt;Hello 👋&lt;/div&gt;'</span>)</span>
+<span id="cb55-7"><a href="#cb55-7" aria-hidden="true" tabindex="-1"></a>test_html2ft(<span class="st">'&lt;div x-transition:enter.scale.80 x-transition:leave.scale.90&gt;hello&lt;/div&gt;'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="99773c69" class="cell">
-<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> html2ft(<span class="st">'&lt;div id="foo"&gt;hi&lt;/div&gt;'</span>, attr1st<span class="op">=</span><span class="va">True</span>) <span class="op">==</span> <span class="st">"Div(id='foo')('hi')"</span></span>
-<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> html2ft(<span class="st">'&lt;div id="foo" hidden&gt;hi&lt;/div&gt;'</span>, attr1st<span class="op">=</span><span class="va">True</span>) <span class="op">==</span> <span class="st">"Div(id='foo', hidden=True)('hi')"</span></span>
-<span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> html2ft(<span class="st">"""</span></span>
-<span id="cb67-4"><a href="#cb67-4" aria-hidden="true" tabindex="-1"></a><span class="st">  &lt;div x-show="open" x-transition:enter="transition duration-300" x-transition:enter-start="opacity-0 scale-90"&gt;Hello 👋&lt;/div&gt;</span></span>
-<span id="cb67-5"><a href="#cb67-5" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>) <span class="op">==</span> <span class="st">"Div('Hello 👋', x_show='open', **{'x-transition:enter': 'transition duration-300', 'x-transition:enter-start': 'opacity-0 scale-90'})"</span></span>
-<span id="cb67-6"><a href="#cb67-6" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> html2ft(<span class="st">'&lt;div x-transition:enter.scale.80 x-transition:leave.scale.90&gt;hello&lt;/div&gt;'</span>) <span class="op">==</span> <span class="st">"Div('hello', **{'x-transition:enter.scale.80': True, 'x-transition:leave.scale.90': True})"</span></span>
-<span id="cb67-7"><a href="#cb67-7" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> html2ft(<span class="st">"&lt;img alt=' ' /&gt;"</span>) <span class="op">==</span> <span class="st">"Img(alt=' ')"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb56"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> html2ft(<span class="st">'&lt;div id="foo"&gt;hi&lt;/div&gt;'</span>, attr1st<span class="op">=</span><span class="va">True</span>) <span class="op">==</span> <span class="st">"Div(id='foo')('hi')"</span></span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> html2ft(<span class="st">'&lt;div id="foo" hidden&gt;hi&lt;/div&gt;'</span>, attr1st<span class="op">=</span><span class="va">True</span>) <span class="op">==</span> <span class="st">"Div(id='foo', hidden=True)('hi')"</span></span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> html2ft(<span class="st">"""</span></span>
+<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a><span class="st">  &lt;div x-show="open" x-transition:enter="transition duration-300" x-transition:enter-start="opacity-0 scale-90"&gt;Hello 👋&lt;/div&gt;</span></span>
+<span id="cb56-5"><a href="#cb56-5" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>) <span class="op">==</span> <span class="st">"Div('Hello 👋', x_show='open', **{'x-transition:enter': 'transition duration-300', 'x-transition:enter-start': 'opacity-0 scale-90'})"</span></span>
+<span id="cb56-6"><a href="#cb56-6" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> html2ft(<span class="st">'&lt;div x-transition:enter.scale.80 x-transition:leave.scale.90&gt;hello&lt;/div&gt;'</span>) <span class="op">==</span> <span class="st">"Div('hello', **{'x-transition:enter.scale.80': True, 'x-transition:leave.scale.90': True})"</span></span>
+<span id="cb56-7"><a href="#cb56-7" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> html2ft(<span class="st">"&lt;img alt=' ' /&gt;"</span>) <span class="op">==</span> <span class="st">"Img(alt=' ')"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>“## Export -</p>
 
 
 </section>
 
 </main> <!-- /main -->
+<script type="application/javascript">
+// Fix CommonMark link bug where Quarto JS changes index.html.md to .md
+// Use setTimeout to run after Quarto's JS has finished mangling the href
+document.addEventListener('DOMContentLoaded', function() {
+  setTimeout(function() {
+    document.querySelectorAll('a[data-original-href*="index.html.md"]').forEach(link => {
+      if (link.dataset.originalHref) { link.href = link.dataset.originalHref; }
+    });
+  }, 100);
+});
+</script>
 <script id="quarto-html-after-body" type="application/javascript">
-window.document.addEventListener("DOMContentLoaded", function (event) {
-  const toggleBodyColorMode = (bsSheetEl) => {
-    const mode = bsSheetEl.getAttribute("data-mode");
-    const bodyEl = window.document.querySelector("body");
-    if (mode === "dark") {
-      bodyEl.classList.add("quarto-dark");
-      bodyEl.classList.remove("quarto-light");
-    } else {
-      bodyEl.classList.add("quarto-light");
-      bodyEl.classList.remove("quarto-dark");
-    }
-  }
-  const toggleBodyColorPrimary = () => {
-    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-    if (bsSheetEl) {
-      toggleBodyColorMode(bsSheetEl);
-    }
-  }
-  toggleBodyColorPrimary();  
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
-  const isCodeAnnotation = (el) => {
-    for (const clz of el.classList) {
-      if (clz.startsWith('code-annotation-')) {                     
-        return true;
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
       }
+      return false;
     }
-    return false;
-  }
-  const onCopySuccess = function(e) {
-    // button target
-    const button = e.trigger;
-    // don't keep focus
-    button.blur();
-    // flash "checked"
-    button.classList.add('code-copy-button-checked');
-    var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Copied!");
-    let tooltip;
-    if (window.bootstrap) {
-      button.setAttribute("data-bs-toggle", "tooltip");
-      button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Copied!");
-      tooltip = new bootstrap.Tooltip(button, 
-        { trigger: "manual", 
-          customClass: "code-copy-button-tooltip",
-          offset: [0, -8]});
-      tooltip.show();    
-    }
-    setTimeout(function() {
-      if (tooltip) {
-        tooltip.hide();
-        button.removeAttribute("data-bs-title");
-        button.removeAttribute("data-bs-toggle");
-        button.removeAttribute("data-bs-placement");
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
       }
-      button.setAttribute("title", currentTitle);
-      button.classList.remove('code-copy-button-checked');
-    }, 1000);
-    // clear code selection
-    e.clearSelection();
-  }
-  const getTextToCopy = function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
       for (const childEl of codeEl.children) {
         if (isCodeAnnotation(childEl)) {
           childEl.remove();
         }
       }
       return codeEl.innerText;
-  }
-  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-    text: getTextToCopy
-  });
-  clipboard.on('success', onCopySuccess);
-  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-      text: getTextToCopy,
-      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
     });
-    clipboardModal.on('success', onCopySuccess);
-  }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/www\.fastht\.ml\/docs\/");
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
     }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/www\.fastht\.ml\/docs");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
-    }
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-    const config = {
-      allowHTML: true,
-      maxWidth: 500,
-      delay: 100,
-      arrow: false,
-      appendTo: function(el) {
-          return el.parentElement;
-      },
-      interactive: true,
-      interactiveBorder: 10,
-      theme: 'quarto',
-      placement: 'bottom-start',
-    };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
-    window.tippy(el, config); 
-  }
-  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-  for (var i=0; i<noterefs.length; i++) {
-    const ref = noterefs[i];
-    tippyHover(ref, function() {
-      // use id or data attribute instead here
-      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-      try { href = new URL(href).hash; } catch {}
-      const id = href.replace(/^#\/?/, "");
-      const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
-    });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
-        }
-      }
-    }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
-          } else {
-            container.appendChild(child.cloneNode(true));
-            break;
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
           }
         }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
         }
-        return container.innerHTML
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
       } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
         if (window.Quarto?.typesetMath) {
           window.Quarto.typesetMath(note);
         }
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
       }
     }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
           }
         } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
           .then(res => res.text())
           .then(html => {
             const parser = new DOMParser();
             const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
+            const note = htmlDoc.querySelector('main.content');
             if (note !== null) {
-              const html = processXRef(id, note);
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
               instance.setContent(html);
             } 
           }).finally(() => {
@@ -1174,185 +1242,161 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
-    });
-  }
-      let selectedAnnoteEl;
-      const selectorForAnnotation = ( cell, annotation) => {
-        let cellAttr = 'data-code-cell="' + cell + '"';
-        let lineAttr = 'data-code-annotation="' +  annotation + '"';
-        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-        return selector;
-      }
-      const selectCodeLines = (annoteEl) => {
-        const doc = window.document;
-        const targetCell = annoteEl.getAttribute("data-target-cell");
-        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-        const lineIds = lines.map((line) => {
-          return targetCell + "-" + line;
-        })
-        let top = null;
-        let height = null;
-        let parent = null;
-        if (lineIds.length > 0) {
-            //compute the position of the single el (top and bottom and make a div)
-            const el = window.document.getElementById(lineIds[0]);
-            top = el.offsetTop;
-            height = el.offsetHeight;
-            parent = el.parentElement.parentElement;
-          if (lineIds.length > 1) {
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-            height = bottom - top;
-          }
-          if (top !== null && height !== null && parent !== null) {
-            // cook up a div (if necessary) and position it 
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
-            }
-            div.style.top = top - 2 + "px";
-            div.style.height = height + 4 + "px";
-            div.style.left = 0;
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
-            }
-            gutterDiv.style.top = top - 2 + "px";
-            gutterDiv.style.height = height + 4 + "px";
-          }
-          selectedAnnoteEl = annoteEl;
-        }
-      };
-      const unselectCodeLines = () => {
-        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-        elementsIds.forEach((elId) => {
-          const div = window.document.getElementById(elId);
-          if (div) {
-            div.remove();
-          }
-        });
-        selectedAnnoteEl = undefined;
-      };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
-          }
-        });
-      }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
-      }
-    } else {
-      return undefined;
-    }
-  };
-  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-  for (var i=0; i<bibliorefs.length; i++) {
-    const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
-          }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
+      }, function(instance) {
       });
     }
-  }
-});
-</script>
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
 </div> <!-- /content -->
 
 

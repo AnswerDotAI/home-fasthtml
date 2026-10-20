@@ -2,7 +2,7 @@
 set -eux
 
 pushd ../fasthtml
-nbdev_docs
+nbdev-docs
 popd
 cp -r ../fasthtml/_docs/* docs/
 tools/sitemap.py

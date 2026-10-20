@@ -192,10 +192,8 @@ Every 5 seconds get the tstamps stored in the DB.
 > **Tip**
 >
 > In the example above we use a synchronous background task function set
-> in the
-> [`FtResponse`](https://www.fastht.ml/docs/api/core.html#ftresponse) of
-> a synchronous handler. However, we can also use asynchronous functions
-> and handlers.
+> in the `FtResponse` of a synchronous handler. However, we can also use
+> asynchronous functions and handlers.
 
 </div>
 

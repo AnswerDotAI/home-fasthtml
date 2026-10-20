@@ -141,9 +141,6 @@ tutorials, notebooks, libraries, and components:
 - [FastHTML Gallery](https://gallery.fastht.ml): Learn from minimal
   examples of components (ie chat bubbles, click-to-edit, infinite
   scroll, etc)
-- [Creating Custom FastHTML Tags for Markdown
-  Rendering](https://isaac-flath.github.io/website/posts/boots/FasthtmlTutorial.html)
-  by Isaac Flath
 - [How to Build a Simple Login System in
   FastHTML](https://blog.mariusvach.com/posts/login-fasthtml) by Marius
   Vach

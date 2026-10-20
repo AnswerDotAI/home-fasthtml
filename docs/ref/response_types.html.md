@@ -40,10 +40,9 @@ instantiate them with the `fast_app` function.
 cli = Client(app)
 ```
 
-FastHTML comes with the test client named
-[`Client`](https://www.fastht.ml/docs/api/core.html#client). It allows
-us to test handlers via a simple interface where `.get()` is a
-`HTTP GET` request, `.post()` is a `HTTP POST` request.
+FastHTML comes with the test client named `Client`. It allows us to test
+handlers via a simple interface where `.get()` is a `HTTP GET` request,
+`.post()` is a `HTTP POST` request.
 
 ## FT Component Response
 
@@ -72,9 +71,8 @@ print(cli.get('/ft').text)
 def get(): return Redirect('https://fastht.ml/')
 ```
 
-Here in this route handler,
-[`Redirect`](https://www.fastht.ml/docs/api/core.html#redirect)
-redirects the user’s browser to the new URL ‘https://fastht.ml/’
+Here in this route handler, `Redirect` redirects the user’s browser to
+the new URL ‘https://fastht.ml/’
 
 ``` python
 resp = cli.get('/rr')

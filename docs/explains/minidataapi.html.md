@@ -119,6 +119,10 @@ connecting to a DB is *not* part of this API, but part of the underlying
 library. For instance, for fastlite:
 
 ``` python
+from fastlite import *
+```
+
+``` python
 db = database(':memory:')
 ```
 

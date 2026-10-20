@@ -7,5 +7,43 @@
       "/tutorials/e2e.html",
       "/tutorials/jupyter_and_fasthtml.html"
     ]
+  },
+  {
+    "listing": "/api/index.html",
+    "items": [
+      "/api/cli.html",
+      "/api/xtend.html",
+      "/api/components.html",
+      "/api/core.html",
+      "/api/js.html",
+      "/api/jupyter.html",
+      "/api/oauth.html",
+      "/api/pico.html",
+      "/api/svg.html"
+    ]
+  },
+  {
+    "listing": "/explains/index.html",
+    "items": [
+      "/explains/explaining_xt_components.html",
+      "/explains/background_tasks.html",
+      "/explains/faq.html",
+      "/explains/minidataapi.html",
+      "/explains/oauth.html",
+      "/explains/routes.html",
+      "/explains/stripe.html",
+      "/explains/websockets.html"
+    ]
+  },
+  {
+    "listing": "/ref/index.html",
+    "items": [
+      "/ref/concise_guide.html",
+      "/ref/defining_xt_component.html",
+      "/ref/best_practice.html",
+      "/ref/handlers.html",
+      "/ref/live_reload.html",
+      "/ref/response_types.html"
+    ]
   }
 ]

@@ -45,10 +45,9 @@ def index():
     )
 ```
 
-Create a `server` object using
-[`JupyUvi`](https://www.fastht.ml/docs/api/jupyter.html#jupyuvi), which
-also starts Uvicorn. The `server` runs in a separate thread from
-Jupyter, so it can use normal HTTP client functions in a notebook.
+Create a `server` object using `JupyUvi`, which also starts Uvicorn. The
+`server` runs in a separate thread from Jupyter, so it can use normal
+HTTP client functions in a notebook.
 
 ``` python
 server = JupyUvi(app)
@@ -62,11 +61,10 @@ document.body.addEventListener('htmx:configRequest', (event) => {
 });
 </script>
 
-The [`HTMX`](https://www.fastht.ml/docs/api/jupyter.html#htmx) callable
-displays the server’s HTMX application in an iframe which can be
-displayed by Jupyter notebook. Pass in the same `port` variable used in
-the [`JupyUvi`](https://www.fastht.ml/docs/api/jupyter.html#jupyuvi)
-callable above or leave it blank to use the default (8000).
+The `HTMX` callable displays the server’s HTMX application in an iframe
+which can be displayed by Jupyter notebook. Pass in the same `port`
+variable used in the `JupyUvi` callable above or leave it blank to use
+the default (8000).
 
 ``` python
 # This doesn't display in the docs - uncomment and run it to see it in action
@@ -91,14 +89,18 @@ where `PORT` is usually the default 8000, so in most cases just click
 ## Graceful shutdowns
 
 Use the `server.stop()` function displayed below. If you restart Jupyter
-without calling this line the thread may not be released and the
-[`HTMX`](https://www.fastht.ml/docs/api/jupyter.html#htmx) callable
-above may throw errors. If that happens, a quick temporary fix is to
-specify a different port number in JupyUvi and HTMX with the `port`
-parameter.
+without calling this line the thread may not be released and the `HTMX`
+callable above may throw errors. If that happens, a quick temporary fix
+is to specify a different port number in JupyUvi and HTMX with the
+`port` parameter.
 
-Cleaner solutions to the dangling thread are to kill the dangling thread
-(dependant on each operating system) or restart the computer.
+For notebook tests, another option is to start the server with
+`JupyUvi(app, daemon=True)`, which allows the process to exit cleanly
+even if a failed test never reaches `server.stop()`.
+
+For long-lived interactive notebook sessions, if you still end up with a
+dangling non-daemon thread, the remaining options are to kill the thread
+(depending on your operating system) or restart the computer.
 
 ``` python
 server.stop()

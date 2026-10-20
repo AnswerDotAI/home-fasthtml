@@ -11,106 +11,127 @@ from httpx import get, AsyncClient
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/jupyter.py#L21"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
 ### nb_serve
 
->  nb_serve (app, log_level='error', port=8000, host='0.0.0.0', **kwargs)
+``` python
+def nb_serve(
+    app, log_level:str='error', port:int=8000, host:str='0.0.0.0', daemon:bool=False, **kwargs
+):
+```
 
 *Start a Jupyter compatible uvicorn server with ASGI `app` on `port`
-with `log_level`*
+with `log_level`; use `daemon=True` for notebook tests so failed runs
+don’t block process shutdown*
 
 ------------------------------------------------------------------------
-
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/jupyter.py#L31"
-target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### nb_serve_async
 
->  nb_serve_async (app, log_level='error', port=8000, host='0.0.0.0',
->                      **kwargs)
+``` python
+async def nb_serve_async(
+    app, log_level:str='error', port:int=8000, host:str='0.0.0.0', **kwargs
+):
+```
 
-*Async version of
-[`nb_serve`](https://www.fastht.ml/docs/api/jupyter.html#nb_serve)*
-
-------------------------------------------------------------------------
-
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/jupyter.py#L39"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
-### is_port_free
-
->  is_port_free (port, host='localhost')
-
-*Check if `port` is free on `host`*
-
-------------------------------------------------------------------------
-
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/jupyter.py#L50"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
-### wait_port_free
-
->  wait_port_free (port, host='localhost', max_wait=3)
-
-*Wait for `port` to be free on `host`*
+*Async version of `nb_serve`*
 
 ## Using FastHTML in Jupyter
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/components.py#L128"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
 ### show
 
->  show (*s, iframe=False, height='auto', style=None)
+``` python
+def show(
+    *s, iframe:bool=False, height:str='auto', style:NoneType=None
+):
+```
 
 *Same as fasthtml.components.show, but also adds `htmx.process()`*
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/jupyter.py#L65"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
 ### render_ft
 
->  render_ft ()
+``` python
+def render_ft(
+    **kw
+):
+```
+
+*Call once in a notebook or solveit dialog to auto-render components
+with HTMX support*
 
 ------------------------------------------------------------------------
-
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/jupyter.py#L70"
-target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### htmx_config_port
 
->  htmx_config_port (port=8000)
+``` python
+def htmx_config_port(
+    port:int=8000
+):
+```
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/jupyter.py#L81"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
 ### JupyUvi
 
->  JupyUvi (app, log_level='error', host='0.0.0.0', port=8000, start=True,
->               **kwargs)
+``` python
+def JupyUvi(
+    app, log_level:str='error', host:str='0.0.0.0', port:int=8000, start:bool=True, live:bool=False,
+    live_rt:str='/_lr', daemon:bool=False, **kwargs
+):
+```
 
 *Start and stop a Jupyter compatible uvicorn server with ASGI `app` on
 `port` with `log_level`*
 
+## Live Browser Refresh:
+
+Since JupyUvi doesn’t restart the uvicorn process, and
+`FastHTMLWithLiveReload` relies on the websocket connection dropping to
+trigger a reload, we use a custom SSE implementation to add live client
+reloads to JupyUvi, controlled via the `live` param.
+
+The logic flows as follows:
+
+- A version number is stored as a private attr on the instance:
+  `self._live_ver = 0`
+- `_setup_live()` then sets up the app to handle browser refreshes:
+  1.  The `live_rt = '/_lr'` controls what endpoint the SSE generator
+      will be attached to on the app. This is normalised w/ a fallback
+      to ensure the endpoint works correctly.
+  2.  A Script tag is appended to the global app headers to ensure all
+      standard routes connect to the SSE endpoint when opened in a
+      client. It connects to the path `self.live_rt` and listens for a
+      `data: reload` event from the SSE endpoint. On receiving this, a
+      browser reload is triggered via `navigation.reload()`.
+  3.  The route is registered on the app passed through to `JupyUvi`,
+      and the generator (detailed below) is served from the
+      `EventStream` response.
+  4.  A callback is attached to the Ipython event `'post_run_cell'`,
+      which is triggered after a cell/ code has been executed in the
+      kernel and returned. We incremement the `JupyUvi` version
+      attribute each time a cell has been run to completion.
+- `_live_sse` is the generator served from our SSE endpoint, which does
+  the following:
+  1.  Creates a reference to the global version number, since a
+      generator is created fresh for each connected client.
+  2.  Create a `while` loop to poll the global version number -\>
+      generator’s version to check for code changes.
+      `self.server.should_exit` is set via `stop()`, so all generators
+      exit immediately when `stop()` is called so open connections don’t
+      hang.
+  3.  If the client/generators version doesn’t match the instance
+      version (code has been run in the kernel since the last loop
+      iteration), we send a `data: reload` event to the `EventSource`
+      listener and trigger a browser reload for each non-matching
+      client.
+
 Creating an object of this class also starts the Uvicorn server. It runs
 in a separate thread, so you can use normal HTTP client functions in a
-notebook.
+notebook. Pass `daemon=True` for notebook tests if you want the process
+to exit cleanly even when a failing test never reaches `server.stop()`.
 
 ``` python
 app = FastHTML()
@@ -122,14 +143,6 @@ def index(): return 'hi'
 port = 8000
 server = JupyUvi(app, port=port)
 ```
-
-<script>
-document.body.addEventListener('htmx:configRequest', (event) => {
-    if(event.detail.path.includes('://')) return;
-    htmx.config.selfRequestsOnly=false;
-    event.detail.path = `${location.protocol}//${location.hostname}:8000${event.detail.path}`;
-});
-</script>
 
 ``` python
 get(f'http://localhost:{port}').text
@@ -144,30 +157,14 @@ without restarting the notebook or recreating the server or application.
 server.stop()
 ```
 
-``` python
-app = FastHTML()
-rt = app.route
-
-@app.route
-async def index(): return 'hi'
-
-server = JupyUvi(app, port=port, start=False)
-await server.start_async()
-```
-
-<script>
-document.body.addEventListener('htmx:configRequest', (event) => {
-    if(event.detail.path.includes('://')) return;
-    htmx.config.selfRequestsOnly=false;
-    event.detail.path = `${location.protocol}//${location.hostname}:8000${event.detail.path}`;
-});
-</script>
+A good way to avoid spinning up two servers when running all the
+notebooks cells is to check whether the `server` variable is already
+defined, and stop if it is the case.
 
 ``` python
-print((await AsyncClient().get(f'http://localhost:{port}')).text)
+if 'server' in globals(): server.stop()
+server.start()
 ```
-
-    hi
 
 ``` python
 server.stop()
@@ -175,14 +172,13 @@ server.stop()
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/jupyter.py#L101"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
 ### JupyUviAsync
 
->  JupyUviAsync (app, log_level='error', host='0.0.0.0', port=8000,
->                    **kwargs)
+``` python
+def JupyUviAsync(
+    app, log_level:str='error', host:str='0.0.0.0', port:int=8000, **kwargs
+):
+```
 
 *Start and stop an async Jupyter compatible uvicorn server with ASGI
 `app` on `port` with `log_level`*
@@ -191,14 +187,6 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 server = JupyUviAsync(app, port=port)
 await server.start()
 ```
-
-<script>
-document.body.addEventListener('htmx:configRequest', (event) => {
-    if(event.detail.path.includes('://')) return;
-    htmx.config.selfRequestsOnly=false;
-    event.detail.path = `${location.protocol}//${location.hostname}:8000${event.detail.path}`;
-});
-</script>
 
 ``` python
 async with AsyncClient() as client:
@@ -209,7 +197,7 @@ print(r.text)
     hi
 
 ``` python
-server.stop()
+await server.stop()
 ```
 
 ### Using a notebook as a web app
@@ -224,9 +212,8 @@ automatically generated if not provided.
 fh_cfg['auto_id' ]=True
 ```
 
-After importing `fasthtml.jupyter` and calling
-[`render_ft()`](https://www.fastht.ml/docs/api/jupyter.html#render_ft),
-FT components render directly in the notebook.
+After importing `fasthtml.jupyter` and calling `render_ft()`, FT
+components render directly in the notebook.
 
 ``` python
 show(*def_hdrs())
@@ -235,7 +222,7 @@ render_ft()
 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.4/dist/htmx.min.js"></script><script src="https://cdn.jsdelivr.net/gh/answerdotai/fasthtml-js@1.0.12/fasthtml.js"></script><script src="https://cdn.jsdelivr.net/gh/answerdotai/surreal@main/surreal.js"></script><script src="https://cdn.jsdelivr.net/gh/gnat/css-scope-inline@main/script.js"></script><script id="_DHTp7k3SRbaeAjPb6FGNOw">if (window.htmx) htmx.process(document.body)</script>
+<script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.7/dist/htmx.js"></script><script src="https://cdn.jsdelivr.net/gh/answerdotai/fasthtml-js@1.0.12/fasthtml.js"></script><script src="https://cdn.jsdelivr.net/gh/answerdotai/surreal@main/surreal.js"></script><script src="https://cdn.jsdelivr.net/gh/gnat/css-scope-inline@main/script.js"></script><script id="_qGWpz_dLTJO1cUIYhAALpg">if (window.htmx) htmx.process(document.body)</script>
 
 Handlers are written just like a regular web app:
 
@@ -243,25 +230,15 @@ Handlers are written just like a regular web app:
 server = JupyUvi(app, port=port)
 ```
 
-<script>
-document.body.addEventListener('htmx:configRequest', (event) => {
-    if(event.detail.path.includes('://')) return;
-    htmx.config.selfRequestsOnly=false;
-    event.detail.path = `${location.protocol}//${location.hostname}:8000${event.detail.path}`;
-});
-</script>
-
 ``` python
 (c := Div(''))
 ```
 
-<div id="_Uxpzz_26TZeN-kzFA6LeKg">
+<div class="prose" data-markdown="1">
 
-<div id="_9s4Pdqx7TxGcbe-7x7MKVQ">
-
-</div>
-
-<script id="_k1VVcEJeS3e1JxBePQpAnw">if (window.htmx) htmx.process(document.body)</script>
+``` html
+<div id="_fuWFj2wxSpiMTeGgQWAp-w"></div>
+```
 
 </div>
 
@@ -276,14 +253,11 @@ All the usual `hx_*` attributes can be used:
 P('not loaded', hx_get=hoho, hx_trigger='load')
 ```
 
-<div id="_evO_Voq9Qi_5b-1p0oZS0g">
+<div class="prose" data-markdown="1">
 
-<p hx-get="/hoho" hx-trigger="load" id="_gJNOsF9IQdmKesYSdh1qTA">
-
-not loaded
-</p>
-
-<script id="_ow7qEPILT7OQmBtdrWq9xQ">if (window.htmx) htmx.process(document.body)</script>
+``` html
+<p hx-get="/hoho" hx-trigger="load" id="_gVMtF7qDSACe_tlKedjqng">not loaded</p>
+```
 
 </div>
 
@@ -294,13 +268,11 @@ FT components can be used directly both as `id` values and as
 (c := Div(''))
 ```
 
-<div id="_knZLzRRZSa_OAxB-fR4ksQ">
+<div class="prose" data-markdown="1">
 
-<div id="_o4AwfFRyQWmVI9xjlOzMHA">
-
-</div>
-
-<script id="_y2CD7-QJS-6s7XTrdTdVZw">if (window.htmx) htmx.process(document.body)</script>
+``` html
+<div id="_yFhzv0uYS4GbME5nOsZZkA"></div>
+```
 
 </div>
 
@@ -310,14 +282,11 @@ def foo(): return Div('foo bar')
 P('hi', hx_get=foo, hx_trigger='load', hx_target=c)
 ```
 
-<div id="_irfLkUpwQxeAxNgcbzO7cA">
+<div class="prose" data-markdown="1">
 
-<p hx-get="/foo" hx-trigger="load" hx-target="#_o4AwfFRyQWmVI9xjlOzMHA" id="_RtkS_DHNSNWtnCdfdhuyoA">
-
-hi
-</p>
-
-<script id="_GaeLaNuzS9ifDsTnO6pHYw">if (window.htmx) htmx.process(document.body)</script>
+``` html
+<p hx-get="/foo" hx-trigger="load" hx-target="#_yFhzv0uYS4GbME5nOsZZkA" id="_10rmKFboQfKCzsdhN4Ce4w">hi</p>
+```
 
 </div>
 
@@ -328,20 +297,19 @@ server.stop()
 ### Running apps in an IFrame
 
 Using an IFrame can be a good idea to get complete isolation of the
-styles and scripts in an app. The
-[`HTMX`](https://www.fastht.ml/docs/api/jupyter.html#htmx) function
-creates an auto-sizing IFrame for a web app.
+styles and scripts in an app. The `HTMX` function creates an auto-sizing
+IFrame for a web app.
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/jupyter.py#L114"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
 ### HTMX
 
->  HTMX (path='/', host='localhost', app=None, port=8000, height='auto',
->            link=False, iframe=True)
+``` python
+def HTMX(
+    path:str='/', host:str='localhost', app:NoneType=None, port:int=8000, height:str='auto', link:bool=False,
+    iframe:bool=True, client:NoneType=None
+):
+```
 
 *An iframe which displays the HTMX application in a notebook.*
 
@@ -363,16 +331,9 @@ server.start()
 
 ``` python
 # Run the notebook locally to see the HTMX iframe in action
-HTMX()
+# Do not commit the outputs because it will break SolveIT
+# HTMX()
 ```
-
-<iframe src="http://localhost:8000" style="width: 100%; height: auto; border: none;" onload="{
-        let frame = this;
-        window.addEventListener('message', function(e) {
-            if (e.source !== frame.contentWindow) return; // Only proceed if the message is from this iframe
-            if (e.data.height) frame.style.height = (e.data.height+1) + 'px';
-        }, false);
-    }" allow="accelerometer; autoplay; camera; clipboard-read; clipboard-write; display-capture; encrypted-media; fullscreen; gamepad; geolocation; gyroscope; hid; identity-credentials-get; idle-detection; magnetometer; microphone; midi; payment; picture-in-picture; publickey-credentials-get; screen-wake-lock; serial; usb; web-share; xr-spatial-tracking"></iframe> 
 
 ``` python
 server.stop()
@@ -380,11 +341,11 @@ server.stop()
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/jupyter.py#L137"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
 ### ws_client
 
->  ws_client (app, nm='', host='localhost', port=8000, ws_connect='/ws',
->                 frame=True, link=True, **kwargs)
+``` python
+def ws_client(
+    app, nm:str='', host:str='localhost', port:int=8000, ws_connect:str='/ws', frame:bool=True, link:bool=True,
+    **kwargs
+):
+```

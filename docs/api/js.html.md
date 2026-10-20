@@ -11,32 +11,15 @@ support is very simple anyway.
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/js.py#L16"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
 ### light_media
 
->  light_media (css:str)
+``` python
+def light_media(
+    css:str, # CSS to be included in the light media query
+):
+```
 
 *Render light media for day mode views*
-
-<table>
-<thead>
-<tr>
-<th></th>
-<th><strong>Type</strong></th>
-<th><strong>Details</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>css</td>
-<td>str</td>
-<td>CSS to be included in the light media query</td>
-</tr>
-</tbody>
-</table>
 
 ``` python
 light_media('.body {color: green;}')
@@ -48,32 +31,15 @@ light_media('.body {color: green;}')
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/js.py#L23"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
 ### dark_media
 
->  dark_media (css:str)
+``` python
+def dark_media(
+    css:str, # CSS to be included in the dark media query
+):
+```
 
 *Render dark media for night mode views*
-
-<table>
-<thead>
-<tr>
-<th></th>
-<th><strong>Type</strong></th>
-<th><strong>Details</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>css</td>
-<td>str</td>
-<td>CSS to be included in the dark media query</td>
-</tr>
-</tbody>
-</table>
 
 ``` python
 dark_media('.body {color: white;}')
@@ -85,34 +51,15 @@ dark_media('.body {color: white;}')
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/js.py#L35"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
 ### MarkdownJS
 
->  MarkdownJS (sel='.marked')
+``` python
+def MarkdownJS(
+    sel:str='.marked', # CSS selector for markdown elements
+):
+```
 
 *Implements browser-based markdown rendering.*
-
-<table>
-<thead>
-<tr>
-<th></th>
-<th><strong>Type</strong></th>
-<th><strong>Default</strong></th>
-<th><strong>Details</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>sel</td>
-<td>str</td>
-<td>.marked</td>
-<td>CSS selector for markdown elements</td>
-</tr>
-</tbody>
-</table>
 
 Usage example
 [here](../tutorials/quickstart_for_web_devs.html#rendering-markdown).
@@ -123,57 +70,16 @@ __file__ = '../../fasthtml/katex.js'
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/js.py#L43"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
 ### KatexMarkdownJS
 
->  KatexMarkdownJS (sel='.marked', inline_delim='$', display_delim='$$',
->                       math_envs=None)
-
-<table>
-<colgroup>
-<col style="width: 6%" />
-<col style="width: 25%" />
-<col style="width: 34%" />
-<col style="width: 34%" />
-</colgroup>
-<thead>
-<tr>
-<th></th>
-<th><strong>Type</strong></th>
-<th><strong>Default</strong></th>
-<th><strong>Details</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>sel</td>
-<td>str</td>
-<td>.marked</td>
-<td>CSS selector for markdown elements</td>
-</tr>
-<tr>
-<td>inline_delim</td>
-<td>str</td>
-<td>$</td>
-<td>Delimiter for inline math</td>
-</tr>
-<tr>
-<td>display_delim</td>
-<td>str</td>
-<td>$$</td>
-<td>Delimiter for long math</td>
-</tr>
-<tr>
-<td>math_envs</td>
-<td>NoneType</td>
-<td>None</td>
-<td>List of environments to render as display math</td>
-</tr>
-</tbody>
-</table>
+``` python
+def KatexMarkdownJS(
+    sel:str='.marked', # CSS selector for markdown elements
+    inline_delim:str='$', # Delimiter for inline math
+    display_delim:str='$$', # Delimiter for long math
+    math_envs:NoneType=None, # List of environments to render as display math
+):
+```
 
 KatexMarkdown usage example:
 
@@ -206,141 +112,43 @@ def get():
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/js.py#L58"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
 ### HighlightJS
 
->  HighlightJS (sel='pre code:not([data-highlighted="yes"])',
->                   langs:str|list|tuple='python', light='atom-one-light',
->                   dark='atom-one-dark')
+``` python
+def HighlightJS(
+    sel:str='pre code:not([data-highlighted="yes"])', # CSS selector for code elements. Default is industry standard, be careful before adjusting it
+    langs:str | list | tuple='python', # Language(s) to highlight
+    light:str='atom-one-light', # Light theme
+    dark:str='atom-one-dark', # Dark theme
+):
+```
 
 *Implements browser-based syntax highlighting. Usage example
 [here](../tutorials/quickstart_for_web_devs.html#code-highlighting).*
 
-<table>
-<colgroup>
-<col style="width: 6%" />
-<col style="width: 25%" />
-<col style="width: 34%" />
-<col style="width: 34%" />
-</colgroup>
-<thead>
-<tr>
-<th></th>
-<th><strong>Type</strong></th>
-<th><strong>Default</strong></th>
-<th><strong>Details</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>sel</td>
-<td>str</td>
-<td>pre code:not([data-highlighted=“yes”])</td>
-<td>CSS selector for code elements. Default is industry standard, be
-careful before adjusting it</td>
-</tr>
-<tr>
-<td>langs</td>
-<td>str | list | tuple</td>
-<td>python</td>
-<td>Language(s) to highlight</td>
-</tr>
-<tr>
-<td>light</td>
-<td>str</td>
-<td>atom-one-light</td>
-<td>Light theme</td>
-</tr>
-<tr>
-<td>dark</td>
-<td>str</td>
-<td>atom-one-dark</td>
-<td>Dark theme</td>
-</tr>
-</tbody>
-</table>
-
 ------------------------------------------------------------------------
-
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/js.py#L81"
-target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### SortableJS
 
->  SortableJS (sel='.sortable', ghost_class='blue-background-class')
-
-<table>
-<colgroup>
-<col style="width: 6%" />
-<col style="width: 25%" />
-<col style="width: 34%" />
-<col style="width: 34%" />
-</colgroup>
-<thead>
-<tr>
-<th></th>
-<th><strong>Type</strong></th>
-<th><strong>Default</strong></th>
-<th><strong>Details</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>sel</td>
-<td>str</td>
-<td>.sortable</td>
-<td>CSS selector for sortable elements</td>
-</tr>
-<tr>
-<td>ghost_class</td>
-<td>str</td>
-<td>blue-background-class</td>
-<td>When an element is being dragged, this is the class used to
-distinguish it from the rest</td>
-</tr>
-</tbody>
-</table>
+``` python
+def SortableJS(
+    sel:str='.sortable', # CSS selector for sortable elements
+    ghost_class:str='blue-background-class', # When an element is being dragged, this is the class used to distinguish it from the rest
+):
+```
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/js.py#L92"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
 ### MermaidJS
 
->  MermaidJS (sel='.language-mermaid', theme='base')
+``` python
+def MermaidJS(
+    sel:str='.language-mermaid', # CSS selector for mermaid elements
+    theme:str='base', # Mermaid theme to use
+):
+```
 
 *Implements browser-based Mermaid diagram rendering.*
-
-<table>
-<thead>
-<tr>
-<th></th>
-<th><strong>Type</strong></th>
-<th><strong>Default</strong></th>
-<th><strong>Details</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>sel</td>
-<td>str</td>
-<td>.language-mermaid</td>
-<td>CSS selector for mermaid elements</td>
-</tr>
-<tr>
-<td>theme</td>
-<td>str</td>
-<td>base</td>
-<td>Mermaid theme to use</td>
-</tr>
-</tbody>
-</table>
 
 ``` python
 app, rt = fast_app(hdrs=[MermaidJS()])

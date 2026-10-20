@@ -189,9 +189,9 @@ write a properly formed web page. You’ll soon see the power of this
 approach.
 
 Line 9  
-The [`serve()`](https://www.fastht.ml/docs/api/core.html#serve) utility
-configures and runs FastHTML using a library called `uvicorn`. Any
-changes to this module will be reloaded into the browser.
+The `serve()` utility configures and runs FastHTML using a library
+called `uvicorn`. Any changes to this module will be reloaded into the
+browser.
 
 ## Adding dynamic content to our minimal app
 

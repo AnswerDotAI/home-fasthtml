@@ -11,11 +11,9 @@ from fasthtml.common import *
 
 FastHTML is a python library which brings together Starlette, Uvicorn,
 HTMX, and fastcore’s `FT` “FastTags” into a library for creating
-server-rendered hypermedia applications. The
-[`FastHTML`](https://www.fastht.ml/docs/api/core.html#fasthtml) class
-itself inherits from `Starlette`, and adds decorator-based routing with
-many additions, Beforeware, automatic `FT` to HTML rendering, and much
-more.
+server-rendered hypermedia applications. The `FastHTML` class itself
+inherits from `Starlette`, and adds decorator-based routing with many
+additions, Beforeware, automatic `FT` to HTML rendering, and much more.
 
 Things to remember when writing FastHTML apps:
 
@@ -28,14 +26,11 @@ Things to remember when writing FastHTML apps:
   similar capabilities to shadcn
 - FastHTML is compatible with JS-native web components and any vanilla
   JS library, but not with React, Vue, or Svelte
-- Use [`serve()`](https://www.fastht.ml/docs/api/core.html#serve) for
-  running uvicorn (`if __name__ == "__main__"` is not needed since it’s
-  automatic)
-- When a title is needed with a response, use
-  [`Titled`](https://www.fastht.ml/docs/api/xtend.html#titled); note
-  that that already wraps children in
-  [`Container`](https://www.fastht.ml/docs/api/pico.html#container), and
-  already includes both the meta title as well as the H1 element.
+- Use `serve()` for running uvicorn (`if __name__ == "__main__"` is not
+  needed since it’s automatic)
+- When a title is needed with a response, use `Titled`; note that that
+  already wraps children in `Container`, and already includes both the
+  meta title as well as the H1 element.
 
 ## Minimal App
 
@@ -148,9 +143,8 @@ to_xml(tags)
 
 ## JS
 
-The [`Script`](https://www.fastht.ml/docs/api/xtend.html#script)
-function allows you to include JavaScript. You can use Python to
-generate parts of your JS or JSON like this:
+The `Script` function allows you to include JavaScript. You can use
+Python to generate parts of your JS or JSON like this:
 
 ``` python
 # In future snippets this import will not be shown, but is required
@@ -238,9 +232,8 @@ app,rt = fast_app()
 
 When a route handler function is used as a fasttag attribute (such as
 `href`, `hx_get`, or `action`) it is converted to that route’s path.
-[`fill_form`](https://www.fastht.ml/docs/api/components.html#fill_form)
-is used to copy an object’s matching attrs into matching-name form
-fields.
+`fill_form` is used to copy an object’s matching attrs into
+matching-name form fields.
 
 ``` python
 @dataclass
@@ -323,8 +316,7 @@ app, rt = fast_app(exception_handlers=exception_handlers)
 
 ## Cookies
 
-We can set cookies using the
-[`cookie()`](https://www.fastht.ml/docs/api/core.html#cookie) function.
+We can set cookies using the `cookie()` function.
 
 ``` python
 @rt
@@ -370,9 +362,8 @@ def profile(req, sess, user_id: int=None):
                   Button("Logout", hx_post=logout))
 ```
 
-Handler functions can return the
-[`HtmxResponseHeaders`](https://www.fastht.ml/docs/api/core.html#htmxresponseheaders)
-object to set HTMX-specific response headers.
+Handler functions can return the `HtmxResponseHeaders` object to set
+HTMX-specific response headers.
 
 ``` python
 @rt
@@ -381,8 +372,8 @@ def htmlredirect(app): return HtmxResponseHeaders(location="http://example.org")
 
 ## APIRouter
 
-[`APIRouter`](https://www.fastht.ml/docs/api/core.html#apirouter) lets
-you organize routes across multiple files in a FastHTML app.
+`APIRouter` lets you organize routes across multiple files in a FastHTML
+app.
 
 ``` python
 # products.py
@@ -537,8 +528,8 @@ send = setup_ws(app, ws)
 
 ### Single File Uploads
 
-[`Form`](https://www.fastht.ml/docs/api/xtend.html#form) defaults to
-“multipart/form-data”. A Starlette UploadFile is passed to the handler.
+`Form` defaults to “multipart/form-data”. A Starlette UploadFile is
+passed to the handler.
 
 ``` python
 upload_dir = Path("filez")
@@ -704,9 +695,8 @@ def index():
 
 MonsterUI recommendations:
 
-- Use defaults as much as possible, for example
-  [`Container`](https://www.fastht.ml/docs/api/pico.html#container) in
-  monsterui already has defaults for margins
+- Use defaults as much as possible, for example `Container` in monsterui
+  already has defaults for margins
 - Use `*T` for button styling consistency, for example
   `cls=ButtonT.destructive` for a red delete button or
   `cls=ButtonT.primary` for a CTA button

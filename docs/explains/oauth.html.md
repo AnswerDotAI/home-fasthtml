@@ -71,7 +71,9 @@ that code:
   `redir_path='/redirect', error_path='/error', logout_path='/logout', login_path='/login'`.
   It will create and handle the redirect and logout paths, and it’s up
   to you to handle `/login` (where unsuccessful login attempts will be
-  redirected) and `/error` (for oauth errors).
+  redirected) and `/error` (for oauth errors, including a failed token
+  exchange, in which case the provider’s response body is in
+  `session['oauth_error']`).
 - When we run `oauth = Auth(app, client)` it adds the redirect and
   logout paths to the app and also adds some beforeware. This beforeware
   runs on any requests (apart from any specified with the `skip`
@@ -169,9 +171,7 @@ application’.
 
 After you register, you’ll see a screen where you can view the client ID
 and generate a client secret. Store these values in a safe place. You’ll
-use them to create a
-[`GitHubAppClient`](https://www.fastht.ml/docs/api/oauth.html#githubappclient)
-object in FastHTML.
+use them to create a `GitHubAppClient` object in FastHTML.
 
 This `client` object is responsible for handling the parts of the OAuth
 flow which depend on direct communication between your app and GitHub,
@@ -401,9 +401,8 @@ serve()
 
 Some things to note:
 
-- The [`before`](https://www.fastht.ml/docs/explains/stripe.html#before)
-  function is used to check if the user is authenticated. If not, they
-  are redirected to the login page.
+- The `before` function is used to check if the user is authenticated.
+  If not, they are redirected to the login page.
 - To log the user out, we remove the user ID from the session.
 - Calling `counts.xtra(name=auth)` ensures that only the row
   corresponding to the current user is accessible when responding to a
@@ -455,7 +454,7 @@ they can click “Run (Pro)” on the edit they’re working on. They click
 site. But now they’ve lost their in-progress edit and are left just
 looking at the homepage! This is an example of a case where you might
 want to keep track of some additional state. Another strong use case for
-being able to pass some uniqie state through the OAuth flow is to
+being able to pass some unique state through the OAuth flow is to
 prevent something called a [CSRF
 attack](https://en.wikipedia.org/wiki/Cross-site_request_forgery). To
 add a state string to the OAuth flow, include a `state` argument when

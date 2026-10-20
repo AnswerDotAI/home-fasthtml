@@ -55,8 +55,8 @@ write a properly formed web page. You’ll soon see the power of this
 approach.
 
 Line 9  
-The [`serve()`](https://www.fastht.ml/docs/api/core.html#serve) utility
-configures and runs FastHTML using a library called `uvicorn`.
+The `serve()` utility configures and runs FastHTML using a library
+called `uvicorn`.
 
 Run the code:
 
@@ -98,9 +98,8 @@ the image below:
 
 ## A Minimal Charting Application
 
-The [`Script`](https://www.fastht.ml/docs/api/xtend.html#script)
-function allows you to include JavaScript. You can use Python to
-generate parts of your JS or JSON like this:
+The `Script` function allows you to include JavaScript. You can use
+Python to generate parts of your JS or JSON like this:
 
 ``` python
 import json
@@ -299,9 +298,8 @@ On line 6 because the `get()` function name is used, this will handle
 HTTP GETs going to the `/` URI.
 
 Line 10  
-On line 10 because the
-[`post()`](https://www.fastht.ml/docs/explains/stripe.html#post)
-function name is used, this will handle HTTP POSTs going to the `/` URI.
+On line 10 because the `post()` function name is used, this will handle
+HTTP POSTs going to the `/` URI.
 
 ## CSS Files and Inline Styles
 
@@ -342,20 +340,18 @@ Line 7
 This will generate an HTML `<link>` tag for sourcing the css for Sakura.
 
 Line 8  
-If you want an inline styles, the
-[`Style()`](https://www.fastht.ml/docs/api/xtend.html#style) function
-will put the result into the HTML.
+If you want an inline styles, the `Style()` function will put the result
+into the HTML.
 
 ## Other Static Media File Locations
 
-As you saw, [`Script`](https://www.fastht.ml/docs/api/xtend.html#script)
-and `Link` are specific to the most common static media use cases in web
-apps: including JavaScript, CSS, and images. But it also works with
-videos and other static media files. The default behavior is to look for
-these files in the root directory - typically we don’t do anything
-special to include them. We can change the default directory that is
-looked in for files by adding the `static_path` parameter to the
-`fast_app` function.
+As you saw, `Script` and `Link` are specific to the most common static
+media use cases in web apps: including JavaScript, CSS, and images. But
+it also works with videos and other static media files. The default
+behavior is to look for these files in the root directory - typically we
+don’t do anything special to include them. We can change the default
+directory that is looked in for files by adding the `static_path`
+parameter to the `fast_app` function.
 
 ``` python
 app, rt = fast_app(static_path='public')
@@ -607,8 +603,7 @@ profile
 
     Profile(email='john@example.com', phone='123456789', age=5)
 
-Then add that data to the `profile_form` using FastHTML’s
-[`fill_form`](https://www.fastht.ml/docs/api/components.html#fill_form)
+Then add that data to the `profile_form` using FastHTML’s `fill_form`
 class:
 
 ``` python
@@ -627,6 +622,10 @@ fill_form(profile_form, profile)
 The usefulness of FastHTML forms becomes more apparent when they are
 combined with FastHTML views. We’ll show how this works by using the
 test client from above. First, let’s create a SQlite database:
+
+``` python
+from fastlite import database
+```
 
 ``` python
 db = database("profiles.db")
@@ -811,9 +810,8 @@ serve()
 
 ## Cookies
 
-We can set cookies using the
-[`cookie()`](https://www.fastht.ml/docs/api/core.html#cookie) function.
-In our example, we’ll create a `timestamp` cookie.
+We can set cookies using the `cookie()` function. In our example, we’ll
+create a `timestamp` cookie.
 
 ``` python
 from datetime import datetime
@@ -950,10 +948,9 @@ def user_auth_before(req, sess):
 ```
 
 Now we pass our `user_auth_before` function as the first argument into a
-[`Beforeware`](https://www.fastht.ml/docs/api/core.html#beforeware)
-class. We also pass a list of regular expressions to the `skip`
-argument, designed to allow users to still get to the home and login
-pages.
+`Beforeware` class. We also pass a list of regular expressions to the
+`skip` argument, designed to allow users to still get to the home and
+login pages.
 
 ``` python
 beforeware = Beforeware(
@@ -1040,7 +1037,7 @@ that plugs nicely into HTMX in the browser
 
 Line 26  
 The endpoint view needs to be an async function that returns a
-[`EventStream`](https://www.fastht.ml/docs/api/core.html#eventstream)
+`EventStream`
 
 ## Websockets
 
@@ -1206,9 +1203,8 @@ serve()
 ```
 
 Line 13  
-Every form rendered with the
-[`Form`](https://www.fastht.ml/docs/api/xtend.html#form) FT component
-defaults to `enctype="multipart/form-data"`
+Every form rendered with the `Form` FT component defaults to
+`enctype="multipart/form-data"`
 
 Line 14  
 Don’t forget to set the `Input` FT Component’s type to `file`
@@ -1278,9 +1274,8 @@ serve()
 ```
 
 Line 13  
-Every form rendered with the
-[`Form`](https://www.fastht.ml/docs/api/xtend.html#form) FT component
-defaults to `enctype="multipart/form-data"`
+Every form rendered with the `Form` FT component defaults to
+`enctype="multipart/form-data"`
 
 Line 14  
 Don’t forget to set the `Input` FT Component’s type to `file` and assign

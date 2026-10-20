@@ -8,9 +8,8 @@ browser as you make them. FastHTML supports live reloading which means
 that it watches for any changes to your code and automatically refreshes
 the webpage in your browser.
 
-To enable live reloading simply replace
-[`FastHTML`](https://www.fastht.ml/docs/api/core.html#fasthtml) in your
-app with `FastHTMLWithLiveReload`.
+To enable live reloading simply replace `FastHTML` in your app with
+`FastHTMLWithLiveReload`.
 
 ``` python
 from fasthtml.common import *
@@ -54,8 +53,7 @@ Line 3
 `fast_app()` instantiates the `FastHTMLWithLiveReload` class.
 
 Line 5  
-[`serve()`](https://www.fastht.ml/docs/api/core.html#serve) is a wrapper
-around a `uvicorn` call.
+`serve()` is a wrapper around a `uvicorn` call.
 
 To run `main.py` in live reload mode, just do `python main.py`. We
 recommend turning off live reload when deploying your app to production.

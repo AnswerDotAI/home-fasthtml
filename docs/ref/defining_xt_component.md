@@ -36,32 +36,14 @@ that fits your needs.
 
 </div>
 
-## NotStr
-
-The first way is to use the `NotStr` class to use an HTML tag as a
-string. It works as a one-off but quickly becomes harder to work with as
-complexity grows. However we can see that you can genenrate the same xml
-using `NotStr` as the out-of-the-box components.
-
-``` python
-from fasthtml.common import NotStr,Div, to_xml
-```
-
-``` python
-div_NotStr = NotStr('<div></div>') 
-print(div_NotStr)
-```
-
-    <div></div>
-
 ## Automatic Creation
 
-The next (and better) approach is to let FastHTML generate the component
-function for you. As you can see in our `assert` this creates a function
-that creates the HTML just as we wanted. This works even though there is
-not a `Some_never_before_used_tag` function in the `fasthtml.components`
-source code (you can verify this yourself by looking at the source
-code).
+The first (and in most cases the best) approach is to let FastHTML
+generate the component function for you. As you can see in our `assert`
+this creates a function that creates the HTML just as we wanted. This
+works even though there is not a `Some_never_before_used_tag` function
+in the `fasthtml.components` source code (you can verify this yourself
+by looking at the source code).
 
 <div>
 
@@ -86,31 +68,13 @@ Some_never_before_used_tag()
 <some-never-before-used-tag></some-never-before-used-tag>
 ```
 
-## Manual Creation
-
-The automatic creation isn’t magic. It’s just calling a python function
-[`__getattr__`](https://www.fastht.ml/docs/api/components.html#__getattr__)
-and you can call it yourself to get the same result.
-
-``` python
-import fasthtml
-
-auto_called = fasthtml.components.Some_never_before_used_tag()
-manual_called = fasthtml.components.__getattr__('Some_never_before_used_tag')()
-
-# Proving they generate the same xml
-assert to_xml(auto_called) == to_xml(manual_called)
-```
-
-Knowing that, we know that it’s possible to create a different function
-that has different behavior than FastHTMLs default behavior by modifying
-how the `___getattr__` function creates the components! It’s only a few
-lines of code and reading that what it does is a great way to understand
-components more deeply.
-
 <div>
 
 > **Tip**
+>
+> In a module `__getattr__` is called to get an attribute. In
+> `fasthtml.components`, the `__getattr__` is set to create components
+> automatically for you.
 >
 > Dunder methods and functions are special functions that have double
 > underscores at the beginning and end of their name. They are called at
@@ -119,22 +83,18 @@ components more deeply.
 > magical if you don’t know how python works, but they are extremely
 > commonly used to modify python’s default behavior (`__init__` is
 > probably the most common one).
->
-> In a module
-> [`__getattr__`](https://www.fastht.ml/docs/api/components.html#__getattr__)
-> is called to get an attribute. In `fasthtml.components`, this is
-> defined to create components automatically for you.
 
 </div>
 
-For example if you want a component that creates `<path></path>` that
-doesn’t conflict names with
+## Manual Creation
+
+If you want a component that creates `<path></path>` that doesn’t
+conflict names with
 [`pathlib.Path`](https://docs.python.org/3/library/pathlib.html#pathlib.Path)
 you can do that. FastHTML automatically creates new components with a
 1:1 mapping and a consistent name, which is almost always what you want.
 But in some cases you may want to customize that and you can use the
-[`ft_hx`](https://www.fastht.ml/docs/api/components.html#ft_hx) function
-to do that differently than the default.
+`ft_hx` function to do that differently than the default.
 
 ``` python
 from fasthtml.common import ft_hx
@@ -148,6 +108,8 @@ ft_path()
 ``` html
 <path></path>
 ```
+
+## Special Cases
 
 We can add any behavior in that function that we need to, so let’s go
 through some progressively complex examples that you may need in some of
@@ -195,9 +157,36 @@ can’t be used in python arguments. To handle these you can define those
 args using a dictionary.
 
 ``` python
+from fasthtml.common import Div
+```
+
+``` python
 Div(normal_arg='normal stuff',**{'notNormal:arg:with_varing@symbols!':'123'})
 ```
 
 ``` html
 <div normal-arg="normal stuff" notnormal:arg:with_varing@symbols!="123"></div>
 ```
+
+## In Desperation: NotStr
+
+An uncommon method is to use the `NotStr` class writing the HTML tag as
+a string. It works as a one-off for a quickfix but quickly becomes
+harder to work with as complexity grows. However we can see that you can
+with some effort generate a similar result with `to_xml` using `NotStr`
+as the out-of-the-box components.
+
+Try everything else before using `NotStr` and if you must use it we
+recommend returning later and fixing it to use one of the above
+techniques.
+
+``` python
+from fasthtml.common import NotStr,to_xml
+```
+
+``` python
+div_NotStr = NotStr('<div>I look like a string but render with to_xml</div>') 
+div_NotStr
+```
+
+    '<div>I look like a string but render with to_xml</div>'

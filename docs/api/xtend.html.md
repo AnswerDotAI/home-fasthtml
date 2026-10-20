@@ -9,54 +9,53 @@ from pprint import pprint
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/xtend.py#L26"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
 ### A
 
->  A (*c, hx_get=None, target_id=None, hx_swap=None, href='#', hx_vals=None,
->         hx_target=None, id=None, cls=None, title=None, style=None,
->         accesskey=None, contenteditable=None, dir=None, draggable=None,
->         enterkeyhint=None, hidden=None, inert=None, inputmode=None, lang=None,
->         popover=None, spellcheck=None, tabindex=None, translate=None,
->         hx_post=None, hx_put=None, hx_delete=None, hx_patch=None,
->         hx_trigger=None, hx_swap_oob=None, hx_include=None, hx_select=None,
->         hx_select_oob=None, hx_indicator=None, hx_push_url=None,
->         hx_confirm=None, hx_disable=None, hx_replace_url=None,
->         hx_disabled_elt=None, hx_ext=None, hx_headers=None, hx_history=None,
->         hx_history_elt=None, hx_inherit=None, hx_params=None,
->         hx_preserve=None, hx_prompt=None, hx_request=None, hx_sync=None,
->         hx_validate=None, hx_on_blur=None, hx_on_change=None,
->         hx_on_contextmenu=None, hx_on_focus=None, hx_on_input=None,
->         hx_on_invalid=None, hx_on_reset=None, hx_on_select=None,
->         hx_on_submit=None, hx_on_keydown=None, hx_on_keypress=None,
->         hx_on_keyup=None, hx_on_click=None, hx_on_dblclick=None,
->         hx_on_mousedown=None, hx_on_mouseenter=None, hx_on_mouseleave=None,
->         hx_on_mousemove=None, hx_on_mouseout=None, hx_on_mouseover=None,
->         hx_on_mouseup=None, hx_on_wheel=None, hx_on__abort=None,
->         hx_on__after_on_load=None, hx_on__after_process_node=None,
->         hx_on__after_request=None, hx_on__after_settle=None,
->         hx_on__after_swap=None, hx_on__before_cleanup_element=None,
->         hx_on__before_on_load=None, hx_on__before_process_node=None,
->         hx_on__before_request=None, hx_on__before_swap=None,
->         hx_on__before_send=None, hx_on__before_transition=None,
->         hx_on__config_request=None, hx_on__confirm=None,
->         hx_on__history_cache_error=None, hx_on__history_cache_miss=None,
->         hx_on__history_cache_miss_error=None,
->         hx_on__history_cache_miss_load=None, hx_on__history_restore=None,
->         hx_on__before_history_save=None, hx_on__load=None,
->         hx_on__no_sse_source_error=None, hx_on__on_load_error=None,
->         hx_on__oob_after_swap=None, hx_on__oob_before_swap=None,
->         hx_on__oob_error_no_target=None, hx_on__prompt=None,
->         hx_on__pushed_into_history=None, hx_on__replaced_in_history=None,
->         hx_on__response_error=None, hx_on__send_abort=None,
->         hx_on__send_error=None, hx_on__sse_error=None, hx_on__sse_open=None,
->         hx_on__swap_error=None, hx_on__target_error=None, hx_on__timeout=None,
->         hx_on__validation_validate=None, hx_on__validation_failed=None,
->         hx_on__validation_halted=None, hx_on__xhr_abort=None,
->         hx_on__xhr_loadend=None, hx_on__xhr_loadstart=None,
->         hx_on__xhr_progress=None, **kwargs)
+``` python
+def A(
+    *c, hx_get:NoneType=None, target_id:NoneType=None, hx_swap:NoneType=None, href:str='#', hx_vals:NoneType=None,
+    hx_target:NoneType=None, id:NoneType=None, cls:NoneType=None, title:NoneType=None, style:NoneType=None,
+    accesskey:NoneType=None, contenteditable:NoneType=None, dir:NoneType=None, draggable:NoneType=None,
+    enterkeyhint:NoneType=None, hidden:NoneType=None, inert:NoneType=None, inputmode:NoneType=None,
+    lang:NoneType=None, popover:NoneType=None, spellcheck:NoneType=None, tabindex:NoneType=None,
+    translate:NoneType=None, hx_post:NoneType=None, hx_put:NoneType=None, hx_delete:NoneType=None,
+    hx_patch:NoneType=None, hx_trigger:NoneType=None, hx_swap_oob:NoneType=None, hx_include:NoneType=None,
+    hx_select:NoneType=None, hx_select_oob:NoneType=None, hx_indicator:NoneType=None, hx_push_url:NoneType=None,
+    hx_confirm:NoneType=None, hx_disable:NoneType=None, hx_replace_url:NoneType=None, hx_disabled_elt:NoneType=None,
+    hx_ext:NoneType=None, hx_headers:NoneType=None, hx_history:NoneType=None, hx_history_elt:NoneType=None,
+    hx_inherit:NoneType=None, hx_params:NoneType=None, hx_preserve:NoneType=None, hx_prompt:NoneType=None,
+    hx_request:NoneType=None, hx_sync:NoneType=None, hx_validate:NoneType=None, hx_action:NoneType=None,
+    hx_method:NoneType=None, hx_config:NoneType=None, hx_ignore:NoneType=None, hx_on_blur:NoneType=None,
+    hx_on_change:NoneType=None, hx_on_contextmenu:NoneType=None, hx_on_focus:NoneType=None,
+    hx_on_input:NoneType=None, hx_on_invalid:NoneType=None, hx_on_reset:NoneType=None, hx_on_select:NoneType=None,
+    hx_on_submit:NoneType=None, hx_on_keydown:NoneType=None, hx_on_keypress:NoneType=None, hx_on_keyup:NoneType=None,
+    hx_on_click:NoneType=None, hx_on_dblclick:NoneType=None, hx_on_mousedown:NoneType=None,
+    hx_on_mouseenter:NoneType=None, hx_on_mouseleave:NoneType=None, hx_on_mousemove:NoneType=None,
+    hx_on_mouseout:NoneType=None, hx_on_mouseover:NoneType=None, hx_on_mouseup:NoneType=None,
+    hx_on_wheel:NoneType=None, hx_on__abort:NoneType=None, hx_on__after_on_load:NoneType=None,
+    hx_on__after_process_node:NoneType=None, hx_on__after_request:NoneType=None, hx_on__after_settle:NoneType=None,
+    hx_on__after_swap:NoneType=None, hx_on__before_cleanup_element:NoneType=None,
+    hx_on__before_on_load:NoneType=None, hx_on__before_process_node:NoneType=None,
+    hx_on__before_request:NoneType=None, hx_on__before_swap:NoneType=None, hx_on__before_send:NoneType=None,
+    hx_on__before_transition:NoneType=None, hx_on__config_request:NoneType=None, hx_on__confirm:NoneType=None,
+    hx_on__history_cache_error:NoneType=None, hx_on__history_cache_miss:NoneType=None,
+    hx_on__history_cache_miss_error:NoneType=None, hx_on__history_cache_miss_load:NoneType=None,
+    hx_on__history_restore:NoneType=None, hx_on__before_history_save:NoneType=None, hx_on__load:NoneType=None,
+    hx_on__no_sse_source_error:NoneType=None, hx_on__on_load_error:NoneType=None,
+    hx_on__oob_after_swap:NoneType=None, hx_on__oob_before_swap:NoneType=None,
+    hx_on__oob_error_no_target:NoneType=None, hx_on__prompt:NoneType=None, hx_on__pushed_into_history:NoneType=None,
+    hx_on__replaced_in_history:NoneType=None, hx_on__response_error:NoneType=None, hx_on__send_abort:NoneType=None,
+    hx_on__send_error:NoneType=None, hx_on__sse_error:NoneType=None, hx_on__sse_open:NoneType=None,
+    hx_on__swap_error:NoneType=None, hx_on__target_error:NoneType=None, hx_on__timeout:NoneType=None,
+    hx_on__validation_validate:NoneType=None, hx_on__validation_failed:NoneType=None,
+    hx_on__validation_halted:NoneType=None, hx_on__xhr_abort:NoneType=None, hx_on__xhr_loadend:NoneType=None,
+    hx_on__xhr_loadstart:NoneType=None, hx_on__xhr_progress:NoneType=None, hx_on__after_init:NoneType=None,
+    hx_on__before_cleanup:NoneType=None, hx_on__before_history_update:NoneType=None,
+    hx_on__before_init:NoneType=None, hx_on__before_process:NoneType=None,
+    hx_on__before_history_restore:NoneType=None, hx_on__after_history_push:NoneType=None,
+    hx_on__after_history_replace:NoneType=None, hx_on__error:NoneType=None, **kwargs
+)->fastcore.xml.FT:
+```
 
 *An A tag; `href` defaults to ‘\#’ for more concise use with HTMX*
 
@@ -64,60 +63,63 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 A('text', ht_get='/get', target_id='id')
 ```
 
+<div class="prose" data-markdown="1">
+
 ``` html
 <a href="#" ht-get="/get" hx-target="#id">text</a>
 ```
 
-------------------------------------------------------------------------
+</div>
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/xtend.py#L32"
-target="_blank" style="float:right; font-size:smaller">source</a>
+------------------------------------------------------------------------
 
 ### AX
 
->  AX (txt, hx_get=None, target_id=None, hx_swap=None, href='#',
->          hx_vals=None, hx_target=None, id=None, cls=None, title=None,
->          style=None, accesskey=None, contenteditable=None, dir=None,
->          draggable=None, enterkeyhint=None, hidden=None, inert=None,
->          inputmode=None, lang=None, popover=None, spellcheck=None,
->          tabindex=None, translate=None, hx_post=None, hx_put=None,
->          hx_delete=None, hx_patch=None, hx_trigger=None, hx_swap_oob=None,
->          hx_include=None, hx_select=None, hx_select_oob=None,
->          hx_indicator=None, hx_push_url=None, hx_confirm=None,
->          hx_disable=None, hx_replace_url=None, hx_disabled_elt=None,
->          hx_ext=None, hx_headers=None, hx_history=None, hx_history_elt=None,
->          hx_inherit=None, hx_params=None, hx_preserve=None, hx_prompt=None,
->          hx_request=None, hx_sync=None, hx_validate=None, hx_on_blur=None,
->          hx_on_change=None, hx_on_contextmenu=None, hx_on_focus=None,
->          hx_on_input=None, hx_on_invalid=None, hx_on_reset=None,
->          hx_on_select=None, hx_on_submit=None, hx_on_keydown=None,
->          hx_on_keypress=None, hx_on_keyup=None, hx_on_click=None,
->          hx_on_dblclick=None, hx_on_mousedown=None, hx_on_mouseenter=None,
->          hx_on_mouseleave=None, hx_on_mousemove=None, hx_on_mouseout=None,
->          hx_on_mouseover=None, hx_on_mouseup=None, hx_on_wheel=None,
->          hx_on__abort=None, hx_on__after_on_load=None,
->          hx_on__after_process_node=None, hx_on__after_request=None,
->          hx_on__after_settle=None, hx_on__after_swap=None,
->          hx_on__before_cleanup_element=None, hx_on__before_on_load=None,
->          hx_on__before_process_node=None, hx_on__before_request=None,
->          hx_on__before_swap=None, hx_on__before_send=None,
->          hx_on__before_transition=None, hx_on__config_request=None,
->          hx_on__confirm=None, hx_on__history_cache_error=None,
->          hx_on__history_cache_miss=None, hx_on__history_cache_miss_error=None,
->          hx_on__history_cache_miss_load=None, hx_on__history_restore=None,
->          hx_on__before_history_save=None, hx_on__load=None,
->          hx_on__no_sse_source_error=None, hx_on__on_load_error=None,
->          hx_on__oob_after_swap=None, hx_on__oob_before_swap=None,
->          hx_on__oob_error_no_target=None, hx_on__prompt=None,
->          hx_on__pushed_into_history=None, hx_on__replaced_in_history=None,
->          hx_on__response_error=None, hx_on__send_abort=None,
->          hx_on__send_error=None, hx_on__sse_error=None, hx_on__sse_open=None,
->          hx_on__swap_error=None, hx_on__target_error=None,
->          hx_on__timeout=None, hx_on__validation_validate=None,
->          hx_on__validation_failed=None, hx_on__validation_halted=None,
->          hx_on__xhr_abort=None, hx_on__xhr_loadend=None,
->          hx_on__xhr_loadstart=None, hx_on__xhr_progress=None, **kwargs)
+``` python
+def AX(
+    txt, hx_get:NoneType=None, target_id:NoneType=None, hx_swap:NoneType=None, href:str='#', *,
+    hx_vals:NoneType=None, hx_target:NoneType=None, id:NoneType=None, cls:NoneType=None, title:NoneType=None,
+    style:NoneType=None, accesskey:NoneType=None, contenteditable:NoneType=None, dir:NoneType=None,
+    draggable:NoneType=None, enterkeyhint:NoneType=None, hidden:NoneType=None, inert:NoneType=None,
+    inputmode:NoneType=None, lang:NoneType=None, popover:NoneType=None, spellcheck:NoneType=None,
+    tabindex:NoneType=None, translate:NoneType=None, hx_post:NoneType=None, hx_put:NoneType=None,
+    hx_delete:NoneType=None, hx_patch:NoneType=None, hx_trigger:NoneType=None, hx_swap_oob:NoneType=None,
+    hx_include:NoneType=None, hx_select:NoneType=None, hx_select_oob:NoneType=None, hx_indicator:NoneType=None,
+    hx_push_url:NoneType=None, hx_confirm:NoneType=None, hx_disable:NoneType=None, hx_replace_url:NoneType=None,
+    hx_disabled_elt:NoneType=None, hx_ext:NoneType=None, hx_headers:NoneType=None, hx_history:NoneType=None,
+    hx_history_elt:NoneType=None, hx_inherit:NoneType=None, hx_params:NoneType=None, hx_preserve:NoneType=None,
+    hx_prompt:NoneType=None, hx_request:NoneType=None, hx_sync:NoneType=None, hx_validate:NoneType=None,
+    hx_action:NoneType=None, hx_method:NoneType=None, hx_config:NoneType=None, hx_ignore:NoneType=None,
+    hx_on_blur:NoneType=None, hx_on_change:NoneType=None, hx_on_contextmenu:NoneType=None, hx_on_focus:NoneType=None,
+    hx_on_input:NoneType=None, hx_on_invalid:NoneType=None, hx_on_reset:NoneType=None, hx_on_select:NoneType=None,
+    hx_on_submit:NoneType=None, hx_on_keydown:NoneType=None, hx_on_keypress:NoneType=None, hx_on_keyup:NoneType=None,
+    hx_on_click:NoneType=None, hx_on_dblclick:NoneType=None, hx_on_mousedown:NoneType=None,
+    hx_on_mouseenter:NoneType=None, hx_on_mouseleave:NoneType=None, hx_on_mousemove:NoneType=None,
+    hx_on_mouseout:NoneType=None, hx_on_mouseover:NoneType=None, hx_on_mouseup:NoneType=None,
+    hx_on_wheel:NoneType=None, hx_on__abort:NoneType=None, hx_on__after_on_load:NoneType=None,
+    hx_on__after_process_node:NoneType=None, hx_on__after_request:NoneType=None, hx_on__after_settle:NoneType=None,
+    hx_on__after_swap:NoneType=None, hx_on__before_cleanup_element:NoneType=None,
+    hx_on__before_on_load:NoneType=None, hx_on__before_process_node:NoneType=None,
+    hx_on__before_request:NoneType=None, hx_on__before_swap:NoneType=None, hx_on__before_send:NoneType=None,
+    hx_on__before_transition:NoneType=None, hx_on__config_request:NoneType=None, hx_on__confirm:NoneType=None,
+    hx_on__history_cache_error:NoneType=None, hx_on__history_cache_miss:NoneType=None,
+    hx_on__history_cache_miss_error:NoneType=None, hx_on__history_cache_miss_load:NoneType=None,
+    hx_on__history_restore:NoneType=None, hx_on__before_history_save:NoneType=None, hx_on__load:NoneType=None,
+    hx_on__no_sse_source_error:NoneType=None, hx_on__on_load_error:NoneType=None,
+    hx_on__oob_after_swap:NoneType=None, hx_on__oob_before_swap:NoneType=None,
+    hx_on__oob_error_no_target:NoneType=None, hx_on__prompt:NoneType=None, hx_on__pushed_into_history:NoneType=None,
+    hx_on__replaced_in_history:NoneType=None, hx_on__response_error:NoneType=None, hx_on__send_abort:NoneType=None,
+    hx_on__send_error:NoneType=None, hx_on__sse_error:NoneType=None, hx_on__sse_open:NoneType=None,
+    hx_on__swap_error:NoneType=None, hx_on__target_error:NoneType=None, hx_on__timeout:NoneType=None,
+    hx_on__validation_validate:NoneType=None, hx_on__validation_failed:NoneType=None,
+    hx_on__validation_halted:NoneType=None, hx_on__xhr_abort:NoneType=None, hx_on__xhr_loadend:NoneType=None,
+    hx_on__xhr_loadstart:NoneType=None, hx_on__xhr_progress:NoneType=None, hx_on__after_init:NoneType=None,
+    hx_on__before_cleanup:NoneType=None, hx_on__before_history_update:NoneType=None,
+    hx_on__before_init:NoneType=None, hx_on__before_process:NoneType=None,
+    hx_on__before_history_restore:NoneType=None, hx_on__after_history_push:NoneType=None,
+    hx_on__after_history_replace:NoneType=None, hx_on__error:NoneType=None, **kwargs
+)->fastcore.xml.FT:
+```
 
 *An A tag with just one text child, allowing hx_get, target_id, and
 hx_swap to be positional params*
@@ -126,217 +128,205 @@ hx_swap to be positional params*
 AX('text', '/get', 'id')
 ```
 
+<div class="prose" data-markdown="1">
+
 ``` html
 <a href="#" hx-get="/get" hx-target="#id">text</a>
 ```
+
+</div>
 
 ## Forms
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/xtend.py#L38"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
 ### Form
 
->  Form (*c, enctype='multipart/form-data', target_id=None, hx_vals=None,
->            hx_target=None, id=None, cls=None, title=None, style=None,
->            accesskey=None, contenteditable=None, dir=None, draggable=None,
->            enterkeyhint=None, hidden=None, inert=None, inputmode=None,
->            lang=None, popover=None, spellcheck=None, tabindex=None,
->            translate=None, hx_get=None, hx_post=None, hx_put=None,
->            hx_delete=None, hx_patch=None, hx_trigger=None, hx_swap=None,
->            hx_swap_oob=None, hx_include=None, hx_select=None,
->            hx_select_oob=None, hx_indicator=None, hx_push_url=None,
->            hx_confirm=None, hx_disable=None, hx_replace_url=None,
->            hx_disabled_elt=None, hx_ext=None, hx_headers=None,
->            hx_history=None, hx_history_elt=None, hx_inherit=None,
->            hx_params=None, hx_preserve=None, hx_prompt=None, hx_request=None,
->            hx_sync=None, hx_validate=None, hx_on_blur=None, hx_on_change=None,
->            hx_on_contextmenu=None, hx_on_focus=None, hx_on_input=None,
->            hx_on_invalid=None, hx_on_reset=None, hx_on_select=None,
->            hx_on_submit=None, hx_on_keydown=None, hx_on_keypress=None,
->            hx_on_keyup=None, hx_on_click=None, hx_on_dblclick=None,
->            hx_on_mousedown=None, hx_on_mouseenter=None, hx_on_mouseleave=None,
->            hx_on_mousemove=None, hx_on_mouseout=None, hx_on_mouseover=None,
->            hx_on_mouseup=None, hx_on_wheel=None, hx_on__abort=None,
->            hx_on__after_on_load=None, hx_on__after_process_node=None,
->            hx_on__after_request=None, hx_on__after_settle=None,
->            hx_on__after_swap=None, hx_on__before_cleanup_element=None,
->            hx_on__before_on_load=None, hx_on__before_process_node=None,
->            hx_on__before_request=None, hx_on__before_swap=None,
->            hx_on__before_send=None, hx_on__before_transition=None,
->            hx_on__config_request=None, hx_on__confirm=None,
->            hx_on__history_cache_error=None, hx_on__history_cache_miss=None,
->            hx_on__history_cache_miss_error=None,
->            hx_on__history_cache_miss_load=None, hx_on__history_restore=None,
->            hx_on__before_history_save=None, hx_on__load=None,
->            hx_on__no_sse_source_error=None, hx_on__on_load_error=None,
->            hx_on__oob_after_swap=None, hx_on__oob_before_swap=None,
->            hx_on__oob_error_no_target=None, hx_on__prompt=None,
->            hx_on__pushed_into_history=None, hx_on__replaced_in_history=None,
->            hx_on__response_error=None, hx_on__send_abort=None,
->            hx_on__send_error=None, hx_on__sse_error=None,
->            hx_on__sse_open=None, hx_on__swap_error=None,
->            hx_on__target_error=None, hx_on__timeout=None,
->            hx_on__validation_validate=None, hx_on__validation_failed=None,
->            hx_on__validation_halted=None, hx_on__xhr_abort=None,
->            hx_on__xhr_loadend=None, hx_on__xhr_loadstart=None,
->            hx_on__xhr_progress=None, **kwargs)
+``` python
+def Form(
+    *c, enctype:str='multipart/form-data', target_id:NoneType=None, hx_vals:NoneType=None, hx_target:NoneType=None,
+    id:NoneType=None, cls:NoneType=None, title:NoneType=None, style:NoneType=None, accesskey:NoneType=None,
+    contenteditable:NoneType=None, dir:NoneType=None, draggable:NoneType=None, enterkeyhint:NoneType=None,
+    hidden:NoneType=None, inert:NoneType=None, inputmode:NoneType=None, lang:NoneType=None, popover:NoneType=None,
+    spellcheck:NoneType=None, tabindex:NoneType=None, translate:NoneType=None, hx_get:NoneType=None,
+    hx_post:NoneType=None, hx_put:NoneType=None, hx_delete:NoneType=None, hx_patch:NoneType=None,
+    hx_trigger:NoneType=None, hx_swap:NoneType=None, hx_swap_oob:NoneType=None, hx_include:NoneType=None,
+    hx_select:NoneType=None, hx_select_oob:NoneType=None, hx_indicator:NoneType=None, hx_push_url:NoneType=None,
+    hx_confirm:NoneType=None, hx_disable:NoneType=None, hx_replace_url:NoneType=None, hx_disabled_elt:NoneType=None,
+    hx_ext:NoneType=None, hx_headers:NoneType=None, hx_history:NoneType=None, hx_history_elt:NoneType=None,
+    hx_inherit:NoneType=None, hx_params:NoneType=None, hx_preserve:NoneType=None, hx_prompt:NoneType=None,
+    hx_request:NoneType=None, hx_sync:NoneType=None, hx_validate:NoneType=None, hx_action:NoneType=None,
+    hx_method:NoneType=None, hx_config:NoneType=None, hx_ignore:NoneType=None, hx_on_blur:NoneType=None,
+    hx_on_change:NoneType=None, hx_on_contextmenu:NoneType=None, hx_on_focus:NoneType=None,
+    hx_on_input:NoneType=None, hx_on_invalid:NoneType=None, hx_on_reset:NoneType=None, hx_on_select:NoneType=None,
+    hx_on_submit:NoneType=None, hx_on_keydown:NoneType=None, hx_on_keypress:NoneType=None, hx_on_keyup:NoneType=None,
+    hx_on_click:NoneType=None, hx_on_dblclick:NoneType=None, hx_on_mousedown:NoneType=None,
+    hx_on_mouseenter:NoneType=None, hx_on_mouseleave:NoneType=None, hx_on_mousemove:NoneType=None,
+    hx_on_mouseout:NoneType=None, hx_on_mouseover:NoneType=None, hx_on_mouseup:NoneType=None,
+    hx_on_wheel:NoneType=None, hx_on__abort:NoneType=None, hx_on__after_on_load:NoneType=None,
+    hx_on__after_process_node:NoneType=None, hx_on__after_request:NoneType=None, hx_on__after_settle:NoneType=None,
+    hx_on__after_swap:NoneType=None, hx_on__before_cleanup_element:NoneType=None,
+    hx_on__before_on_load:NoneType=None, hx_on__before_process_node:NoneType=None,
+    hx_on__before_request:NoneType=None, hx_on__before_swap:NoneType=None, hx_on__before_send:NoneType=None,
+    hx_on__before_transition:NoneType=None, hx_on__config_request:NoneType=None, hx_on__confirm:NoneType=None,
+    hx_on__history_cache_error:NoneType=None, hx_on__history_cache_miss:NoneType=None,
+    hx_on__history_cache_miss_error:NoneType=None, hx_on__history_cache_miss_load:NoneType=None,
+    hx_on__history_restore:NoneType=None, hx_on__before_history_save:NoneType=None, hx_on__load:NoneType=None,
+    hx_on__no_sse_source_error:NoneType=None, hx_on__on_load_error:NoneType=None,
+    hx_on__oob_after_swap:NoneType=None, hx_on__oob_before_swap:NoneType=None,
+    hx_on__oob_error_no_target:NoneType=None, hx_on__prompt:NoneType=None, hx_on__pushed_into_history:NoneType=None,
+    hx_on__replaced_in_history:NoneType=None, hx_on__response_error:NoneType=None, hx_on__send_abort:NoneType=None,
+    hx_on__send_error:NoneType=None, hx_on__sse_error:NoneType=None, hx_on__sse_open:NoneType=None,
+    hx_on__swap_error:NoneType=None, hx_on__target_error:NoneType=None, hx_on__timeout:NoneType=None,
+    hx_on__validation_validate:NoneType=None, hx_on__validation_failed:NoneType=None,
+    hx_on__validation_halted:NoneType=None, hx_on__xhr_abort:NoneType=None, hx_on__xhr_loadend:NoneType=None,
+    hx_on__xhr_loadstart:NoneType=None, hx_on__xhr_progress:NoneType=None, hx_on__after_init:NoneType=None,
+    hx_on__before_cleanup:NoneType=None, hx_on__before_history_update:NoneType=None,
+    hx_on__before_init:NoneType=None, hx_on__before_process:NoneType=None,
+    hx_on__before_history_restore:NoneType=None, hx_on__after_history_push:NoneType=None,
+    hx_on__after_history_replace:NoneType=None, hx_on__error:NoneType=None, **kwargs
+)->fastcore.xml.FT:
+```
 
-*A Form tag; identical to plain
-[`ft_hx`](https://www.fastht.ml/docs/api/components.html#ft_hx) version
-except default `enctype='multipart/form-data'`*
+*A Form tag; identical to plain `ft_hx` version except default
+`enctype='multipart/form-data'`*
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/xtend.py#L44"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
 ### Hidden
 
->  Hidden (value:Any='', id:Any=None, target_id=None, hx_vals=None,
->              hx_target=None, cls=None, title=None, style=None, accesskey=None,
->              contenteditable=None, dir=None, draggable=None,
->              enterkeyhint=None, hidden=None, inert=None, inputmode=None,
->              lang=None, popover=None, spellcheck=None, tabindex=None,
->              translate=None, hx_get=None, hx_post=None, hx_put=None,
->              hx_delete=None, hx_patch=None, hx_trigger=None, hx_swap=None,
->              hx_swap_oob=None, hx_include=None, hx_select=None,
->              hx_select_oob=None, hx_indicator=None, hx_push_url=None,
->              hx_confirm=None, hx_disable=None, hx_replace_url=None,
->              hx_disabled_elt=None, hx_ext=None, hx_headers=None,
->              hx_history=None, hx_history_elt=None, hx_inherit=None,
->              hx_params=None, hx_preserve=None, hx_prompt=None,
->              hx_request=None, hx_sync=None, hx_validate=None, hx_on_blur=None,
->              hx_on_change=None, hx_on_contextmenu=None, hx_on_focus=None,
->              hx_on_input=None, hx_on_invalid=None, hx_on_reset=None,
->              hx_on_select=None, hx_on_submit=None, hx_on_keydown=None,
->              hx_on_keypress=None, hx_on_keyup=None, hx_on_click=None,
->              hx_on_dblclick=None, hx_on_mousedown=None, hx_on_mouseenter=None,
->              hx_on_mouseleave=None, hx_on_mousemove=None, hx_on_mouseout=None,
->              hx_on_mouseover=None, hx_on_mouseup=None, hx_on_wheel=None,
->              hx_on__abort=None, hx_on__after_on_load=None,
->              hx_on__after_process_node=None, hx_on__after_request=None,
->              hx_on__after_settle=None, hx_on__after_swap=None,
->              hx_on__before_cleanup_element=None, hx_on__before_on_load=None,
->              hx_on__before_process_node=None, hx_on__before_request=None,
->              hx_on__before_swap=None, hx_on__before_send=None,
->              hx_on__before_transition=None, hx_on__config_request=None,
->              hx_on__confirm=None, hx_on__history_cache_error=None,
->              hx_on__history_cache_miss=None,
->              hx_on__history_cache_miss_error=None,
->              hx_on__history_cache_miss_load=None, hx_on__history_restore=None,
->              hx_on__before_history_save=None, hx_on__load=None,
->              hx_on__no_sse_source_error=None, hx_on__on_load_error=None,
->              hx_on__oob_after_swap=None, hx_on__oob_before_swap=None,
->              hx_on__oob_error_no_target=None, hx_on__prompt=None,
->              hx_on__pushed_into_history=None, hx_on__replaced_in_history=None,
->              hx_on__response_error=None, hx_on__send_abort=None,
->              hx_on__send_error=None, hx_on__sse_error=None,
->              hx_on__sse_open=None, hx_on__swap_error=None,
->              hx_on__target_error=None, hx_on__timeout=None,
->              hx_on__validation_validate=None, hx_on__validation_failed=None,
->              hx_on__validation_halted=None, hx_on__xhr_abort=None,
->              hx_on__xhr_loadend=None, hx_on__xhr_loadstart=None,
->              hx_on__xhr_progress=None, **kwargs)
+``` python
+def Hidden(
+    value:Any='', id:Any=None, *, target_id:NoneType=None, hx_vals:NoneType=None, hx_target:NoneType=None,
+    cls:NoneType=None, title:NoneType=None, style:NoneType=None, accesskey:NoneType=None,
+    contenteditable:NoneType=None, dir:NoneType=None, draggable:NoneType=None, enterkeyhint:NoneType=None,
+    hidden:NoneType=None, inert:NoneType=None, inputmode:NoneType=None, lang:NoneType=None, popover:NoneType=None,
+    spellcheck:NoneType=None, tabindex:NoneType=None, translate:NoneType=None, hx_get:NoneType=None,
+    hx_post:NoneType=None, hx_put:NoneType=None, hx_delete:NoneType=None, hx_patch:NoneType=None,
+    hx_trigger:NoneType=None, hx_swap:NoneType=None, hx_swap_oob:NoneType=None, hx_include:NoneType=None,
+    hx_select:NoneType=None, hx_select_oob:NoneType=None, hx_indicator:NoneType=None, hx_push_url:NoneType=None,
+    hx_confirm:NoneType=None, hx_disable:NoneType=None, hx_replace_url:NoneType=None, hx_disabled_elt:NoneType=None,
+    hx_ext:NoneType=None, hx_headers:NoneType=None, hx_history:NoneType=None, hx_history_elt:NoneType=None,
+    hx_inherit:NoneType=None, hx_params:NoneType=None, hx_preserve:NoneType=None, hx_prompt:NoneType=None,
+    hx_request:NoneType=None, hx_sync:NoneType=None, hx_validate:NoneType=None, hx_action:NoneType=None,
+    hx_method:NoneType=None, hx_config:NoneType=None, hx_ignore:NoneType=None, hx_on_blur:NoneType=None,
+    hx_on_change:NoneType=None, hx_on_contextmenu:NoneType=None, hx_on_focus:NoneType=None,
+    hx_on_input:NoneType=None, hx_on_invalid:NoneType=None, hx_on_reset:NoneType=None, hx_on_select:NoneType=None,
+    hx_on_submit:NoneType=None, hx_on_keydown:NoneType=None, hx_on_keypress:NoneType=None, hx_on_keyup:NoneType=None,
+    hx_on_click:NoneType=None, hx_on_dblclick:NoneType=None, hx_on_mousedown:NoneType=None,
+    hx_on_mouseenter:NoneType=None, hx_on_mouseleave:NoneType=None, hx_on_mousemove:NoneType=None,
+    hx_on_mouseout:NoneType=None, hx_on_mouseover:NoneType=None, hx_on_mouseup:NoneType=None,
+    hx_on_wheel:NoneType=None, hx_on__abort:NoneType=None, hx_on__after_on_load:NoneType=None,
+    hx_on__after_process_node:NoneType=None, hx_on__after_request:NoneType=None, hx_on__after_settle:NoneType=None,
+    hx_on__after_swap:NoneType=None, hx_on__before_cleanup_element:NoneType=None,
+    hx_on__before_on_load:NoneType=None, hx_on__before_process_node:NoneType=None,
+    hx_on__before_request:NoneType=None, hx_on__before_swap:NoneType=None, hx_on__before_send:NoneType=None,
+    hx_on__before_transition:NoneType=None, hx_on__config_request:NoneType=None, hx_on__confirm:NoneType=None,
+    hx_on__history_cache_error:NoneType=None, hx_on__history_cache_miss:NoneType=None,
+    hx_on__history_cache_miss_error:NoneType=None, hx_on__history_cache_miss_load:NoneType=None,
+    hx_on__history_restore:NoneType=None, hx_on__before_history_save:NoneType=None, hx_on__load:NoneType=None,
+    hx_on__no_sse_source_error:NoneType=None, hx_on__on_load_error:NoneType=None,
+    hx_on__oob_after_swap:NoneType=None, hx_on__oob_before_swap:NoneType=None,
+    hx_on__oob_error_no_target:NoneType=None, hx_on__prompt:NoneType=None, hx_on__pushed_into_history:NoneType=None,
+    hx_on__replaced_in_history:NoneType=None, hx_on__response_error:NoneType=None, hx_on__send_abort:NoneType=None,
+    hx_on__send_error:NoneType=None, hx_on__sse_error:NoneType=None, hx_on__sse_open:NoneType=None,
+    hx_on__swap_error:NoneType=None, hx_on__target_error:NoneType=None, hx_on__timeout:NoneType=None,
+    hx_on__validation_validate:NoneType=None, hx_on__validation_failed:NoneType=None,
+    hx_on__validation_halted:NoneType=None, hx_on__xhr_abort:NoneType=None, hx_on__xhr_loadend:NoneType=None,
+    hx_on__xhr_loadstart:NoneType=None, hx_on__xhr_progress:NoneType=None, hx_on__after_init:NoneType=None,
+    hx_on__before_cleanup:NoneType=None, hx_on__before_history_update:NoneType=None,
+    hx_on__before_init:NoneType=None, hx_on__before_process:NoneType=None,
+    hx_on__before_history_restore:NoneType=None, hx_on__after_history_push:NoneType=None,
+    hx_on__after_history_replace:NoneType=None, hx_on__error:NoneType=None, **kwargs
+)->fastcore.xml.FT:
+```
 
 *An Input of type ‘hidden’*
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/xtend.py#L50"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
 ### CheckboxX
 
->  CheckboxX (checked:bool=False, label=None, value='1', id=None, name=None,
->                 target_id=None, hx_vals=None, hx_target=None, cls=None,
->                 title=None, style=None, accesskey=None, contenteditable=None,
->                 dir=None, draggable=None, enterkeyhint=None, hidden=None,
->                 inert=None, inputmode=None, lang=None, popover=None,
->                 spellcheck=None, tabindex=None, translate=None, hx_get=None,
->                 hx_post=None, hx_put=None, hx_delete=None, hx_patch=None,
->                 hx_trigger=None, hx_swap=None, hx_swap_oob=None,
->                 hx_include=None, hx_select=None, hx_select_oob=None,
->                 hx_indicator=None, hx_push_url=None, hx_confirm=None,
->                 hx_disable=None, hx_replace_url=None, hx_disabled_elt=None,
->                 hx_ext=None, hx_headers=None, hx_history=None,
->                 hx_history_elt=None, hx_inherit=None, hx_params=None,
->                 hx_preserve=None, hx_prompt=None, hx_request=None,
->                 hx_sync=None, hx_validate=None, hx_on_blur=None,
->                 hx_on_change=None, hx_on_contextmenu=None, hx_on_focus=None,
->                 hx_on_input=None, hx_on_invalid=None, hx_on_reset=None,
->                 hx_on_select=None, hx_on_submit=None, hx_on_keydown=None,
->                 hx_on_keypress=None, hx_on_keyup=None, hx_on_click=None,
->                 hx_on_dblclick=None, hx_on_mousedown=None,
->                 hx_on_mouseenter=None, hx_on_mouseleave=None,
->                 hx_on_mousemove=None, hx_on_mouseout=None,
->                 hx_on_mouseover=None, hx_on_mouseup=None, hx_on_wheel=None,
->                 hx_on__abort=None, hx_on__after_on_load=None,
->                 hx_on__after_process_node=None, hx_on__after_request=None,
->                 hx_on__after_settle=None, hx_on__after_swap=None,
->                 hx_on__before_cleanup_element=None,
->                 hx_on__before_on_load=None, hx_on__before_process_node=None,
->                 hx_on__before_request=None, hx_on__before_swap=None,
->                 hx_on__before_send=None, hx_on__before_transition=None,
->                 hx_on__config_request=None, hx_on__confirm=None,
->                 hx_on__history_cache_error=None,
->                 hx_on__history_cache_miss=None,
->                 hx_on__history_cache_miss_error=None,
->                 hx_on__history_cache_miss_load=None,
->                 hx_on__history_restore=None, hx_on__before_history_save=None,
->                 hx_on__load=None, hx_on__no_sse_source_error=None,
->                 hx_on__on_load_error=None, hx_on__oob_after_swap=None,
->                 hx_on__oob_before_swap=None, hx_on__oob_error_no_target=None,
->                 hx_on__prompt=None, hx_on__pushed_into_history=None,
->                 hx_on__replaced_in_history=None, hx_on__response_error=None,
->                 hx_on__send_abort=None, hx_on__send_error=None,
->                 hx_on__sse_error=None, hx_on__sse_open=None,
->                 hx_on__swap_error=None, hx_on__target_error=None,
->                 hx_on__timeout=None, hx_on__validation_validate=None,
->                 hx_on__validation_failed=None, hx_on__validation_halted=None,
->                 hx_on__xhr_abort=None, hx_on__xhr_loadend=None,
->                 hx_on__xhr_loadstart=None, hx_on__xhr_progress=None, **kwargs)
+``` python
+def CheckboxX(
+    checked:bool=False, label:NoneType=None, value:str='1', id:NoneType=None, name:NoneType=None, *,
+    target_id:NoneType=None, hx_vals:NoneType=None, hx_target:NoneType=None, cls:NoneType=None, title:NoneType=None,
+    style:NoneType=None, accesskey:NoneType=None, contenteditable:NoneType=None, dir:NoneType=None,
+    draggable:NoneType=None, enterkeyhint:NoneType=None, hidden:NoneType=None, inert:NoneType=None,
+    inputmode:NoneType=None, lang:NoneType=None, popover:NoneType=None, spellcheck:NoneType=None,
+    tabindex:NoneType=None, translate:NoneType=None, hx_get:NoneType=None, hx_post:NoneType=None,
+    hx_put:NoneType=None, hx_delete:NoneType=None, hx_patch:NoneType=None, hx_trigger:NoneType=None,
+    hx_swap:NoneType=None, hx_swap_oob:NoneType=None, hx_include:NoneType=None, hx_select:NoneType=None,
+    hx_select_oob:NoneType=None, hx_indicator:NoneType=None, hx_push_url:NoneType=None, hx_confirm:NoneType=None,
+    hx_disable:NoneType=None, hx_replace_url:NoneType=None, hx_disabled_elt:NoneType=None, hx_ext:NoneType=None,
+    hx_headers:NoneType=None, hx_history:NoneType=None, hx_history_elt:NoneType=None, hx_inherit:NoneType=None,
+    hx_params:NoneType=None, hx_preserve:NoneType=None, hx_prompt:NoneType=None, hx_request:NoneType=None,
+    hx_sync:NoneType=None, hx_validate:NoneType=None, hx_action:NoneType=None, hx_method:NoneType=None,
+    hx_config:NoneType=None, hx_ignore:NoneType=None, hx_on_blur:NoneType=None, hx_on_change:NoneType=None,
+    hx_on_contextmenu:NoneType=None, hx_on_focus:NoneType=None, hx_on_input:NoneType=None,
+    hx_on_invalid:NoneType=None, hx_on_reset:NoneType=None, hx_on_select:NoneType=None, hx_on_submit:NoneType=None,
+    hx_on_keydown:NoneType=None, hx_on_keypress:NoneType=None, hx_on_keyup:NoneType=None, hx_on_click:NoneType=None,
+    hx_on_dblclick:NoneType=None, hx_on_mousedown:NoneType=None, hx_on_mouseenter:NoneType=None,
+    hx_on_mouseleave:NoneType=None, hx_on_mousemove:NoneType=None, hx_on_mouseout:NoneType=None,
+    hx_on_mouseover:NoneType=None, hx_on_mouseup:NoneType=None, hx_on_wheel:NoneType=None,
+    hx_on__abort:NoneType=None, hx_on__after_on_load:NoneType=None, hx_on__after_process_node:NoneType=None,
+    hx_on__after_request:NoneType=None, hx_on__after_settle:NoneType=None, hx_on__after_swap:NoneType=None,
+    hx_on__before_cleanup_element:NoneType=None, hx_on__before_on_load:NoneType=None,
+    hx_on__before_process_node:NoneType=None, hx_on__before_request:NoneType=None, hx_on__before_swap:NoneType=None,
+    hx_on__before_send:NoneType=None, hx_on__before_transition:NoneType=None, hx_on__config_request:NoneType=None,
+    hx_on__confirm:NoneType=None, hx_on__history_cache_error:NoneType=None, hx_on__history_cache_miss:NoneType=None,
+    hx_on__history_cache_miss_error:NoneType=None, hx_on__history_cache_miss_load:NoneType=None,
+    hx_on__history_restore:NoneType=None, hx_on__before_history_save:NoneType=None, hx_on__load:NoneType=None,
+    hx_on__no_sse_source_error:NoneType=None, hx_on__on_load_error:NoneType=None,
+    hx_on__oob_after_swap:NoneType=None, hx_on__oob_before_swap:NoneType=None,
+    hx_on__oob_error_no_target:NoneType=None, hx_on__prompt:NoneType=None, hx_on__pushed_into_history:NoneType=None,
+    hx_on__replaced_in_history:NoneType=None, hx_on__response_error:NoneType=None, hx_on__send_abort:NoneType=None,
+    hx_on__send_error:NoneType=None, hx_on__sse_error:NoneType=None, hx_on__sse_open:NoneType=None,
+    hx_on__swap_error:NoneType=None, hx_on__target_error:NoneType=None, hx_on__timeout:NoneType=None,
+    hx_on__validation_validate:NoneType=None, hx_on__validation_failed:NoneType=None,
+    hx_on__validation_halted:NoneType=None, hx_on__xhr_abort:NoneType=None, hx_on__xhr_loadend:NoneType=None,
+    hx_on__xhr_loadstart:NoneType=None, hx_on__xhr_progress:NoneType=None, hx_on__after_init:NoneType=None,
+    hx_on__before_cleanup:NoneType=None, hx_on__before_history_update:NoneType=None,
+    hx_on__before_init:NoneType=None, hx_on__before_process:NoneType=None,
+    hx_on__before_history_restore:NoneType=None, hx_on__after_history_push:NoneType=None,
+    hx_on__after_history_replace:NoneType=None, hx_on__error:NoneType=None, **kwargs
+)->fastcore.xml.FT:
+```
 
-*A Checkbox optionally inside a Label, preceded by a
-[`Hidden`](https://www.fastht.ml/docs/api/xtend.html#hidden) with
+*A Checkbox optionally inside a Label, preceded by a `Hidden` with
 matching name*
 
 ``` python
 show(CheckboxX(True, 'Check me out!'))
 ```
 
-<input type="hidden" skip>
+<input type="hidden" value="" skip>
 <label>  <input type="checkbox" checked value="1">
 Check me out!</label>
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/xtend.py#L60"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
 ### Script
 
->  Script (code:str='', id=None, cls=None, title=None, style=None,
->              attrmap=None, valmap=None, ft_cls=None, **kwargs)
+``` python
+def Script(
+    code:str='', *, id:NoneType=None, cls:NoneType=None, title:NoneType=None, style:NoneType=None,
+    attrmap:NoneType=None, valmap:NoneType=None, ft_cls:NoneType=None, **kwargs
+)->fastcore.xml.FT:
+```
 
 *A Script tag that doesn’t escape its code*
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/xtend.py#L66"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
 ### Style
 
->  Style (*c, id=None, cls=None, title=None, style=None, attrmap=None,
->             valmap=None, ft_cls=None, **kwargs)
+``` python
+def Style(
+    *c, id:NoneType=None, cls:NoneType=None, title:NoneType=None, style:NoneType=None, attrmap:NoneType=None,
+    valmap:NoneType=None, ft_cls:NoneType=None, **kwargs
+)->fastcore.xml.FT:
+```
 
 *A Style tag that doesn’t escape its code*
 
@@ -344,92 +334,89 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/xtend.py#L71"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
 ### double_braces
 
->  double_braces (s)
+``` python
+def double_braces(
+    s
+):
+```
 
 *Convert single braces to double braces if next to special chars or
 newline*
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/xtend.py#L77"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
 ### undouble_braces
 
->  undouble_braces (s)
+``` python
+def undouble_braces(
+    s
+):
+```
 
 *Convert double braces to single braces if next to special chars or
 newline*
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/xtend.py#L83"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
 ### loose_format
 
->  loose_format (s, **kw)
+``` python
+def loose_format(
+    s, **kw
+):
+```
 
 *String format `s` using `kw`, without being strict about braces outside
 of template params*
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/xtend.py#L89"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
 ### ScriptX
 
->  ScriptX (fname, src=None, nomodule=None, type=None, _async=None,
->               defer=None, charset=None, crossorigin=None, integrity=None,
->               **kw)
+``` python
+def ScriptX(
+    fname, src:NoneType=None, nomodule:NoneType=None, type:NoneType=None, _async:NoneType=None, defer:NoneType=None,
+    charset:NoneType=None, crossorigin:NoneType=None, integrity:NoneType=None, **kw
+):
+```
 
 *A `script` element with contents read from `fname`*
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/xtend.py#L97"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
 ### replace_css_vars
 
->  replace_css_vars (css, pre='tpl', **kwargs)
+``` python
+def replace_css_vars(
+    css, pre:str='tpl', **kwargs
+):
+```
 
 *Replace `var(--)` CSS variables with `kwargs` if name prefix matches
 `pre`*
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/xtend.py#L106"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
 ### StyleX
 
->  StyleX (fname, **kw)
+``` python
+def StyleX(
+    fname, **kw
+):
+```
 
 *A `style` element with contents read from `fname` and variables
 replaced from `kw`*
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/xtend.py#L114"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
 ### Nbsp
 
->  Nbsp ()
+``` python
+def Nbsp():
+```
 
 *A non-breaking space*
 
@@ -437,115 +424,116 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/xtend.py#L119"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
 ### Surreal
 
->  Surreal (code:str)
+``` python
+def Surreal(
+    code:str
+):
+```
 
 *Wrap `code` in `domReadyExecute` and set `m=me()` and `p=me('-')`*
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/xtend.py#L132"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
 ### On
 
->  On (code:str, event:str='click', sel:str='', me=True)
+``` python
+def On(
+    code:str, event:str='click', sel:str='', me:bool=True
+):
+```
 
 *An async surreal.js script block event handler for `event` on selector
 `sel,p`, making available parent `p`, event `ev`, and target `e`*
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/xtend.py#L145"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
 ### Prev
 
->  Prev (code:str, event:str='click')
+``` python
+def Prev(
+    code:str, event:str='click'
+):
+```
 
 *An async surreal.js script block event handler for `event` on previous
-sibling, with same vars as
-[`On`](https://www.fastht.ml/docs/api/xtend.html#on)*
+sibling, with same vars as `On`*
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/xtend.py#L150"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
 ### Now
 
->  Now (code:str, sel:str='')
+``` python
+def Now(
+    code:str, sel:str=''
+):
+```
 
 *An async surreal.js script block on selector `me(sel)`*
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/xtend.py#L156"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
 ### AnyNow
 
->  AnyNow (sel:str, code:str)
+``` python
+def AnyNow(
+    sel:str, code:str
+):
+```
 
 *An async surreal.js script block on selector `any(sel)`*
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/xtend.py#L161"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
 ### run_js
 
->  run_js (js, id=None, **kw)
+``` python
+def run_js(
+    js, id:NoneType=None, **kw
+):
+```
 
 *Run `js` script, auto-generating `id` based on name of caller if
 needed, and js-escaping any `kw` params*
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/xtend.py#L168"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
 ### HtmxOn
 
->  HtmxOn (eventname:str, code:str)
+``` python
+def HtmxOn(
+    eventname:str, code:str
+):
+```
+
+*Run `code` on htmx event `eventname`; both the v2 (`htmx:camelCase`)
+and v4 (`htmx-dash-case`) spellings are bound, and only the loaded
+version’s fires*
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/xtend.py#L174"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
 ### jsd
 
->  jsd (org, repo, root, path, prov='gh', typ='script', ver=None, esm=False,
->           **kwargs)
+``` python
+def jsd(
+    org, repo, root, path, prov:str='gh', typ:str='script', ver:NoneType=None, esm:bool=False, **kwargs
+)->fastcore.xml.FT:
+```
 
-*jsdelivr [`Script`](https://www.fastht.ml/docs/api/xtend.html#script)
-or CSS `Link` tag, or URL*
+*jsdelivr `Script` or CSS `Link` tag, or URL*
 
 ## Other helpers
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/xtend.py#L182"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
 ### Fragment
 
->  Fragment (*c)
+``` python
+def Fragment(
+    *c
+):
+```
 
 *An empty tag, used as a container*
 
@@ -559,57 +547,53 @@ print(to_xml(fts))
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/xtend.py#L188"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
 ### Titled
 
->  Titled (title:str='FastHTML app', *args, cls='container', target_id=None,
->              hx_vals=None, hx_target=None, id=None, style=None,
->              accesskey=None, contenteditable=None, dir=None, draggable=None,
->              enterkeyhint=None, hidden=None, inert=None, inputmode=None,
->              lang=None, popover=None, spellcheck=None, tabindex=None,
->              translate=None, hx_get=None, hx_post=None, hx_put=None,
->              hx_delete=None, hx_patch=None, hx_trigger=None, hx_swap=None,
->              hx_swap_oob=None, hx_include=None, hx_select=None,
->              hx_select_oob=None, hx_indicator=None, hx_push_url=None,
->              hx_confirm=None, hx_disable=None, hx_replace_url=None,
->              hx_disabled_elt=None, hx_ext=None, hx_headers=None,
->              hx_history=None, hx_history_elt=None, hx_inherit=None,
->              hx_params=None, hx_preserve=None, hx_prompt=None,
->              hx_request=None, hx_sync=None, hx_validate=None, hx_on_blur=None,
->              hx_on_change=None, hx_on_contextmenu=None, hx_on_focus=None,
->              hx_on_input=None, hx_on_invalid=None, hx_on_reset=None,
->              hx_on_select=None, hx_on_submit=None, hx_on_keydown=None,
->              hx_on_keypress=None, hx_on_keyup=None, hx_on_click=None,
->              hx_on_dblclick=None, hx_on_mousedown=None, hx_on_mouseenter=None,
->              hx_on_mouseleave=None, hx_on_mousemove=None, hx_on_mouseout=None,
->              hx_on_mouseover=None, hx_on_mouseup=None, hx_on_wheel=None,
->              hx_on__abort=None, hx_on__after_on_load=None,
->              hx_on__after_process_node=None, hx_on__after_request=None,
->              hx_on__after_settle=None, hx_on__after_swap=None,
->              hx_on__before_cleanup_element=None, hx_on__before_on_load=None,
->              hx_on__before_process_node=None, hx_on__before_request=None,
->              hx_on__before_swap=None, hx_on__before_send=None,
->              hx_on__before_transition=None, hx_on__config_request=None,
->              hx_on__confirm=None, hx_on__history_cache_error=None,
->              hx_on__history_cache_miss=None,
->              hx_on__history_cache_miss_error=None,
->              hx_on__history_cache_miss_load=None, hx_on__history_restore=None,
->              hx_on__before_history_save=None, hx_on__load=None,
->              hx_on__no_sse_source_error=None, hx_on__on_load_error=None,
->              hx_on__oob_after_swap=None, hx_on__oob_before_swap=None,
->              hx_on__oob_error_no_target=None, hx_on__prompt=None,
->              hx_on__pushed_into_history=None, hx_on__replaced_in_history=None,
->              hx_on__response_error=None, hx_on__send_abort=None,
->              hx_on__send_error=None, hx_on__sse_error=None,
->              hx_on__sse_open=None, hx_on__swap_error=None,
->              hx_on__target_error=None, hx_on__timeout=None,
->              hx_on__validation_validate=None, hx_on__validation_failed=None,
->              hx_on__validation_halted=None, hx_on__xhr_abort=None,
->              hx_on__xhr_loadend=None, hx_on__xhr_loadstart=None,
->              hx_on__xhr_progress=None, **kwargs)
+``` python
+def Titled(
+    title:str='FastHTML app', *args, cls:str='container', target_id:NoneType=None, hx_vals:NoneType=None,
+    hx_target:NoneType=None, id:NoneType=None, style:NoneType=None, accesskey:NoneType=None,
+    contenteditable:NoneType=None, dir:NoneType=None, draggable:NoneType=None, enterkeyhint:NoneType=None,
+    hidden:NoneType=None, inert:NoneType=None, inputmode:NoneType=None, lang:NoneType=None, popover:NoneType=None,
+    spellcheck:NoneType=None, tabindex:NoneType=None, translate:NoneType=None, hx_get:NoneType=None,
+    hx_post:NoneType=None, hx_put:NoneType=None, hx_delete:NoneType=None, hx_patch:NoneType=None,
+    hx_trigger:NoneType=None, hx_swap:NoneType=None, hx_swap_oob:NoneType=None, hx_include:NoneType=None,
+    hx_select:NoneType=None, hx_select_oob:NoneType=None, hx_indicator:NoneType=None, hx_push_url:NoneType=None,
+    hx_confirm:NoneType=None, hx_disable:NoneType=None, hx_replace_url:NoneType=None, hx_disabled_elt:NoneType=None,
+    hx_ext:NoneType=None, hx_headers:NoneType=None, hx_history:NoneType=None, hx_history_elt:NoneType=None,
+    hx_inherit:NoneType=None, hx_params:NoneType=None, hx_preserve:NoneType=None, hx_prompt:NoneType=None,
+    hx_request:NoneType=None, hx_sync:NoneType=None, hx_validate:NoneType=None, hx_action:NoneType=None,
+    hx_method:NoneType=None, hx_config:NoneType=None, hx_ignore:NoneType=None, hx_on_blur:NoneType=None,
+    hx_on_change:NoneType=None, hx_on_contextmenu:NoneType=None, hx_on_focus:NoneType=None,
+    hx_on_input:NoneType=None, hx_on_invalid:NoneType=None, hx_on_reset:NoneType=None, hx_on_select:NoneType=None,
+    hx_on_submit:NoneType=None, hx_on_keydown:NoneType=None, hx_on_keypress:NoneType=None, hx_on_keyup:NoneType=None,
+    hx_on_click:NoneType=None, hx_on_dblclick:NoneType=None, hx_on_mousedown:NoneType=None,
+    hx_on_mouseenter:NoneType=None, hx_on_mouseleave:NoneType=None, hx_on_mousemove:NoneType=None,
+    hx_on_mouseout:NoneType=None, hx_on_mouseover:NoneType=None, hx_on_mouseup:NoneType=None,
+    hx_on_wheel:NoneType=None, hx_on__abort:NoneType=None, hx_on__after_on_load:NoneType=None,
+    hx_on__after_process_node:NoneType=None, hx_on__after_request:NoneType=None, hx_on__after_settle:NoneType=None,
+    hx_on__after_swap:NoneType=None, hx_on__before_cleanup_element:NoneType=None,
+    hx_on__before_on_load:NoneType=None, hx_on__before_process_node:NoneType=None,
+    hx_on__before_request:NoneType=None, hx_on__before_swap:NoneType=None, hx_on__before_send:NoneType=None,
+    hx_on__before_transition:NoneType=None, hx_on__config_request:NoneType=None, hx_on__confirm:NoneType=None,
+    hx_on__history_cache_error:NoneType=None, hx_on__history_cache_miss:NoneType=None,
+    hx_on__history_cache_miss_error:NoneType=None, hx_on__history_cache_miss_load:NoneType=None,
+    hx_on__history_restore:NoneType=None, hx_on__before_history_save:NoneType=None, hx_on__load:NoneType=None,
+    hx_on__no_sse_source_error:NoneType=None, hx_on__on_load_error:NoneType=None,
+    hx_on__oob_after_swap:NoneType=None, hx_on__oob_before_swap:NoneType=None,
+    hx_on__oob_error_no_target:NoneType=None, hx_on__prompt:NoneType=None, hx_on__pushed_into_history:NoneType=None,
+    hx_on__replaced_in_history:NoneType=None, hx_on__response_error:NoneType=None, hx_on__send_abort:NoneType=None,
+    hx_on__send_error:NoneType=None, hx_on__sse_error:NoneType=None, hx_on__sse_open:NoneType=None,
+    hx_on__swap_error:NoneType=None, hx_on__target_error:NoneType=None, hx_on__timeout:NoneType=None,
+    hx_on__validation_validate:NoneType=None, hx_on__validation_failed:NoneType=None,
+    hx_on__validation_halted:NoneType=None, hx_on__xhr_abort:NoneType=None, hx_on__xhr_loadend:NoneType=None,
+    hx_on__xhr_loadstart:NoneType=None, hx_on__xhr_progress:NoneType=None, hx_on__after_init:NoneType=None,
+    hx_on__before_cleanup:NoneType=None, hx_on__before_history_update:NoneType=None,
+    hx_on__before_init:NoneType=None, hx_on__before_process:NoneType=None,
+    hx_on__before_history_restore:NoneType=None, hx_on__after_history_push:NoneType=None,
+    hx_on__after_history_replace:NoneType=None, hx_on__error:NoneType=None, **kwargs
+)->fastcore.xml.FT:
+```
 
 *An HTML partial containing a `Title`, and `H1`, and any provided
 children*
@@ -625,59 +609,319 @@ show(Titled('my page', P('para')))
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/xtend.py#L193"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
 ### Socials
 
->  Socials (title, site_name, description, image, url=None, w=1200, h=630,
->               twitter_site=None, creator=None, card='summary')
+``` python
+def Socials(
+    title, site_name, description, image, url:NoneType=None, w:int=1200, h:int=630, twitter_site:NoneType=None,
+    creator:NoneType=None, card:str='summary'
+):
+```
 
 *OG and Twitter social card headers*
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/xtend.py#L216"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
 ### YouTubeEmbed
 
->  YouTubeEmbed (video_id:str, width:int=560, height:int=315,
->                    start_time:int=0, no_controls:bool=False,
->                    title:str='YouTube video player', cls:str='', **kwargs)
+``` python
+def YouTubeEmbed(
+    video_id:str, *, width:int=560, height:int=315, start_time:int=0, no_controls:bool=False,
+    title:str='YouTube video player', cls:str='', **kwargs
+):
+```
 
 *Embed a YouTube video*
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/xtend.py#L241"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
 ### Favicon
 
->  Favicon (light_icon, dark_icon)
+``` python
+def Favicon(
+    light_icon, dark_icon
+):
+```
 
 *Light and dark favicon headers*
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/xtend.py#L247"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
 ### clear
 
->  clear (id)
+``` python
+def clear(
+    id
+):
+```
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/xtend.py#L268"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
 ### with_sid
 
->  with_sid (app, dest, path='/')
+``` python
+def with_sid(
+    app, dest, path:str='/'
+):
+```
+
+------------------------------------------------------------------------
+
+### LdJson
+
+``` python
+def LdJson(
+    typ, data:dict, script:bool=False, extra:NoneType=None, **kwargs
+)->fastcore.xml.FT:
+```
+
+*A script tag containing JSON-LD structured data*
+
+------------------------------------------------------------------------
+
+### LdContactPoint
+
+``` python
+def LdContactPoint(
+    contact_type:str, email:str=None, phone:str=None, script:bool=False, **extra
+)->dict:
+```
+
+*Create a ContactPoint for JSON-LD*
+
+------------------------------------------------------------------------
+
+### LdOrg
+
+``` python
+def LdOrg(
+    name:str, url:str=None, logo:str=None, alt_name:str=None, same_as:list=None, contact_points:list=None,
+    script:bool=False, **extra
+)->dict:
+```
+
+*JSON-LD Organization structured data*
+
+``` python
+LdOrg(
+    name="AnswerDotAI, Inc.", alt_name="SolveIt", 
+    url="https://solve.it.com/", logo="https://solve.it.com/brand/logo.png",
+    same_as=["https://www.fast.ai/", "https://twitter.com/fastdotai"],
+    contact_points=[LdContactPoint("customer support", email="support@fast.ai")],
+    script=True)
+```
+
+<div class="prose" data-markdown="1">
+
+``` html
+<script type="application/ld+json">{
+ "@type": "Organization",
+ "@context": "https://schema.org",
+ "name": "AnswerDotAI, Inc.",
+ "alternateName": "SolveIt",
+ "url": "https://solve.it.com/",
+ "logo": "https://solve.it.com/brand/logo.png",
+ "sameAs": [
+  "https://www.fast.ai/",
+  "https://twitter.com/fastdotai"
+ ],
+ "contactPoint": [
+  {
+   "@type": "ContactPoint",
+   "@context": "https://schema.org",
+   "contactType": "customer support",
+   "email": "support@fast.ai"
+  }
+ ]
+}</script>
+```
+
+</div>
+
+------------------------------------------------------------------------
+
+### LdWebsite
+
+``` python
+def LdWebsite(
+    name:str, url:str, script:bool=False, **extra
+)->dict:
+```
+
+*Create JSON-LD WebSite structured data*
+
+------------------------------------------------------------------------
+
+### LdCourseInstance
+
+``` python
+def LdCourseInstance(
+    course_mode:str='Online', start_date:str=None, end_date:str=None, location:dict=None, instructor:dict=None,
+    script:bool=False, **extra
+)->dict:
+```
+
+*Create a CourseInstance for JSON-LD*
+
+------------------------------------------------------------------------
+
+### LdCourse
+
+``` python
+def LdCourse(
+    name:str, description:str, provider:dict, course_instance:dict=None, script:bool=False, **extra
+)->dict:
+```
+
+*Create JSON-LD Course structured data*
+
+``` python
+LdCourse(
+    name="How to Solve It With Code",
+    description="A 5-week course teaching the SolveIt method...",
+    provider={"@type": "Organization", "name": "FastDotAI", "sameAs": "https://fast.ai/"},
+    course_instance=LdCourseInstance(
+        start_date="2025-11-03", 
+        end_date="2025-12-10",
+        location={"@type": "VirtualLocation", "url": "https://solve.it.com/"},
+        instructor={"@type": "Person", "name": "Jeremy Howard", "sameAs": "https://www.fast.ai/about/#jeremy"}
+    ), script=True)
+```
+
+<div class="prose" data-markdown="1">
+
+``` html
+<script type="application/ld+json">{
+ "@type": "Course",
+ "@context": "https://schema.org",
+ "name": "How to Solve It With Code",
+ "description": "A 5-week course teaching the SolveIt method...",
+ "provider": {
+  "@type": "Organization",
+  "name": "FastDotAI",
+  "sameAs": "https://fast.ai/"
+ },
+ "hasCourseInstance": {
+  "@type": "CourseInstance",
+  "@context": "https://schema.org",
+  "courseMode": "Online",
+  "startDate": "2025-11-03",
+  "endDate": "2025-12-10",
+  "location": {
+   "@type": "VirtualLocation",
+   "url": "https://solve.it.com/"
+  },
+  "instructor": {
+   "@type": "Person",
+   "name": "Jeremy Howard",
+   "sameAs": "https://www.fast.ai/about/#jeremy"
+  }
+ }
+}</script>
+```
+
+</div>
+
+------------------------------------------------------------------------
+
+### robots_txt
+
+``` python
+def robots_txt(
+    app, allow_all:bool=True, disallow_paths:NoneType=None, sitemap_url:NoneType=None, crawl_delay:NoneType=None
+):
+```
+
+*Add a /robots.txt route to the app*
+
+Parameters: - `allow_all=True` - Allow all crawling (default) -
+`disallow_paths` - List of paths to disallow
+(e.g. `["/admin", "/private"]`) - `sitemap_url` - URL to your
+sitemap.xml - `crawl_delay` - Seconds between requests for polite
+crawlers
+
+Usage examples:
+
+``` python
+app = FastHTML()
+```
+
+``` python
+# Allow everything
+robots_txt(app)
+
+# Block specific paths with sitemap
+robots_txt(app, disallow_paths=["/admin", "/api"], sitemap_url="https://mysite.com/sitemap.xml")
+
+# Block everything
+robots_txt(app, allow_all=False)
+```
+
+------------------------------------------------------------------------
+
+### sitemap_xml
+
+``` python
+def sitemap_xml(
+    app, urls, loc_base:str=''
+):
+```
+
+*Add a /sitemap.xml route to the app with list of URLs*
+
+------------------------------------------------------------------------
+
+### sitemap_url
+
+``` python
+def sitemap_url(
+    url_info, loc_base:str=''
+):
+```
+
+*Create a sitemap URL element from url_info (string or dict)*
+
+``` python
+# Simple URLs
+sitemap_xml(app, ["/", "/about", "/contact"], loc_base="https://mysite.com")
+
+# With metadata
+sitemap_xml(app, [
+    {"loc": "/", "changefreq": "daily", "priority": 1.0},
+    {"loc": "/about", "changefreq": "monthly", "priority": 0.8},
+    "/contact"  # Can mix simple strings with dicts
+], loc_base="https://mysite.com")
+```
+
+------------------------------------------------------------------------
+
+### upload_pb_attrs
+
+``` python
+def upload_pb_attrs(
+    id:str='uploadprog'
+):
+```
+
+*Form `hx_on` progress attr that reveals and updates a hidden
+`upload_pb` of matching `id`*
+
+File uploads can take a while for large files, so it’s nice to show
+users a progress bar. With a progress bar like
+`Progress(id='uploadprog', value='0', max='100', cls='hidden')`,
+`upload_pb_attrs` returns an htmx event handler that reveals and updates
+it.
+
+Add both to a form, along with htmx’s multipart encoding:
+
+``` python
+Form(Input(type='file', name='f'),
+    Progress(id='uploadprog', value='0', max='100', cls='hidden'),
+    Button('Upload'),
+    hx_post='/upload', hx_encoding='multipart/form-data', **upload_pb_attrs())
+```
+
+As the browser uploads, htmx fires `htmx:xhr:progress` events carrying
+`loaded` and `total` byte counts. The handler waits for the first event
+that reports a `total`, then removes the `hidden` class and sets the
+bar’s value to the percentage uploaded.

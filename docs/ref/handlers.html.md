@@ -15,8 +15,7 @@ import json,time
 app = FastHTML()
 ```
 
-The [`FastHTML`](https://www.fastht.ml/docs/api/core.html#fasthtml)
-class is the main application class for FastHTML apps.
+The `FastHTML` class is the main application class for FastHTML apps.
 
 ``` python
 rt = app.route
@@ -41,9 +40,8 @@ the response body to the client.
 cli = Client(app)
 ```
 
-[`Client`](https://www.fastht.ml/docs/api/core.html#client) is a test
-client for FastHTML applications. It allows you to simulate requests to
-your app without running a server.
+`Client` is a test client for FastHTML applications. It allows you to
+simulate requests to your app without running a server.
 
 ``` python
 cli.get('/hi').text
@@ -51,12 +49,10 @@ cli.get('/hi').text
 
     'Hi there'
 
-The `get` method on a
-[`Client`](https://www.fastht.ml/docs/api/core.html#client) instance
-simulates GET requests to the app. It returns a response object that has
-a `.text` attribute, which you can use to access the body of the
-response. It calls `httpx.get` internally – all httpx HTTP verbs are
-supported.
+The `get` method on a `Client` instance simulates GET requests to the
+app. It returns a response object that has a `.text` attribute, which
+you can use to access the body of the response. It calls `httpx.get`
+internally – all httpx HTTP verbs are supported.
 
 ``` python
 @rt("/hi")
@@ -67,11 +63,9 @@ cli.post('/hi').text
     'Postal'
 
 Handler functions can be defined for different HTTP methods on the same
-route. Here, we define a
-[`post`](https://www.fastht.ml/docs/explains/stripe.html#post) handler
-for the `/hi` route. The
-[`Client`](https://www.fastht.ml/docs/api/core.html#client) instance can
-simulate different HTTP methods, including POST requests.
+route. Here, we define a `post` handler for the `/hi` route. The
+`Client` instance can simulate different HTTP methods, including POST
+requests.
 
 ## Request and Response Objects
 
@@ -210,11 +204,9 @@ necessary HTML boilerplate, including default `head` content with
 required scripts.
 
 When using `app.route` (or `rt`), if the function name matches an HTTP
-verb (e.g., `get`,
-[`post`](https://www.fastht.ml/docs/explains/stripe.html#post), `put`,
-`delete`), that HTTP method is automatically used for the route. In this
-case, a path must be explicitly provided as an argument to the
-decorator.
+verb (e.g., `get`, `post`, `put`, `delete`), that HTTP method is
+automatically used for the route. In this case, a path must be
+explicitly provided as an argument to the decorator.
 
 ``` python
 hxhdr = {'headers':{'hx-request':"1"}}
@@ -307,20 +299,25 @@ print(cli.get('/autolink').text)
        <div href="/user/Alexis">Text.</div>
      </html>
 
-The [`uri`](https://www.fastht.ml/docs/api/core.html#uri) function is
-used to generate URLs for named routes. It takes the route name as its
-first argument, followed by any path or query parameters needed for that
-route.
+The `uri` function is used to generate URLs for named routes. It takes
+the route name as its first argument, followed by any path or query
+parameters needed for that route.
 
 In this example, `uri('gday', nm='Alexis')` generates the URL for the
 route named ‘gday’ (which we defined earlier as ‘/user/{nm}’), with
 ‘Alexis’ as the value for the ‘nm’ parameter.
 
 The `link` parameter in FT components sets the `href` attribute of the
-rendered HTML element. By using
-[`uri()`](https://www.fastht.ml/docs/api/core.html#uri), we can
-dynamically generate correct URLs even if the underlying route structure
-changes.
+rendered HTML element. By using `uri()`, we can dynamically generate
+correct URLs even if the underlying route structure changes.
+
+FastHTML provides several shorthand attributes that enable URL
+resolution: `link`= (becomes `href`=), `get`= (becomes `hx-get`=),
+`post`= (becomes `hx-post`=), `put`=, `delete`=, and `patch`=. These
+shorthands are required for `uri()` resolution to work at render time.
+
+Important: Using `hx_get=uri(...)` directly will not resolve the URL -
+you must use the shorthand `get=uri(...)` instead.
 
 This approach promotes maintainable code by centralizing route
 definitions and avoiding hardcoded URLs throughout the application.
@@ -423,11 +420,9 @@ print(cli.get('/static/foo/jph.ico').text)
 
     Getting jph.ico from /foo/
 
-The
-[`reg_re_param`](https://www.fastht.ml/docs/api/core.html#reg_re_param)
-function is used to register custom path parameter types using regular
-expressions. Here, we define a new path parameter type called “imgext”
-that matches common image file extensions.
+The `reg_re_param` function is used to register custom path parameter
+types using regular expressions. Here, we define a new path parameter
+type called “imgext” that matches common image file extensions.
 
 Handler functions can use complex path patterns with multiple parameters
 and custom types. In this example, the route pattern
@@ -467,16 +462,11 @@ print(cli.get('/files/foo').text)
 
     foo.txt
 
-Handler functions can use
-[`Path`](https://www.fastht.ml/docs/api/svg.html#path) objects as
-parameter types. The
-[`Path`](https://www.fastht.ml/docs/api/svg.html#path) type is from
-Python’s standard library `pathlib` module, which provides an
-object-oriented interface for working with file paths. In this example,
-the `path` parameter is annotated with
-[`Path`](https://www.fastht.ml/docs/api/svg.html#path), so FastHTML
-automatically converts the string from the URL to a
-[`Path`](https://www.fastht.ml/docs/api/svg.html#path) object.
+Handler functions can use `Path` objects as parameter types. The `Path`
+type is from Python’s standard library `pathlib` module, which provides
+an object-oriented interface for working with file paths. In this
+example, the `path` parameter is annotated with `Path`, so FastHTML
+automatically converts the string from the URL to a `Path` object.
 
 This approach is particularly useful when working with file-related
 routes, as it provides a convenient and platform-independent way to
@@ -548,10 +538,9 @@ indicate that the function’s name is not important or won’t be
 referenced elsewhere. This is a common Python convention for throwaway
 or unused variables, and it works here because FastHTML uses the route
 decorator parameter, when provided, to determine the URL path, not the
-function name. By default, both `get` and
-[`post`](https://www.fastht.ml/docs/explains/stripe.html#post) methods
-can be used in routes that don’t specify an http method (by either using
-`app.get`, `def get`, or the `methods` parameter to `app.route`).
+function name. By default, both `get` and `post` methods can be used in
+routes that don’t specify an http method (by either using `app.get`,
+`def get`, or the `methods` parameter to `app.route`).
 
 ``` python
 @app.get("/datie/")
@@ -579,9 +568,8 @@ match the header names. In this example, `user_agent` is used as a
 parameter name, which automatically captures the value of the
 ‘User-Agent’ header from the request.
 
-The [`Client`](https://www.fastht.ml/docs/api/core.html#client) instance
-allows setting custom headers for test requests. Here, we set the
-‘User-Agent’ header to ‘FastHTML’ in the test request.
+The `Client` instance allows setting custom headers for test requests.
+Here, we set the ‘User-Agent’ header to ‘FastHTML’ in the test request.
 
 ``` python
 @app.get("/hxtest")
@@ -598,8 +586,8 @@ print(cli.get('/hxtest2', headers={'HX-Request':'1'}).text)
 
 Handler functions can access HTMX-specific headers using either the
 special `htmx` parameter name, or a parameter annotated with
-[`HtmxHeaders`](https://www.fastht.ml/docs/api/core.html#htmxheaders).
-Both approaches provide access to HTMX-related information.
+`HtmxHeaders`. Both approaches provide access to HTMX-related
+information.
 
 In these examples, the `htmx.request` attribute returns the value of the
 ‘HX-Request’ header.
@@ -613,10 +601,9 @@ print(cli.get('/app').text)
 
     foo
 
-Handler functions can access the
-[`FastHTML`](https://www.fastht.ml/docs/api/core.html#fasthtml)
-application instance using the special `app` parameter name. This allows
-handlers to access application-level attributes and methods.
+Handler functions can access the `FastHTML` application instance using
+the special `app` parameter name. This allows handlers to access
+application-level attributes and methods.
 
 In this example, we set a custom attribute `chk` on the application
 instance. The handler function then uses the `app` parameter to access
@@ -633,18 +620,14 @@ print(r.headers)
     foo
     Headers({'mykey': 'myval', 'content-length': '3', 'content-type': 'text/html; charset=utf-8'})
 
-Handler functions can access the
-[`FastHTML`](https://www.fastht.ml/docs/api/core.html#fasthtml)
-application instance using a parameter annotated with
-[`FastHTML`](https://www.fastht.ml/docs/api/core.html#fasthtml). This
-allows handlers to access application-level attributes and methods, just
-like using the special `app` parameter name.
+Handler functions can access the `FastHTML` application instance using a
+parameter annotated with `FastHTML`. This allows handlers to access
+application-level attributes and methods, just like using the special
+`app` parameter name.
 
-Handlers can return tuples containing both content and
-[`HttpHeader`](https://www.fastht.ml/docs/api/core.html#httpheader)
-objects.
-[`HttpHeader`](https://www.fastht.ml/docs/api/core.html#httpheader)
-allows setting custom HTTP headers in the response.
+Handlers can return tuples containing both content and `HttpHeader`
+objects. `HttpHeader` allows setting custom HTTP headers in the
+response.
 
 In this example:
 
@@ -666,15 +649,14 @@ print(r.headers)
 
     Headers({'hx-location': 'http://example.org', 'content-length': '0', 'content-type': 'text/html; charset=utf-8'})
 
-Handler functions can return
-[`HtmxResponseHeaders`](https://www.fastht.ml/docs/api/core.html#htmxresponseheaders)
-objects to set HTMX-specific response headers. This is useful for
-HTMX-specific behaviors like client-side redirects.
+Handler functions can return `HtmxResponseHeaders` objects to set
+HTMX-specific response headers. This is useful for HTMX-specific
+behaviors like client-side redirects.
 
 In this example we define a handler that returns an
-[`HtmxResponseHeaders`](https://www.fastht.ml/docs/api/core.html#htmxresponseheaders)
-object with a `location` parameter, which sets the `HX-Location` header
-in the response. HTMX uses this for client-side redirects.
+`HtmxResponseHeaders` object with a `location` parameter, which sets the
+`HX-Location` header in the response. HTMX uses this for client-side
+redirects.
 
 ``` python
 @app.get("/app4")
@@ -684,16 +666,14 @@ cli.get('/app4', follow_redirects=False)
 
     <Response [303 See Other]>
 
-Handler functions can return
-[`Redirect`](https://www.fastht.ml/docs/api/core.html#redirect) objects
-to perform HTTP redirects. This is useful for redirecting users to
-different pages or external URLs.
+Handler functions can return `Redirect` objects to perform HTTP
+redirects. This is useful for redirecting users to different pages or
+external URLs.
 
 In this example:
 
-- We define a handler that returns a
-  [`Redirect`](https://www.fastht.ml/docs/api/core.html#redirect) object
-  with the URL “http://example.org”.
+- We define a handler that returns a `Redirect` object with the URL
+  “http://example.org”.
 - The `cli.get('/app4', follow_redirects=False)` call simulates a GET
   request to the ‘/app4’ route without following redirects.
 - The response has a 303 See Other status code, indicating a redirect.
@@ -708,12 +688,10 @@ Redirect.__response__
 
     <function fasthtml.core.Redirect.__response__(self, req)>
 
-The [`Redirect`](https://www.fastht.ml/docs/api/core.html#redirect)
-class in FastHTML implements a `__response__` method, which is a special
-method recognized by the framework. When a handler returns a
-[`Redirect`](https://www.fastht.ml/docs/api/core.html#redirect) object,
-FastHTML internally calls this `__response__` method to replace the
-original response.
+The `Redirect` class in FastHTML implements a `__response__` method,
+which is a special method recognized by the framework. When a handler
+returns a `Redirect` object, FastHTML internally calls this
+`__response__` method to replace the original response.
 
 The `__response__` method takes a `req` parameter, which represents the
 incoming request. This allows the method to access request information
@@ -761,12 +739,10 @@ tags, which are both placed in the head.
 
 ## APIRouter
 
-[`APIRouter`](https://www.fastht.ml/docs/api/core.html#apirouter) is
-useful when you want to split your application routes across multiple
-`.py` files that are part of a single FastHTMl application. It accepts
-an optional `prefix` argument that will be applied to all routes within
-that instance of
-[`APIRouter`](https://www.fastht.ml/docs/api/core.html#apirouter).
+`APIRouter` is useful when you want to split your application routes
+across multiple `.py` files that are part of a single FastHTMl
+application. It accepts an optional `prefix` argument that will be
+applied to all routes within that instance of `APIRouter`.
 
 Below we define several hypothetical product related routes in a
 `products.py` and then demonstrate how they can seamlessly be
@@ -1006,11 +982,10 @@ parsed into the specified type. In this example, `it` is of type
 `Bodie`, and FastHTML converts the incoming JSON data to a `Bodie`
 instance.
 
-The [`Titled`](https://www.fastht.ml/docs/api/xtend.html#titled)
-component is used to create a page with a title and main content. It
-automatically generates an `<h1>` with the provided title, wraps the
-content in a `<main>` tag with a “container” class, and adds a `title`
-to the head.
+The `Titled` component is used to create a page with a title and main
+content. It automatically generates an `<h1>` with the provided title,
+wraps the content in a `<main>` tag with a “container” class, and adds a
+`title` to the head.
 
 When making a request with JSON data: - Set the “Content-Type” header to
 “application/json” - Provide the JSON data as a string in the `data`
@@ -1039,10 +1014,9 @@ Handler functions can set and retrieve cookies. In this example:
 - The `/getcookie` route retrieves the ‘now’ cookie and returns its
   value.
 
-The [`cookie()`](https://www.fastht.ml/docs/api/core.html#cookie)
-function is used to create a cookie response. FastHTML automatically
-converts the datetime object to a string when setting the cookie, and
-parses it back to a date object when retrieving it.
+The `cookie()` function is used to create a cookie response. FastHTML
+automatically converts the datetime object to a string when setting the
+cookie, and parses it back to a date object when retrieving it.
 
 ``` python
 cookie('now', datetime.now())
@@ -1050,12 +1024,9 @@ cookie('now', datetime.now())
 
     HttpHeader(k='set-cookie', v='now="2025-01-30 16:19:29.997374"; Path=/; SameSite=lax')
 
-The [`cookie()`](https://www.fastht.ml/docs/api/core.html#cookie)
-function returns an
-[`HttpHeader`](https://www.fastht.ml/docs/api/core.html#httpheader)
-object with the ‘set-cookie’ key. You can return it in a tuple along
-with `FT` elements, along with anything else FastHTML supports in
-responses.
+The `cookie()` function returns an `HttpHeader` object with the
+‘set-cookie’ key. You can return it in a tuple along with `FT` elements,
+along with anything else FastHTML supports in responses.
 
 ``` python
 app = FastHTML(secret_key='soopersecret')

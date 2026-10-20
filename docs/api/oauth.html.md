@@ -12,68 +12,107 @@ from IPython.display import Markdown
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/oauth.py#L23"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
 ### GoogleAppClient
 
->  GoogleAppClient (client_id, client_secret, code=None, scope=None,
->                       project_id=None, **kwargs)
+``` python
+def GoogleAppClient(
+    client_id, client_secret, code:NoneType=None, scope:NoneType=None, project_id:NoneType=None, **kwargs
+):
+```
 
 *A `WebApplicationClient` for Google oauth2*
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/oauth.py#L42"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
 ### GitHubAppClient
 
->  GitHubAppClient (client_id, client_secret, code=None, scope=None,
->                       **kwargs)
+``` python
+def GitHubAppClient(
+    client_id, client_secret, code:NoneType=None, scope:NoneType=None, **kwargs
+):
+```
 
 *A `WebApplicationClient` for GitHub oauth2*
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/oauth.py#L54"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
 ### HuggingFaceClient
 
->  HuggingFaceClient (client_id, client_secret, code=None, scope=None,
->                         state=None, **kwargs)
+``` python
+def HuggingFaceClient(
+    client_id, client_secret, code:NoneType=None, scope:NoneType=None, state:NoneType=None, **kwargs
+):
+```
 
 *A `WebApplicationClient` for HuggingFace oauth2*
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/oauth.py#L67"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
 ### DiscordAppClient
 
->  DiscordAppClient (client_id, client_secret, is_user=False, perms=0,
->                        scope=None, **kwargs)
+``` python
+def DiscordAppClient(
+    client_id, client_secret, is_user:bool=False, perms:int=0, scope:NoneType=None, **kwargs
+):
+```
 
 *A `WebApplicationClient` for Discord oauth2*
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/oauth.py#L98"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
 ### Auth0AppClient
 
->  Auth0AppClient (domain, client_id, client_secret, code=None, scope=None,
->                      redirect_uri='', **kwargs)
+``` python
+def Auth0AppClient(
+    domain, client_id, client_secret, code:NoneType=None, scope:NoneType=None, redirect_uri:str='', **kwargs
+):
+```
 
 *A `WebApplicationClient` for Auth0 OAuth2*
+
+Apple Sign In requires a few extra steps compared to other OAuth
+providers:
+
+1.  **Client secret is a JWT** — Instead of a static secret, you
+    generate a signed JWT using a private key from Apple
+2.  **Callback is POST, not GET** — Apple sends the authorization code
+    via form POST, so you need `redir_method='post'`
+3.  **User info is in the ID token** — There’s no separate userinfo
+    endpoint; you decode the JWT they return
+
+See [Apple’s Sign In
+documentation](https://developer.apple.com/documentation/sign_in_with_apple/sign_in_with_apple_rest_api/authenticating_users_with_sign_in_with_apple)
+for details.
+
+To use Apple Sign In, you’ll need credentials from the [Apple Developer
+Portal](https://developer.apple.com/account):
+
+1.  **Team ID** — Found in your Membership section
+2.  **App ID** — Create under Identifiers → App IDs with “Sign in with
+    Apple” capability enabled
+3.  **Service ID** — Create under Identifiers → Services IDs, linked to
+    your App ID (this becomes your `client_id`)
+4.  **Key ID** — Create under Keys with “Sign in with Apple” enabled
+5.  **Private Key (.p8 file)** — Downloaded when you create the key (you
+    can only download it once!)
+
+When configuring your Service ID, you’ll need to specify your domain and
+return URL (e.g., `https://yourdomain.com/auth/callback`). Note: Apple
+doesn’t accept `localhost` — use a real domain or a tunneling service
+like ngrok for local development. (I used a solveit public domain for
+easy prototyping)
+
+------------------------------------------------------------------------
+
+### AppleAppClient
+
+``` python
+def AppleAppClient(
+    client_id, key_id, team_id, private_key, code:NoneType=None, scope:NoneType=None, **kwargs
+):
+```
+
+*A `WebApplicationClient` for Apple Sign In*
 
 ``` python
 # cli = GoogleAppClient.from_file('client_secret.json')
@@ -81,14 +120,13 @@ target="_blank" style="float:right; font-size:smaller">source</a>
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/oauth.py#L117"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
 ### WebApplicationClient.login_link
 
->  WebApplicationClient.login_link (redirect_uri, scope=None, state=None,
->                                       **kwargs)
+``` python
+def login_link(
+    redirect_uri, scope:NoneType=None, state:NoneType=None, **kwargs
+):
+```
 
 *Get a login link for this client*
 
@@ -109,27 +147,50 @@ port = 8000
 ```
 
 ``` python
-app,rt = fast_app()
-server = JupyUvi(app, port=port)
+# app,rt = fast_app()
+# server = JupyUvi(app, port=port)
 ```
-
-<script>
-document.body.addEventListener('htmx:configRequest', (event) => {
-    if(event.detail.path.includes('://')) return;
-    htmx.config.selfRequestsOnly=false;
-    event.detail.path = `${location.protocol}//${location.hostname}:8000${event.detail.path}`;
-});
-</script>
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/oauth.py#L124"
-target="_blank" style="float:right; font-size:smaller">source</a>
+### get_host
+
+``` python
+def get_host(
+    request
+):
+```
+
+*Get the host, preferring X-Forwarded-Host if available*
+
+``` python
+from types import SimpleNamespace
+from urllib.parse import urlparse
+```
+
+``` python
+mock_request_localhost = SimpleNamespace(headers={}, url=SimpleNamespace(netloc='localhost:8000'))
+mock_request_with_forward = SimpleNamespace(
+    headers={'x-forwarded-host': 'example.com'}, 
+    url=SimpleNamespace(netloc='localhost:8000', hostname='localhost')
+)
+
+print("Without X-Forwarded-Host:", get_host(mock_request_localhost))
+print("With X-Forwarded-Host:", get_host(mock_request_with_forward))
+```
+
+    Without X-Forwarded-Host: localhost:8000
+    With X-Forwarded-Host: example.com
+
+------------------------------------------------------------------------
 
 ### redir_url
 
->  redir_url (request, redir_path, scheme=None)
+``` python
+def redir_url(
+    req, redir_path, scheme:NoneType=None
+):
+```
 
 *Get the redir url for the host in `request`*
 
@@ -142,39 +203,75 @@ def index(request):
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/oauth.py#L131"
-target="_blank" style="float:right; font-size:smaller">source</a>
+### \_AppClient.retr_info
 
-### \_AppClient.parse_response
+``` python
+def retr_info(
+    code, redirect_uri
+):
+```
 
->  _AppClient.parse_response (code, redirect_uri)
-
-*Get the token from the oauth2 server response*
+*Combines `parse_response` and `get_info`*
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/oauth.py#L141"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
 ### \_AppClient.get_info
 
->  _AppClient.get_info (token=None)
+``` python
+def get_info(
+    token:NoneType=None
+):
+```
 
 *Get the info for authenticated user*
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/oauth.py#L149"
-target="_blank" style="float:right; font-size:smaller">source</a>
+### \_AppClient.parse_response
 
-### \_AppClient.retr_info
+``` python
+def parse_response(
+    code, redirect_uri
+):
+```
 
->  _AppClient.retr_info (code, redirect_uri)
+*Get the token from the oauth2 server response*
+
+------------------------------------------------------------------------
+
+### \_AppClient.retr_info_async
+
+``` python
+async def retr_info_async(
+    code, redirect_uri
+):
+```
 
 *Combines `parse_response` and `get_info`*
+
+------------------------------------------------------------------------
+
+### \_AppClient.get_info_async
+
+``` python
+async def get_info_async(
+    token:NoneType=None
+):
+```
+
+*Get the info for authenticated user*
+
+------------------------------------------------------------------------
+
+### \_AppClient.parse_response_async
+
+``` python
+async def parse_response_async(
+    code, redirect_uri
+):
+```
+
+*Get the token from the oauth2 server response*
 
 ``` python
 @rt(redir_path)
@@ -189,18 +286,18 @@ def get(request, code:str):
 ```
 
 ``` python
-server.stop()
+# server.stop()
 ```
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/oauth.py#L156"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
 ### \_AppClient.retr_id
 
->  _AppClient.retr_id (code, redirect_uri)
+``` python
+def retr_id(
+    code, redirect_uri
+):
+```
 
 *Call `retr_info` and then return id/subscriber value*
 
@@ -219,134 +316,136 @@ to revoke access, for example) with `client.token["access_token"]`.
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/oauth.py#L162"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
 ### url_match
 
->  url_match (url, patterns=('^(localhost|127\\.0\\.0\\.1)(:\\d+)?$',))
+``` python
+def url_match(
+    request, patterns:tuple=('^(localhost|127\\.0\\.0\\.1)(:\\d+)?$',)
+):
+```
+
+``` python
+mock_request_prod = SimpleNamespace(headers={}, url=SimpleNamespace(netloc='myapp.com', hostname='myapp.com'))
+
+print("Localhost:", redir_url(mock_request_localhost, '/redirect'))
+print("With X-Forwarded-Host:", redir_url(mock_request_with_forward, '/redirect'))
+print("Production:", redir_url(mock_request_prod, '/redirect'))
+```
+
+    Localhost: http://localhost:8000/redirect
+    With X-Forwarded-Host: https://example.com/redirect
+    Production: https://myapp.com/redirect
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/oauth.py#L166"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
 ### OAuth
 
->  OAuth (app, cli, skip=None, redir_path='/redirect', error_path='/error',
->             logout_path='/logout', login_path='/login', https=True,
->             http_patterns=('^(localhost|127\\.0\\.0\\.1)(:\\d+)?$',))
-
-*Initialize self. See help(type(self)) for accurate signature.*
+``` python
+def OAuth(
+    app, cli, skip:NoneType=None, redir_path:str='/redirect', error_path:str='/error', logout_path:str='/logout',
+    login_path:str='/login', https:bool=True, http_patterns:tuple=('^(localhost|127\\.0\\.0\\.1)(:\\d+)?$',),
+    redir_method:str='get'
+):
+```
 
 ### Google helpers
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/oauth.py#L216"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
 ### GoogleAppClient.consent_url
 
->  GoogleAppClient.consent_url (proj=None)
+``` python
+def consent_url(
+    proj:NoneType=None
+):
+```
 
 *Get Google OAuth consent screen URL*
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/oauth.py#L216"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
 ### GoogleAppClient.consent_url
 
->  GoogleAppClient.consent_url (proj=None)
+``` python
+def consent_url(
+    proj:NoneType=None
+):
+```
 
 *Get Google OAuth consent screen URL*
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/oauth.py#L224"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
 ### Credentials.update
 
->  Credentials.update ()
+``` python
+def update():
+```
 
 *Refresh the credentials if they are expired, and return them*
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/oauth.py#L224"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
 ### Credentials.update
 
->  Credentials.update ()
+``` python
+def update():
+```
 
 *Refresh the credentials if they are expired, and return them*
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/oauth.py#L231"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
 ### Credentials.save
 
->  Credentials.save (fname)
+``` python
+def save(
+    fname
+):
+```
 
 *Save credentials to `fname`*
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/oauth.py#L231"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
 ### Credentials.save
 
->  Credentials.save (fname)
+``` python
+def save(
+    fname
+):
+```
 
 *Save credentials to `fname`*
 
 ------------------------------------------------------------------------
-
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/oauth.py#L236"
-target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### load_creds
 
->  load_creds (fname)
+``` python
+def load_creds(
+    fname
+):
+```
 
 *Load credentials from `fname`*
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/oauth.py#L242"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
 ### GoogleAppClient.creds
 
->  GoogleAppClient.creds ()
+``` python
+def creds():
+```
 
 *Create `Credentials` from the client, refreshing if needed*
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/AnswerDotAI/fasthtml/blob/main/fasthtml/oauth.py#L242"
-target="_blank" style="float:right; font-size:smaller">source</a>
-
 ### GoogleAppClient.creds
 
->  GoogleAppClient.creds ()
+``` python
+def creds():
+```
 
 *Create `Credentials` from the client, refreshing if needed*

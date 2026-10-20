@@ -88,9 +88,8 @@ the same id without reloading the page.
 
 > **Note**
 >
-> Make sure you set `exts='ws'` when creating your
-> [`FastHTML`](https://www.fastht.ml/docs/api/core.html#fasthtml) object
-> if you want to use websockets so the extension is loaded.
+> Make sure you set `exts='ws'` when creating your `FastHTML` object if
+> you want to use websockets so the extension is loaded.
 
 </div>
 
