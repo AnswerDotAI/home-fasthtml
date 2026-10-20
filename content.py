@@ -1,5 +1,5 @@
 from fasthtml.common import *
-from fastlite import *
+from fastlite import database
 from inspect import getsource
 from home_components import accordion,col,inset,bnset
 
