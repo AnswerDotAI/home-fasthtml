@@ -2380,6 +2380,21 @@ def setup_ws(
 ):
 ```
 
+`setup_ws` returns an async function that broadcasts FT elements to
+connected clients. Here a message handler broadcasts each incoming
+message. Clients can disconnect and reconnect:
+
+``` python
+push_app = FastHTML()
+async def relay(msg:str): await push(Div(msg, id='status'))
+push = push_app.setup_ws(relay)
+with TestClient(push_app) as client:
+    for msg in ('hello', 'again'):
+        with client.websocket_connect('/ws') as ws:
+            ws.send_json(dict(msg=msg))
+            assert msg in ws.receive_text()
+```
+
 ------------------------------------------------------------------------
 
 ### FastHTML.devtools_json

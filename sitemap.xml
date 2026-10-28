@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://www.fastht.ml/docs/index.html</loc>
-    <lastmod>2026-10-20T23:00:45.042Z</lastmod>
+    <lastmod>2026-10-28T02:59:32.179Z</lastmod>
   </url>
   <url>
     <loc>https://www.fastht.ml/docs/tutorials/index.html</loc>
@@ -10,19 +10,19 @@
   </url>
   <url>
     <loc>https://www.fastht.ml/docs/tutorials/e2e.html</loc>
-    <lastmod>2026-10-20T23:00:45.151Z</lastmod>
+    <lastmod>2026-10-28T02:59:32.281Z</lastmod>
   </url>
   <url>
     <loc>https://www.fastht.ml/docs/api/jupyter.html</loc>
-    <lastmod>2026-10-20T23:00:45.104Z</lastmod>
+    <lastmod>2026-10-28T02:59:32.240Z</lastmod>
   </url>
   <url>
     <loc>https://www.fastht.ml/docs/api/svg.html</loc>
-    <lastmod>2026-10-20T23:00:45.145Z</lastmod>
+    <lastmod>2026-10-28T02:59:32.282Z</lastmod>
   </url>
   <url>
     <loc>https://www.fastht.ml/docs/api/oauth.html</loc>
-    <lastmod>2026-10-20T23:00:45.135Z</lastmod>
+    <lastmod>2026-10-28T02:59:32.277Z</lastmod>
   </url>
   <url>
     <loc>https://www.fastht.ml/docs/api/index.html</loc>
@@ -30,11 +30,11 @@
   </url>
   <url>
     <loc>https://www.fastht.ml/docs/api/xtend.html</loc>
-    <lastmod>2026-10-20T23:00:45.164Z</lastmod>
+    <lastmod>2026-10-28T02:59:32.303Z</lastmod>
   </url>
   <url>
     <loc>https://www.fastht.ml/docs/explains/websockets.html</loc>
-    <lastmod>2026-10-20T23:00:45.050Z</lastmod>
+    <lastmod>2026-10-28T02:59:32.179Z</lastmod>
   </url>
   <url>
     <loc>https://www.fastht.ml/docs/explains/index.html</loc>
@@ -42,19 +42,19 @@
   </url>
   <url>
     <loc>https://www.fastht.ml/docs/explains/background_tasks.html</loc>
-    <lastmod>2026-10-20T23:00:45.041Z</lastmod>
+    <lastmod>2026-10-28T02:59:32.180Z</lastmod>
   </url>
   <url>
     <loc>https://www.fastht.ml/docs/explains/routes.html</loc>
-    <lastmod>2026-10-20T23:00:45.053Z</lastmod>
+    <lastmod>2026-10-28T02:59:32.179Z</lastmod>
   </url>
   <url>
     <loc>https://www.fastht.ml/docs/explains/minidataapi.html</loc>
-    <lastmod>2026-10-20T23:00:45.050Z</lastmod>
+    <lastmod>2026-10-28T02:59:32.182Z</lastmod>
   </url>
   <url>
     <loc>https://www.fastht.ml/docs/ref/defining_xt_component.html</loc>
-    <lastmod>2026-10-20T23:00:45.079Z</lastmod>
+    <lastmod>2026-10-28T02:59:32.213Z</lastmod>
   </url>
   <url>
     <loc>https://www.fastht.ml/docs/ref/index.html</loc>
@@ -62,7 +62,7 @@
   </url>
   <url>
     <loc>https://www.fastht.ml/docs/ref/live_reload.html</loc>
-    <lastmod>2026-10-20T23:00:45.093Z</lastmod>
+    <lastmod>2026-10-28T02:59:32.224Z</lastmod>
   </url>
   <url>
     <loc>https://www.fastht.ml/docs/ref/best_practice.html</loc>
@@ -70,98 +70,98 @@
   </url>
   <url>
     <loc>https://www.fastht.ml/docs/ref/concise_guide.html</loc>
-    <lastmod>2026-10-20T23:00:45.096Z</lastmod>
+    <lastmod>2026-10-28T02:59:32.256Z</lastmod>
   </url>
   <url>
     <loc>https://www.fastht.ml/docs/ref/handlers.html</loc>
-    <lastmod>2026-10-20T23:00:45.131Z</lastmod>
+    <lastmod>2026-10-28T02:59:32.292Z</lastmod>
   </url>
   <url>
     <loc>https://www.fastht.ml/docs/ref/response_types.html</loc>
-    <lastmod>2026-10-20T23:00:45.118Z</lastmod>
+    <lastmod>2026-10-28T02:59:32.271Z</lastmod>
   </url>
   <url>
     <loc>https://www.fastht.ml/docs/unpublished/tutorial_for_web_devs.html</loc>
-    <lastmod>2026-10-20T23:00:45.171Z</lastmod>
+    <lastmod>2026-10-28T02:59:32.312Z</lastmod>
   </url>
   <url>
     <loc>https://www.fastht.ml/docs/explains/faq.html</loc>
-    <lastmod>2026-10-20T23:00:45.039Z</lastmod>
+    <lastmod>2026-10-28T02:59:32.180Z</lastmod>
   </url>
   <url>
     <loc>https://www.fastht.ml/docs/explains/stripe.html</loc>
-    <lastmod>2026-10-20T23:00:45.041Z</lastmod>
+    <lastmod>2026-10-28T02:59:32.180Z</lastmod>
   </url>
   <url>
     <loc>https://www.fastht.ml/docs/explains/explaining_xt_components.html</loc>
-    <lastmod>2026-10-20T23:00:45.034Z</lastmod>
+    <lastmod>2026-10-28T02:59:32.183Z</lastmod>
   </url>
   <url>
     <loc>https://www.fastht.ml/docs/explains/oauth.html</loc>
-    <lastmod>2026-10-20T23:00:45.045Z</lastmod>
+    <lastmod>2026-10-28T02:59:32.181Z</lastmod>
   </url>
   <url>
     <loc>https://www.fastht.ml/docs/api/core.html</loc>
-    <lastmod>2026-10-20T23:00:45.279Z</lastmod>
+    <lastmod>2026-10-28T02:59:32.422Z</lastmod>
   </url>
   <url>
     <loc>https://www.fastht.ml/docs/api/pico.html</loc>
-    <lastmod>2026-10-20T23:00:45.085Z</lastmod>
+    <lastmod>2026-10-28T02:59:32.229Z</lastmod>
   </url>
   <url>
     <loc>https://www.fastht.ml/docs/api/cli.html</loc>
-    <lastmod>2026-10-20T23:00:45.073Z</lastmod>
+    <lastmod>2026-10-28T02:59:32.204Z</lastmod>
   </url>
   <url>
     <loc>https://www.fastht.ml/docs/api/js.html</loc>
-    <lastmod>2026-10-20T23:00:45.084Z</lastmod>
+    <lastmod>2026-10-28T02:59:32.216Z</lastmod>
   </url>
   <url>
     <loc>https://www.fastht.ml/docs/api/components.html</loc>
-    <lastmod>2026-10-20T23:00:45.148Z</lastmod>
+    <lastmod>2026-10-28T02:59:32.300Z</lastmod>
   </url>
   <url>
     <loc>https://www.fastht.ml/docs/tutorials/quickstart_for_web_devs.html</loc>
-    <lastmod>2026-10-20T23:00:45.188Z</lastmod>
+    <lastmod>2026-10-28T02:59:32.332Z</lastmod>
   </url>
   <url>
     <loc>https://www.fastht.ml/docs/tutorials/jupyter_and_fasthtml.html</loc>
-    <lastmod>2026-10-20T23:00:45.140Z</lastmod>
+    <lastmod>2026-10-28T02:59:32.289Z</lastmod>
   </url>
   <url>
     <loc>https://www.fastht.ml/docs/tutorials/by_example.html</loc>
-    <lastmod>2026-10-20T23:00:45.165Z</lastmod>
+    <lastmod>2026-10-28T02:59:32.302Z</lastmod>
   </url>
   <url>
     <loc>https://www.fastht.ml/</loc>
-    <lastmod>2026-10-20T23:01:04+00:00</lastmod>
+    <lastmod>2026-10-28T03:08:41+00:00</lastmod>
   </url>
   <url>
     <loc>https://www.fastht.ml/about</loc>
-    <lastmod>2026-10-20T23:01:04+00:00</lastmod>
+    <lastmod>2026-10-28T03:08:41+00:00</lastmod>
   </url>
   <url>
     <loc>https://www.fastht.ml/about/vision</loc>
-    <lastmod>2026-10-20T23:01:04+00:00</lastmod>
+    <lastmod>2026-10-28T03:08:41+00:00</lastmod>
   </url>
   <url>
     <loc>https://www.fastht.ml/about/foundation</loc>
-    <lastmod>2026-10-20T23:01:04+00:00</lastmod>
+    <lastmod>2026-10-28T03:08:41+00:00</lastmod>
   </url>
   <url>
     <loc>https://www.fastht.ml/about/tech</loc>
-    <lastmod>2026-10-20T23:01:04+00:00</lastmod>
+    <lastmod>2026-10-28T03:08:41+00:00</lastmod>
   </url>
   <url>
     <loc>https://www.fastht.ml/about/components</loc>
-    <lastmod>2026-10-20T23:01:04+00:00</lastmod>
+    <lastmod>2026-10-28T03:08:41+00:00</lastmod>
   </url>
   <url>
     <loc>https://www.fastht.ml/docs/llms.txt</loc>
-    <lastmod>2026-10-20T23:01:04+00:00</lastmod>
+    <lastmod>2026-10-28T03:08:41+00:00</lastmod>
   </url>
   <url>
     <loc>https://www.fastht.ml/docs/llms.html</loc>
-    <lastmod>2026-10-20T23:01:04+00:00</lastmod>
+    <lastmod>2026-10-28T03:08:41+00:00</lastmod>
   </url>
 </urlset>

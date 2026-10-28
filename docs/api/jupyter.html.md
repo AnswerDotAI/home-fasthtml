@@ -339,6 +339,8 @@ server.start()
 server.stop()
 ```
 
+### Live prototyping over websockets
+
 ------------------------------------------------------------------------
 
 ### ws_client
@@ -348,4 +350,50 @@ def ws_client(
     app, nm:str='', host:str='localhost', port:int=8000, ws_connect:str='/ws', frame:bool=True, link:bool=True,
     **kwargs
 ):
+```
+
+Push FT components from notebook cells to an open browser without
+writing a request handler for each update. `app.setup_ws()` registers
+`/ws` and returns an async broadcast function. Use `JupyUviAsync` to
+keep the server and notebook updates on the same event loop.
+
+Run the following cells one at a time in a local notebook. They are
+excluded from automated execution. Do not save the iframe outputs.
+
+``` python
+ws_app = FastHTML(exts='ws')
+send = ws_app.setup_ws()
+ws_server = JupyUviAsync(ws_app)
+await ws_server.start()
+```
+
+`ws_client` creates a page and displays its iframe and a link to open it
+in a separate tab. It returns the page’s FT container:
+
+``` python
+view = ws_client(ws_app)
+```
+
+Wait for the iframe or linked page to load before running this cell.
+`set` replaces the container’s children and pushes the updated container
+to each connected browser. Run it again with different content to try
+another layout:
+
+``` python
+view.set(H2('Live prototype'), P('Waiting for an update', id='status'));
+```
+
+To update an existing element by ID, send a matching FT element from
+another cell. This updates the browser without changing the Python-side
+`view`; another `view.set(...)` replaces the browser content with the
+new Python-side content.
+
+``` python
+await send(P('Updated from a later cell', id='status'))
+```
+
+Stop the server when you have finished experimenting:
+
+``` python
+await ws_server.stop()
 ```
